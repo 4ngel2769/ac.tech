@@ -59,7 +59,7 @@
         width: 100%;
         transition: top 0.5s;
         background-color: rgba(114, 114, 114, 0);
-        backdrop-filter: blur(5px);
+        /* backdrop-filter: blur(5px); */
         z-index: 50;
     }
     .navMenu_ {
