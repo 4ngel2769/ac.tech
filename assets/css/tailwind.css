@@ -23,7 +23,78 @@
   font-family: 'Progress';
   src: url('/assets/progress_personal.ttf');
 }
-
+@font-face {
+  font-family: 'TypewriteInk';
+  src: url('/assets/TypewriterInkedRegular-lgwPZ.ttf');
+}
+@font-face {
+  font-family: 'TripDeniedPersonal';
+  src: url('/assets/TripDeniedPersonalUseRegular-d98q6.ttf');
+}
+@font-face {
+  font-family: 'TripDeniedBackground';
+  src: url('/assets/TripDeniedBackgroundRegular-mLmyx.ttf');
+}
+@font-face {
+  font-family: 'ShineTypewriter';
+  src: url('/assets/ShineTypewriter-lgwzd.ttf');
+}
+@font-face {
+  font-family: 'Rough';
+  src: url('/assets/RoughSerif-ALjqA.ttf');
+}
+@font-face {
+  font-family: 'OldPrint';
+  src: url('/assets/OldPrintingPressFreeVersion-8jd0.ttf');
+}
+@font-face {
+  font-family: 'Marny';
+  src: url('/assets/MarnyRegular-lg3GX.otf');
+}
+@font-face {
+  font-family: 'Mango';
+  src: url('/assets/MangoMingle-1G32Z.ttf');
+}
+@font-face {
+  font-family: 'Kyiv';
+  src: url('/assets/KyivMachine-nR0aM.ttf');
+}
+@font-face {
+  font-family: 'Kg';
+  src: url('/assets/KgHoloceneRegular-lgjKy.ttf');
+}
+@font-face {
+  font-family: 'Infamous';
+  src: url('/assets/Infamous-Yznao.ttf');
+}
+@font-face {
+  font-family: 'Holingston';
+  src: url('/assets/Holingston-x32x5.otf');
+}
+@font-face {
+  font-family: 'Darkosta';
+  src: url('/assets/DarkostaRegular-X3w0o.otf');
+}
+@font-face {
+  font-family: 'Craglland';
+  src: url('/assets/Craglland-RpZmW.ttf');
+}
+@font-face {
+  font-family: 'Cornetta';
+  src: url('/assets/Cornetta-EaLVn.ttf');
+}
+@font-face {
+  font-family: 'Barcelona';
+  src: url('/assets/Barcelona-x3qOV.otf');
+}
+@font-face {
+  font-family: 'BarcelonaItalic';
+  src: url('/assets/BarcelonaItalic-p7Ljv.otf');
+}
+@font-face {
+  font-family: 'Balacksix';
+  src: url('/assets/Balacksix-ZVAgm.ttf');
+}
 
  /* Fonts  */
 :root {
@@ -33,6 +104,24 @@
   --font4: 'Creamy Sugar';
   --font5: 'Drip October';
   --font6: 'Progress';
+  --font7: 'TypewriteInk';
+  --font8: 'TripDeniedPersonal';
+  --font9: 'TripDeniedBackground';
+  --font10: 'ShineTypewriter';
+  --font11: 'Rough';
+  --font12: 'OldPrint';
+  --font13: 'Marny';
+  --font14: 'Mango';
+  --font15: 'Kyiv';
+  --font16: 'Kg';
+  --font17: 'Infamous';
+  --font18: 'Holingston';
+  --font19: 'Darkosta';
+  --font20: 'Craglland';
+  --font21: 'Cornetta';
+  --font22: 'Barcelona';
+  --font23: 'BarcelonaItalic';
+  --font24: 'Nalacksix';
 }
 
 /* main colors */
@@ -94,6 +183,9 @@ body {
   color: var(--green);
 }
 
+body {
+  background-color: var(--dark-alt1);
+}
 
 /* #Cursor
 ================================================== */
