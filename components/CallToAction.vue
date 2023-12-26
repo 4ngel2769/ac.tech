@@ -1,5 +1,5 @@
 <template>
     <div>
-        <call-to-action />
+        <h1 class="text-center">Hi</h1>
     </div>
 </template>
