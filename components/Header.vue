@@ -6,10 +6,10 @@
                 <!-- <img src="/src/sy-rsw.png" width="50px"/> -->
                 </NuxtLink>
                 <ul class="flex gap-4 navMenu_">
-                    <div class="burgerMenu">
+                    <!-- <div class="burgerMenu">
                         <font-awesome-icon :icon="['fas', 'bars']" />
                         <div class="burgerMenuIcon"></div>
-                    </div>
+                    </div> -->
                     <!-- <div class="navMenu">
                         <li><NuxtLink to="/">Home</NuxtLink></li>
                         <li><NuxtLink to="/about">About</NuxtLink></li>
@@ -96,5 +96,9 @@
         padding: 8px;
         border-radius: 25px;
         border-style: dashed;
+        position: absolute;
+        top: 2em;
+        right: 3em;
+        /* justify-self: start; */
     }
 </style>
