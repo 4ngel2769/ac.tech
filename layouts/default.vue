@@ -8,13 +8,13 @@
       <nav id="menu" class="main-menu">
         <ul class="navig">
           <li class="nav__item">
-            <a href="https://codepen.io/hallonanton/" target="_blank">Home</a>
+            <a href="/" target="_blank">Home</a>
           </li>
           <li class="nav__item">
-            <a href="https://codepen.io/hallonanton/" target="_blank">About</a>
+            <a href="/about">About</a>
           </li>
           <li class="nav__item">
-            <a href="https://codepen.io/hallonanton/" target="_blank">Contact</a>
+            <a href="/contact">Contact</a>
           </li>
         </ul>
       </nav>
@@ -22,7 +22,7 @@
       <div class="socialSidebar">
         <div class="subSocial">
           <div class="socialLink">
-            <NuxtLink to="https://instagram.com/piestudios123"><font-awesome-icon :icon="['fab', 'instagram']" /></NuxtLink>
+            <NuxtLink to="https://instagram.com/azdev0"><font-awesome-icon :icon="['fab', 'instagram']" /></NuxtLink>
           </div>
           <div class="socialLink">
             <NuxtLink to="https://twitter.com/angeldev0"><font-awesome-icon :icon="['fab', 'x-twitter']" /></NuxtLink>
@@ -62,6 +62,9 @@
   /* Menu Button CSS */
 
   /* #Cursor
+================================================== */
+
+/* #Cursor
 ================================================== */
 
 .cursor,
@@ -139,7 +142,7 @@
   left: 50%;
   width: 100%;
   height: 80%;
-  background-color: #9b00b7;
+  background-color: #0b0e12;
   transform-origin: center center;
   transition: all 500ms ease;
   will-change: transform;
@@ -435,6 +438,7 @@
   .theSlot {
     padding: 50px 0 50px 0;
     height: 100vh;
+    width: 100%;
   }
   .socialSidebar {
     position: fixed;

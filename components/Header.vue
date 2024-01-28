@@ -1,6 +1,6 @@
 <template>
     <header>
-        <div class="shadow-sm navbar" id="navbar">
+        <div class="navbar" id="navbar">
             <nav class="container mx-auto p-4 flex justify-between" style="max-width: 100%; display: flex; align-items: center; justify-content: space-between; margin: 0 3em 0 3em;">
                 <NuxtLink to="/" class="font-bold flex align-middle">
                 <!-- <img src="/src/sy-rsw.png" width="50px"/> -->
@@ -17,7 +17,7 @@
                     </div> -->
                     <li><NuxtLink to="/contact" class="callToActionNavBtn">Get in touch</NuxtLink></li>
                 </ul>
-                <a class="navTitle">Angel Capra</a>
+                <a class="navTitle" href="/">ANGEL CAPRA</a>
             </nav>
         </div>
     </header>
@@ -61,6 +61,7 @@
         background-color: rgba(114, 114, 114, 0);
         /* backdrop-filter: blur(5px); */
         z-index: 50;
+        /* pointer-events: none !important; */
     }
     .navMenu_ {
         display: flex;
@@ -76,7 +77,7 @@
         text-align: center;
         letter-spacing: 3px;
         font-size: 1em;
-        font-family: var(--font7);
+        font-family: var(--font2);
         height: 60px;
         width: 200px;
         top: 40px;

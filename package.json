@@ -11,9 +11,11 @@
   },
   "devDependencies": {
     "@formkit/auto-animate": "^0.8.1",
-    "@nuxt/devtools": "latest",
+    "@nuxt/devtools": "^1.0.6",
     "@nuxtjs/tailwindcss": "^6.10.1",
-    "nuxt": "^3.9.0",
+    "nuxt": "^3.8.2",
+    "sass": "^1.70.0",
+    "sass-loader": "^14.0.0",
     "vue": "^3.3.13",
     "vue-router": "^4.2.5"
   },
