@@ -77,7 +77,7 @@
         text-align: center;
         letter-spacing: 3px;
         font-size: 1em;
-        font-family: var(--font2);
+        font-family: var(--font22);
         height: 60px;
         width: 200px;
         top: 40px;

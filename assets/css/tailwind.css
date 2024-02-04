@@ -159,9 +159,9 @@
 
   /* Main page */
   --main-light: #000000;
-  --main-dark: #000000;
-  --main-dsc: #000000;
-  --main-details: #000000;
+  --main-dark: #eeeeee;
+  --main-dsc: #d3d6d8;
+  --main-details: #999999;
 
   /* Blog posts*/
   --post-light: #000000;
