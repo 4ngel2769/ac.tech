@@ -3,18 +3,20 @@
       <div class="main-menu" id="main-menu">
 
       </div>
-      <div id="btn" class="btn">MENU</div>
+      <div id="btn" class="btn">
+        <!-- <font-awesome-icon :icon="['fas', 'compass']" class="menuicon" /> -->
+      </div>
 
       <nav id="menu" class="main-menu">
         <ul class="navig">
           <li class="nav__item">
-            <a href="/" target="_blank">Home</a>
+            <NuxtLink to="/">Home</NuxtLink>
           </li>
           <li class="nav__item">
-            <a href="/about">About</a>
+            <NuxtLink to="/about">About</NuxtLink>
           </li>
           <li class="nav__item">
-            <a href="/contact">Contact</a>
+            <NuxtLink to="/contact">Contact</NuxtLink>
           </li>
         </ul>
       </nav>
@@ -45,9 +47,9 @@
         <Footer />
       </div>
     </div>
-    	<div class='cursor' id="cursor"></div>
+    	<!-- <div class='cursor' id="cursor"></div>
       <div class='cursor2' id="cursor2"></div>
-      <div class='cursor3' id="cursor3"></div>
+      <div class='cursor3' id="cursor3"></div> -->
 </template>
 
 <style scoped>
@@ -67,7 +69,7 @@
 /* #Cursor
 ================================================== */
 
-.cursor,
+/* .cursor,
 .cursor2,
 .cursor3{
 	position: fixed;
@@ -112,7 +114,7 @@
 	.cursor,.cursor2,.cursor3{
 		display: none
 	}
-}
+} */
 
 
 
@@ -121,6 +123,10 @@
  * Menu styles and animation
  */
 /* @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700,900'); */
+.menuicon {
+  font-size: 4.04em;
+}
+
 .main-menu {
   position: fixed;
   top: -50%;
@@ -469,30 +475,30 @@ export default {
   mounted() {
     //Page cursors
 
-    document.getElementsByTagName("body")[0].addEventListener("mousemove", function(n) {
-        t.style.left = n.clientX + "px", 
-		t.style.top = n.clientY + "px", 
-		e.style.left = n.clientX + "px", 
-		e.style.top = n.clientY + "px", 
-		i.style.left = n.clientX + "px", 
-		i.style.top = n.clientY + "px"
-    });
-    var t = document.getElementById("cursor"),
-        e = document.getElementById("cursor2"),
-        i = document.getElementById("cursor3");
-    function n(t) {
-        e.classList.add("hover"), i.classList.add("hover")
-    }
-    function s(t) {
-        e.classList.remove("hover"), i.classList.remove("hover")
-    }
-    s();
-    for (var r = document.querySelectorAll(".hover-target"), a = r.length - 1; a >= 0; a--) {
-        o(r[a])
-    }
-    function o(t) {
-        t.addEventListener("mouseover", n), t.addEventListener("mouseout", s)
-    }
+    // document.getElementsByTagName("body")[0].addEventListener("mousemove", function(n) {
+    //     t.style.left = n.clientX + "px", 
+		// t.style.top = n.clientY + "px", 
+		// e.style.left = n.clientX + "px", 
+		// e.style.top = n.clientY + "px", 
+		// i.style.left = n.clientX + "px", 
+		// i.style.top = n.clientY + "px"
+    // });
+    // var t = document.getElementById("cursor"),
+    //     e = document.getElementById("cursor2"),
+    //     i = document.getElementById("cursor3");
+    // function n(t) {
+    //     e.classList.add("hover"), i.classList.add("hover")
+    // }
+    // function s(t) {
+    //     e.classList.remove("hover"), i.classList.remove("hover")
+    // }
+    // s();
+    // for (var r = document.querySelectorAll(".hover-target"), a = r.length - 1; a >= 0; a--) {
+    //     o(r[a])
+    // }
+    // function o(t) {
+    //     t.addEventListener("mouseover", n), t.addEventListener("mouseout", s)
+    // }
 
     //Page menu
 
