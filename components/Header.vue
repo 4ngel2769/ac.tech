@@ -17,7 +17,7 @@
                     </div> -->
                     <!-- <li><NuxtLink to="/contact" class="callToActionNavBtn">Get in touch</NuxtLink></li> -->
                 </ul>
-                <a class="navTitle" href="/">ANGEL CAPRA</a>
+                <a class="navTitle" href="/"><p>ANGELCAPRA</p><p class="colored-tech">.TECH</p></a>
             </nav>
         </div>
     </header>
@@ -55,7 +55,7 @@
         display: flex;
         flex-direction: row;
         justify-content: center;
-        height: 100px;
+        height: 80px;
         width: 100%;
         transition: top 0.5s;
         background-color: rgba(114, 114, 114, 0);
@@ -73,14 +73,16 @@
         cursor:pointer;
     }
     .navTitle {
+        display: flex;
+        flex-direction: row;
         position: fixed;
         text-align: center;
         letter-spacing: 3px;
         font-size: 1em;
         font-family: var(--font22);
-        height: 60px;
+        height: 40px;
         width: 200px;
-        top: 40px;
+        top: 30px;
         left: 50%;
         transform: translate(-50%, 0);
         z-index: 30;
@@ -101,5 +103,8 @@
         top: 2em;
         right: 3em;
         /* justify-self: start; */
+    }
+    .colored-tech {
+        color: hotpink;
     }
 </style>
