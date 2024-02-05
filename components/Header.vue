@@ -103,6 +103,7 @@
         top: 2em;
         right: 3em;
         /* justify-self: start; */
+        /* a */
     }
     .colored-tech {
         color: hotpink;
