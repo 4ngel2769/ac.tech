@@ -96,6 +96,58 @@
   font-family: 'Balacksix';
   src: url('/assets/fonts/Balacksix-ZVAgm.ttf');
 }
+@font-face {
+  font-family: 'Vonique';
+  src: url('/assets/fonts/Vonique64.ttf');
+}
+@font-face {
+  font-family: 'SpaceAge';
+  src: url('/assets/fonts/space\ age.ttf');
+}
+@font-face {
+  font-family: 'Pixel';
+  src: url('/assets/fonts/Pixel.ttf');
+}
+@font-face {
+  font-family: 'Opificio';
+  src: url('/assets/fonts/opificio_regular.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Opificio';
+  src: url('/assets/fonts/opificio_bold.ttf');
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Opificio';
+  src: url('/assets/fonts/opificio_light.ttf');
+  font-weight: lighter;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Opificio';
+  src: url('/assets/fonts/opificio_rounded.ttf');
+  font-weight: normal;
+  font-style: round;
+}
+@font-face {
+  font-family: 'Opificio';
+  src: url('/assets/fonts/opificio_light_rounded.ttf');
+  font-weight: lighter;
+  font-style: round;
+}
+@font-face {
+  font-family: 'Opificio';
+  src: url('/assets/fonts/opificio_bold_rounded.ttf');
+  font-weight: bold;
+  font-style: round;
+}
+@font-face {
+  font-family: 'Guildof';
+  src: url('/assets/fonts/guildof.ttf');
+}
 
  /* Fonts  */
 :root {
@@ -123,7 +175,14 @@
   --font22: 'Barcelona';
   --font23: 'BarcelonaItalic';
   --font24: 'Nalacksix';
+  --font25: 'Balacksix';
+  --font26: 'Vonique';
+  --font27: 'SpaceAge';
+  --font28: 'Pixel';
+  --font29: 'Opificio';
+  --font30: 'Guildof';
 }
+
 
 /* main colors */
 :root {
@@ -139,7 +198,7 @@
   --red: #f52626;
   --l-red: #ff6060;
   --green: #18e436;
-  --l-green: #64ff5c;
+  --l-green: #93ff8d;
   --lime: #43ff43;
   --yellow: #d2ff4c;
   --blue: #2471ff;
@@ -184,8 +243,35 @@ body {
   color: var(--green);
 }
 
-body {
-  background-color: var(--dark-alt1);
+.theSlot {
+  background-color: var(--htb-bg1);
+  /* background-image: url('/public/bbburst_many.svg'); */
+  /* background-image: url('/public/pppixelate.svg'); */
+  /* background-image: url('/public/bbburst2.svg'); */
+  background-image: url('/public/bbburst4.svg');
+  background-attachment: scroll;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.textlink {
+  color: inherit;
+  text-decoration: none;
+}
+.textlink {
+  background: 
+    linear-gradient(to right, rgba(100, 200, 200, 1), rgba(100, 200, 200, 1)),
+    linear-gradient(to right, rgba(255, 0, 0, 1), rgba(255, 0, 180, 1), rgba(0, 100, 200, 1));
+  background-size: 100% 0.1em, 0 0.1em;
+  background-position: 100% 100%, 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 400ms;
+}
+
+.textlink:hover,
+.textlink:focus {
+  background-size: 0 0.1em, 100% 0.1em;
 }
 
 /* #Cursor

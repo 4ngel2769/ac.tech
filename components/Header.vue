@@ -15,7 +15,7 @@
                         <li><NuxtLink to="/about">About</NuxtLink></li>
                         <li><NuxtLink to="/posts">Posts</NuxtLink></li>
                     </div> -->
-                    <li><NuxtLink to="/contact" class="callToActionNavBtn">Get in touch</NuxtLink></li>
+                    <!-- <li><NuxtLink to="/contact" class="callToActionNavBtn">Get in touch</NuxtLink></li> -->
                 </ul>
                 <a class="navTitle" href="/">ANGEL CAPRA</a>
             </nav>

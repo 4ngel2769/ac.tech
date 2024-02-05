@@ -10,7 +10,7 @@ export default defineNuxtConfig({
         { name: 'description', content: 'IoT hacking | Tech tutorials | Cyber security' }
       ],
       link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'},
+        { rel: 'icon', type: 'image/x-icon', href: '/android-chrome-512x512.png'},
         // Nerd font icons
         { rel: 'stylesheet', href: 'https://www.nerdfonts.com/assets/css/webfont.css' },
         // Google's material icons

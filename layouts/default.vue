@@ -1,13 +1,13 @@
 <template>
     <div class="flex flex-col align-center" id="frontGround">
-      <div class="main-menu" id="main-menu">
+      <!-- <div class="main-menu" id="main-menu">
 
-      </div>
-      <div id="btn" class="btn">
+      </div> -->
+      <!-- <div id="btn" class="btn"> -->
         <!-- <font-awesome-icon :icon="['fas', 'compass']" class="menuicon" /> -->
-      </div>
+      <!-- </div> -->
 
-      <nav id="menu" class="main-menu">
+      <!-- <nav id="menu" class="main-menu">
         <ul class="navig">
           <li class="nav__item">
             <NuxtLink to="/">Home</NuxtLink>
@@ -19,7 +19,7 @@
             <NuxtLink to="/contact">Contact</NuxtLink>
           </li>
         </ul>
-      </nav>
+      </nav> -->
 
       <div class="socialSidebar">
         <div class="subSocial">
@@ -123,7 +123,9 @@
  * Menu styles and animation
  */
 /* @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700,900'); */
-.menuicon {
+
+
+/* .menuicon {
   font-size: 4.04em;
 }
 
@@ -290,7 +292,7 @@
   100% {
     transform: translate(-50%, 0%) translate3d(0, 0, 0);
   }
-}
+} */
 /*
  * Misc styles
  */
@@ -383,7 +385,7 @@
   /* ######### */
 
 
-  .menuDiv {
+  /* .menuDiv {
     position: absolute;
     left: 0;
     margin: 40px;
@@ -398,7 +400,7 @@
     background-color: gold;
     margin: 10px 0;
     transition: .2s;
-  }  
+  }   */
   nav {
 	 opacity: 0;
 	 visibility: hidden;
@@ -441,33 +443,33 @@
 
 
 
-  .theSlot {
-    padding: 50px 0 50px 0;
-    height: 100vh;
-    width: 100%;
-  }
-  .socialSidebar {
-    position: fixed;
-    z-index: 40;
-    top: 50vh;
-    transform: translate(0, -50%);
-    right: 0;
-    margin: 25px;
-    font-size: 1.2em;
-  }
-  .socialSidebar a {
-    transition: 0.2s ease-in-out;
-  }
-  .socialSidebar a:hover {
-    color: var(--dark-alt1);
-  }
-  .subSocial {
-    display: flex;
-    flex-direction: column;
-  }
-  .socialLink {
-    margin: 10px 0 10px 0;
-  }
+.theSlot {
+  /* padding: 50px 0 50px 0; */
+  height: 100vh;
+  width: 100%;
+}
+.socialSidebar {
+  position: fixed;
+  z-index: 40;
+  top: 50vh;
+  transform: translate(0, -50%);
+  right: 0;
+  margin: 25px;
+  font-size: 1.2em;
+}
+.socialSidebar a {
+  transition: 0.2s ease-in-out;
+}
+.socialSidebar a:hover {
+  color: var(--dark-alt1);
+}
+.subSocial {
+  display: flex;
+  flex-direction: column;
+}
+.socialLink {
+  margin: 10px 0 10px 0;
+}
 </style>
 
 <script>
