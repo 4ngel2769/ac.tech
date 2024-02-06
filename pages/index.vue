@@ -1,11 +1,11 @@
-<script setup lang="ts">
+<!--<script setup lang="js">
     const items = [{
         label: 'More info',
         icon: 'i-heroicons-link-16-solid',
         defaultOpen: false,
         slot: 'moreinfo'
     }]
-</script>
+</script>-->
 
 <!--<script lang="js">
 export default {
@@ -94,7 +94,7 @@ export default {
             </UTooltip>
         </div>
     </div>
-    <div class="assets-credits">
+    <div class="assets-credits" id="assets-credits">
         <p>Awesome backgrounds by Sébastien Noël's <a href="https://fffuel.co" target="_blank">fffuel.co</a> .</p>
     </div>
 </template>
@@ -182,6 +182,8 @@ export default {
         background-color: #3535352f;
         z-index: 100;
         border: 2px solid #a4a4a482;
+        transition: left 1.3s;
+        /* transform: translate3d(-50%, -50%); */
     }
     .assets-credits a {
         color: var(--l-green);
@@ -254,3 +256,20 @@ export default {
         
     }
 </style>
+
+<script>
+export default {
+    mounted () {
+        var prevScrollpos = window.pageYOffset;
+        window.onscroll = function() {
+            var currentScrollPosition = window.pageYOffset;
+            if (prevScrollpos > currentScrollPosition) {
+                document.getElementById('assets-credits').style.left = '20px';
+            } else {
+                document.getElementById('assets-credits').style.left = '-450px';
+            }
+            prevScrollpos = currentScrollPosition;
+        }
+    }
+}
+</script>
