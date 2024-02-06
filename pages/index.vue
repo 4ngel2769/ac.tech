@@ -1,3 +1,22 @@
+<script setup lang="js">
+    const items = [{
+        label: 'More info',
+        icon: 'i-heroicons-link-16-solid',
+        defaultOpen: false,
+        slot: 'more-info'
+    }]
+</script>
+
+<!--<script lang="js">
+export default {
+    mounted() {
+        var w = $(window).width();
+        $('.more-info-mobile').css('width', w);
+    }
+}
+</script>
+-->
+
 <template>
     <div class="tContainer">
         <div class="ProfilePicture">
@@ -5,6 +24,33 @@
         </div>
         <div class="Name">
             <p class="NameText" >Angel Capra</p>
+        </div>
+        <div class="more-info-mobile">
+            <UAccordion :items="items">
+                <template #item="{ item }">
+                    <p class="italic text-gray-900 dark:text-white text-center">
+                        {{ item.description }}
+                    </p>
+                </template>
+
+                <template #getting-started>
+                    <div class="text-gray-900 dark:text-white text-center">
+                        <div class="undertext">
+                            <div class="Location">
+                                <font-awesome-icon icon="fa-solid fa-location-dot" />
+                                <p class="LocationText">Montreal, Quebec</p>
+                            </div>
+                            <div class="Website">
+                                <font-awesome-icon icon="fa-solid fa-arrow-up-right-from-square" />
+                                <p class="WebsiteText"><a target="_blank" href="https://angellabs.xyz">https://angellabs.xyz</a></p>
+                                <UTooltip text="Ancient website (no longer actively maintained).">
+                                    <UBadge color="pink" variant="subtle">Old</UBadge>
+                                </UTooltip>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </UAccordion>
         </div>
         <div class="undertext">
             <div class="Location">
@@ -63,6 +109,11 @@
     .Description, .DescriptionText {
         /* font-family: var(--font22); */
         font-size: 18px;
+    }
+    .more-info-mobile {
+        /* display: none; */
+        /* visibility: hidden; */
+        /* width: ; */
     }
     .linkstitle {
         margin: 15px 0px 0px 0px;
@@ -152,7 +203,10 @@
             align-items: center;
         }
         .linkscontainer .link {
-            font-size: 40px;
+            font-size: 30px;
         }
+    }
+    @media only screen and (max-width: 410px) {
+        
     }
 </style>

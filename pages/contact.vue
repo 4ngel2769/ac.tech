@@ -44,12 +44,6 @@ const items = [{
 
             <template #getting-started>
                 <div class="text-gray-900 dark:text-white text-center">
-                    <Logo class="w-auto h-8 mx-auto" />
-
-                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">
-                    Fully styled and customizable components for Nuxt.
-                    </p>
-                    
                     <div class="undertext">
                         <div class="Location">
                             <font-awesome-icon icon="fa-solid fa-location-dot" />
@@ -63,26 +57,6 @@ const items = [{
                             </UTooltip>
                         </div>
                     </div>
-                </div>
-            </template>
-
-            <template #installation="{ description }">
-                <div class="flex flex-col justify-center items-center gap-1 mb-4">
-                    <h3 class="text-xl font-bold text-gray-900 dark:text-white">
-                    Installation
-                    </h3>
-                    <p class="text-sm text-gray-500 dark:text-gray-400">
-                    Install <code>@nuxt/ui</code> dependency to your project:
-                    </p>
-                    <p>
-                    {{ description }}
-                    </p>
-                </div>
-
-                <div class="flex flex-col items-center">
-                    <code>$ npm i @nuxt/ui</code>
-                    <code>$ yarn add @nuxt/ui</code>
-                    <code>$ pnpm add @nuxt/ui</code>
                 </div>
             </template>
         </UAccordion>
