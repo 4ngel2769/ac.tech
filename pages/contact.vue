@@ -30,42 +30,54 @@ const items = [{
 </script>
 
 <template>
-  <UAccordion :items="items">
-    <template #item="{ item }">
-      <p class="italic text-gray-900 dark:text-white text-center">
-        {{ item.description }}
-      </p>
-    </template>
+    <div class="d">
+        <div>bruv</div>
+        <div>bruv</div>
+        <div>a</div>
+        <div>a</div>
+        <UAccordion :items="items">
+            <template #item="{ item }">
+                <p class="italic text-gray-900 dark:text-white text-center">
+                    {{ item.description }}
+                </p>
+            </template>
 
-    <template #getting-started>
-      <div class="text-gray-900 dark:text-white text-center">
-        <Logo class="w-auto h-8 mx-auto" />
+            <template #getting-started>
+                <div class="text-gray-900 dark:text-white text-center">
+                    <Logo class="w-auto h-8 mx-auto" />
 
-        <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">
-          Fully styled and customizable components for Nuxt.
-        </p>
-      </div>
-    </template>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">
+                    Fully styled and customizable components for Nuxt.
+                    </p>
+                </div>
+            </template>
 
-    <template #installation="{ description }">
-      <div class="flex flex-col justify-center items-center gap-1 mb-4">
-        <h3 class="text-xl font-bold text-gray-900 dark:text-white">
-          Installation
-        </h3>
-        <p class="text-sm text-gray-500 dark:text-gray-400">
-          Install <code>@nuxt/ui</code> dependency to your project:
-        </p>
-        <p>
-          {{ description }}
-        </p>
-      </div>
+            <template #installation="{ description }">
+                <div class="flex flex-col justify-center items-center gap-1 mb-4">
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white">
+                    Installation
+                    </h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">
+                    Install <code>@nuxt/ui</code> dependency to your project:
+                    </p>
+                    <p>
+                    {{ description }}
+                    </p>
+                </div>
 
-      <div class="flex flex-col items-center">
-        <code>$ npm i @nuxt/ui</code>
-        <code>$ yarn add @nuxt/ui</code>
-        <code>$ pnpm add @nuxt/ui</code>
-      </div>
-    </template>
-  </UAccordion>
+                <div class="flex flex-col items-center">
+                    <code>$ npm i @nuxt/ui</code>
+                    <code>$ yarn add @nuxt/ui</code>
+                    <code>$ pnpm add @nuxt/ui</code>
+                </div>
+            </template>
+        </UAccordion>
+    </div>
 </template>
 
+<style scoped>
+    .d {
+        display: flex;
+        flex-direction: column;
+    }
+</style>
