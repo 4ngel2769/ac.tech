@@ -25,6 +25,7 @@
         <div class="LinksTitle">
             <p class="linkstitle"></p>
         </div>
+        <UDivider label="Socials" class="socialdivider" />
         <p class="linkstitle">follow me on</p>
         <div class="linkscontainer">
             <NuxtLink class="link" to="https://youtube.com/@angeldev0" external target="_blank"><font-awesome-icon icon="fa-brands fa-youtube" /></NuxtLink>
@@ -42,9 +43,6 @@
 </template>
 
 <style scoped>
-    .link {
-        font-size: 20px;
-    }
     .tContainer {
         display: flex;
         flex-direction: column;
@@ -76,6 +74,7 @@
         margin: 10px 0px 10px 0px;
     }
     .link {
+        font-size: 20px;
         padding: 0px 10px 0px 10px;
     }
     .Location {
@@ -106,6 +105,10 @@
         color: #aaaaaa;
         margin: 5px 0px 25px 0px;
     }
+    .socialdivider {
+        display: none;
+        visibility: hidden;
+    }
     .assets-credits {
         position: absolute;
         bottom: 20px;
@@ -135,6 +138,9 @@
             flex-direction: column;
             gap: 10px;
         }
-
+        .socialdivider {
+            display: flex;
+            visibility: visible;
+        }
     }
 </style>
