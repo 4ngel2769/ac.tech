@@ -84,7 +84,6 @@ export default {
     <div class="assets-credits">
         <p>Awesome backgrounds by Sébastien Noël's <a href="https://fffuel.co" target="_blank">fffuel.co</a> .</p>
     </div>
-    <img class="bottomImg" src="/wave-haikei4.svg" alt="wave">
 </template>
 
 <style scoped>

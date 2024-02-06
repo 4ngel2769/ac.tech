@@ -42,6 +42,7 @@
       </div>
       <div class="flex theSlot" style="justify-content: center;">
         <slot />
+        <div class="footerimg"></div>
       </div>
       <div class="flex" style="justify-content: center;">
         <Footer />
@@ -444,9 +445,27 @@
 
 
 .theSlot {
+  display: flex;
+  flex-direction: column;
   /* padding: 50px 0 50px 0; */
   /* height: 100vh; */
   width: 100%;
+}
+.footerimg {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  width: 100%;
+  min-height: 0em;
+  margin: 0 auto;
+  box-sizing: border-box;
+  background-image: url('/wave-haikei4.svg');
+  background-position: bottom !important;
+  background-size: 100% !important;
+  background-repeat: repeat-x !important;
+  background-clip: inherit;
 }
 .socialSidebar {
   position: fixed;
