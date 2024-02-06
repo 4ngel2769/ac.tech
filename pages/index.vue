@@ -173,15 +173,18 @@ export default {
     }
     .bottomImg {
         position: absolute;
-        left: -10px;
-        right: -10px;
+        /* left: -10px; */
+        right: 0px;
         bottom: 0px;
         z-index: 0;
-        width: 110vh;
+        min-width: 110vh;
+    }
+    body {
+        overflow-x: hidden;
     }
 
-
     @media only screen and (max-width: 768px) {
+        
         .tContainer {
             margin: 80px 40px 40px 40px;
         }
