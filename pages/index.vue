@@ -146,8 +146,9 @@ export default {
         gap: 6px;
         margin: 0px 0px 0px 0px;
     }
-    .Website p {
-
+    .more-info-mobile {
+        display: none;
+        visibility: hidden;
     }
     .undertext {
         display: flex;
@@ -181,6 +182,8 @@ export default {
         bottom: 0px;
         z-index: 0;
     }
+
+
     @media only screen and (max-width: 768px) {
         .tContainer {
             margin: 80px 40px 40px 40px;
@@ -204,6 +207,14 @@ export default {
         }
         .linkscontainer .link {
             font-size: 30px;
+        }
+        .more-info-mobile {
+            display: flex;
+            visibility: visible;
+        }
+        .undertext {
+            display: none;
+            visibility: hidden;
         }
     }
     @media only screen and (max-width: 410px) {
