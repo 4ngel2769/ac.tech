@@ -447,6 +447,7 @@
 .theSlot {
   display: flex;
   flex-direction: column;
+  align-items: center;
   /* padding: 50px 0 50px 0; */
   /* height: 100vh; */
   width: 100%;
