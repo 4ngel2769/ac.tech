@@ -62,9 +62,6 @@
         font-family: var(--font29);
         font-size: 2em;
     }
-    .undertext {
-        color: #aaaaaa;
-    }
     .Description, .DescriptionText {
         /* font-family: var(--font22); */
         font-size: 18px;
@@ -106,6 +103,7 @@
         display: flex;
         flex-direction: row;
         gap: 25px;
+        color: #aaaaaa;
         margin: 5px 0px 25px 0px;
     }
     .assets-credits {

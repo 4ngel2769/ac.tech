@@ -49,6 +49,20 @@ const items = [{
                     <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">
                     Fully styled and customizable components for Nuxt.
                     </p>
+                    
+                    <div class="undertext">
+                        <div class="Location">
+                            <font-awesome-icon icon="fa-solid fa-location-dot" />
+                            <p class="LocationText">Montreal, Quebec</p>
+                        </div>
+                        <div class="Website">
+                            <font-awesome-icon icon="fa-solid fa-arrow-up-right-from-square" />
+                            <p class="WebsiteText"><a target="_blank" href="https://angellabs.xyz">https://angellabs.xyz</a></p>
+                            <UTooltip text="Ancient website (no longer actively maintained).">
+                                <UBadge color="pink" variant="subtle">Old</UBadge>
+                            </UTooltip>
+                        </div>
+                    </div>
                 </div>
             </template>
 
@@ -79,5 +93,33 @@ const items = [{
     .d {
         display: flex;
         flex-direction: column;
+    }
+    .Location {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 6px;
+        margin: 0px 0px 0px 0px;
+    }
+    .Location p {
+        /* font-family: var(--font29); */
+        /* font-weight: bold; */
+    }
+    .Website {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 6px;
+        margin: 0px 0px 0px 0px;
+    }
+    .Website p {
+
+    }
+    .undertext {
+        display: flex;
+        flex-direction: row;
+        gap: 25px;
+        color: #aaaaaa;
+        margin: 5px 0px 25px 0px;
     }
 </style>
