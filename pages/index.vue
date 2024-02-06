@@ -216,6 +216,10 @@ export default {
             display: none;
             visibility: hidden;
         }
+        .assets-credits {
+            visibility: hidden;
+            display: none;
+        }
     }
     @media only screen and (max-width: 410px) {
         
