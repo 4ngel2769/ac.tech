@@ -39,7 +39,7 @@
         <p>Awesome backgrounds by Sébastien Noël's <a href="https://fffuel.co" target="_blank">fffuel.co</a> .</p>
     </div>
     <div class="wave">
-        <img src="/public/wave-haikei4.svg" alt="wave">
+        <img src="/wave-haikei4.svg" alt="wave">
     </div>
 </template>
 
