@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<!-- <script setup lang="ts">
 const items = [{
   label: 'Getting Started',
   icon: 'i-heroicons-information-circle',
@@ -28,9 +28,11 @@ const items = [{
   description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.'
 }]
 </script>
+-->
 
 <template>
-    <div class="d">
+    <NuxtLink to="/">go back</NuxtLink>
+    <!-- <div class="d">
         <div>bruv</div>
         <div>bruv</div>
         <div>a</div>
@@ -60,9 +62,10 @@ const items = [{
                 </div>
             </template>
         </UAccordion>
-    </div>
+    </div> -->
 </template>
 
+<!--
 <style scoped>
     .d {
         display: flex;
@@ -90,3 +93,4 @@ const items = [{
         margin: 5px 0px 25px 0px;
     }
 </style>
+-->

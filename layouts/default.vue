@@ -445,6 +445,7 @@
 
 
 .theSlot {
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -457,14 +458,15 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 1rem;
-  width: 100%;
-  min-height: 0em;
+  /* padding: 5rem; */
+  height: 180px;
+  width: 100vmax;
+  /* min-height: 1em; */
   margin: 0 auto;
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
   background-image: url('/wave-haikei4.svg');
   background-position: bottom !important;
-  background-size: 100% !important;
+  /* background-size: 100% !important; */
   background-repeat: repeat-x !important;
   background-clip: inherit;
 }

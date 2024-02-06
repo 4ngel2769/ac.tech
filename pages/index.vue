@@ -25,7 +25,7 @@ export default {
         <div class="Name">
             <p class="NameText">Angel Capra</p>
         </div>
-        <div class="more-info-mobile">
+        <!-- <div class="more-info-mobile">
             <UAccordion :items="items">
                 <template #item="{ item }">
                     <p class="italic text-gray-900 dark:text-white text-center">
@@ -50,7 +50,7 @@ export default {
                     </div>
                 </template>
             </UAccordion>
-        </div>
+        </div> -->
         <div class="undertext">
             <div class="Location">
                 <font-awesome-icon icon="fa-solid fa-location-dot" />
@@ -64,8 +64,9 @@ export default {
                 </UTooltip>
             </div>
         </div>
+        <UDivider label="About Me" class="descriptiondivider" />
         <div class="Description">
-            <p class="DescriptionText">Cybersecurity student fascinated by the Internet of Things and embedded systems</p>
+            <p class="DescriptionText">Cybersecurity student fascinated by the Internet of Things and embedded systems.</p>
         </div>
         <div class="LinksTitle">
             <p class="linkstitle"></p>
@@ -73,12 +74,24 @@ export default {
         <UDivider label="Socials" class="socialdivider" />
         <p class="linkstitle">follow me on</p>
         <div class="linkscontainer">
-            <NuxtLink class="link" to="https://youtube.com/@angeldev0" external target="_blank"><font-awesome-icon icon="fa-brands fa-youtube" /></NuxtLink>
-            <NuxtLink class="link" to="https://github.com/4ngel2769" external target="_blank"><font-awesome-icon icon="fa-brands fa-github" /></NuxtLink>
-            <NuxtLink class="link" to="https://dev.to/angeldev0" external target="_blank"><font-awesome-icon icon="fa-brands fa-dev" /></NuxtLink>
-            <NuxtLink class="link" to="https://twitter.com/angeldev0" external target="_blank"><font-awesome-icon icon="fa-brands fa-twitter" /></NuxtLink>
-            <NuxtLink class="link" to="mailto:angel@angellabs.xyz" external><font-awesome-icon icon="fa-solid fa-at" /></NuxtLink>
-            <NuxtLink class="link" to="https://instagram.com/azdev0" external target="_blank"><font-awesome-icon icon="fa-brands fa-instagram" /></NuxtLink>
+            <UTooltip text="YouTube | @angeldev0">
+                <NuxtLink class="link" to="https://youtube.com/@angeldev0" external target="_blank"><font-awesome-icon icon="fa-brands fa-youtube" /></NuxtLink>
+            </UTooltip>
+            <UTooltip text="GitHub | 4ngel2769">
+                <NuxtLink class="link" to="https://github.com/4ngel2769" external target="_blank"><font-awesome-icon icon="fa-brands fa-github" /></NuxtLink>                
+            </UTooltip>
+            <UTooltip text="Dev.to | @angeldev0">
+                <NuxtLink class="link" to="https://dev.to/angeldev0" external target="_blank"><font-awesome-icon icon="fa-brands fa-dev" /></NuxtLink>
+            </UTooltip>
+            <UTooltip text="Twitter | @angeldev0">
+                <NuxtLink class="link" to="https://twitter.com/angeldev0" external target="_blank"><font-awesome-icon icon="fa-brands fa-twitter" /></NuxtLink>
+            </UTooltip>
+            <UTooltip text="Instagram | @azdev0">
+                <NuxtLink class="link" to="https://instagram.com/azdev0" external target="_blank"><font-awesome-icon icon="fa-brands fa-instagram" /></NuxtLink>
+            </UTooltip>
+            <UTooltip text="Email angel@angellabs.xyz">
+                <NuxtLink class="link" to="mailto:angel@angellabs.xyz" external><font-awesome-icon icon="fa-solid fa-at" /></NuxtLink>            
+            </UTooltip>
         </div>
     </div>
     <div class="assets-credits">
@@ -150,6 +163,11 @@ export default {
         gap: 25px;
         color: #aaaaaa;
         margin: 5px 0px 25px 0px;
+        font-size: 0.9em;
+    }
+    .descriptiondivider {
+        display: none;
+        visibility: hidden;
     }
     .socialdivider {
         display: none;
@@ -159,10 +177,11 @@ export default {
         position: absolute;
         bottom: 20px;
         left: 20px;
-        border-radius: 18px;
+        border-radius: 12px;
         padding: 10px;
-        background-color: #3535353d;
+        background-color: #3535352f;
         z-index: 100;
+        border: 2px solid #a4a4a482;
     }
     .assets-credits a {
         color: var(--l-green);
@@ -187,9 +206,10 @@ export default {
         .tContainer {
             margin: 80px 40px 40px 40px;
         }
-        .undertext {
-            flex-direction: column;
-            gap: 10px;
+        .descriptiondivider {
+            display: flex;
+            visibility: visible;
+            margin: 0 0 10px 0;
         }
         .socialdivider {
             display: flex;
@@ -207,18 +227,27 @@ export default {
         .linkscontainer .link {
             font-size: 30px;
         }
-        .more-info-mobile {
+        /* .more-info-mobile {
             display: flex;
             visibility: visible;
             height: auto;
-        }
+        } */
         .undertext {
-            display: none;
-            visibility: hidden;
+            /* display: none; */
+            /* visibility: hidden; */
+            flex-direction: column;
+            gap: 5px;
+            margin: 0px 0 25px 0;
         }
         .assets-credits {
             visibility: hidden;
             display: none;
+        }
+    }
+    @media only screen and (min-width: 769px) {
+        .tContainer {
+            padding: 0 10px 0 10px;
+            max-width: 700px;
         }
     }
     @media only screen and (max-width: 410px) {

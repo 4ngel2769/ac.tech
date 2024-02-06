@@ -17,36 +17,36 @@
                     </div> -->
                     <!-- <li><NuxtLink to="/contact" class="callToActionNavBtn">Get in touch</NuxtLink></li> -->
                 </ul>
-                <a class="navTitle" href="/"><p>ANGELCAPRA</p><p class="colored-tech">.TECH</p></a>
+                <a class="navTitle" id="navTitle" href="/"><p>ANGELCAPRA</p><p class="colored-tech">.TECH</p></a>
             </nav>
         </div>
     </header>
 </template>
 
 
-<!--<script>
+<script>
     export default {
         mounted () {
             var prevScrollpos = window.pageYOffset;
             window.onscroll = function() {
                 var currentScrollPos = window.pageYOffset;
                 if (prevScrollpos > currentScrollPos) {
-                    document.getElementById('navbar').style.top = "0px";
+                    document.getElementById('navTitle').style.top = "30px";
                 } else {
-                    document.getElementById('navbar').style.top = "-140px";
+                    document.getElementById('navTitle').style.top = "-80px";
                 }
                 prevScrollpos = currentScrollPos;
             };
 
-            $('.burgermenu').click(function(){
-                $('.fullMenu').toggleClass('open');
-            });
-            $('.fullMenu ul li').click(function(){
-                $('.fullMenu').toggleClass('open');
-            })
+            // $('.burgermenu').click(function(){
+            //     $('.fullMenu').toggleClass('open');
+            // });
+            // $('.fullMenu ul li').click(function(){
+            //     $('.fullMenu').toggleClass('open');
+            // })
         }
     }
-</script>-->
+</script>
 
 <style scoped>
     .navbar {
@@ -84,6 +84,7 @@
         width: 200px;
         top: 30px;
         left: 50%;
+        transition: top 0.5s;
         transform: translate(-50%, 0);
         z-index: 30;
     }

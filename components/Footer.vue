@@ -8,6 +8,10 @@
     .footerdiv {
         margin: 30px 0px 25px 0px;
         font-size: 13px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
     .nl {
         color: var(--kdeL);
