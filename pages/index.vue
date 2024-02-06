@@ -1,7 +1,4 @@
 <template>
-    <div class="mainVue">
-        <!-- <call-to-action /> -->
-    </div>
     <div class="tContainer">
         <div class="ProfilePicture">
             <img src="/android-chrome-512x512.png" alt="Profile Picture" width="120px" />
@@ -41,8 +38,6 @@
     <div class="assets-credits">
         <p>Awesome backgrounds by Sébastien Noël's <a href="https://fffuel.co" target="_blank">fffuel.co</a> .</p>
     </div>
-    <!-- <div class="wave">
-    </div> -->
     <img class="bottomImg" src="/wave-haikei4.svg" alt="wave">
 </template>
 
@@ -113,12 +108,6 @@
         gap: 25px;
         margin: 5px 0px 25px 0px;
     }
-    .mainVue {
-        display: flex;
-        flex-direction: column;
-        align-content: center;
-        justify-content: center;
-    }
     .assets-credits {
         position: absolute;
         bottom: 20px;
@@ -134,21 +123,20 @@
     .assets-credits p {
         color: var(--main-details);
     }
-    .assets-credits a, p {
-    }
-    /* .wave {
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        height: 50px;
-        position: absolute;
-        bottom: 0vh;
-        z-index: 120;
-    } */
     .bottomImg {
         position: absolute;
         left: 0;
         bottom: 0px;
         z-index: 0;
+    }
+    @media only screen and (max-width: 768px) {
+        .tContainer {
+            margin: 80px 40px 40px 40px;
+        }
+        .undertext {
+            flex-direction: column;
+            gap: 10px;
+        }
+
     }
 </style>
