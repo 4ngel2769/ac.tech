@@ -141,6 +141,18 @@
         .socialdivider {
             display: flex;
             visibility: visible;
+            margin: 20px 0 0 0;
+        }
+        .linkstitle {
+            display: none;
+        }
+        .linkscontainer {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .linkscontainer .link {
+            font-size: 40px;
         }
     }
 </style>
