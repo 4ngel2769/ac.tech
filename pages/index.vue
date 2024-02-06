@@ -109,11 +109,11 @@ export default {
         /* font-family: var(--font22); */
         font-size: 18px;
     }
-    .more-info-mobile {
+    /* .more-info-mobile { */
         /* display: none; */
         /* visibility: hidden; */
         /* width: ; */
-    }
+    /* } */
     .linkstitle {
         margin: 15px 0px 0px 0px;
         /* font-family: var(--font29); */
@@ -133,10 +133,6 @@ export default {
         align-items: center;
         gap: 6px;
         margin: 0px 0px 0px 0px;
-    }
-    .Location p {
-        /* font-family: var(--font29); */
-        /* font-weight: bold; */
     }
     .Website {
         display: flex;

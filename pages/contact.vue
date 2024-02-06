@@ -75,19 +75,12 @@ const items = [{
         gap: 6px;
         margin: 0px 0px 0px 0px;
     }
-    .Location p {
-        /* font-family: var(--font29); */
-        /* font-weight: bold; */
-    }
     .Website {
         display: flex;
         flex-direction: row;
         align-items: center;
         gap: 6px;
         margin: 0px 0px 0px 0px;
-    }
-    .Website p {
-
     }
     .undertext {
         display: flex;
