@@ -7,7 +7,7 @@ export default defineNuxtConfig({
     head: {
       title: 'Angel 🚀',
       meta: [
-        { name: 'description', content: 'IoT hacking | Tech tutorials | Cyber security' }
+        { name: 'description', content: 'Personal website; find my projects, social links, and more. 📄' }
       ],
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/android-chrome-512x512.png'},
