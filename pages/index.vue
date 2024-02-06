@@ -23,7 +23,7 @@ export default {
             <img src="/android-chrome-512x512.png" alt="Profile Picture" width="120px" />
         </div>
         <div class="Name">
-            <p class="NameText" >Angel Capra</p>
+            <p class="NameText">Angel Capra</p>
         </div>
         <div class="more-info-mobile">
             <UAccordion :items="items">
@@ -32,8 +32,7 @@ export default {
                         {{ item.description }}
                     </p>
                 </template>
-
-                <template #getting-started>
+                <template #more-info>
                     <div class="text-gray-900 dark:text-white text-center">
                         <div class="undertext">
                             <div class="Location">
