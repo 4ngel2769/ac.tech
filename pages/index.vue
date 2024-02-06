@@ -4,7 +4,7 @@
     </div>
     <div class="tContainer">
         <div class="ProfilePicture">
-            <img src="/android-chrome-512x512.png" alt="Profile Picture" width="150px" />
+            <img src="/android-chrome-512x512.png" alt="Profile Picture" width="120px" />
         </div>
         <div class="Name">
             <p class="NameText" >Angel Capra</p>
@@ -27,11 +27,12 @@
         </div>
         <p class="linkstitle">follow me on</p>
         <div class="linkscontainer">
-            <NuxtLink class="link" to="https://youtube.com/@4ngel2769"><font-awesome-icon icon="fa-brands fa-youtube" /></NuxtLink>
-            <NuxtLink class="link" to="https://github.com/4ngel2769"><font-awesome-icon icon="fa-brands fa-github" /></NuxtLink>
-            <NuxtLink class="link" to="https://dev.to/angeldev0"><font-awesome-icon icon="fa-brands fa-dev" /></NuxtLink>
-            <NuxtLink class="link" to="https://twitter.com/angeldev0"><font-awesome-icon icon="fa-brands fa-twitter" /></NuxtLink>
-            <NuxtLink class="link" to="mailto:angel@angellabs.xyz"><font-awesome-icon icon="fa-solid fa-at" /></NuxtLink>
+            <NuxtLink class="link" to="https://youtube.com/@angeldev0" external target="_blank"><font-awesome-icon icon="fa-brands fa-youtube" /></NuxtLink>
+            <NuxtLink class="link" to="https://github.com/4ngel2769" external target="_blank"><font-awesome-icon icon="fa-brands fa-github" /></NuxtLink>
+            <NuxtLink class="link" to="https://dev.to/angeldev0" external target="_blank"><font-awesome-icon icon="fa-brands fa-dev" /></NuxtLink>
+            <NuxtLink class="link" to="https://twitter.com/angeldev0" external target="_blank"><font-awesome-icon icon="fa-brands fa-twitter" /></NuxtLink>
+            <NuxtLink class="link" to="mailto:angel@angellabs.xyz" external><font-awesome-icon icon="fa-solid fa-at" /></NuxtLink>
+            <NuxtLink class="link" to="https://instagram.com/azdev0" external target="_blank"><font-awesome-icon icon="fa-brands fa-instagram" /></NuxtLink>
         </div>
     </div>
     <div class="assets-credits">
@@ -50,7 +51,7 @@
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
-        margin: 100px 0px 0px 0px;
+        margin: 80px 0px 0px 0px;
         left: 10px;
         max-width: 700px;
         /* background-color: #101417e2; */

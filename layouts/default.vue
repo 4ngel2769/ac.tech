@@ -21,7 +21,7 @@
         </ul>
       </nav> -->
 
-      <div class="socialSidebar">
+      <!-- <div class="socialSidebar">
         <div class="subSocial">
           <div class="socialLink">
             <NuxtLink to="https://instagram.com/azdev0"><font-awesome-icon :icon="['fab', 'instagram']" /></NuxtLink>
@@ -33,10 +33,10 @@
             <NuxtLink to="https://github.com/4ngel2769"><font-awesome-icon :icon="['fab', 'github']" /></NuxtLink>
           </div>
           <div class="socialLink">
-            <NuxtLink to="https://youtube.com/@4ngel2769"><font-awesome-icon :icon="['fab', 'youtube']" /></NuxtLink>
+            <NuxtLink to="https://youtube.com/@angeldev0"><font-awesome-icon :icon="['fab', 'youtube']" /></NuxtLink>
           </div>
         </div>
-      </div>
+      </div> -->
       <div class="flex navbar" style="justify-content: center;">
         <Header />
       </div>
