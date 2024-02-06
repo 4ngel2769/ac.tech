@@ -3,7 +3,7 @@
         label: 'More info',
         icon: 'i-heroicons-link-16-solid',
         defaultOpen: false,
-        slot: 'more-info'
+        slot: 'moreinfo'
     }]
 </script>
 
@@ -32,7 +32,7 @@ export default {
                         {{ item.description }}
                     </p>
                 </template>
-                <template #more-info>
+                <template #moreinfo>
                     <div class="text-gray-900 dark:text-white text-center">
                         <div class="undertext">
                             <div class="Location">
@@ -177,9 +177,11 @@ export default {
     }
     .bottomImg {
         position: absolute;
-        left: 0;
+        left: -10px;
+        right: -10px;
         bottom: 0px;
         z-index: 0;
+        width: 110vh;
     }
 
 
@@ -210,6 +212,7 @@ export default {
         .more-info-mobile {
             display: flex;
             visibility: visible;
+            max-height: 500px;
         }
         .undertext {
             display: none;
