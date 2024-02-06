@@ -23,31 +23,6 @@
     </header>
 </template>
 
-
-<script>
-    export default {
-        mounted () {
-            var prevScrollpos = window.pageYOffset;
-            window.onscroll = function() {
-                var currentScrollPos = window.pageYOffset;
-                if (prevScrollpos > currentScrollPos) {
-                    document.getElementById('navTitle').style.top = "30px";
-                } else {
-                    document.getElementById('navTitle').style.top = "-80px";
-                }
-                prevScrollpos = currentScrollPos;
-            };
-
-            // $('.burgermenu').click(function(){
-            //     $('.fullMenu').toggleClass('open');
-            // });
-            // $('.fullMenu ul li').click(function(){
-            //     $('.fullMenu').toggleClass('open');
-            // })
-        }
-    }
-</script>
-
 <style scoped>
     .navbar {
         position: fixed;
@@ -110,3 +85,39 @@
         color: hotpink;
     }
 </style>
+
+<script>
+    export default {
+        mounted () {
+            var prevScrollpos = window.pageYOffset;
+            window.onscroll = function() {
+                var currentScrollPos = window.pageYOffset;
+                if (prevScrollpos > currentScrollPos) {
+                    document.getElementById('navTitle').style.top = "30px";
+                    document.getElementById('assets-credits').style.left = '20px';
+                } else {
+                    document.getElementById('navTitle').style.top = "-80px";
+                    document.getElementById('assets-credits').style.left = '-450px';
+                }
+                prevScrollpos = currentScrollPos;
+            };
+            // var previousScrollposition = window.pageYOffset;
+            // window.onscroll = function() {
+            //     var currentScrollPosition = window.pageYOffset;
+            //     if (previousScrollposition > currentScrollPosition) {
+            //         document.getElementById('assets-credits').style.left = '20px';
+            //     } else {
+            //         document.getElementById('assets-credits').style.left = '-450px';
+            //     }
+            //     previousScrollposition = currentScrollPosition;
+            // }
+
+            // $('.burgermenu').click(function(){
+            //     $('.fullMenu').toggleClass('open');
+            // });
+            // $('.fullMenu ul li').click(function(){
+            //     $('.fullMenu').toggleClass('open');
+            // })
+        }
+    }
+</script>

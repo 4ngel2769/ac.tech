@@ -258,18 +258,9 @@ export default {
 </style>
 
 <script>
-export default {
-    mounted () {
-        var prevScrollpos = window.pageYOffset;
-        window.onscroll = function() {
-            var currentScrollPosition = window.pageYOffset;
-            if (prevScrollpos > currentScrollPosition) {
-                document.getElementById('assets-credits').style.left = '20px';
-            } else {
-                document.getElementById('assets-credits').style.left = '-450px';
-            }
-            prevScrollpos = currentScrollPosition;
-        }
-    }
-}
+// export default {
+//     mounted () {
+        
+//     }
+// }
 </script>
