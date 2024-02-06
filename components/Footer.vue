@@ -6,7 +6,8 @@
 
 <style scoped>
     .footerdiv {
-        margin: 30px 0px 35px 0px;
+        margin: 30px 0px 25px 0px;
+        font-size: 13px;
     }
     .nl {
         color: var(--kdeL);
