@@ -39,7 +39,7 @@
         <p>Awesome backgrounds by Sébastien Noël's <a href="https://fffuel.co" target="_blank">fffuel.co</a> .</p>
     </div>
     <div class="wave">
-        <img src="/wave-haikei4.svg" alt="wave">
+        <img class="bottomImg" src="/wave-haikei4.svg" alt="wave">
     </div>
 </template>
 
@@ -59,6 +59,11 @@
         /* padding: 15px; */
         /* border-radius: 5px; */
     }
+.bottomImg {
+   position: absolute;
+   left: 0;
+   bottom: 0;
+}
     .Name, .NameText {
         /* font-family: var(--font19); */
         font-family: var(--font29);
@@ -134,8 +139,11 @@
     .assets-credits a, p {
     }
     .wave {
-        position: absolute;
+position: absolute;
+    left: 0;
+    bottom: 0;
+        /*position: absolute;
         bottom: 0vh;
-        z-index: 50;
+        z-index: 50;*/
     }
 </style>
