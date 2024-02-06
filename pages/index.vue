@@ -1,4 +1,4 @@
-<script setup lang="js">
+<script setup lang="ts">
     const items = [{
         label: 'More info',
         icon: 'i-heroicons-link-16-solid',
@@ -210,7 +210,7 @@ export default {
         .more-info-mobile {
             display: flex;
             visibility: visible;
-            max-height: 500px;
+            height: auto;
         }
         .undertext {
             display: none;
