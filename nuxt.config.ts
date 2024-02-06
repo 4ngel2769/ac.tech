@@ -24,5 +24,9 @@ export default defineNuxtConfig({
     '@fortawesome/fontawesome-svg-core/styles.css'
   ],
 
-  modules: ['@nuxtjs/tailwindcss', '@formkit/auto-animate']
+  modules: ['@formkit/auto-animate', '@nuxt/ui'],
+  ui: {
+    global: true,
+    icons: ['mdi', 'simple-icons']
+  }
 })
