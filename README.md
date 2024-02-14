@@ -44,17 +44,9 @@ This will start a local instance on port `3000` and open it in your default brow
 |||
 
 <!--
-A README file is a guide that gives users a detailed description of a project you have worked on. It can also be documentation with guidelines on how to use or contribute to a project. A good README file can help your project stand out from others and attract more collaborators or users.
-
-To write a README file for your personal website project, you can follow these steps:
-
-1. Start by adding the title and a brief introduction of your project. For example:
-
 # AC.Tech
 
 AC.Tech is a personal website built with [Nuxt.js 3](^1^), a modern framework that makes web development intuitive and powerful with Vue components, hybrid rendering, SEO, and more. The website showcases my skills, projects, interests, and blog posts.
-
-2. Next, add a section on how to install and run your project locally. You can use code blocks to show the commands or steps needed. For example:
 
 ## Installation and Usage
 
@@ -66,8 +58,6 @@ To install and run this project, you need to have [Node.js](https://nodejs.org/)
 - Start the development server: `npm run dev`
 - Open your browser and go to `http://localhost:3000`
 
-3. Then, add a section on the features and functionalities of your website. You can use bullet points or paragraphs to describe what your website can do and how it works. For example:
-
 ## Features and Functionalities
 
 - Responsive design that adapts to different screen sizes and devices
@@ -75,22 +65,21 @@ To install and run this project, you need to have [Node.js](https://nodejs.org/)
 - Customizable theme and layout that can be changed from the settings page
 - Interactive animations and transitions that enhance the user experience
 - Contact form that sends messages to my email address
-
-4. Optionally, you can also add sections on the technologies, tools, and resources you used to build your website, the challenges and learnings you encountered during the development process, the future plans and improvements you have for your website, and the license and contribution guidelines for your project. For example:
-
+-->
 ## Technologies, Tools, and Resources
 
 - [Nuxt.js 3](^1^): The intuitive Vue framework that powers the website
+<!--  -->
 - [Tailwind CSS](https://tailwindcss.com/): The utility-first CSS framework that styles the website
-- [Animate.css](https://animate.style/): The library that provides animations for the website
+<!-- - [Animate.css](https://animate.style/): The library that provides animations for the website -->
 - [GitHub API](https://docs.github.com/en/rest): The API that fetches data from my GitHub repositories
-- [Medium API](https://github.com/Medium/medium-api-docs): The API that fetches data from my Medium blog posts
-- [Netlify](https://www.netlify.com/): The platform that deploys and hosts the website
-- [Formspree](https://formspree.io/): The service that handles the contact form submissions
+<!-- - [Medium API](https://github.com/Medium/medium-api-docs): The API that fetches data from my Medium blog posts -->
+<!-- - [Netlify](https://www.netlify.com/): The platform that deploys and hosts the website -->
+<!-- - [Formspree](https://formspree.io/): The service that handles the contact form submissions -->
 - [Visual Studio Code](https://code.visualstudio.com/): The code editor that I used to write the code
-- [Figma](https://www.figma.com/): The tool that I used to design the website
-- [Unsplash](https://unsplash.com/): The source of the images that I used for the website
-
+<!-- - [Figma](https://www.figma.com/): The tool that I used to design the website -->
+<!-- - [Unsplash](https://unsplash.com/): The source of the images that I used for the website -->
+<!--
 ## Challenges and Learnings
 
 - One of the challenges I faced was to make the website responsive and compatible with different browsers and devices. I learned how to use media queries, breakpoints, and browser prefixes to achieve this goal.
