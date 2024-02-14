@@ -3,6 +3,11 @@
 
 Prerequisites: [node.js](https://nodejs.org), [git](https://git-scm.com).
 
+
+#### My personal website built with [Nuxt.js 3, a modern framework that makes web development intuitive and powerful with Vue components, hybrid rendering, SEO, and more](https://nuxt.com). The website showcases my skills, projects, interests, and blog posts.
+
+# Installation and usage
+
 Clone the repository:
 ```bash
 git clone https://github.com/4ngel2769/ac.tech.git my-website
@@ -26,3 +31,14 @@ pnpm dev -o
 bun run dev -o # experimental
 ```
 This will start a local instance on port `3000` and open it in your default browser.
+
+# Features roadmap
+
+|Status|Feature|
+|:-:|:-|
+|✅|Cool styling|
+|✅|Decent SEO|
+|✅|About & links|
+|〰️|Blog page|
+|☑️|Resume|
+|||
