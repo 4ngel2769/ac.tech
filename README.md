@@ -69,12 +69,8 @@ To install and run this project, you need to have [Node.js](https://nodejs.org/)
 ## Technologies, Tools, and Resources
 
 - [Nuxt.js 3](^1^): The intuitive Vue framework that powers the website
-<!--  -->
 - [Tailwind CSS](https://tailwindcss.com/): The utility-first CSS framework that styles the website
-<!-- - [Animate.css](https://animate.style/): The library that provides animations for the website -->
 - [GitHub API](https://docs.github.com/en/rest): The API that fetches data from my GitHub repositories
-<!-- - [Medium API](https://github.com/Medium/medium-api-docs): The API that fetches data from my Medium blog posts -->
-<!-- - [Netlify](https://www.netlify.com/): The platform that deploys and hosts the website -->
 <!-- - [Formspree](https://formspree.io/): The service that handles the contact form submissions -->
 - [Visual Studio Code](https://code.visualstudio.com/): The code editor that I used to write the code
 <!-- - [Figma](https://www.figma.com/): The tool that I used to design the website -->
