@@ -24,12 +24,36 @@ export default defineNuxtConfig({
     '@fortawesome/fontawesome-svg-core/styles.css'
   ],
 
-  modules: ['@formkit/auto-animate', '@nuxt/ui'],
+  modules: ['@formkit/auto-animate', '@nuxt/ui', '@nuxtjs/seo'],
   ui: {
     global: true,
     icons: ['mdi', 'simple-icons']
   },
   colorMode: {
     preference: 'dark'
+  },
+  ogImage: {
+    enabled: true
+  },
+  sitemap: {
+    enabled: true
+  },
+  robots: {
+    enabled: true
+  },
+  seoExperiments: {
+    enabled: true
+  },
+  schemaOrg: {
+    enabled: true
+  },
+  linkChecker: {
+    enabled: true
+  },
+  site: {
+    url: 'https://angelcapra.tech',
+    // name: 'Angel 🚀',
+    // description: 'Personal website; find my projects, social links, and more. 📄',
+    defaultLocale: 'en',
   }
 })
