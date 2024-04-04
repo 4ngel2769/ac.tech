@@ -13,6 +13,7 @@
     "@formkit/auto-animate": "^0.8.1",
     "@nuxt/devtools": "^1.0.6",
     "@nuxt/ui": "^2.13.0",
+    "@nuxtjs/robots": "^3.0.0",
     "@nuxtjs/seo": "^2.0.0-rc.8",
     "nuxt": "^3.8.2",
     "sass": "^1.70.0",

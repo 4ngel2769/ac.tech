@@ -7,7 +7,7 @@ export default defineNuxtConfig({
     head: {
       title: 'Angel 🚀',
       meta: [
-        { name: 'description', content: 'Personal website; find my projects, social links, and more. 📄' }
+        { name: 'description', content: 'Angel Capra \'s portfolio and personal website ; find my projects, socials , and more. 📄' }
       ],
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/android-chrome-512x512.png'},
@@ -24,7 +24,7 @@ export default defineNuxtConfig({
     '@fortawesome/fontawesome-svg-core/styles.css'
   ],
 
-  modules: ['@formkit/auto-animate', '@nuxt/ui', '@nuxtjs/seo'],
+  modules: ['@formkit/auto-animate', '@nuxt/ui', '@nuxtjs/seo', '@nuxtjs/robots'],
   ui: {
     global: true,
     icons: ['mdi', 'simple-icons']
