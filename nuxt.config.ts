@@ -33,7 +33,7 @@ export default defineNuxtConfig({
     '@fortawesome/fontawesome-svg-core/styles.css'
   ],
 
-  modules: ['@formkit/auto-animate', '@nuxt/ui', // '@nuxtjs/seo',
+  modules: ['@formkit/auto-animate', '@nuxt/ui', '@nuxtjs/pwa',// '@nuxtjs/seo',
   '@nuxtjs/robots', "@nuxt/image"],
   ui: {
     global: true,
