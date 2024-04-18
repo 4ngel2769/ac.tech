@@ -59,8 +59,8 @@ export default {
             <div class="Website">
                 <font-awesome-icon icon="fa-solid fa-arrow-up-right-from-square" />
                 <p class="WebsiteText"><a target="_blank" href="https://angellabs.xyz">https://angellabs.xyz</a></p>
-                <UTooltip text="Ancient website (no longer actively maintained).">
-                    <UBadge color="pink" variant="subtle">Old</UBadge>
+                <UTooltip text="Under development as new website (Coming soon).">
+                    <UBadge color="green" variant="outline">Development</UBadge>
                 </UTooltip>
             </div>
         </div>
