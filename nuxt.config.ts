@@ -5,6 +5,9 @@ export default defineNuxtConfig({
   //
   app: {
     head: {
+      htmlAttrs: {
+        lang: 'en',
+      },
       title: 'Angel 🚀',
       meta: [
         { name: 'description', content: 'Angel Capra \'s portfolio and personal website ; find my projects, socials , and more. 📄' }
@@ -25,12 +28,8 @@ export default defineNuxtConfig({
     '@fortawesome/fontawesome-svg-core/styles.css'
   ],
 
-  modules: [
-    '@formkit/auto-animate',
-    '@nuxt/ui',
-    // '@nuxtjs/seo',
-    '@nuxtjs/robots'
-  ],
+  modules: ['@formkit/auto-animate', '@nuxt/ui', // '@nuxtjs/seo',
+  '@nuxtjs/robots', "@nuxt/image"],
   ui: {
     global: true,
     icons: ['mdi', 'simple-icons']
