@@ -23,7 +23,7 @@ export default {
             <NuxtImg format="webp" src="/android-chrome-192x192.png" quality="90" alt="Profile Picture" width="120px" />
         </div>
         <div class="Name">
-            <p class="NameText">Angel Capra</p>
+            <h1 class="NameText">Angel Capra</h1>
         </div>
         <!-- <div class="more-info-mobile">
             <UAccordion :items="items">
@@ -66,7 +66,7 @@ export default {
         </div>
         <UDivider label="About Me" class="descriptiondivider" />
         <div class="Description">
-            <p class="DescriptionText">Cybersecurity student fascinated by the Internet of Things and embedded systems.</p>
+            <h2 class="DescriptionText">Cybersecurity student fascinated by the Internet of Things and embedded systems.</h2>
         </div>
         <div class="LinksTitle">
             <p class="linkstitle"></p>
