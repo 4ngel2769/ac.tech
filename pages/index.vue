@@ -20,7 +20,7 @@ export default {
 <template>
     <div class="tContainer">
         <div class="ProfilePicture">
-            <img src="/android-chrome-192x192.png" alt="Profile Picture" width="120px" />
+            <NuxtImg format="webp" src="/android-chrome-192x192.png" quality="90" alt="Profile Picture" width="120px" />
         </div>
         <div class="Name">
             <p class="NameText">Angel Capra</p>
