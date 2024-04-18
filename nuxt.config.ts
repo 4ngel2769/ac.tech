@@ -24,32 +24,37 @@ export default defineNuxtConfig({
     '@fortawesome/fontawesome-svg-core/styles.css'
   ],
 
-  modules: ['@formkit/auto-animate', '@nuxt/ui', '@nuxtjs/seo', '@nuxtjs/robots'],
+  modules: [
+    '@formkit/auto-animate',
+    '@nuxt/ui',
+    // '@nuxtjs/seo',
+    '@nuxtjs/robots'
+  ],
   ui: {
     global: true,
     icons: ['mdi', 'simple-icons']
   },
-  colorMode: {
-    preference: 'dark'
-  },
-  ogImage: {
-    enabled: true
-  },
-  sitemap: {
-    enabled: true
-  },
-  robots: {
-    enabled: true
-  },
-  seoExperiments: {
-    enabled: true
-  },
-  schemaOrg: {
-    enabled: true
-  },
-  linkChecker: {
-    enabled: true
-  },
+  // colorMode: {
+  //   preference: 'dark'
+  // },
+  // ogImage: {
+  //   enabled: true
+  // },
+  // sitemap: {
+  //   enabled: true
+  // },
+  // robots: {
+  //   enabled: true
+  // },
+  // seoExperiments: {
+  //   enabled: true
+  // },
+  // schemaOrg: {
+  //   enabled: true
+  // },
+  // linkChecker: {
+  //   enabled: true
+  // },
   site: {
     url: 'https://angelcapra.tech',
     // name: 'Angel 🚀',
