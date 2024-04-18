@@ -33,8 +33,8 @@ export default defineNuxtConfig({
     '@fortawesome/fontawesome-svg-core/styles.css'
   ],
 
-  modules: ['@formkit/auto-animate', '@nuxt/ui', // '@nuxtjs/seo',
-  '@nuxtjs/robots', "@nuxt/image"],
+  modules: ['@formkit/auto-animate', // '@nuxtjs/seo',
+  '@nuxt/ui', '@nuxtjs/robots', "@nuxt/image", "@nuxtjs/sitemap"],
   ui: {
     global: true,
     icons: ['mdi', 'simple-icons']
@@ -60,10 +60,10 @@ export default defineNuxtConfig({
   // linkChecker: {
   //   enabled: true
   // },
-  // site: {
-  //   url: 'https://angelcapra.tech',
+  site: {
+    url: 'https://angelcapra.tech',
   //   // name: 'Angel 🚀',
   //   // description: 'Personal website; find my projects, social links, and more. 📄',
   //   defaultLocale: 'en',
-  // }
+  }
 })

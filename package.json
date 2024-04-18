@@ -17,6 +17,7 @@
     "@nuxtjs/pwa": "^3.3.5",
     "@nuxtjs/robots": "^3.0.0",
     "@nuxtjs/seo": "^2.0.0-rc.8",
+    "@nuxtjs/sitemap": "^5.1.4",
     "nuxt": "^3.8.2",
     "sass": "^1.70.0",
     "sass-loader": "^14.0.0",
