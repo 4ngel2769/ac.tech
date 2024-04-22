@@ -12,9 +12,9 @@ export default defineNuxtConfig({
       htmlAttrs: {
         lang: 'en',
       },
-      title: 'Angel 🚀',
+      title: 'Angel Capra 🚀',
       meta: [
-        { name: 'description', content: 'Angel Capra \'s portfolio and personal website ; find my projects, socials , and more. 📄' }
+        { name: 'description', content: 'I\'m Angel, a cybersecurity student fascinated by the IoT, embedded systems, and anything that has to do with technology! Here you can find my projects ranging from small websites and apps to hacking devices using the esp32 or arduino boards. Either way, there will be something interesting!' }
       ],
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/android-chrome-512x512.png'},
@@ -62,7 +62,7 @@ export default defineNuxtConfig({
   // },
   site: {
     url: 'https://angelcapra.tech',
-  //   // name: 'Angel 🚀',
+    // name: 'Angel 🚀',
   //   // description: 'Personal website; find my projects, social links, and more. 📄',
   //   defaultLocale: 'en',
   }

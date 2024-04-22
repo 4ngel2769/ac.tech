@@ -66,7 +66,7 @@ export default {
         </div>
         <UDivider label="About Me" class="descriptiondivider" />
         <div class="Description">
-            <h2 class="DescriptionText">Cybersecurity student fascinated by the Internet of Things and embedded systems.</h2>
+            <h2 class="DescriptionText">I'm Angel, a cybersecurity student fascinated by IoT, embedded systems, and tech breakthroughs.</h2>
         </div>
         <div class="LinksTitle">
             <p class="linkstitle"></p>
@@ -257,7 +257,19 @@ export default {
     }
 </style>
 
-<script>
+<script lang="ts">
+    export default {
+        mounted() {
+            useSeoMeta({
+                title: 'Angel Capra | Portfolio 🚀',
+                ogTitle: 'Angel Capra | Portfolio 🚀',
+                description: 'I\'m Angel, a cybersecurity student fascinated by the IoT, embedded systems, and anything that has to do with technology!',
+                ogDescription: 'I\'m Angel, a cybersecurity student fascinated by the IoT, embedded systems, and anything that has to do with technology!',
+                ogImage: '',
+                twitterCard: 'summary_large_image',
+            })
+        }
+    }
 // export default {
 //     mounted () {
         
