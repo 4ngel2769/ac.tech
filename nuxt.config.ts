@@ -64,6 +64,6 @@ export default defineNuxtConfig({
     url: 'https://angelcapra.tech',
     // name: 'Angel 🚀',
   //   // description: 'Personal website; find my projects, social links, and more. 📄',
-  //   defaultLocale: 'en',
+    defaultLocale: 'en',
   }
 })
