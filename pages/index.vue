@@ -65,35 +65,39 @@ export default {
             </div>
         </div>
         <UDivider label="About Me" class="descriptiondivider" />
-        <div class="Description">
-            <h2 class="DescriptionText">I'm Angel, a cybersecurity student fascinated by IoT, embedded systems, and tech breakthroughs.</h2>
+        <div class="descriptiondiv">
+            <div class="Description">
+                <h2 class="DescriptionText">I'm Angel, a cybersecurity student fascinated by IoT, embedded systems, and tech breakthroughs.</h2>
+            </div>
+            <div class="LinksTitle">
+                <p class="linkstitle"></p>
+            </div>
+            <UDivider label="Socials" class="socialdivider" />
+            <p class="linkstitle">follow me on</p>
+            <div class="linkscontainer">
+                <UTooltip text="YouTube | @angeldev0">
+                    <NuxtLink class="link" to="https://youtube.com/@angeldev0" external target="_blank"><font-awesome-icon icon="fas fa-brands fa-youtube" /></NuxtLink>
+                </UTooltip>
+                <UTooltip text="GitHub | 4ngel2769">
+                    <NuxtLink class="link" to="https://github.com/4ngel2769" external target="_blank"><font-awesome-icon icon="fa-brands fa-github" /></NuxtLink>                
+                </UTooltip>
+                <UTooltip text="Dev.to | @angeldev0">
+                    <NuxtLink class="link" to="https://dev.to/angeldev0" external target="_blank"><font-awesome-icon icon="fa-brands fa-dev" /></NuxtLink>
+                </UTooltip>
+                <UTooltip text="Twitter | @angeldev0">
+                    <NuxtLink class="link" to="https://twitter.com/angeldev0" external target="_blank"><font-awesome-icon icon="fa-brands fa-twitter" /></NuxtLink>
+                </UTooltip>
+                <UTooltip text="Instagram | @piestudios123">
+                    <NuxtLink class="link" to="https://instagram.com/piestudios123" external target="_blank"><font-awesome-icon icon="cib:instagram" /></NuxtLink>
+                </UTooltip>
+                <UTooltip text="Email angel@angellabs.xyz">
+                    <NuxtLink class="link" to="mailto:angel@angellabs.xyz" external><font-awesome-icon icon="fa-solid fa-at" /></NuxtLink>            
+                </UTooltip>
+            </div>
         </div>
-        <div class="LinksTitle">
-            <p class="linkstitle"></p>
-        </div>
-        <UDivider label="Socials" class="socialdivider" />
-        <p class="linkstitle">follow me on</p>
-        <div class="linkscontainer">
-            <UTooltip text="YouTube | @angeldev0">
-                <NuxtLink class="link" to="https://youtube.com/@angeldev0" external target="_blank"><font-awesome-icon icon="fa-brands fa-youtube" /></NuxtLink>
-            </UTooltip>
-            <UTooltip text="GitHub | 4ngel2769">
-                <NuxtLink class="link" to="https://github.com/4ngel2769" external target="_blank"><font-awesome-icon icon="fa-brands fa-github" /></NuxtLink>                
-            </UTooltip>
-            <UTooltip text="Dev.to | @angeldev0">
-                <NuxtLink class="link" to="https://dev.to/angeldev0" external target="_blank"><font-awesome-icon icon="fa-brands fa-dev" /></NuxtLink>
-            </UTooltip>
-            <UTooltip text="Twitter | @angeldev0">
-                <NuxtLink class="link" to="https://twitter.com/angeldev0" external target="_blank"><font-awesome-icon icon="fa-brands fa-twitter" /></NuxtLink>
-            </UTooltip>
-            <UTooltip text="Instagram | @piestudios123">
-                <NuxtLink class="link" to="https://instagram.com/piestudios123" external target="_blank"><font-awesome-icon icon="fa-brands fa-instagram" /></NuxtLink>
-            </UTooltip>
-            <UTooltip text="Email angel@angellabs.xyz">
-                <NuxtLink class="link" to="mailto:angel@angellabs.xyz" external><font-awesome-icon icon="fa-solid fa-at" /></NuxtLink>            
-            </UTooltip>
-        </div>
+        
     </div>
+    
     <div class="assets-credits" id="assets-credits">
         <p>Awesome backgrounds by Sébastien Noël's <a href="https://fffuel.co" target="_blank">fffuel.co</a> .</p>
     </div>
@@ -121,6 +125,10 @@ export default {
         /* font-family: var(--font22); */
         font-size: 18px;
     }
+    .descriptiondiv {
+        display: flex;
+        flex-direction: column;
+    }
     /* .more-info-mobile { */
         /* display: none; */
         /* visibility: hidden; */
@@ -134,6 +142,7 @@ export default {
     }
     .linkscontainer {
         margin: 10px 0px 10px 0px;
+        display: flex;
     }
     .link {
         font-size: 20px;
