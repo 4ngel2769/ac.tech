@@ -30,13 +30,14 @@ export default defineNuxtConfig({
   },
 
   css: [
-    // '@fortawesome/fontawesome-svg-core/styles.css'
+    '@fortawesome/fontawesome-svg-core/styles.css'
   ],
 
-  modules: ['@formkit/auto-animate', '@nuxtjs/seo', '@nuxt/ui', '@nuxtjs/robots', "@nuxt/image", "nuxt-icon", "@nuxtjs/sitemap"],
+  modules: ['@formkit/auto-animate', // '@nuxtjs/seo',
+  '@nuxt/ui', '@nuxtjs/robots', "@nuxt/image", "@nuxtjs/sitemap"],
   ui: {
     global: true,
-    // icons: ['mdi', 'simple-icons']
+    icons: ['mdi', 'simple-icons']
   },
   // colorMode: {
   //   preference: 'dark'
