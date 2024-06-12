@@ -272,8 +272,8 @@ export default {
             useSeoMeta({
                 title: 'Angel Capra | Portfolio 🚀',
                 ogTitle: 'Angel Capra | Portfolio 🚀',
-                description: 'I\'m Angel, a cybersecurity student fascinated by the IoT, embedded systems, and anything that has to do with technology!',
-                ogDescription: 'I\'m Angel, a cybersecurity student fascinated by the IoT, embedded systems, and anything that has to do with technology!',
+                description: 'Explore Angel Capra\'s projects in cybersecurity, IoT development, and embedded systems. As a passionate cybersecurity student, I showcase a diverse portfolio from hacking devices with ESP32 and Arduino to creating innovative tech solutions. Discover the intersection of cybersecurity and IoT technology, and find fascinating projects that push the boundaries of tech innovation.',
+                ogDescription: 'Explore Angel Capra\'s projects in cybersecurity, IoT development, and embedded systems. As a passionate cybersecurity student, I showcase a diverse portfolio from hacking devices with ESP32 and Arduino to creating innovative tech solutions. Discover the intersection of cybersecurity and IoT technology, and find fascinating projects that push the boundaries of tech innovation.',
                 ogImage: '',
                 twitterCard: 'summary_large_image',
             })
