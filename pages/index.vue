@@ -16,8 +16,50 @@ export default {
 }
 </script>
 -->
+<script setup lang="ts">
+    const isOpen = ref(false)
+</script>
 
 <template>
+    <!-- <div class="menu">
+        <UButton
+        icon="i-heroicons-bars-3-20-solid"
+        color="white"
+        @click="isOpen = true"
+        size="lg"
+        class="transparent-icon"
+        />
+
+        <USlideover v-model="isOpen" side="top">
+        <UCard
+            class="flex flex-col flex-1"
+            :ui="{ body: { base: 'flex-1' }, ring: '', divide: 'divide-y divide-gray-100 dark:divide-gray-800' }"
+            side="top">
+            
+            <template #header>
+            <UButton
+                color="gray"
+                variant="ghost"
+                size="sm"
+                icon="i-heroicons-x-mark-20-solid"
+                class="flex sm:hidden absolute end-5 top-5 z-10"
+                square
+                padded
+                @click="isOpen = false"
+            />
+
+            <UButton color="gray" variant="ghost" icon="i-heroicons-x-mark-20-solid" class="-my-1" @click="isOpen = false" />
+            </template>
+
+            <Placeholder class="h-full" />
+
+            <template #footer>
+                <p>Copyright 2024 © All rights reserved - Angel C</p>
+            </template>
+        </UCard>
+        </USlideover>
+    </div> -->
+
     <div class="tContainer">
         <div class="ProfilePicture">
             <NuxtImg format="webp" src="/android-chrome-192x192.png" quality="90" alt="Profile Picture" width="120px" />
@@ -63,6 +105,13 @@ export default {
                     <UBadge color="green" variant="outline">Development</UBadge>
                 </UTooltip>
             </div>
+            <div class="Website">
+                <font-awesome-icon icon="fa-solid fa-arrow-up-right-from-square" />
+                <p class="WebsiteText"><a target="_blank" href="https://angelscoolstuff.pages.dev">https://angelscoolstuff</a></p>
+                <UTooltip text="Old personal website.">
+                    <UBadge color="pink" variant="outline">Old</UBadge>
+                </UTooltip>
+            </div>
         </div>
         <UDivider label="About Me" class="descriptiondivider" />
         <div class="descriptiondiv">
@@ -104,6 +153,21 @@ export default {
 </template>
 
 <style scoped>
+    .menu {
+        z-index: 9999;
+    }
+    .transparent-icon {
+        background-color: transparent;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .transparent-button .icon {
+        width: 4rem; /* Adjust size as needed */
+        height: 4rem; /* Adjust size as needed */
+    }
+
     .tContainer {
         display: flex;
         flex-direction: column;

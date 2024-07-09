@@ -2,6 +2,7 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   ssr: true,
+
   routeRules: {
     '/': { prerender: true }
   },
@@ -35,11 +36,13 @@ export default defineNuxtConfig({
   ],
 
   modules: ['@formkit/auto-animate', // '@nuxtjs/seo',
-  '@nuxt/ui', '@nuxtjs/robots', "@nuxt/image", "@nuxtjs/sitemap"],
+  '@nuxt/ui', '@nuxtjs/robots', "@nuxt/image", "@nuxtjs/sitemap", "@nuxtjs/color-mode"],
+
   ui: {
     global: true,
     icons: ['mdi', 'simple-icons']
   },
+
   // colorMode: {
   //   preference: 'dark'
   // },
@@ -66,5 +69,7 @@ export default defineNuxtConfig({
     // name: 'Angel 🚀',
   //   // description: 'Personal website; find my projects, social links, and more. 📄',
     defaultLocale: 'en',
-  }
+  },
+
+  compatibilityDate: '2024-07-09'
 })
