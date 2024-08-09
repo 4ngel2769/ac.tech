@@ -116,7 +116,7 @@ export default {
         <UDivider label="About Me" class="descriptiondivider" />
         <div class="descriptiondiv">
             <div class="Description">
-                <h2 class="DescriptionText">I'm Angel, a cybersecurity student fascinated by IoT, embedded systems, and tech breakthroughs.</h2>
+                <h2 class="DescriptionText">I'm Angel, a cybersecurity student fascinated by hacking, IoT, embedded systems, and tech.</h2>
             </div>
             <div class="LinksTitle">
                 <p class="linkstitle"></p>
@@ -136,11 +136,14 @@ export default {
                 <UTooltip text="Twitter | @angeldev0">
                     <NuxtLink class="link" to="https://twitter.com/angeldev0" external target="_blank"><font-awesome-icon icon="fa-brands fa-twitter" /></NuxtLink>
                 </UTooltip>
+                <UTooltip text="LinkedIn | @angelcapra">
+                    <NuxtLink class="link" to="http://linkedin.com/in/angelcapra" external target="_blank"><font-awesome-icon :icon="['fab', 'linkedin']" /></NuxtLink>
+                </UTooltip>
                 <UTooltip text="Instagram | @piestudios123">
                     <NuxtLink class="link" to="https://instagram.com/piestudios123" external target="_blank"><font-awesome-icon icon="fa-brands fa-instagram" /></NuxtLink>
                 </UTooltip>
                 <UTooltip text="Email angel@angellabs.xyz">
-                    <NuxtLink class="link" to="mailto:angel@angellabs.xyz" external><font-awesome-icon icon="fa-solid fa-at" /></NuxtLink>            
+                    <NuxtLink class="link" to="mailto:angeldevz0@proton.me" external><font-awesome-icon icon="fa-solid fa-at" /></NuxtLink>
                 </UTooltip>
             </div>
         </div>
@@ -154,7 +157,7 @@ export default {
 
 <style scoped>
     .menu {
-        z-index: 9999;
+        z-index: 0;
     }
     .transparent-icon {
         background-color: transparent;
@@ -253,7 +256,7 @@ export default {
         border-radius: 12px;
         padding: 10px;
         background-color: #3535352f;
-        z-index: 100;
+        z-index: -100;
         border: 2px solid #a4a4a482;
         transition: left 1.3s;
         /* transform: translate3d(-50%, -50%); */
@@ -269,7 +272,7 @@ export default {
         /* left: -10px; */
         right: 0px;
         bottom: 0px;
-        z-index: 0;
+        z-index: -200;
         min-width: 110vh;
     }
     body {
@@ -296,8 +299,9 @@ export default {
         }
         .linkscontainer {
             display: flex;
-            justify-content: space-around;
+            justify-content: center;
             align-items: center;
+            flex-wrap: wrap;
         }
         .linkscontainer .link {
             font-size: 30px;

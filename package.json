@@ -4,13 +4,14 @@
   "type": "module",
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "dev": "nuxt dev --host",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
     "@formkit/auto-animate": "^0.8.2",
+    "@nuxt/content": "^2.13.2",
     "@nuxt/devtools": "^1.3.9",
     "@nuxt/image": "^1.7.0",
     "@nuxt/ui": "^2.17.0",
@@ -32,6 +33,8 @@
     "@fortawesome/vue-fontawesome": "^3.0.8",
     "@iconify-json/mdi": "^1.1.67",
     "@iconify-json/simple-icons": "^1.1.108",
-    "import": "^0.0.6"
+    "@nuxtjs/tailwindcss": "^6.12.1",
+    "import": "^0.0.6",
+    "rehype-external-links": "^3.0.0"
   }
 }

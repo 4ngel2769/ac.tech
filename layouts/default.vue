@@ -59,7 +59,7 @@
   }
   .navbar {
     position: absolute;
-    z-index: 30;
+    z-index: 0;
   }
 
   /* Menu Button CSS */
@@ -331,7 +331,7 @@
   line-height: 40px;
   cursor: pointer;
   user-select: none;
-  z-index: 3000;
+  z-index: -50;
 }
 /*
  * More from me link 🔥
@@ -350,7 +350,7 @@
   text-transform: uppercase;
   text-decoration: none;
   overflow: hidden;
-  z-index: 1;
+  z-index: -700;
   animation: reveal 5000ms cubic-bezier(0.87, -0.41, 0.19, 1.44);
 }
 .more::before {
@@ -366,7 +366,7 @@
   background-color: rgba(0, 0, 0, 0);
   transition: max-width 0ms ease 250ms, background-color 250ms ease;
   transform: translate(-50%, -50%);
-  z-index: -1;
+  z-index: -701;
 }
 .more:hover::before {
   max-width: 100%;
@@ -407,7 +407,7 @@
 	 visibility: hidden;
 	 width: 100%;
 	 height: 100vh;
-	 z-index: 999;
+	 z-index: 0;
 	 background: black;
 	 transition-duration: 0.5s;
 	 backface-visibility: visible;
@@ -472,7 +472,7 @@
 }
 .socialSidebar {
   position: fixed;
-  z-index: 40;
+  z-index: 0;
   top: 50vh;
   transform: translate(0, -50%);
   right: 0;
