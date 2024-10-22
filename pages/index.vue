@@ -18,6 +18,9 @@ export default {
 -->
 <script setup lang="ts">
     const isOpen = ref(false)
+    useSeoMeta({
+        
+    })
 </script>
 
 <template>
