@@ -2,9 +2,36 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   ssr: true,
+  experimental: {
+    payloadExtraction: false
+  },
+  router: {
+      options: {
+          strict: false
+      }
+  },
 
   routeRules: {
     '/': { prerender: true }
+  },
+  content: {
+    // https://content.nuxtjs.org/api/configuration
+    highlight: {
+      theme: 'github-dark',
+      preload: ['java','javascript']
+    },
+    markdown: {
+      // https://github.com/rehypejs/rehype-external-links
+      rehypePlugins: [
+        [
+        'rehype-external-links',
+          {
+            target: '_blank',
+            rel: 'noopener noreferer'
+          }
+        ]
+      ]
+    }
   },
 
   //
@@ -32,15 +59,28 @@ export default defineNuxtConfig({
   },
 
   css: [
-    '@fortawesome/fontawesome-svg-core/styles.css'
+    '@fortawesome/fontawesome-svg-core/styles.css',
+    '/assets/css/main.css'
   ],
 
-  modules: ['@formkit/auto-animate', // '@nuxtjs/seo',
-  '@nuxt/ui', '@nuxtjs/robots', "@nuxt/image", "@nuxtjs/sitemap", "@nuxtjs/color-mode"],
+  modules: [// '@nuxtjs/seo',
+  '@formkit/auto-animate', '@nuxt/ui', '@nuxtjs/robots', "@nuxt/image", "@nuxtjs/sitemap", "@nuxtjs/color-mode", '@nuxt/content'],
 
   ui: {
     global: true,
     icons: ['mdi', 'simple-icons']
+  },
+  
+  runtimeConfig: {
+    public: {
+      GITHUB: 'https://github.com/4ngel2769',
+      LINKEDIN: 'https://www.linkedin.com/in/angelcapra',
+      TWITTER: 'https://x.com/4ngel2769',
+      INSTAGRAM: 'https://www.instagram.com/piestudios123',
+      EMAIL: process.env.GITHUB,
+      YOUTUBE: 'https://youtube.com/@angeldev0',
+      DEVTO: 'https://dev.to/angeldev0',
+    }
   },
 
   // colorMode: {
@@ -71,5 +111,5 @@ export default defineNuxtConfig({
     defaultLocale: 'en',
   },
 
-  compatibilityDate: '2024-07-09'
+  compatibilityDate: '2024-07-09',
 })
