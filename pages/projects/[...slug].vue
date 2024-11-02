@@ -1,10 +1,11 @@
 <template>
     <main class="blog-post-text">
-        <ContentDoc>
-            <template v-slot="{ doc }">
+        <div class="thatbg">
+            <ContentDoc>
+                <template v-slot="{ doc }" >
                 <Section id="blog-title" type="header">
                     <div
-                        class="border-t-2 pt-8 border-typography_primary flex flex-col md:flex-row items-center md:justify-between md:text-right mb-12 md:mb-8"
+                        class="border-t-2 pt-8 border-gray-100 flex flex-col md:flex-row items-center md:justify-between md:text-right mb-12 md:mb-8"
                     >
                         <!-- Breadcrumbs -->
                         <ol itemscope itemtype="https://schema.org/BreadcrumbList" class="blog-breadcrumb">
@@ -18,11 +19,10 @@
                                     itemscope
                                     itemtype="https://schema.org/WebPage"
                                     itemprop="item"
-                                    itemid="/blog/"
-                                    href="/blog/"
+                                    itemid="/projects/"
+                                    href="/projects/"
                                 >
-                                    <span itemprop="name">Blog</span></a
-                                >
+                                <span itemprop="name">Projects</span></a>
                                 <meta itemprop="position" content="2" />
                             </li>
                             <li class="separator">/</li>
@@ -32,7 +32,7 @@
                             </li>
                         </ol>
                         <!-- Publish date -->
-                        <span class="font-light text-typography_primary/75 dark:text-typography_primary_dark/75 mt-2 md:mt-0">{{
+                        <span class="font-dark text-typography_primary/75 dark:text-typography_primary_dark/75 mt-2 md:mt-0">{{
                             $formatDate(doc.date)
                         }}</span>
                     </div>
@@ -42,7 +42,7 @@
                     </h1>
                     <p class="blog-post-text mb-8 md:w-8/12 md:text-lg md:leading-lg text-center md:text-left">{{ doc.excerpt }}</p>
                     <div
-                        class="border-b-2 pb-8 border-typography_primary dark:border-typography_primary_dark flex flex-col md:flex-row items-center md:justify-between mt-12 md:mt-4"
+                        class="border-b-2 pb-8 border-gray-100 dark:border-typography_primary_dark flex flex-col md:flex-row items-center md:justify-between mt-12 md:mt-4"
                     >
                         <!-- Author -->
                         <div class="flex flex-row items-center justify-center">
@@ -95,7 +95,8 @@
             <template #not-found>
                 <SectionsError />
             </template>
-        </ContentDoc>
+            </ContentDoc>
+        </div>
     </main>
 </template>
 
@@ -179,6 +180,18 @@ useHead({
     ],
     script: jsonScripts
 });
+
+// Increment view count when page loads
+onMounted(async () => {
+    try {
+        await $fetch('/api/views/increment', {
+            method: 'POST',
+            body: { path: cleanPath }
+        })
+    } catch (error) {
+        console.error('Failed to increment view count:', error)
+    }
+})
 </script>
 
 <style scoped>
@@ -187,12 +200,29 @@ useHead({
     top: calc(theme('spacing.nav') + 0.25rem);
 }
 .blog-aside-wrapper {
-    @apply flex flex-col border-t-2 border-b-2 border-typography_primary py-4;
+    @apply flex flex-col border-t-2 border-b-2 border-gray-100 py-4;
 }
 .blog-post-text {
-    @apply text-typography_primary;
+    @apply text-gray-300;
 }
 .separator {
     @apply mx-1;
+}
+.thatbg {
+    background-color: #00000037;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 10px;
+    backdrop-filter: blur(10px);
+}
+
+.prose :where(a):not(:where([class~="not-prose"] *)) {
+  color: theme('colors.emerald.600'); /* or any color you want */
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+/* Dark mode version */
+.dark .prose :where(a):not(:where([class~="not-prose"] *)) {
+  color: theme('colors.emerald.400');
 }
 </style>

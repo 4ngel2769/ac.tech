@@ -1,44 +1,46 @@
 <template>
     <div class="mxw rounded-xl">
         <NuxtLink :to="post._path">
-            <!-- <div class="card text-center rounded-t-xl "> -->
             <div class="card flex rounded-md">
-                <img :src="post.img" class="hoverBanner absolute z-20" />
-
-                <!-- <div class="hoverBG"
-                :style="{ 
-                    backgroundImage: 'url(' + post.img + ')' 
-                }" 
-                
-                style="
-                mask-image: linear-gradient(0deg, transparent 2%, black);
-                -webkit-mask-image: linear-gradient(0deg, transparent -10%, black);
-                transition: transform .8s;
-                "></div> -->
+                <img :src="post.img" :alt="post.title" class="hoverBanner absolute z-20" />
                 <div class="card-details">
-                    <!-- <NuxtLink :to="post._path"> -->
-                        <div class="text-center">
-                            <p class="text-gray-200 text-lg">
-                                {{ post.title }}
-                            </p>
-                        </div>
-                    <!-- </NuxtLink> -->
+                    <div class="text-center">
+                        <p class="text-gray-200 text-lg">{{ post.title }}</p>
+                    </div>
                 </div>
             </div>
         </NuxtLink>
         <div class="postFooter">
-            <p class="text-gray-300 textC">
-                {{ post.description }}...
-            </p>
-            <!-- <p class="text-gray-400">
-                By {{ post.author }}
-            </p> -->
+            <p class="text-gray-300 textC">{{ post.description }}</p>
             <div class="postFooterDetails">
-                <p class="text-gray-500 textC" style="font-size: .8em;">{{ post.date }}</p>
-                <p class="text-gray-100 text-2xl textC">
-                    <i :class="'nf fa-solid '+ post.icon"></i>
-                    <!-- <span class="material-symbols-outlined">{{ post.icon }}</span> -->
-                </p>
+                <div class="meta-info">
+                    <span class="text-sm text-gray-400">
+                        <i class="nf nf-fa-eye mr-1"></i>
+                        {{ viewCount }}
+                    </span>
+                    <span class="text-sm text-gray-400 ml-4">
+                        {{ new Date(post.date).toLocaleDateString() }}
+                    </span>
+                </div>
+                <div class="tags">
+                    <UBadge 
+                        v-for="tag in post.tags" 
+                        :key="tag"
+                        color="gray"
+                        variant="subtle"
+                        class="mr-2"
+                    >
+                        {{ tag }}
+                    </UBadge>
+                </div>
+                <div class="links">
+                    <a v-if="post.github" :href="post.github" target="_blank" class="icon-link">
+                        <i class="nf nf-fa-github"></i>
+                    </a>
+                    <a v-if="post.demo" :href="post.demo" target="_blank" class="icon-link">
+                        <i class="nf nf-fa-external_link"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -46,6 +48,20 @@
 
 <script setup>
     const { post } = defineProps(['post'])
+
+    // Fetch view count when component mounts
+    const viewCount = ref(0)
+    onMounted(async () => {
+        try {
+            const response = await $fetch('/api/views/get', {
+                method: 'POST',
+                body: { path: post._path }
+            })
+            viewCount.value = response.count
+        } catch (error) {
+            console.error('Failed to fetch view count:', error)
+        }
+    })
 </script>
 
 <style scoped>
@@ -121,5 +137,22 @@
 }
 .mxw:hover .postFooter * {
     color: black;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.icon-link {
+    color: var(--gray-400);
+    transition: color 0.2s;
+    font-size: 1.2em;
+    margin-left: 0.5rem;
+}
+
+.icon-link:hover {
+    color: var(--gray-100);
 }
 </style>

@@ -2,7 +2,7 @@
     <main>
         <!-- Query for the given blog page number -->
         <ContentQuery
-            path="/blog"
+            path="/projects"
             :only="['headline', 'excerpt', 'date', 'tags', '_path', 'image']"
             :sort="{
                 date: -1
