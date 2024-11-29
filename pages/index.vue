@@ -253,16 +253,16 @@ export default {
         visibility: hidden;
     }
     .assets-credits {
-        position: absolute;
+        position: fixed;
         bottom: 20px;
         left: 20px;
         border-radius: 12px;
         padding: 10px;
         background-color: #3535352f;
-        z-index: -100;
+        z-index: 1;
         border: 2px solid #a4a4a482;
         transition: left 1.3s;
-        /* transform: translate3d(-50%, -50%); */
+        backdrop-filter: blur(5px);
     }
     .assets-credits a {
         color: var(--l-green);
