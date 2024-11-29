@@ -1,4 +1,13 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
+import { defineNuxtConfig } from 'nuxt/config'
+
+declare global {
+  namespace NodeJS {
+    interface ProcessEnv {
+      GITHUB: string
+    }
+  }
+}
+
 export default defineNuxtConfig({
   devtools: { enabled: true },
   ssr: true,
@@ -63,12 +72,18 @@ export default defineNuxtConfig({
     '/assets/css/main.css'
   ],
 
-  modules: [// '@nuxtjs/seo',
-  '@formkit/auto-animate', '@nuxt/ui', '@nuxtjs/robots', "@nuxt/image", "@nuxtjs/sitemap", "@nuxtjs/color-mode", '@nuxt/content'],
+  modules: [
+    '@formkit/auto-animate',
+    '@nuxt/ui',
+    '@nuxtjs/robots',
+    "@nuxt/image",
+    "@nuxtjs/sitemap",
+    "@nuxtjs/color-mode",
+    '@nuxt/content'
+  ],
 
   ui: {
-    global: true,
-    icons: ['mdi', 'simple-icons']
+    global: true
   },
   
   runtimeConfig: {
@@ -77,7 +92,7 @@ export default defineNuxtConfig({
       LINKEDIN: 'https://www.linkedin.com/in/angelcapra',
       TWITTER: 'https://x.com/4ngel2769',
       INSTAGRAM: 'https://www.instagram.com/piestudios123',
-      EMAIL: process.env.GITHUB,
+      EMAIL: '',
       YOUTUBE: 'https://youtube.com/@angeldev0',
       DEVTO: 'https://dev.to/angeldev0',
     }
