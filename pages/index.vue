@@ -121,16 +121,16 @@ export default {
             <div class="Description">
                 <h2 class="DescriptionText leading-h4 font-semibold">Hi, I'm Angel — Cybersecurity Researcher & Embedded Systems Developer</h2>
             </div>
-            <div>
-                <p>I specialize in <span class="font-medium">cybersecurity</span>, <span class="font-medium">ethical hacking</span>, and <span class="font-medium">embedded systems development</span>,
-                <br>with extensive experience in Docker, virtual environments, networking, and server management.
-                <br>My work involves uncovering vulnerabilities, creating secure devices, and developing innovative
-                <br>solutions using ESP32 microcontrollers.
+            <div class="mb-6">
+                <p class="tracking-normal leading-6">I specialize in <span class="font-medium">cybersecurity</span>, <span class="font-medium">ethical hacking</span>, and <span class="font-medium">embedded systems development</span>,
+                with extensive experience in Docker, virtual environments, networking, and server management.<br>
+                My work involves uncovering vulnerabilities, creating secure devices, and developing innovative
+                solutions using ESP32 microcontrollers.
                 </p>
             </div>
-            <div class="LinksTitle">
-                <p class="linkstitle"></p>
-            </div>
+            <!-- <div class="Description"> -->
+                <!-- <p class="DescriptionText">What I Do:</p> -->
+            <!-- </div> -->
             <UDivider label="Socials" class="socialdivider" />
             <p class="linkstitle">follow me on</p>
             <div class="linkscontainer">
