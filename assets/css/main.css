@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+.squiggly-underline {
+    text-decoration-line: underline;
+    text-decoration-style: wavy;
+    text-decoration-color: linear-gradient(to right, #FF6347, #4CAF50, #1E90FF); /* Customize the color of the squiggly line */
+    text-decoration-thickness: 1.2px; /* Customize the thickness of the squiggly line */
+}
+
 html {
     scroll-behavior: smooth;
 }

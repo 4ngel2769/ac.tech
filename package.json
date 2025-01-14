@@ -33,8 +33,11 @@
     "@fortawesome/free-regular-svg-icons": "^6.5.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.1",
     "@fortawesome/vue-fontawesome": "^3.0.8",
+    "@nuxtjs/dotenv": "^1.4.2",
+    "@nuxtjs/google-analytics": "^2.4.0",
     "@nuxtjs/tailwindcss": "^6.12.1",
     "import": "^0.0.6",
+    "nuxt-gtag": "^3.0.2",
     "rehype-external-links": "^3.0.0"
   }
 }

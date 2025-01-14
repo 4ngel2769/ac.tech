@@ -119,7 +119,14 @@ export default {
         <UDivider label="About Me" class="descriptiondivider" />
         <div class="descriptiondiv">
             <div class="Description">
-                <h2 class="DescriptionText">I'm Angel, a cybersecurity student fascinated by hacking, IoT, embedded systems, and tech.</h2>
+                <h2 class="DescriptionText leading-h4 font-semibold">Hi, I'm Angel — Cybersecurity Researcher & Embedded Systems Developer</h2>
+            </div>
+            <div>
+                <p>I specialize in <span class="font-medium">cybersecurity</span>, <span class="font-medium">ethical hacking</span>, and <span class="font-medium">embedded systems development</span>,
+                <br>with extensive experience in Docker, virtual environments, networking, and server management.
+                <br>My work involves uncovering vulnerabilities, creating secure devices, and developing innovative
+                <br>solutions using ESP32 microcontrollers.
+                </p>
             </div>
             <div class="LinksTitle">
                 <p class="linkstitle"></p>
@@ -142,9 +149,9 @@ export default {
                 <UTooltip text="LinkedIn | @angelcapra">
                     <NuxtLink class="link" to="http://linkedin.com/in/angelcapra" external target="_blank"><font-awesome-icon :icon="['fab', 'linkedin']" /></NuxtLink>
                 </UTooltip>
-                <!-- <UTooltip text="Instagram | @piestudios123"> -->
-                    <!-- <NuxtLink class="link" to="https://instagram.com/piestudios123" external target="_blank"><font-awesome-icon icon="fa-brands fa-instagram" /></NuxtLink> -->
-                <!-- </UTooltip> -->
+                <UTooltip text="Instagram | @angelthebox">
+                    <NuxtLink class="link" to="https://instagram.com/angelthebox" external target="_blank"><font-awesome-icon icon="fa-brands fa-instagram" /></NuxtLink>
+                </UTooltip>
                 <UTooltip text="Email me | angeldevz0@proton.me">
                     <NuxtLink class="link" to="mailto:angeldevz0@proton.me" external><font-awesome-icon icon="fa-solid fa-at" /></NuxtLink>
                 </UTooltip>

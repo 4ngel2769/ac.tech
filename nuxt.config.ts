@@ -77,10 +77,15 @@ export default defineNuxtConfig({
     '@nuxt/ui',
     '@nuxtjs/robots',
     "@nuxt/image",
+    "nuxt-gtag",
     "@nuxtjs/sitemap",
     "@nuxtjs/color-mode",
     '@nuxt/content'
   ],
+
+  gtag: {
+    id: process.env.GOOGLE_ANALYTICS_ID,
+  },
 
   ui: {
     global: true
