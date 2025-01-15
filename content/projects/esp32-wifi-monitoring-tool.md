@@ -1,17 +1,17 @@
 ---
-title: 'cool tech stuff'
-description: "cool tech project"
-headline: 'Sample Blog Title'
-excerpt: "Sample excerpt, appears in blog cards"
-date: '2023-02-28T12:00:00'
+title: 'ESP32 WiFi Monitoring Toolkit'
+description: "An ESP32 Based Tool for Monitoring WiFi Networks"
+headline: 'An ESP32 Based Tool for Monitoring WiFi Networks'
+excerpt: "-"
+date: '2024-09-21T14:21:15'
 dateUpdated: ''
-author: 'Sample Author'
-authorUrl: 'https://example.com/'
+author: 'Angel Capra'
+authorUrl: ''
 tags: ['tag1', 'tag2']
 socialImage:
-    src: '/android-chrome-192x192.png'
+    src: '/default.jpg'
     mime: 'webp'
-    alt: 'Mountain'
+    alt: 'ESP32 WiFi Monitoring Toolkit'
     width: 1200
     height: 630
 ---
