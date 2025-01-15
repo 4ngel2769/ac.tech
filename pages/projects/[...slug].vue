@@ -7,7 +7,7 @@
                         class="border-t-2 pt-8 border-typography_primary flex flex-col md:flex-row items-center md:justify-between md:text-right mb-12 md:mb-8"
                     >
                         <!-- Breadcrumbs -->
-                        <ol itemscope itemtype="https://schema.org/BreadcrumbList" class="blog-breadcrumb">
+                        <ol itemscope itemtype="https://schema.org/BreadcrumbList" class="blog-breadcrumb ">
                             <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
                                 <a itemprop="item" href="/"> <span itemprop="name">Home</span></a>
                                 <meta itemprop="position" content="1" />
@@ -18,10 +18,10 @@
                                     itemscope
                                     itemtype="https://schema.org/WebPage"
                                     itemprop="item"
-                                    itemid="/blog/"
-                                    href="/blog/"
+                                    itemid="/projects/"
+                                    href="/projects/"
                                 >
-                                    <span itemprop="name">Blog</span></a
+                                    <span itemprop="name">Projects</span></a
                                 >
                                 <meta itemprop="position" content="2" />
                             </li>
@@ -32,7 +32,7 @@
                             </li>
                         </ol>
                         <!-- Publish date -->
-                        <span class="font-light text-typography_primary/75 dark:text-typography_primary_dark/75 mt-2 md:mt-0">{{
+                        <span class="font-200 text-neutral-300/75 mt-2 md:mt-0">{{
                             $formatDate(doc.date)
                         }}</span>
                     </div>
@@ -106,10 +106,10 @@ const cleanPath = path.replace(/\/+$/, '');
 const { data, error } = await useAsyncData(`content-${cleanPath}`, async () => {
     // Remove a trailing slash in case the browser adds it, it might break the routing
     // fetch document where the document path matches with the cuurent route
-    let article = queryContent('/blog').where({ _path: cleanPath }).findOne();
+    let article = queryContent('/projects').where({ _path: cleanPath }).findOne();
     // get the surround information,
     // which is an array of documeents that come before and after the current document
-    let surround = queryContent('/blog').sort({ date: -1 }).only(['_path', 'headline', 'excerpt']).findSurround(cleanPath, { before: 1, after: 1 });
+    let surround = queryContent('/projects').sort({ date: -1 }).only(['_path', 'headline', 'excerpt']).findSurround(cleanPath, { before: 1, after: 1 });
     return {
         article: await article,
         surround: await surround
@@ -120,9 +120,9 @@ const { data, error } = await useAsyncData(`content-${cleanPath}`, async () => {
 const { data: authorData } = await useAsyncData('home', () => queryContent('/authors').findOne());
 
 // Set the meta
-const baseUrl = 'https://example.com';
+const baseUrl = process.env.BASEURL;
 const canonicalPath = baseUrl + (path + '/').replace(/\/+$/, '/');
-const image = baseUrl + (data.value?.article?.socialImage.src || '/sample.webp');
+const image = baseUrl + (data.value?.article?.socialImage.src || '/default.jpg');
 
 // JSON+LD
 const jsonScripts = [
@@ -133,7 +133,7 @@ const jsonScripts = [
             '@type': 'BlogPosting',
             mainEntityOfPage: {
                 '@type': 'WebPage',
-                '@id': 'https://example.com/'
+                '@id': `${baseUrl}`
             },
             url: canonicalPath,
             image: image,
@@ -142,7 +142,7 @@ const jsonScripts = [
             datePublished: data.value?.article?.date,
             dateModified: data.value?.article?.dateUpdated || data.value?.article?.date,
             author: authorData.value[data.value?.article?.author],
-            publisher: authorData.value['Gonzalo Hirsch']
+            publisher: authorData.value['Angel Capra']
         })
     }
 ];
@@ -190,7 +190,7 @@ useHead({
     @apply flex flex-col border-t-2 border-b-2 border-typography_primary py-4;
 }
 .blog-post-text {
-    @apply text-typography_primary;
+    @apply text-zinc-300;
 }
 .separator {
     @apply mx-1;

@@ -21,7 +21,6 @@ export default {
     useSeoMeta({
         
     })
-    console.log(process.env.GOOGLE_ANALYTICS_ID);
 </script>
 
 <template>
@@ -99,7 +98,7 @@ export default {
         </div> -->
         <div class="undertext">
             <div class="Location">
-                <font-awesome-icon icon="fa-solid fa-location-dot" />
+                <font-awesome-icon :icon="['fas', 'location-dot']" />
                 <p class="LocationText">Montreal, Quebec</p>
             </div>
             <div class="Website">
@@ -129,6 +128,8 @@ export default {
                 solutions using ESP32 microcontrollers.
                 </p>
             </div>
+            <UButton @click="navigateTo('/projects')" label="Checkout my projects?">
+            </UButton>
             <!-- <div class="Description"> -->
                 <!-- <p class="DescriptionText">What I Do:</p> -->
             <!-- </div> -->
@@ -148,7 +149,7 @@ export default {
                     <NuxtLink class="link" to="https://twitter.com/angeldev0" external target="_blank"><font-awesome-icon icon="fa-brands fa-twitter" /></NuxtLink>
                 </UTooltip>
                 <UTooltip text="LinkedIn | @angelcapra">
-                    <NuxtLink class="link" to="http://linkedin.com/in/angelcapra" external target="_blank"><font-awesome-icon :icon="['fab', 'linkedin']" /></NuxtLink>
+                    <NuxtLink class="link" to="http://linkedin.com/in/angelcapra" external target="_blank"><font-awesome-icon icon="fa-brands fa-linkedin"/></NuxtLink>
                 </UTooltip>
                 <UTooltip text="Instagram | @angelthebox">
                     <NuxtLink class="link" to="https://instagram.com/angelthebox" external target="_blank"><font-awesome-icon icon="fa-brands fa-instagram" /></NuxtLink>

@@ -1,14 +1,14 @@
 ---
 title: 'Sample Meta Title | Blog'
 description: "Sample meta description, it gets added on share cards"
-headline: 'Sample Blog Title 3'
+headline: 'Sample Blog Title 7'
 excerpt: "Sample excerpt, appears in blog cards"
 date: '3023-02-28T12:00:00'
 dateUpdated: ''
 author: 'Sample Author'
 authorUrl: 'https://example.com/'
 socialImage:
-    src: '/img/blog/sample.webp'
+    src: '/android-chrome-192x192.png'
     mime: 'webp'
     alt: 'Mountain'
     width: 1200

@@ -98,6 +98,10 @@ export default defineNuxtConfig({
     '@nuxt/content'
   ],
 
+  icon: {
+    
+  },
+
   gtag: {
     id: process.env.GOOGLE_ANALYTICS_ID,
   },

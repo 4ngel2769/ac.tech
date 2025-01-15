@@ -8,7 +8,7 @@ dateUpdated: ''
 author: 'Sample Author'
 authorUrl: 'https://example.com/'
 socialImage:
-    src: '/img/blog/sample.webp'
+    src: '/android-chrome-192x192.png'
     mime: 'webp'
     alt: 'Mountain'
     width: 1200

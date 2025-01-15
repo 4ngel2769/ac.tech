@@ -8,7 +8,7 @@
                 </li>
                 <span>/</span>
                 <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                    <span itemprop="name">Blog</span>
+                    <span itemprop="name" class="text-slate-50">Blog</span>
                     <meta itemprop="position" content="2" />
                 </li>
             </ol>

@@ -2,7 +2,7 @@
     <main>
         <!-- Query for the given blog page number -->
         <ContentQuery
-            path="/blog"
+            path="/projects"
             :only="['headline', 'excerpt', 'date', 'tags', '_path', 'image']"
             :sort="{
                 date: -1
@@ -16,7 +16,7 @@
                 <Section id="main" class="!pt-0">
                     <BlogList :data="data" />
                     <ContentQuery
-                        path="/blog"
+                        path="/projects"
                         :only="['headline']"
                     >
                         <template v-slot="{ data }">
@@ -26,8 +26,8 @@
                                 :currentPage="getPageNumber()"
                                 :totalPages="getPageLimit(data.length)"
                                 :nextPage="getPageNumber() < getPageLimit(data.length)"
-                                baseUrl="/blog/"
-                                pageUrl="/blog/page/"
+                                baseUrl="/projects/"
+                                pageUrl="/projects/page/"
                             />
                         </template>
                         <template #not-found>
@@ -67,11 +67,11 @@ let pageNo;
 try {
     pageNo = getPageNumber();
     if (isNaN(pageNo) || pageNo <= 0) {
-        router.replace('/blog/');
+        router.replace('/projects/');
     }
 } catch (err) {
     console.error(err);
-    router.replace('/blog/');
+    router.replace('/projects/');
 }
 
 useSeoMeta({
