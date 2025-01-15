@@ -21,6 +21,7 @@ export default {
     useSeoMeta({
         
     })
+    console.log(process.env.GOOGLE_ANALYTICS_ID);
 </script>
 
 <template>

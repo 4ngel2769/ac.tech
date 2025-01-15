@@ -46,6 +46,21 @@ export default defineNuxtConfig({
   //
   app: {
     head: {
+      script: [
+        {
+          src: "https://www.googletagmanager.com/gtag/js?id=G-K7ZPX7THHN",
+          async: true
+        },
+        {
+          children: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-K7ZPX7THHN');
+          `,
+          type: "text/javascript",
+        },
+      ],
       htmlAttrs: {
         lang: 'en',
       },
