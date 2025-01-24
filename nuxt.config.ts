@@ -67,7 +67,7 @@ export default defineNuxtConfig({
       title: 'Angel Capra 🚀',
       meta: [
         { name: 'description', content: 'Explore Angel Capra\'s projects in cybersecurity, IoT development, and embedded systems. As a passionate cybersecurity student, I showcase a diverse portfolio from hacking devices with ESP32 and Arduino to creating innovative tech solutions. Discover the intersection of cybersecurity and IoT technology, and find fascinating projects that push the boundaries of tech innovation.' },
-        { name: 'keywords', content: 'angel capra, angel, capra, portfolio, cyber security, cybersecurity, cyber, security, angeldev0, 4ngel2769, cybersecurity portfolio, IoT, internet of things' }
+        { name: 'keywords', content: 'angel capra, angel, capra, angel c, ac.tech, angellabs, portfolio, cyber security, cybersecurity, cyber, security, angeldev0, 4ngel2769, cybersecurity portfolio, IoT, internet of things' }
       ],
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/android-chrome-512x512.png'},
