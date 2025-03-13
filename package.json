@@ -21,7 +21,7 @@
     "@nuxtjs/robots": "^5.1.1",
     "@nuxtjs/seo": "^2.0.3",
     "@nuxtjs/sitemap": "^7.0.2",
-    "nuxt": "^3.15.1",
+    "nuxt": "^3.16.0",
     "sass": "^1.83.4",
     "sass-loader": "^16.0.4",
     "vue": "^3.5.13",
@@ -38,6 +38,7 @@
     "@nuxtjs/tailwindcss": "^6.13.1",
     "fuse.js": "^7.0.0",
     "import": "^0.0.6",
+    "nuxi": "^3.23.0",
     "nuxt-gtag": "^3.0.2",
     "rehype-external-links": "^3.0.0"
   }
