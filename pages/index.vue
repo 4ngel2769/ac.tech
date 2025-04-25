@@ -151,8 +151,8 @@ export default {
                 <UTooltip text="LinkedIn | @angelcapra">
                     <NuxtLink class="link" to="http://linkedin.com/in/angelcapra" external target="_blank"><font-awesome-icon icon="fa-brands fa-linkedin"/></NuxtLink>
                 </UTooltip>
-                <UTooltip text="Instagram | @angelthebox">
-                    <NuxtLink class="link" to="https://instagram.com/angelthebox" external target="_blank"><font-awesome-icon icon="fa-brands fa-instagram" /></NuxtLink>
+                <UTooltip text="Instagram | @angeldevz0">
+                    <NuxtLink class="link" to="https://instagram.com/angeldevz0" external target="_blank"><font-awesome-icon icon="fa-brands fa-instagram" /></NuxtLink>
                 </UTooltip>
                 <UTooltip text="Email me | angeldevz0@proton.me">
                     <NuxtLink class="link" to="mailto:angeldevz0@proton.me" external><font-awesome-icon icon="fa-solid fa-at" /></NuxtLink>
