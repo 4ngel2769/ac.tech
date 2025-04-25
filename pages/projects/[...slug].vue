@@ -102,7 +102,11 @@
 <script setup>
 const { $formatDate } = useNuxtApp();
 const { path } = useRoute();
-const cleanPath = path.replace(/\/+$/, '');
+let cleanPath = path.replace(/\/+$/, '');
+
+// Normalize any repeated `/projects` prefix
+cleanPath = cleanPath.replace(/^\/(projects\/)+/, '/projects/');
+
 const { data, error } = await useAsyncData(`content-${cleanPath}`, async () => {
     // Remove a trailing slash in case the browser adds it, it might break the routing
     // fetch document where the document path matches with the cuurent route
