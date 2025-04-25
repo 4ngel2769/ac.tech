@@ -1,5 +1,5 @@
 ---
-title: 'Sample Meta Title | Blog'
+title: 'Muzzy! | Music Bot'
 description: "Sample meta description, it gets added on share cards"
 headline: 'Sample Blog Title 7'
 excerpt: "Sample excerpt, appears in blog cards"
@@ -9,118 +9,47 @@ author: 'Sample Author'
 authorUrl: 'https://example.com/'
 socialImage:
     src: 'https://i.imgur.com/iUmChbB.png'
-    mime: 'webp'
-    alt: 'Mountain'
+    mime: 'png'
+    alt: 'Muzzy Music Discord Bot'
     width: 1200
     height: 630
 ---
 
-This is a sample blog post.
+[![Nice banner, i know](https://i.imgur.com/iUmChbB.png)](https://discord.com/invite/cK2HH6Bmj5)
 
-## Table of Contents
+## High quality muzzic!
 
-Headings up to H3 (inclusive) are added to the Table of Contents
 
-### This heading is in the ToC
+### Muzzy provides users with an easy to use interface, high quality music, and cool features such as audi filters!
 
-Lorem ipsum
+### Command List
 
-#### This heading is not in the ToC
+| Name | Arguments | Modules | Description |
+| :- | :-: | :-: | :- |
+|`/247`| - | Music | Toggle non-stop playing |
+|`/clearqueue`|-| Music |Clear the current queue|
+|`/filter`|Filter| Music |Apply some awesome filters (like bassboost) to music|Music|
+|`/join`|-| Music |Make me join a voice channel|
+|`/leave`|-| Music |Remove me from a voice channel|
+|`/loop`|Track/Queue| Music |Turn on the loop per track (will loop the currently playing song) or per queue (will loop the entire queue)|
+|`/nowplaying`|-| Music |Displays information about the currently playing track|
+|`/pause`|-| Music |Pause the current track|
+|`/play`|Search Terms| Music |Play some music|
+|`/queue`|-| Music |Shows what's up next|
+|`/remove`|Track| Music |Remove a track from the queue|
+|`/resume`|-| Music |Resume the track/queue after being paused|
+|`/seek`|Time| Music |Skip to a certain time in the current track|
+|`/shuffle`|-| Music |Shuffle the queue|
+|`/skip`|-| Music |Skip the current track|
+|`/skipto`|Track| Music |Skip to a tack from the current queue|
+|`/stop`|-| Music |Stops the track & queue|
+|`/volume`|Num 0 - 100| Music |Increase or decrease the volume to your liking|
+|`/about`|-|Info|In case you want to know more about me!|
+|`/help`|-|Info|Shows you the help panel|
+|`/invite`|-|Info|Shows the invite pannel! (You can also use it to join the support server and vote for me!)|
+|`/voice_status`|-|Info|Displays information about my backend|
+|`/ping`|-|Info|Pong!|
+|`/status`|-|Info|My current statistics|
+|`/meme`|-|Fun|AhghahgahghhaghaHGhahgaaosd-*dies of laugh*|
 
-##### This heading is not in the ToC either
-
-## Code
-
-Code blocks can be added like this:
-
-```bash
-```javascript{1-4}[file.json]
-export default defineNuxtConfig({
-    modules: ['@nuxtjs/tailwindcss', '@nuxt/content'],
-    css: ['/assets/css/main.css'],
-    ssr: true,
-    experimental: {
-        payloadExtraction: false
-    },
-    router: {
-        options: {
-            strict: false
-        }
-    },
-    sourcemap: false,
-    content: {
-        // https://content.nuxtjs.org/api/configuration
-        highlight: {
-            theme: 'github-dark',
-            preload: ['java','javascript']
-        },
-        markdown: {
-            // https://github.com/rehypejs/rehype-external-links
-            rehypePlugins: [
-                [
-                    'rehype-external-links',
-                    {
-                        target: '_blank',
-                        rel: 'noopener noreferer'
-                    }
-                ]
-            ]
-        }
-    }
-});
-```    
-```
-
-This is processed and looks like this:
-
-```javascript{1-4,6}[file.json]
-export default defineNuxtConfig({
-    modules: ['@nuxtjs/tailwindcss', '@nuxt/content'],
-    css: ['/assets/css/main.css'],
-    ssr: true,
-    experimental: {
-        payloadExtraction: false
-    },
-    router: {
-        options: {
-            strict: false
-        }
-    },
-    sourcemap: false,
-    content: {
-        // https://content.nuxtjs.org/api/configuration
-        highlight: {
-            theme: 'github-dark',
-            preload: ['java','javascript']
-        },
-        markdown: {
-            // https://github.com/rehypejs/rehype-external-links
-            rehypePlugins: [
-                [
-                    'rehype-external-links',
-                    {
-                        target: '_blank',
-                        rel: 'noopener noreferer'
-                    }
-                ]
-            ]
-        }
-    }
-});
-```
-
-You can define language, highlighted lines, and filename.
-
-Inline code is written using \`, and looks like `this`.
-
-## Images
-
-Images should be loaded from the `public` folder. An image is added like this:
-
-```bash
-![Alt text goes here](/img/blog/sample.webp)
-```
-
-The result of that is:
-
-![Alt text goes here](https://i.imgur.com/iUmChbB.png)
+### For further questions and support you can join Muzzy's server [here](https://discord.com/invite/cK2HH6Bmj5)!
