@@ -63,14 +63,10 @@ const getPageNumber = () => {
 
 // Attempt to get the number
 const router = useRouter();
-let pageNo;
-try {
-    pageNo = getPageNumber();
-    if (isNaN(pageNo) || pageNo <= 0) {
-        router.replace('/projects/');
-    }
-} catch (err) {
-    console.error(err);
+let pageNo = Number(params.number);
+
+if (!Number.isInteger(pageNo) || pageNo < 1 || pageNo > 999) {
+    // Avoid potential deep page paths like /projects/page/999999...
     router.replace('/projects/');
 }
 
