@@ -70,6 +70,7 @@ export default defineNuxtConfig({
         { name: 'keywords', content: 'angel capra, angel, capra, angel c, ac.tech, angellabs, portfolio, cyber security, cybersecurity, cyber, security, angeldev0, 4ngel2769, cybersecurity portfolio, IoT, internet of things' }
       ],
       link: [
+        { rel: 'canonical', href: 'https://angellabs.xyz' },
         { rel: 'icon', type: 'image/x-icon', href: '/android-chrome-512x512.png'},
         // Nerd font icons
         { rel: 'stylesheet', href: 'https://www.nerdfonts.com/assets/css/webfont.css' },
