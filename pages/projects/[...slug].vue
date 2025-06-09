@@ -54,9 +54,9 @@
                             >
                         </div>
                         <!-- Social Share -->
-                        <div class="mt-6 md:mt-0">
+                        <!-- <div class="mt-6 md:mt-0">
                             <NavShareIcons :headline="doc.headline" :excerpt="doc.excerpt" :path="doc._path + '/'" />
-                        </div>
+                        </div> -->
                     </div>
                 </Section>
                 <!-- Content -->

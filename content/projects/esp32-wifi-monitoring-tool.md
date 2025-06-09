@@ -119,9 +119,9 @@ Inline code is written using \`, and looks like `this`.
 Images should be loaded from the `public` folder. An image is added like this:
 
 ```bash
-![Alt text goes here](/img/blog/sample.webp)
+![Alt text goes here](/sample.png)
 ```
 
 The result of that is:
 
-![Alt text goes here](/img/blog/sample.webp)
+![Alt text goes here](/sample.png)

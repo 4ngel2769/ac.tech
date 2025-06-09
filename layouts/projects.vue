@@ -18,7 +18,7 @@
               <span class="mx-2">/</span>
             </li>
             <li>
-              <span v-if="$route.path === '/projects'" class="text-gray-900">Projects</span>
+              <span v-if="$route.path === '/projects' || '/projects/'" class="text-gray-100">Projects</span>
               <NuxtLink v-else to="/projects" class="hover:text-gray-700">Projects</NuxtLink>
             </li>
             <li v-if="$route.path !== '/projects'">

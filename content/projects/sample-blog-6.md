@@ -8,7 +8,7 @@ dateUpdated: ''
 author: 'Sample Author'
 authorUrl: 'https://example.com/'
 socialImage:
-    src: '/android-chrome-192x192.png'
+    src: '/sample.png'
     mime: 'webp'
     alt: 'Mountain'
     width: 1200
@@ -118,9 +118,9 @@ Inline code is written using \`, and looks like `this`.
 Images should be loaded from the `public` folder. An image is added like this:
 
 ```bash
-![Alt text goes here](/img/blog/sample.webp)
+![Alt text goes here](/sample.png)
 ```
 
 The result of that is:
 
-![Alt text goes here](/img/blog/sample.webp)
+![Alt text goes here](/sample.png)

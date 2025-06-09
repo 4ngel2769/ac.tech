@@ -253,7 +253,7 @@ const formatDate = (date) => {
 
 .project-image {
   @apply w-full h-full object-cover;
-  filter: brightness(80%);
+  filter: brightness(70%);
   transition: transform 0.6s ease, filter 0.3s ease;
 }
 
