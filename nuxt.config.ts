@@ -1,4 +1,5 @@
 import { defineNuxtConfig } from 'nuxt/config'
+import tailwindcss from "@tailwindcss/vite";
 
 declare global {
   namespace NodeJS {
@@ -19,10 +20,16 @@ export default defineNuxtConfig({
           strict: false
       }
   },
-
   routeRules: {
     '/': { prerender: true }
   },
+  vite: {
+    // plugins: [tailwindcss()],
+    // optimizeDeps: {
+    //   include: ['@fortawesome/fontawesome-svg-core', '@fortawesome/free-solid-svg-icons', '@fortawesome/vue-fontawesome']
+    // }
+  },
+
   content: {
     // https://content.nuxtjs.org/api/configuration
     highlight: {

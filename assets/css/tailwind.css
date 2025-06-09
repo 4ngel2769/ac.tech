@@ -243,10 +243,10 @@ Nunito
 body {
   /* background-color: #101923; */
   background-color: var(--dark-bg);
-  @apply text-gray-300;
+  color: #d1d5db; /* equivalent to text-gray-300 */
 }
 .router-link-exact-active {
-  color: var(--green);
+  color: var(--htb-green);
 }
 
 .theSlot {

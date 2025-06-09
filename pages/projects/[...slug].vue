@@ -195,6 +195,7 @@ useHead({
 }
 .blog-post-text {
     @apply text-zinc-300;
+    color: white
 }
 .separator {
     @apply mx-1;
