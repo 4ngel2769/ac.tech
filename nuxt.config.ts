@@ -152,8 +152,8 @@ export default defineNuxtConfig({
   //   enabled: true
   // },
   site: {
-    url: 'https://angelcapra.tech',
-    // name: 'Angel 🚀',
+    url: 'https://angellabs.xyz',
+    name: 'Angel Capra 🚀',
   //   // description: 'Personal website; find my projects, social links, and more. 📄',
     defaultLocale: 'en',
   },
