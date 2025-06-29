@@ -33,8 +33,14 @@ export default defineNuxtConfig({
   content: {
     // https://content.nuxtjs.org/api/configuration
     highlight: {
-      theme: 'github-dark',
-      preload: ['java','javascript']
+      theme: 'everforest-dark',
+      preload: [
+        'java',
+        'javascript',
+        'typescript',
+        'python',
+        'bash'
+      ]
     },
     markdown: {
       // https://github.com/rehypejs/rehype-external-links
