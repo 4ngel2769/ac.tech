@@ -38,7 +38,7 @@ export default defineNuxtConfig({
       preload: [
         'java',
         'javascript',
-        'python',
+        // 'python',
         // 'typescript',
         // 'c',
         // 'cpp',
