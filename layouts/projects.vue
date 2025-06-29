@@ -18,10 +18,10 @@
               <span class="mx-2">/</span>
             </li>
             <li>
-              <span v-if="$route.path === '/projects' || '/projects/'" class="text-gray-100">Projects</span>
+              <span v-if="$route.path === '/projects' || $route.path === '/projects/'" class="text-gray-100">Projects</span>
               <NuxtLink v-else to="/projects" class="hover:text-gray-700">Projects</NuxtLink>
             </li>
-            <li v-if="$route.path !== '/projects'">
+            <li v-if="$route.path !== '/projects' && $route.path !== '/projects/'">
               <span class="mx-2">/</span>
               <span class="text-gray-900">{{ currentProjectTitle }}</span>
             </li>
@@ -75,4 +75,4 @@ const currentProjectTitle = computed(() => {
   background-repeat: repeat-x !important;
   background-clip: inherit;
 }
-</style> 
+</style>

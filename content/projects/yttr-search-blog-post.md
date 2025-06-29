@@ -7,6 +7,7 @@ date: '2025-06-29T12:00:00'
 dateUpdated: ''
 author: 'angeldev0'
 authorUrl: 'https://github.com/4ngel2769'
+tags: ['YouTube', 'CLI Tool', 'Transcript Search', 'Python']
 socialImage:
     src: '/yttr-search-preview.png'
     mime: 'png'

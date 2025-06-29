@@ -38,7 +38,8 @@ export default defineNuxtConfig({
       preload: [
         'java',
         'javascript',
-        // 'python',
+        'python',
+        'typescript',
         // 'typescript',
         // 'c',
         // 'cpp',
@@ -46,11 +47,11 @@ export default defineNuxtConfig({
         // 'go',
         // 'html',
         // 'css',
-        // 'bash',
-        // 'json',
-        // 'yaml',
+        'bash',
+        'json',
+        'yaml',
         // 'xml'
-      ],
+      ]
     },
     markdown: {
       // https://github.com/rehypejs/rehype-external-links

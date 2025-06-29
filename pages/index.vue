@@ -19,7 +19,12 @@ export default {
 <script setup lang="ts">
     const isOpen = ref(false)
     useSeoMeta({
-        
+        title: 'Angel Capra | Portfolio 🚀',
+        ogTitle: 'Angel Capra | Portfolio 🚀',
+        description: 'Explore Angel Capra\'s projects in cybersecurity, IoT development, and embedded systems. As a passionate cybersecurity student, I showcase a diverse portfolio from hacking devices with ESP32 and Arduino to creating innovative tech solutions. Discover the intersection of cybersecurity and IoT technology, and find fascinating projects that push the boundaries of tech innovation.',
+        ogDescription: 'Explore Angel Capra\'s projects in cybersecurity, IoT development, and embedded systems. As a passionate cybersecurity student, I showcase a diverse portfolio from hacking devices with ESP32 and Arduino to creating innovative tech solutions. Discover the intersection of cybersecurity and IoT technology, and find fascinating projects that push the boundaries of tech innovation.',
+        ogImage: '',
+        twitterCard: 'summary_large_image',
     })
 </script>
 
