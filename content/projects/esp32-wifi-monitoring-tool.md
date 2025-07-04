@@ -6,8 +6,8 @@ excerpt: "-"
 date: '2024-09-21T14:21:15'
 dateUpdated: ''
 author: 'Angel Capra'
-authorUrl: ''
-tags: ['tag1', 'tag2']
+authorUrl: 'https://github.com/4ngel2769'
+tags: ['ESP32', 'WiFi', 'Monitoring', 'Toolkit']
 socialImage:
     src: '/default.jpg'
     mime: 'webp'

@@ -18,10 +18,10 @@
               <span class="mx-2">/</span>
             </li>
             <li>
-              <span v-if="$route.path === '/projects' || '/projects/'" class="text-gray-100">Projects</span>
-              <NuxtLink v-else to="/projects" class="hover:text-gray-700">Projects</NuxtLink>
+              <span v-if="isProjectsPage" class="text-gray-100">Projects</span>
+              <NuxtLink v-else to="/projects" class="hover:text-gray-200">Projects</NuxtLink>
             </li>
-            <li v-if="$route.path !== '/projects'">
+            <li v-if="!isProjectsPage">
               <span class="mx-2">/</span>
               <span class="text-gray-900">{{ currentProjectTitle }}</span>
             </li>
@@ -44,10 +44,17 @@
 <script setup>
 const route = useRoute()
 
-// Get current project title for breadcrumbs
-const currentProjectTitle = computed(() => {
-  // This will be populated by the project page component
-  return route.meta.projectTitle || 'Project Details'
+// Handle potential SSR issues gracefully
+const isProjectsPage = computed(() => {
+  try {
+    return route?.path === '/projects' || route?.path === '/projects/'
+  } catch (error) {
+    // Log error in development
+    if (process.dev) {
+      console.warn('Route access during SSR:', error)
+    }
+    return true // Safe fallback
+  }
 })
 </script>
 
@@ -75,4 +82,4 @@ const currentProjectTitle = computed(() => {
   background-repeat: repeat-x !important;
   background-clip: inherit;
 }
-</style> 
+</style>

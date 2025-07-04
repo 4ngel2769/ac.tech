@@ -37,6 +37,7 @@
     "@nuxtjs/dotenv": "^1.4.2",
     "@nuxtjs/google-analytics": "^2.4.0",
     "@tailwindcss/vite": "^4.1.8",
+    "@vueuse/core": "^13.5.0",
     "daisyui": "^5.0.43",
     "fuse.js": "^7.0.0",
     "import": "^0.0.6",

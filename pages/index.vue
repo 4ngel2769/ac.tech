@@ -16,12 +16,6 @@ export default {
 }
 </script>
 -->
-<script setup lang="ts">
-    const isOpen = ref(false)
-    useSeoMeta({
-        
-    })
-</script>
 
 <template>
     <!-- <div class="menu">
@@ -116,10 +110,35 @@ export default {
                 </UTooltip>
             </div>
         </div>
+        <UDivider label="Socials" class="socialdivider" />
+        <p class="linkstitle">Find me here!</p>
+        <div class="linkscontainer">
+            <UTooltip text="YouTube | @angeldev0">
+                <NuxtLink class="link" to="https://youtube.com/@angeldev0" external target="_blank"><font-awesome-icon icon="fas fa-brands fa-youtube" /></NuxtLink>
+            </UTooltip>
+            <UTooltip text="GitHub | 4ngel2769">
+                <NuxtLink class="link" to="https://github.com/4ngel2769" external target="_blank"><font-awesome-icon icon="fa-brands fa-github" /></NuxtLink>                
+            </UTooltip>
+            <UTooltip text="Dev.to | @angeldev0">
+                <NuxtLink class="link" to="https://dev.to/angeldev0" external target="_blank"><font-awesome-icon icon="fa-brands fa-dev" /></NuxtLink>
+            </UTooltip>
+            <UTooltip text="Twitter | @angeldev0">
+                <NuxtLink class="link" to="https://twitter.com/angeldev0" external target="_blank"><font-awesome-icon icon="fa-brands fa-twitter" /></NuxtLink>
+            </UTooltip>
+            <UTooltip text="LinkedIn | @angelcapra">
+                <NuxtLink class="link" to="http://linkedin.com/in/angelcapra" external target="_blank"><font-awesome-icon icon="fa-brands fa-linkedin"/></NuxtLink>
+            </UTooltip>
+            <UTooltip text="Instagram | @angeldevz0">
+                <NuxtLink class="link" to="https://instagram.com/angeldevz0" external target="_blank"><font-awesome-icon icon="fa-brands fa-instagram" /></NuxtLink>
+            </UTooltip>
+            <UTooltip text="Email me | angeldevz0@proton.me">
+                <NuxtLink class="link" to="mailto:angeldevz0@proton.me" external><font-awesome-icon icon="fa-solid fa-at" /></NuxtLink>
+            </UTooltip>
+        </div>
         <UDivider label="About Me" class="descriptiondivider" />
         <div class="descriptiondiv">
             <div class="Description">
-                <h2 class="DescriptionText leading-h4 font-semibold">Hi, I'm Angel — Cybersecurity Researcher & Embedded Systems Developer</h2>
+                <h2 class="DescriptionText leading-h4 font-semibold">Hi, I'm Angel, Cybersecurity Researcher & Embedded Systems Developer</h2>
             </div>
             <div class="mb-6">
                 <p class="tracking-normal leading-6">I specialize in <span class="font-medium">cybersecurity</span>, <span class="font-medium">ethical hacking</span>, and <span class="font-medium">embedded systems development</span>,
@@ -128,36 +147,13 @@ export default {
                 solutions using ESP32 microcontrollers.
                 </p>
             </div>
-            <UButton @click="navigateTo('/projects')" label="Checkout my projects?">
-            </UButton>
+            <button type="button" class="explore-projects-btn" @click="navigateTo('/projects')">
+              <p>Explore my projects</p>
+              <font-awesome-icon :icon="['fas', 'rocket']" class="ml-2" />
+            </button>
             <!-- <div class="Description"> -->
                 <!-- <p class="DescriptionText">What I Do:</p> -->
             <!-- </div> -->
-            <UDivider label="Socials" class="socialdivider" />
-            <p class="linkstitle">follow me on</p>
-            <div class="linkscontainer">
-                <UTooltip text="YouTube | @angeldev0">
-                    <NuxtLink class="link" to="https://youtube.com/@angeldev0" external target="_blank"><font-awesome-icon icon="fas fa-brands fa-youtube" /></NuxtLink>
-                </UTooltip>
-                <UTooltip text="GitHub | 4ngel2769">
-                    <NuxtLink class="link" to="https://github.com/4ngel2769" external target="_blank"><font-awesome-icon icon="fa-brands fa-github" /></NuxtLink>                
-                </UTooltip>
-                <UTooltip text="Dev.to | @angeldev0">
-                    <NuxtLink class="link" to="https://dev.to/angeldev0" external target="_blank"><font-awesome-icon icon="fa-brands fa-dev" /></NuxtLink>
-                </UTooltip>
-                <UTooltip text="Twitter | @angeldev0">
-                    <NuxtLink class="link" to="https://twitter.com/angeldev0" external target="_blank"><font-awesome-icon icon="fa-brands fa-twitter" /></NuxtLink>
-                </UTooltip>
-                <UTooltip text="LinkedIn | @angelcapra">
-                    <NuxtLink class="link" to="http://linkedin.com/in/angelcapra" external target="_blank"><font-awesome-icon icon="fa-brands fa-linkedin"/></NuxtLink>
-                </UTooltip>
-                <UTooltip text="Instagram | @angeldevz0">
-                    <NuxtLink class="link" to="https://instagram.com/angeldevz0" external target="_blank"><font-awesome-icon icon="fa-brands fa-instagram" /></NuxtLink>
-                </UTooltip>
-                <UTooltip text="Email me | angeldevz0@proton.me">
-                    <NuxtLink class="link" to="mailto:angeldevz0@proton.me" external><font-awesome-icon icon="fa-solid fa-at" /></NuxtLink>
-                </UTooltip>
-            </div>
         </div>
         
     </div>
@@ -344,6 +340,87 @@ export default {
     @media only screen and (max-width: 410px) {
         
     }
+
+    .explore-projects-btn {
+      position: relative;
+      background-color: #262626; /* bg-neutral-800 */
+      height: 3rem; /* h-16 */
+      width: 16rem; /* w-64 */
+      border: 1px solid #404040;
+      text-align: left;
+      padding: 0.75rem;
+      color: #f9fafb; /* text-gray-50 */
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 0.5rem;
+      overflow: hidden;
+      text-underline-offset: 0.125rem;
+      text-decoration-color: transparent;
+      transition: all 0.5s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      z-index: 0;
+    }
+    
+    .explore-projects-btn * {
+        z-index: 1000;
+    }
+
+    /* Before pseudo-element (violet glow) */
+    .explore-projects-btn::before {
+      content: '';
+      position: absolute;
+      width: 3rem; /* w-12 */
+      height: 3rem; /* h-12 */
+      right: 0.25rem; /* right-1 */
+      top: 0.25rem; /* top-1 */
+      z-index: 0;
+      background-color: #8b5cf6; /* bg-violet-500 */
+      border-radius: 50%;
+      filter: blur(16px);
+      transition: all 0.5s ease;
+    }
+
+    /* After pseudo-element (rose glow) */
+    .explore-projects-btn::after {
+      content: '';
+      position: absolute;
+      z-index: 0;
+      width: 5rem; /* w-20 */
+      height: 5rem; /* h-20 */
+      background-color: #fda4af; /* bg-rose-300 */
+      right: 2rem; /* right-8 */
+      top: 0.75rem; /* top-3 */
+      border-radius: 50%;
+      filter: blur(16px);
+      transition: all 0.5s ease;
+    }
+
+    /* Hover effects */
+    .explore-projects-btn:hover {
+      border-color: #fda4af; /* hover:border-rose-300 */
+      color: #fff4f5; /* hover:text-rose-300 */
+      text-decoration-color: #fda4af;
+      text-underline-offset: 0.25rem;
+      text-decoration-thickness: 2px;
+    }
+
+    .explore-projects-btn:hover::before {
+      box-shadow: 20px 20px 20px 30px #a21caf;
+      right: 3rem; /* hover:before:right-12 */
+      bottom: -2rem; /* hover:before:-bottom-8 */
+      filter: blur(20px);
+    }
+    .explore-projects-btn:hover::after {
+      box-shadow: 20px 20px 20px 30px #f472b6;
+      right: 0; /* hover:after:right-0 */
+      top: 0; /* hover:after:top-0 */
+      filter: blur(20px);
+    }
+    .explore-projects-btn:hover::after {
+      right: -2rem; /* hover:after:-right-8 */
+    }
 </style>
 
 <script lang="ts">
@@ -352,11 +429,12 @@ export default {
             useSeoMeta({
                 title: 'Angel Capra | Portfolio 🚀',
                 ogTitle: 'Angel Capra | Portfolio 🚀',
-                description: 'Explore Angel Capra\'s projects in cybersecurity, IoT development, and embedded systems. As a passionate cybersecurity student, I showcase a diverse portfolio from hacking devices with ESP32 and Arduino to creating innovative tech solutions. Discover the intersection of cybersecurity and IoT technology, and find fascinating projects that push the boundaries of tech innovation.',
-                ogDescription: 'Explore Angel Capra\'s projects in cybersecurity, IoT development, and embedded systems. As a passionate cybersecurity student, I showcase a diverse portfolio from hacking devices with ESP32 and Arduino to creating innovative tech solutions. Discover the intersection of cybersecurity and IoT technology, and find fascinating projects that push the boundaries of tech innovation.',
+                description: 'Explore Angel Capra\'s projects in cybersecurity, IoT development, and embedded systems. As a cybersecurity student, I showcase a diverse portfolio from hacking devices with ESP32 and Arduino to creating innovative tech solutions. Discover the intersection of cybersecurity and IoT technology, and find fascinating projects that push the boundaries of tech innovation.',
+                ogDescription: 'Explore Angel Capra\'s projects in cybersecurity, IoT development, and embedded systems. As a cybersecurity student, I showcase a diverse portfolio from hacking devices with ESP32 and Arduino to creating innovative tech solutions. Discover the intersection of cybersecurity and IoT technology, and find fascinating projects that push the boundaries of tech innovation.',
                 ogImage: '',
                 twitterCard: 'summary_large_image',
             })
+            const isOpen = ref(false);
         }
     }
 // export default {

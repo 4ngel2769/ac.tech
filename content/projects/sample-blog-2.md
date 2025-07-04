@@ -1,8 +1,8 @@
 ---
-title: 'Sample Meta Title | Blog'
-description: "Sample meta description, it gets added on share cards"
-headline: 'Sample Blog Title 2'
-excerpt: "Sample excerpt, appears in blog cards"
+title: 'Sample Blog: Exploring IoT Security'
+description: "A sample blog post demonstrating layout, images, and code."
+headline: 'Sample Blog: IoT Security in Action'
+excerpt: "A showcase of how a blog post can look, with images, code, and more."
 date: '2023-02-28T12:00:00'
 dateUpdated: ''
 author: 'Sample Author'
@@ -15,112 +15,42 @@ socialImage:
     height: 630
 ---
 
-This is a sample blog post.
+Welcome to a **sample blog post**! This page demonstrates how your blog content can look, including images, code blocks, and more.
+
+## Visual Showcase
+
+Here’s an example of an embedded image:
+
+![ESP32 WiFi Monitoring Toolkit](/default.jpg)
+
+And here’s another image from a real project:
+
+![Muzzy Discord Bot](https://i.imgur.com/iUmChbB.png)
 
 ## Table of Contents
 
-Headings up to H3 (inclusive) are added to the Table of Contents
+- [Visual Showcase](#visual-showcase)
+- [Code Example](#code-example)
+- [Conclusion](#conclusion)
 
-### This heading is in the ToC
+## Code Example
 
-Lorem ipsum
+Here’s a code block with syntax highlighting:
 
-#### This heading is not in the ToC
+```python
+def hello_world():
+    print("Hello, world!")
+```
 
-##### This heading is not in the ToC either
+Or a configuration snippet:
 
-## Code
-
-Code blocks can be added like this:
-
-```bash
-```javascript{1-4}[file.json]
+```javascript [nuxt.config.js]
 export default defineNuxtConfig({
-    modules: ['@nuxtjs/tailwindcss', '@nuxt/content'],
-    css: ['/assets/css/main.css'],
-    ssr: true,
-    experimental: {
-        payloadExtraction: false
-    },
-    router: {
-        options: {
-            strict: false
-        }
-    },
-    sourcemap: false,
-    content: {
-        // https://content.nuxtjs.org/api/configuration
-        highlight: {
-            theme: 'github-dark',
-            preload: ['java','javascript']
-        },
-        markdown: {
-            // https://github.com/rehypejs/rehype-external-links
-            rehypePlugins: [
-                [
-                    'rehype-external-links',
-                    {
-                        target: '_blank',
-                        rel: 'noopener noreferer'
-                    }
-                ]
-            ]
-        }
-    }
-});
-```    
+  modules: ['@nuxtjs/tailwindcss', '@nuxt/content'],
+  css: ['/assets/css/main.css'],
+})
 ```
 
-This is processed and looks like this:
+## Conclusion
 
-```javascript{1-4,6}[file.json]
-export default defineNuxtConfig({
-    modules: ['@nuxtjs/tailwindcss', '@nuxt/content'],
-    css: ['/assets/css/main.css'],
-    ssr: true,
-    experimental: {
-        payloadExtraction: false
-    },
-    router: {
-        options: {
-            strict: false
-        }
-    },
-    sourcemap: false,
-    content: {
-        // https://content.nuxtjs.org/api/configuration
-        highlight: {
-            theme: 'github-dark',
-            preload: ['java','javascript']
-        },
-        markdown: {
-            // https://github.com/rehypejs/rehype-external-links
-            rehypePlugins: [
-                [
-                    'rehype-external-links',
-                    {
-                        target: '_blank',
-                        rel: 'noopener noreferer'
-                    }
-                ]
-            ]
-        }
-    }
-});
-```
-
-You can define language, highlighted lines, and filename.
-
-Inline code is written using \`, and looks like `this`.
-
-## Images
-
-Images should be loaded from the `public` folder. An image is added like this:
-
-```bash
-![Alt text goes here](/sample.png)
-```
-
-The result of that is:
-
-![Alt text goes here](/sample.png)
+This sample blog post demonstrates images, code, and structure. You can easily customize it for your own content!

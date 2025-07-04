@@ -2,50 +2,55 @@
     <main class="blog-post-text">
         <ContentDoc>
             <template v-slot="{ doc }">
+                <!-- Header Section -->
                 <Section id="blog-title" type="header">
-                    <div
-                        class="border-t-2 pt-8 border-typography_primary flex flex-col md:flex-row items-center md:justify-between md:text-right mb-12 md:mb-8"
-                    >
-                        <!-- Breadcrumbs -->
-                        <ol itemscope itemtype="https://schema.org/BreadcrumbList" class="blog-breadcrumb ">
-                            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                                <a itemprop="item" href="/"> <span itemprop="name">Home</span></a>
-                                <meta itemprop="position" content="1" />
-                            </li>
-                            <li class="separator">/</li>
-                            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                                <a
-                                    itemscope
-                                    itemtype="https://schema.org/WebPage"
-                                    itemprop="item"
-                                    itemid="/projects/"
-                                    href="/projects/"
-                                >
-                                    <span itemprop="name">Projects</span></a
-                                >
-                                <meta itemprop="position" content="2" />
-                            </li>
-                            <li class="separator">/</li>
-                            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                                <span itemprop="name">{{ doc.headline }}</span>
-                                <meta itemprop="position" content="3" />
-                            </li>
-                        </ol>
-                        <!-- Publish date -->
-                        <span class="font-200 text-neutral-300/75 mt-2 md:mt-0">{{
-                            $formatDate(doc.date)
-                        }}</span>
-                    </div>
-                    <!-- Headline -->
-                    <h1 class="blog-post-text font-bold mb-4 md:mb-6 text-h3 leading-h3 md:text-h1 md:leading-h1 text-center md:text-left">
-                        {{ doc.headline }}
-                    </h1>
-                    <p class="blog-post-text mb-8 md:w-8/12 md:text-lg md:leading-lg text-center md:text-left">{{ doc.excerpt }}</p>
-                    <div
-                        class="border-b-2 pb-8 border-typography_primary dark:border-typography_primary_dark flex flex-col md:flex-row items-center md:justify-between mt-12 md:mt-4"
-                    >
+                    <div class="max-w-5xl mx-auto">
+                        <div
+                            class="border-t-2 pt-8 border-typography_primary flex flex-col md:flex-row items-center md:justify-between md:text-right mb-12 md:mb-8"
+                        >
+                            <!-- Breadcrumbs -->
+                            <ol itemscope itemtype="https://schema.org/BreadcrumbList" class="blog-breadcrumb ">
+                                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                                    <a itemprop="item" href="/"> <span itemprop="name">Home</span></a>
+                                    <meta itemprop="position" content="1" />
+                                </li>
+                                <li class="separator">/</li>
+                                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                                    <a
+                                        itemscope
+                                        itemtype="https://schema.org/WebPage"
+                                        itemprop="item"
+                                        itemid="/projects/"
+                                        href="/projects/"
+                                    >
+                                        <span itemprop="name">Projects</span></a
+                                    >
+                                    <meta itemprop="position" content="2" />
+                                </li>
+                                <li class="separator">/</li>
+                                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                                    <span itemprop="name">{{ doc.headline }}</span>
+                                    <meta itemprop="position" content="3" />
+                                </li>
+                            </ol>
+                            <!-- Publish date -->
+                            <span class="font-200 text-neutral-300/75 mt-2 md:mt-0">{{
+                                $formatDate(doc.date)
+                            }}</span>
+                        </div>
+                        
+                        <!-- Title -->
+                        <h1 class="blog-post-text font-bold mb-8 text-h3 leading-h3 md:text-h1 md:leading-h1 text-center">
+                            {{ doc.headline }}
+                        </h1>
+                        
+                        <!-- Excerpt -->
+                        <p class="blog-post-text mb-12 text-lg md:text-xl leading-relaxed text-center max-w-4xl mx-auto">
+                            {{ doc.excerpt }}
+                        </p>
+                        
                         <!-- Author -->
-                        <div class="flex flex-row items-center justify-center">
+                        <div class="text-center mb-12">
                             <span class="blog-post-text text-lg leading-lg font-light"
                                 >By
                                 <a class="hover:underline italic" :href="doc.authorUrl" target="_blank" rel="noopener noreferrer">{{
@@ -53,41 +58,64 @@
                                 }}</a></span
                             >
                         </div>
-                        <!-- Social Share -->
-                        <!-- <div class="mt-6 md:mt-0">
-                            <NavShareIcons :headline="doc.headline" :excerpt="doc.excerpt" :path="doc._path + '/'" />
-                        </div> -->
                     </div>
                 </Section>
-                <!-- Content -->
-                <Section id="main" class="!pt-0 relative grid grid-cols-10 gap-8 lg:gap-12">
-                    <!-- Table of Contents -->
-                    <aside class="col-span-full md:col-span-3 md:hidden">
-                        <div class="blog-post-text blog-aside-wrapper mb-2">
-                            <BlogTableOfContents :links="doc.body?.toc?.links" />
+
+                <!-- Image and TOC Section -->
+                <Section id="image-toc" class="!pt-0 !pb-12">
+                    <div class="max-w-5xl mx-auto">
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 mb-12">
+                            <!-- Social Image -->
+                            <div class="lg:col-span-2">
+                                <div class="project-featured-image">
+                                    <img 
+                                        v-if="doc.socialImage?.src"
+                                        :src="doc.socialImage.src" 
+                                        :alt="doc.socialImage.alt || doc.headline"
+                                        class="w-full h-auto rounded-lg shadow-lg"
+                                    />
+                                    <div 
+                                        v-else 
+                                        class="w-full h-64 bg-gray-700 rounded-lg flex items-center justify-center"
+                                    >
+                                        <span class="text-gray-400">No featured image</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Table of Contents -->
+                            <div class="lg:col-span-1">
+                                <div class="sticky top-24">
+                                    <div class="blog-aside-wrapper">
+                                        <BlogTableOfContents :links="doc.body?.toc?.links" class="blog-post-text" />
+                                    </div>
+                                    
+                                    <!-- Related articles -->
+                                    <div v-if="data?.surround?.filter((elem) => elem !== null)?.length > 0" class="blog-aside-wrapper mt-6">
+                                        <BlogRelatedArticles :surround="data?.surround" class="blog-post-text" />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </aside>
-                    <article class="prose col-span-full md:col-span-7 relative">
-                        <!-- Update date -->
-                        <span
-                            v-show="doc.dateUpdated"
-                            class="italic absolute -top-8 text-sm leading-sm font-light text-typography_primary/75 dark:text-typography_primary_dark/75"
-                            >(Updated: {{ $formatDate(doc.dateUpdated) }})</span
-                        >
-                        <!-- Blog content -->
-                        <ContentRenderer :value="doc" class="blog-content blog-post-text" />
-                    </article>
-                    <aside class="col-span-full md:col-span-3 blog-aside h-fit">
-                        <!-- Mobile Table of Content -->
-                        <div class="!hidden blog-aside-wrapper md:!flex mb-4">
-                            <BlogTableOfContents :links="doc.body?.toc?.links" class="blog-post-text" />
-                        </div>
-                        <!-- Related articles -->
-                        <div v-if="data?.surround?.filter((elem) => elem !== null)?.length > 0" class="blog-aside-wrapper">
-                            <BlogRelatedArticles :surround="data?.surround" class="blog-post-text" />
-                        </div>
-                    </aside>
+                    </div>
                 </Section>
+
+                <!-- Content Section -->
+                <Section id="main" class="!pt-0">
+                    <div class="max-w-4xl mx-auto">
+                        <article class="prose prose-lg max-w-none">
+                            <!-- Update date -->
+                            <span
+                                v-show="doc.dateUpdated"
+                                class="italic block text-sm leading-sm font-light text-typography_primary/75 dark:text-typography_primary_dark/75 mb-8"
+                                >(Updated: {{ $formatDate(doc.dateUpdated) }})</span
+                            >
+                            <!-- Blog content -->
+                            <ContentRenderer :value="doc" class="blog-content blog-post-text" />
+                        </article>
+                    </div>
+                </Section>
+
                 <!-- Scroll to top -->
                 <NavScrollTopIcon />
             </template>
@@ -186,18 +214,57 @@ useHead({
 </script>
 
 <style scoped>
-.blog-aside {
-    @apply sticky;
-    top: calc(theme('spacing.nav') + 0.25rem);
-}
 .blog-aside-wrapper {
     @apply flex flex-col border-t-2 border-b-2 border-typography_primary py-4;
 }
+
 .blog-post-text {
     @apply text-zinc-300;
-    color: white
+    color: white;
 }
+
 .separator {
     @apply mx-1;
+}
+
+.project-featured-image {
+    @apply relative overflow-hidden;
+}
+
+.project-featured-image img {
+    @apply transition-transform duration-300 hover:scale-105;
+}
+
+/* Enhanced prose styling for better readability */
+.prose {
+    @apply text-gray-300;
+}
+
+.prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+    @apply text-white;
+}
+
+.prose p {
+    @apply text-gray-300 leading-relaxed;
+}
+
+.prose a {
+    @apply text-blue-400 hover:text-blue-300;
+}
+
+.prose code {
+    @apply text-yellow-300;
+}
+
+.prose blockquote {
+    @apply border-l-4 border-blue-500 bg-gray-800 text-gray-300;
+}
+
+.prose ul, .prose ol {
+    @apply text-gray-300;
+}
+
+.prose strong {
+    @apply text-white;
 }
 </style>

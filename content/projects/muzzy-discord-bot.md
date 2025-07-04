@@ -1,10 +1,14 @@
 ---
-title: 'Muzzy! | Music Bot'
-description: "Sample meta description, it gets added on share cards"
-headline: 'Sample Blog Title 7'
-excerpt: "Sample excerpt, appears in blog cards"
-date: '3023-02-28T12:00:00'
+title: 'Muzzy! | The best music bot on Discord'
+description: "Muzzy is a high quality music bot for Discord, providing users with an easy to use interface and cool features such as audio filters."
+headline: 'Muzzy! | The best music bot on Discord'
+excerpt: "Muzzy is a high quality music bot for Discord, providing users with an easy to use interface and cool features such as audio filters."
+date: '2025-02-28T12:00:00'
 dateUpdated: ''
+tags: [
+    'Discord',
+    'Bot',
+]
 author: 'Sample Author'
 authorUrl: 'https://example.com/'
 socialImage:

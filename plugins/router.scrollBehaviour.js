@@ -1,7 +1,8 @@
 const navHeight = 64;   //px
 
-// https://github.com/nuxt/framework/issues/1707
 export default defineNuxtPlugin((nuxtApp) => {
+  // Only run on client side
+  if (process.client) {
     nuxtApp.$router.options.scrollBehavior = async (to, from, savedPosition) => {
       if (savedPosition && !to.hash) {
         return savedPosition;
@@ -35,5 +36,5 @@ export default defineNuxtPlugin((nuxtApp) => {
       }
       return { left: 0, top: 0, behaviour: "smooth" };
     };
-  });
-  
+  }
+});

@@ -4,85 +4,163 @@
 /* @import "tailwindcss"; */
 /* @plugin "daisyui"; */
 
+:root {
+  --blog-bg: #101923;
+  --blog-text: #e0e6ed;
+  --blog-text-bold: #f8fafc;
+  --blog-text-light: #cbd5e1;
+  --blog-text-secondary: #94a3b8;
+  --blog-link: #a6ddb1;
+  --blog-heading: #f8fafc;
+  --blog-code-bg: #181f2a;
+  --blog-code-text: #ffecb3;
+  --radius: 0.8rem;
+
+  --blog-tag-bg: #172125;
+  --blog-tag-bg-hover: #cfd0d0;
+  --blog-tag-text: #878e91;
+  --blog-tag-text-hover: #1a1e20;
+
+  --breadcrumbs: #bfbfbf;
+}
+
+/* Blog Content Custom Colors */
+.blog-content,
+.prose {
+  /* background: var(--blog-bg); */ /* <-- Commented out as requested */
+  color: var(--blog-text);
+}
+
+.blog-content p,
+.prose p {
+  color: var(--blog-text);
+}
+
+.blog-content h1,
+.prose h1,
+.blog-content h2,
+.prose h2,
+.blog-content h3,
+.prose h3,
+.blog-content h4,
+.prose h4,
+.blog-content h5,
+.prose h5 {
+  color: var(--blog-heading);
+}
+
+.blog-content a,
+.prose a {
+  color: var(--blog-link);
+}
+
+.blog-content strong,
+.prose strong,
+.blog-content b,
+.prose b {
+  color: var(--blog-text-bold);
+  font-weight: bold;
+}
+
+.blog-content em,
+.prose em {
+  color: var(--blog-text-light);
+}
+
+.blog-content code,
+.prose code,
+.blog-content pre,
+.prose pre {
+  background: var(--blog-code-bg);
+  color: var(--blog-code-text);
+  /* border-radius: 4px; */
+  padding: 2px 6px;
+}
+
 .squiggly-underline {
-    text-decoration-line: underline;
-    text-decoration-style: wavy;
-    text-decoration-color: linear-gradient(to right, #FF6347, #4CAF50, #1E90FF); /* Customize the color of the squiggly line */
-    text-decoration-thickness: 1.2px; /* Customize the thickness of the squiggly line */
+  text-decoration-line: underline;
+  text-decoration-style: wavy;
+  text-decoration-color: linear-gradient(
+    to right,
+    #ff6347,
+    #4caf50,
+    #1e90ff
+  ); /* Customize the color of the squiggly line */
+  text-decoration-thickness: 1.2px; /* Customize the thickness of the squiggly line */
 }
 
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
 h1 {
-    @apply text-h1_sm leading-h1_sm mb-6;
+  @apply text-h1_sm leading-h1_sm mb-6;
 }
 
 h2 {
-    @apply text-h2_sm leading-h2_sm mb-4;
+  @apply text-h2_sm leading-h2_sm mb-4;
 }
 
 h3 {
-    @apply text-h3_sm leading-h3_sm mb-4;
+  @apply text-h3_sm leading-h3_sm mb-4;
 }
 
 h4 {
-    @apply text-h4_sm leading-h4_sm mb-2;
+  @apply text-h4_sm leading-h4_sm mb-2;
 }
 
 h5 {
-    @apply text-h5_sm leading-h5_sm mb-1;
+  @apply text-h5_sm leading-h5_sm mb-1;
 }
 
 @screen md {
-    h1 {
-        @apply text-h1 leading-h1;
-    }
+  h1 {
+    @apply text-h1 leading-h1;
+  }
 
-    h2 {
-        @apply text-h2 leading-h2;
-    }
+  h2 {
+    @apply text-h2 leading-h2;
+  }
 
-    h3 {
-        @apply text-h3 leading-h3;
-    }
+  h3 {
+    @apply text-h3 leading-h3;
+  }
 
-    h4 {
-        @apply text-h4 leading-h4;
-    }
+  h4 {
+    @apply text-h4 leading-h4;
+  }
 
-    h5 {
-        @apply text-h5 leading-h5;
-    }
+  h5 {
+    @apply text-h5 leading-h5;
+  }
 }
 
 /* Body Text */
 
 p {
-    @apply text-base leading-base;
+  @apply text-base leading-base;
 }
 
 /* Blog Headings */
 
 .blog-content h1 {
-    @apply mt-16;
+  @apply mt-16;
 }
 
 .blog-content h2 {
-    @apply mt-8;
+  @apply mt-8;
 }
 
 .blog-content h3 {
-    @apply mt-6;
+  @apply mt-6;
 }
 
 .blog-content h4 {
-    @apply mt-4;
+  @apply mt-4;
 }
 
 .blog-content h5 {
-    @apply mt-4;
+  @apply mt-4;
 }
 
 /* Blog Content */
@@ -92,7 +170,7 @@ p {
 .blog-content > ol + p,
 .blog-content > p + ul,
 .blog-content > p + ol {
-    @apply mt-4;
+  @apply mt-4;
 }
 
 /* Blog Body */
@@ -100,39 +178,119 @@ p {
 .blog-content p,
 .blog-content ol,
 .blog-content ul {
-    @apply text-lg leading-h5;
+  @apply text-lg leading-h5;
 }
 
 /* Blog Breadcrumbs */
 
 .blog-breadcrumb {
-    @apply inline-block text-center font-light;
+  @apply inline-block text-center font-light;
 }
 
 .blog-breadcrumb > span {
-    @apply mx-1 inline;
+  @apply mx-1 inline;
 }
 
 .blog-breadcrumb > li {
-    @apply inline;
+  @apply inline;
 }
 
 .blog-breadcrumb > li a {
-    @apply text-brand_primary;
+  color: var(--breadcrumbs);
 }
 
 .blog-breadcrumb > li a:hover {
-    @apply underline;
+  @apply underline;
 }
 
 /* Blog Aside */
 
 .blog-aside-title {
-    @apply uppercase font-extrabold text-xs leading-xs;
+  @apply uppercase font-extrabold text-xs leading-xs;
 }
 
 /* Blog Links */
 
 .blog-content :not(h1):not(h2):not(h3):not(h4):not(h5) a {
-    @apply underline font-bold text-brand_primary;
+  @apply underline font-bold text-brand_primary;
+}
+
+/* --- Blog/Project Code Block Card Effects --- */
+.blog-content pre,
+.prose pre {
+  position: relative;
+  background: #29292c !important;
+  /* Remove border or box-shadow from parent if present */
+  /* box-shadow: 0 0 10px 0 #8efff933, 0 2px 8px 0 rgba(0,0,0,0.10); */
+  /* border-radius: 1rem; */
+  border: none;
+  margin: 2.5em 0 2.5em 0;
+  overflow: visible;
+  font-family: 'Fira Mono', 'Consolas', 'Menlo', 'Monaco', monospace;
+  font-size: 1em;
+  padding: 1.5em 1.2em 1.2em 2.5em;
+  transition: box-shadow 0.3s, border-color 0.3s;
+}
+
+.blog-content code,
+.prose code {
+  background: none;
+  color: var(--blog-code-text);
+  font-size: 1em;
+  /* border-radius: 0.4em; */
+  padding: 0;
+}
+
+
+/* Remove unwanted background from code block wrappers */
+.blog-content pre,
+.prose pre {
+  background: #29292c !important;
+  /* Remove border or box-shadow from parent if present */
+  /* box-shadow: 0 0 10px 0 #8efff933, 0 2px 8px 0 rgba(0,0,0,0.10); */
+  border-radius: calc(.9rem - 2px);
+  border: none;
+  margin: 2.5em 0 2.5em 0;
+  position: relative;
+  overflow: visible;
+}
+
+/* Remove background from code block wrappers */
+.blog-content .nuxt-content-highlight,
+.prose .nuxt-content-highlight {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+/* Place the copy button inside the code block, top right */
+.blog-content pre,
+.prose pre {
+  position: relative;
+}
+
+.blog-content .nuxt-content-copy-button,
+.prose .nuxt-content-copy-button {
+  position: absolute;
+  top: 0.75em;
+  right: 1em;
+  z-index: 10;
+  background: rgba(30, 41, 59, 0.85);
+  color: #fff;
+  border: none;
+  border-radius: 0.5em;
+  padding: 0.25em 0.5em;
+  font-size: 1em;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.10);
+  cursor: pointer;
+}
+
+.blog-content .nuxt-content-copy-button:hover,
+.prose .nuxt-content-copy-button:hover {
+  opacity: 1;
+  background: #a6a95e;
+  color: #18181b;
 }

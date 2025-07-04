@@ -10,7 +10,7 @@ declare global {
 }
 
 export default defineNuxtConfig({
-  devtools: { enabled: true },
+  devtools: { enabled: false },
   ssr: true,
   experimental: {
     payloadExtraction: false
@@ -20,9 +20,22 @@ export default defineNuxtConfig({
           strict: false
       }
   },
-  routeRules: {
-    '/': { prerender: true }
+  nitro: {
+    prerender: {
+      routes: ['/projects', '/']
+    }
   },
+  routeRules: {
+    // Homepage pre-rendered at build time
+    '/': { prerender: true },
+    // Projects page pre-rendered at build time
+    '/projects': { prerender: true },
+    // Individual projects can be SSR or static
+    '/projects/**': { prerender: true },
+    // Admin or dashboard pages are SPA
+    '/admin/**': { ssr: false },
+  },
+
   vite: {
     // plugins: [tailwindcss()],
     // optimizeDeps: {
