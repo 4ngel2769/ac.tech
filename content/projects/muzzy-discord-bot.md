@@ -56,4 +56,8 @@ socialImage:
 |`/status`|-|Info|My current statistics|
 |`/meme`|-|Fun|AhghahgahghhaghaHGhahgaaosd-*dies of laugh*|
 
+```bash
+echo this://google.com
+```
+
 ### For further questions and support you can join Muzzy's server [here](https://discord.com/invite/cK2HH6Bmj5)!
