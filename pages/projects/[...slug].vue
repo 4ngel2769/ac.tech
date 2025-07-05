@@ -183,7 +183,7 @@
                         <!-- Continue Reading Navigation -->
                         <div v-if="data?.surround && (data.surround[0] || data.surround[1])" class="continue-reading-section mt-16">
                             <!-- Top divider line -->
-                            <div class="divider-line mb-8"></div>
+                            <div class="divider-line mb-4"></div>
                             
                             <div class="navigation-container">
                                 <!-- Previous Post -->
@@ -217,7 +217,7 @@
                             </div>
                             
                             <!-- Bottom divider line -->
-                            <div class="divider-line mt-8"></div>
+                            <div class="divider-line mt-4"></div>
                         </div>
                     </div>
                 </Section>
