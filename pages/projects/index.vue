@@ -3,14 +3,14 @@
   <main>
     <div class="space-y-8">
       <div class="flex items-center gap-4">
-        <button
+        <!-- <button
           type="button"
           class="back-btn"
           @click="$router.back()"
         >
           <font-awesome-icon :icon="['fas', 'arrow-left']" class="mr-2" />
           <p>Back</p>
-        </button>
+        </button> -->
         <h1 class="text-4xl font-bold">My Projects</h1>
       </div>
 
@@ -497,83 +497,6 @@ const formatDate = (date) => {
 .notiglow,
 .notiborderglow {
   display: none;
-}
-
-/* Your existing back button styles remain the same */
-.back-btn {
-  position: relative;
-  background-color: #262626;
-  height: 2.6rem;
-  width: 6rem;
-  border: 1px solid #404040;
-  text-align: left;
-  padding: 0.75rem 1.2rem;
-  margin-bottom: 24px;
-  color: #f9fafb;
-  font-size: 1rem;
-  font-weight: bold;
-  border-radius: 0.5rem;
-  overflow: hidden;
-  text-underline-offset: 0.125rem;
-  text-decoration-color: transparent;
-  transition: all 0.5s ease;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  z-index: 0;
-}
-
-.back-btn * {
-  z-index: 100 !important;
-}
-
-.back-btn::before,
-.back-btn::after {
-  content: "";
-  position: absolute;
-  z-index: 1;
-  pointer-events: none;
-  transition: all 0.5s ease;
-}
-
-.back-btn::before {
-  width: 3rem;
-  height: 3rem;
-  right: 0.25rem;
-  top: 0.25rem;
-  background-color: #8b5cf6;
-  border-radius: 50%;
-  filter: blur(16px);
-}
-
-.back-btn::after {
-  width: 5rem;
-  height: 5rem;
-  right: 2rem;
-  top: 0.75rem;
-  background-color: #fda4af;
-  border-radius: 50%;
-  filter: blur(16px);
-}
-
-.back-btn:hover {
-  border-color: #cfb9c6;
-  color: #ffecee;
-  text-decoration-color: #fda4af;
-  text-underline-offset: 0.25rem;
-  text-decoration-thickness: 2px;
-}
-
-.back-btn:hover::before {
-  box-shadow: 20px 20px 20px 30px #a21caf;
-  right: 3rem;
-  bottom: -2rem;
-  filter: blur(20px);
-}
-
-.back-btn:hover::after {
-  right: -2rem;
-  filter: blur(20px);
 }
 
 @media (max-width: 768px) {
