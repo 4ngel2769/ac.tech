@@ -48,6 +48,8 @@ This toolkit can:
 
 ## Hardware Overview
 
+![wifi-monitoring-toolkit](/default.jpg){size="medium" align="center"}
+
 The core components:
 
 - **ESP32 (WROOM or WROVER)** ' the brain.

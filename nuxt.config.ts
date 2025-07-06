@@ -71,6 +71,7 @@ export default defineNuxtConfig({
       ]
     },
     markdown: {
+      anchorLinks: false,
       // https://github.com/rehypejs/rehype-external-links
       rehypePlugins: [
         [
