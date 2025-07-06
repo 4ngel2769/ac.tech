@@ -1,7 +1,7 @@
 ---
 title: 'YouTube Transcript Search Tool - Powerful CLI for Video Content Discovery | Blog'
 description: "Discover how to search YouTube video transcripts with yttr-search, a powerful CLI tool that supports channel scanning, keyword highlighting, and batch processing."
-headline: 'Building a YouTube Transcript Search CLI Tool'
+headline: 'YTTR-Search: A Powerful CLI for YouTube Transcript Search'
 excerpt: "Learn about yttr-search, an open-source CLI utility that makes searching YouTube video transcripts effortless with features like channel scanning, keyword highlighting, and batch processing."
 date: '2025-06-29T12:00:00'
 dateUpdated: ''
