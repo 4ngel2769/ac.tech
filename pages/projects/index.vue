@@ -108,7 +108,7 @@
         v-if="!hasMoreProjects && visibleProjects.length > 0"
         class="text-center text-gray-500 py-8"
       >
-        No more projects to load
+        <p class="eor">End of results</p>
       </div>
     </div>
   </main>
@@ -497,6 +497,17 @@ const formatDate = (date) => {
 .notiglow,
 .notiborderglow {
   display: none;
+}
+
+*, h1, h2, h3, h4, h5, h6, ul, ol, li, p, blockquote, figure, figcaption, table, th, td, ol, pre, code, kbd, samp, placeholder {
+  font-family: 'Montserrat', sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  list-style-type: decimal;
+}
+
+.eor {
+  font-weight: 300;
 }
 
 @media (max-width: 768px) {

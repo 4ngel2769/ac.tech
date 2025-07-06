@@ -6,7 +6,7 @@
     </div>
 
     <!-- Main content -->
-    <div class="flex-grow pt-24 px-4 md:px-6 lg:px-8">
+    <div class="flex-grow pt-24 px-4 md:px-6 lg:px-8 projectsPage">
       <div class="max-w-7xl mx-auto">
         <!-- Breadcrumbs -->
         <nav class="mb-8" aria-label="Breadcrumb">
@@ -35,7 +35,6 @@
 
     <!-- Footer -->
     <div class="mt-auto">
-      <div class="footerimg"></div>
       <Footer />
     </div>
   </div>
@@ -69,17 +68,12 @@ const isProjectsPage = computed(() => {
   backdrop-filter: blur(8px);
 }
 
-.footerimg {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 180px;
-  width: 100vmax;
-  margin: 0 auto;
-  background-image: url('/wave-haikei4.svg');
-  background-position: bottom !important;
-  background-repeat: repeat-x !important;
-  background-clip: inherit;
+* h1,
+* h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 200;
+  font-style: normal;
+  list-style-type: decimal;
 }
 </style>

@@ -11,11 +11,15 @@
   --blog-text-light: #cbd5e1;
   --blog-text-secondary: #94a3b8;
   --blog-link: #a6ddb1;
+  --blog-link-hover: #e5e5e5;
   --blog-heading: #cecece;
   --blog-heading-secondary: #f3f3f3;
-  --blog-code-bg: #181f2a;
-  --blog-code-text: #ffecb3;
   --radius: 0.8rem;
+
+  --blog-code-bg: #1b1f26;
+  --blog-code-text: #e3dfc2;
+  --code-border: 1px solid rgba(154, 154, 154, 0.234);
+  --code-shadow: 0 1px 2px rgba(9, 10, 10, 0.189);
 
   --blog-tag-bg: #172125;
   --blog-tag-bg-hover: #cfd0d0;
@@ -24,6 +28,65 @@
 
   --breadcrumbs: #a7a7a7;
   --breadcrumbs-main: rgb(139, 187, 226);
+
+  --dark-bg: #0a0e0f;
+  --dark-alt1: #0e1114;
+  --dark-alt2: #0d1317;
+  --dark-alt3: #222831;
+  --dark-alt4: #151516;
+  --light-bg: #f2f2f2;
+  --light-alt1: #000000;
+  --light-alt2: #000000;
+  --light-alt3: #000000;
+  --red: #f52626;
+  --l-red: #ff6060;
+  --green: #18e436;
+  --l-green: #93ff8d;
+  --lime: #43ff43;
+  --yellow: #d2ff4c;
+  --blue: #2471ff;
+  --kde: #20e693;
+  --kdeL: #7cd4af;
+  --htb-green: #99ff23;
+  --htb-bg1: #0d1516;
+  --htb-bg2: #243035;
+  --accent: #ffffff;
+  --secondary: #801fff;
+  --secondaryL: #8c6ccc;
+  --primary: #842eda;
+
+   /* Footer colors  */
+  --fbg: #191c22;
+
+
+  /* Txt colors*/
+
+  /* Main page */
+  --main-light: #000000;
+  --main-dark: #eeeeee;
+  --main-dsc: #d3d6d8;
+  --main-details: #999999;
+
+  /* Blog posts*/
+  --post-light: #000000;
+  --post-dark: #000000;
+  --post-title: #000000;
+  --post-dsc: #000000;
+  --post-details: #000000;
+
+  --scroll-track: #2b333b;
+  --scroll-thumb: #16181c;
+  --scroll-thumb-h: #0d1012;
+}
+
+.projectsPage {
+  background-color: var(--dark-bg);
+  /* background-image: url('/pppixelate.svg'); */
+  /* background-attachment: scroll; */
+  /* background-repeat: no-repeat; */
+  /* background-size: cover; */
+  /* background-position: center; */
+  /* min-height: 100vh; */
 }
 
 /* Blog Content Custom Colors */
@@ -114,13 +177,22 @@
 .prose a {
   color: var(--blog-link);
 }
+.blog-content a,
+.prose a {
+  color: var(--blog-link); /* gold */
+  transition: color 0.2s;
+}
+.blog-content a:hover,
+.prose a:hover {
+  color: var(--blog-link-hover); /* white on hover */
+}
 
 .blog-content strong,
 .prose strong,
 .blog-content b,
 .prose b {
   color: var(--blog-text-bold);
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .blog-content em,
@@ -281,9 +353,6 @@ p {
 
 /* Blog Links */
 
-.blog-content :not(h1):not(h2):not(h3):not(h4):not(h5) a {
-  @apply underline font-bold text-brand_primary;
-}
 
 /* --- Blog/Project Code Block Card Effects --- */
 .blog-content pre,
@@ -478,4 +547,159 @@ p {
   display: block;
   margin-left: auto;
   margin-right: 0;
+}
+
+/* Inline code snippets (between backticks) - Remove backticks from display */
+.blog-content code:not(pre code),
+.prose code:not(pre code) {
+  background: var(--blog-code-bg);
+  color: var(--blog-code-text);
+  padding: 0.2em 0.4em;
+  border-radius: 0.25em;
+  font-size: 0.85em;
+  font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
+  border: var(--code-border);
+  box-shadow: var(--code-shadow);
+  font-weight: 500;
+}
+
+/* Remove any content that might be adding backticks */
+.blog-content code:not(pre code)::before,
+.prose code:not(pre code)::before,
+.blog-content code:not(pre code)::after,
+.prose code:not(pre code)::after {
+  content: none !important;
+}
+
+/* GitHub-style alert blocks */
+.blog-content .alert,
+.prose .alert {
+  padding: 1rem;
+  margin: 1.5rem 0;
+  border-left: 4px solid;
+  border-radius: 0.5rem;
+  position: relative;
+  font-family: 'Montserrat', sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.blog-content .alert .alert-title,
+.prose .alert .alert-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.blog-content .alert .alert-content,
+.prose .alert .alert-content {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.blog-content .alert .alert-content p,
+.prose .alert .alert-content p {
+  margin: 0;
+}
+
+/* Alert icons */
+.blog-content .alert .alert-icon,
+.prose .alert .alert-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+}
+
+/* Note Alert - Blue */
+.blog-content .alert.note,
+.prose .alert.note {
+  background: rgba(59, 130, 246, 0.15);
+  border-color: #3b82f6;
+  color: #dbeafe;
+}
+
+.blog-content .alert.note .alert-title,
+.prose .alert.note .alert-title {
+  color: #60a5fa;
+}
+
+.blog-content .alert.note .alert-icon,
+.prose .alert.note .alert-icon {
+  color: #3b82f6;
+}
+
+/* Tip Alert - Green */
+.blog-content .alert.tip,
+.prose .alert.tip {
+  background: rgba(34, 197, 94, 0.15);
+  border-color: #22c55e;
+  color: #dcfce7;
+}
+
+.blog-content .alert.tip .alert-title,
+.prose .alert.tip .alert-title {
+  color: #4ade80;
+}
+
+.blog-content .alert.tip .alert-icon,
+.prose .alert.tip .alert-icon {
+  color: #22c55e;
+}
+
+/* Important Alert - Purple */
+.blog-content .alert.important,
+.prose .alert.important {
+  background: rgba(147, 51, 234, 0.15);
+  border-color: #9333ea;
+  color: #f3e8ff;
+}
+
+.blog-content .alert.important .alert-title,
+.prose .alert.important .alert-title {
+  color: #a855f7;
+}
+
+.blog-content .alert.important .alert-icon,
+.prose .alert.important .alert-icon {
+  color: #9333ea;
+}
+
+/* Warning Alert - Yellow */
+.blog-content .alert.warning,
+.prose .alert.warning {
+  background: rgba(245, 158, 11, 0.25); /* more visible yellow */
+  border-color: #f59e0b;
+  color: #fffbe6; /* more readable on dark bg */
+}
+
+.blog-content .alert.warning .alert-title,
+.prose .alert.warning .alert-title {
+  color: #fbbf24;
+}
+
+.blog-content .alert.warning .alert-icon,
+.prose .alert.warning .alert-icon {
+  color: #f59e0b;
+}
+
+/* Caution Alert - Red */
+.blog-content .alert.caution,
+.prose .alert.caution {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: #ef4444;
+  color: #fecaca;
+}
+
+.blog-content .alert.caution .alert-title,
+.prose .alert.caution .alert-title {
+  color: #f87171;
+}
+
+.blog-content .alert.caution .alert-icon,
+.prose .alert.caution .alert-icon {
+  color: #ef4444;
 }

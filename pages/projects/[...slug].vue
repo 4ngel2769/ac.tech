@@ -630,10 +630,6 @@ h1 {
   @apply text-gray-300 leading-relaxed;
 }
 
-.prose a {
-  @apply text-blue-400 hover:text-blue-300;
-}
-
 .prose code {
   @apply text-yellow-300;
 }

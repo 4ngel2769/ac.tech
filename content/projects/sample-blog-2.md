@@ -51,6 +51,26 @@ export default defineNuxtConfig({
 })
 ```
 
+::alert{type="note"}
+Highlights information that users should take into account, even when skimming.
+::
+
+::alert{type="tip"}
+Optional information to help a user be more successful.
+::
+
+::alert{type="important"}
+Crucial information necessary for users to succeed.
+::
+
+::alert{type="warning"}
+Critical content demanding immediate user attention due to potential risks.
+::
+
+::alert{type="caution"}
+Negative potential consequences of an action.
+::
+
 ## Conclusion
 
 This sample blog post demonstrates images, code, and structure. You can easily customize it for your own content!

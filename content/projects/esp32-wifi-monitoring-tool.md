@@ -112,6 +112,6 @@ This is just the beginning. The ESP32 has more potential than most people realiz
 
 ---
 
-> #### 🔧 [See the source code on GitHub](https:\/\/github.com/4ngel2769)
-> #### 📸 Demo pictures and schematics files will be added soon!
----
+> ##### 🔧 [See the source code on GitHub](https:\/\/github.com/4ngel2769)
+> ##### 📸 Demo pictures and schematics files will be added soon!
+> ##### 💬 Questions? Feedback? Open an issue on GitHub or reach out to me on [Twitter](https://twitter.com/4ngel2769).

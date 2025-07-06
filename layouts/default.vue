@@ -1,16 +1,19 @@
 <template>
-    <div class="flex flex-col align-center" id="frontGround">
-      <div class="flex navbar" style="justify-content: center;">
-        <Header />
-      </div>
-      <div class="flex theSlot" style="justify-content: center;">
-        <slot />
-        <div class="footerimg"></div>
-      </div>
-      <div class="flex" style="justify-content: center;">
-        <Footer />
-      </div>
+  <div class="flex flex-col align-center" id="frontGround">
+    <div class="flex navbar" style="justify-content: center;">
+      <Header />
     </div>
+    <div
+      class="flex theSlot"
+      style="justify-content: center; background-image: url('/bbburst4.svg'); background-size: cover; background-repeat: no-repeat; background-position: center;"
+    >
+      <slot />
+      <div class="footerimg"></div>
+    </div>
+    <div class="flex" style="justify-content: center;">
+      <Footer />
+    </div>
+  </div>
 </template>
 
 <script setup>
@@ -41,7 +44,7 @@
     justify-content: center;
     align-items: center;
     height: 180px;
-    width: 100vmax;
+    width: 100vw;
     margin: 0 auto;
     background-image: url('/wave-haikei4.svg');
     background-position: bottom !important;

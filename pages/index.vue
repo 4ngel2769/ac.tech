@@ -193,7 +193,7 @@ export default {
     }
     .Name, .NameText {
         /* font-family: var(--font19); */
-        font-family: var(--font29);
+        font-family: var(--font2);
         font-size: 2em;
     }
     .Description, .DescriptionText {
