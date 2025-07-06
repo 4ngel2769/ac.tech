@@ -4,8 +4,8 @@
       <template v-slot="{ doc }">
         <!-- Header Section with Image and Meta -->
         <Section id="blog-header" type="header" class="!pb-8">
-          <div class="max-w-7xl mx-auto">
-            <!-- Changed from max-w-6xl to max-w-7xl -->
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Added responsive padding -->
             <!-- Breadcrumbs -->
             <div class="border-t-2 pt-6 border-zinc-500 mb-8">
               <ol
@@ -242,8 +242,8 @@
 
         <!-- Content Section -->
         <Section id="main" class="!pt-0">
-          <div class="max-w-6xl mx-auto">
-            <!-- Keeping this as max-w-6xl -->
+          <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Added responsive padding -->
             <article class="prose prose-lg max-w-none">
               <!-- Update date -->
               <span
@@ -658,19 +658,14 @@ h1 {
 .divider-line {
   @apply w-full h-px bg-gradient-to-r from-transparent via-gray-400 to-transparent;
 }
-.divider-line._top {
-  @apply mb-4;
-}
-.divider-line._bottom {
-  @apply mt-4;
-}
 
 .navigation-container {
-  @apply flex flex-col md:flex-row gap-8 md:gap-12 items-center justify-between;
+  @apply flex flex-row gap-4 items-center justify-between; /* Changed from flex-col md:flex-row to always flex-row */
 }
 
 .nav-item {
   display: flex;
+  flex: 1; /* Make buttons take equal space */
 }
 
 .nav-spacer {
@@ -678,7 +673,7 @@ h1 {
 }
 
 .nav-link {
-  @apply block py-4 hover:text-blue-300 transition-colors duration-300;
+  @apply block py-4 hover:text-blue-300 transition-colors duration-300 w-full text-center; /* Added w-full and text-center */
 }
 
 .nav-direction {
@@ -713,27 +708,111 @@ h1 {
   @apply text-right;
 }
 
-/* Mobile adjustments */
+/* Mobile adjustments - UPDATED */
 @media (max-width: 767px) {
   .navigation-container {
-    @apply gap-6;
+    @apply gap-2; /* Reduced gap for mobile */
   }
 
   .nav-link {
-    @apply py-3;
+    @apply py-3 px-2; /* Added horizontal padding */
   }
 
   .nav-title {
     @apply text-sm;
   }
 
+  .nav-direction {
+    @apply text-xs; /* Smaller text on mobile */
+  }
+
+  /* Keep both buttons aligned properly on mobile */
   .nav-next .nav-title {
-    @apply text-left;
+    @apply text-right; /* Keep right alignment */
   }
 
   .nav-next .nav-direction {
-    @apply justify-start;
+    @apply justify-end; /* Keep right alignment */
   }
+
+  /* Make buttons more compact on mobile */
+  .nav-item {
+    min-width: 0; /* Allow buttons to shrink */
+  }
+}
+
+/* Mobile responsive fixes - UPDATED with smaller margins */
+@media (max-width: 768px) {
+  .project-hero-title {
+    font-size: 1.5rem !important;
+    line-height: 1.3;
+    padding: 0 0.5rem !important; /* Reduced from 1rem */
+  }
+
+  .project-excerpt {
+    padding: 0 0.5rem !important; /* Reduced from 1rem */
+    font-size: 0.875rem;
+  }
+
+  .meta-item {
+    padding: 0 0.5rem !important; /* Reduced from 1rem */
+  }
+
+  /* Make hero image span full width with minimal margin */
+  .project-hero-image {
+    margin: 0 !important;
+    width: calc(100vw - 8px) !important; /* 4px margin on each side */
+    margin-left: calc(-50vw + 50% + 4px) !important;
+    border-radius: 0 !important;
+  }
+
+  /* Make category tags smaller and thinner */
+  .meta-tag {
+    padding: 0.125rem 0.375rem !important;
+    font-size: 0.625rem !important;
+    border-width: 0.5px !important;
+    font-weight: 400 !important;
+    line-height: 1.2 !important;
+  }
+
+  /* FIX: Force blog content to respect smaller mobile padding */
+  .blog-content,
+  .prose {
+    padding: 0 0.5rem !important; /* Reduced from 1rem */
+    margin: 0 !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+  }
+
+  /* Make all images in blog content span full width */
+  .blog-content img,
+  .prose img {
+    width: calc(100vw - 8px) !important; /* 4px margin on each side */
+    max-width: calc(100vw - 8px) !important;
+    margin: 1rem calc(-50vw + 50% + 4px) !important;
+    display: block !important;
+    border-radius: 0 !important;
+  }
+
+  /* FIX: Handle code blocks on mobile with smaller margins */
+  .blog-content pre,
+  .prose pre {
+    margin: 1rem calc(-50vw + 50% + 4px) !important; /* Full width with 4px margin */
+    padding: 1rem !important;
+    border-radius: 0 !important;
+    overflow-x: auto !important;
+    max-width: calc(100vw - 8px) !important;
+  }
+}
+
+/* Ensure images don't break layout */
+.project-hero-image img,
+.blog-content img,
+.prose img {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
 }
 
 /* Line clamp utility for excerpt truncation */

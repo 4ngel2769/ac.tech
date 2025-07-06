@@ -15,16 +15,35 @@
 <style scoped>
 .project-bg {
   min-height: 100vh;
-  background: #0c0c0c; /* <-- Your custom color or image here */
+  background: #0c0c0c;
+  width: 100%;
+  max-width: 100vw; /* Prevent overflow */
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  box-sizing: border-box;
 }
+
 .projectSlot {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  /* Optionally add a custom background image here */
-  /* background-image: url('/your-custom-bg.svg'); */
-  /* background-size: cover; */
-  /* background-position: center; */
+  max-width: 100vw; /* Prevent overflow */
+  overflow-x: hidden;
+  box-sizing: border-box;
+  padding: 0; /* Remove any default padding */
+}
+
+/* Mobile-specific fixes */
+@media (max-width: 768px) {
+  .project-bg {
+    padding: 0;
+    margin: 0;
+  }
+  
+  .projectSlot {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
 }
 </style>
