@@ -54,6 +54,14 @@
                                         </div>
                                     </div>
                                     
+                                    <!-- Updated On (only if dateUpdated exists) -->
+                                    <div v-if="doc.dateUpdated" class="meta-item flex flex-row items-start gap-4">
+                                        <span class="meta-label flex-shrink-0 w-1/2">Updated On</span>
+                                        <div class="meta-content w-1/2">
+                                            <span class="meta-value">{{ formatDate(doc.dateUpdated) }}</span>
+                                        </div>
+                                    </div>
+                                    
                                     <!-- Categories -->
                                     <div v-if="doc.tags && doc.tags.length > 0" class="meta-item flex flex-row items-start gap-4">
                                         <span class="meta-label flex-shrink-0 w-1/2">
@@ -111,6 +119,14 @@
                                             <span class="meta-label flex-shrink-0 w-1/2">Published On</span>
                                             <div class="meta-content w-1/2">
                                                 <span class="meta-value">{{ formatDate(doc.date) }}</span>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Updated On (only if dateUpdated exists) -->
+                                        <div v-if="doc.dateUpdated" class="meta-item flex flex-row items-start gap-4 mb-1">
+                                            <span class="meta-label flex-shrink-0 w-1/2">Updated On</span>
+                                            <div class="meta-content w-1/2">
+                                                <span class="meta-value">{{ formatDate(doc.dateUpdated) }}</span>
                                             </div>
                                         </div>
                                         
@@ -234,6 +250,10 @@
 </template>
 
 <script setup>
+definePageMeta({
+    layout: 'project',
+    scrollToTop: true,
+})
 // Create a local date formatting function
 const formatDate = (dateString) => {
     if (!dateString) return ''
@@ -267,10 +287,24 @@ const { data, error } = await useAsyncData(`content-${cleanPath}`, async () => {
 // Get the authors
 const { data: authorData } = await useAsyncData('home', () => queryContent('/authors').findOne());
 
-// Set the meta
-const baseUrl = process.env.BASEURL;
-const canonicalPath = baseUrl + (path + '/').replace(/\/+$/, '/');
-const image = baseUrl + (data.value?.article?.socialImage.src || '/default.jpg');
+// Set the meta - Fix the image URL construction
+const runtimeConfig = useRuntimeConfig()
+const baseUrl = runtimeConfig.public.baseUrl || 'https://angellabs.xyz' // Replace with your actual domain
+
+// Construct the proper image URL
+let socialImageSrc = data.value?.article?.socialImage?.src
+if (socialImageSrc) {
+    // If the image starts with '/', it's a local image - prepend the base URL
+    if (socialImageSrc.startsWith('/')) {
+        socialImageSrc = baseUrl + socialImageSrc
+    }
+    // If it starts with 'http', it's already a full URL - use as is
+} else {
+    // Fallback image
+    socialImageSrc = baseUrl + '/default.jpg'
+}
+
+const canonicalPath = baseUrl + (path + '/').replace(/\/+$/, '/')
 
 // JSON+LD
 const jsonScripts = [
@@ -284,16 +318,17 @@ const jsonScripts = [
                 '@id': `${baseUrl}`
             },
             url: canonicalPath,
-            image: image,
+            image: socialImageSrc,
             headline: data.value?.article?.headline,
             abstract: data.value?.article?.excerpt,
             datePublished: data.value?.article?.date,
             dateModified: data.value?.article?.dateUpdated || data.value?.article?.date,
-            author: authorData.value[data.value?.article?.author],
-            publisher: authorData.value['Angel Capra']
+            author: authorData.value?.[data.value?.article?.author],
+            publisher: authorData.value?.['Angel Capra']
         })
     }
 ];
+
 useHead({
     title: data.value?.article?.title,
     meta: [
@@ -304,19 +339,19 @@ useHead({
         { hid: 'og:title', property: 'og:title', content: data.value?.article?.headline },
         { hid: 'og:url', property: 'og:url', content: canonicalPath },
         { hid: 'og:description', property: 'og:description', content: data.value?.article?.description },
-        { hid: 'og:image', name: 'image', property: 'og:image', content: image },
-        { hid: 'og:type', property: 'og:type', content: 'Article' },
-        { hid: 'og:image:type', property: 'og:image:type', content: `image/${data.value?.article?.socialImage.mime}` },
-        { hid: 'og:image:width', property: 'og:image:width', content: data.value?.article?.socialImage.width || 190 },
-        { hid: 'og:image:height', property: 'og:image:height', content: data.value?.article?.socialImage.height || 190 },
-        { hid: 'og:image:alt', property: 'og:image:alt', content: data.value?.article?.socialImage.alt },
+        { hid: 'og:image', property: 'og:image', content: socialImageSrc },
+        { hid: 'og:type', property: 'og:type', content: 'article' },
+        { hid: 'og:image:type', property: 'og:image:type', content: `image/${data.value?.article?.socialImage?.mime || 'jpeg'}` },
+        { hid: 'og:image:width', property: 'og:image:width', content: data.value?.article?.socialImage?.width || 1200 },
+        { hid: 'og:image:height', property: 'og:image:height', content: data.value?.article?.socialImage?.height || 630 },
+        { hid: 'og:image:alt', property: 'og:image:alt', content: data.value?.article?.socialImage?.alt || data.value?.article?.headline },
         // Twitter
-        { hid: 'twitter:card', name: 'twitter:card', content: 'Summary' },
+        { hid: 'twitter:card', name: 'twitter:card', content: 'summary_large_image' },
         { hid: 'twitter:title', name: 'twitter:title', content: data.value?.article?.headline },
         { hid: 'twitter:url', name: 'twitter:url', content: canonicalPath },
         { hid: 'twitter:description', name: 'twitter:description', content: data.value?.article?.description },
-        { hid: 'twitter:image', name: 'twitter:image', content: image },
-        { hid: 'twitter:image:alt', name: 'twitter:image:alt', content: data.value?.article?.socialImage.alt }
+        { hid: 'twitter:image', name: 'twitter:image', content: socialImageSrc },
+        { hid: 'twitter:image:alt', name: 'twitter:image:alt', content: data.value?.article?.socialImage?.alt || data.value?.article?.headline }
     ],
     link: [
         {

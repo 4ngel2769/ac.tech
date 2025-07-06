@@ -52,7 +52,22 @@ export default defineNuxtConfig({
         'javascript',
         'typescript',
         'python',
-        'bash'
+        'bash',
+        'c',
+        'cpp',
+        'csharp',
+        'css',
+        'html',
+        'csv',
+        'json',
+        'yaml',
+        'xml',
+        'markdown',
+        'php',
+        'ruby',
+        'sql',
+        'go',
+        'rust'
       ]
     },
     markdown: {
@@ -146,6 +161,8 @@ export default defineNuxtConfig({
       EMAIL: '',
       YOUTUBE: 'https://youtube.com/@angeldev0',
       DEVTO: 'https://dev.to/angeldev0',
+      baseUrl: 'https://angellabs.xyz',
+      siteName: 'Angel Capra 🚀',
     }
   },
 

@@ -4,7 +4,7 @@ description: "An ESP32 Based Tool for Monitoring WiFi Networks"
 headline: 'An ESP32 Based Tool for Monitoring WiFi Networks'
 excerpt: "A powerful DIY toolkit using the ESP32 for scanning, monitoring, and analyzing WiFi networks, all from a tiny board."
 date: '2024-09-21T14:21:15'
-dateUpdated: ''
+dateUpdated: '2025-07-06T13:36:00'
 author: 'Angel Capra'
 authorUrl: 'https://github.com/4ngel2769'
 tags: ['ESP32', 'WiFi', 'Monitoring', 'Toolkit']
