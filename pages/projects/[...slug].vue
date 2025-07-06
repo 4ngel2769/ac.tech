@@ -115,7 +115,7 @@
                                     <!-- Meta Information -->
                                     <div class="project-meta-container flex flex-col space-y-4">
                                         <!-- Published On -->
-                                        <div class="meta-item flex flex-row items-start gap-4 mb-1">
+                                        <div class="meta-item flex flex-row items-start gap-4">
                                             <span class="meta-label flex-shrink-0 w-1/2">Published On</span>
                                             <div class="meta-content w-1/2">
                                                 <span class="meta-value">{{ formatDate(doc.date) }}</span>
@@ -123,7 +123,7 @@
                                         </div>
                                         
                                         <!-- Updated On (only if dateUpdated exists) -->
-                                        <div v-if="doc.dateUpdated" class="meta-item flex flex-row items-start gap-4 mb-1">
+                                        <div v-if="doc.dateUpdated" class="meta-item flex flex-row items-start gap-4">
                                             <span class="meta-label flex-shrink-0 w-1/2">Updated On</span>
                                             <div class="meta-content w-1/2">
                                                 <span class="meta-value">{{ formatDate(doc.dateUpdated) }}</span>
