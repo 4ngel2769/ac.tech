@@ -127,7 +127,8 @@ export default defineNuxtConfig({
 
   css: [
     '@fortawesome/fontawesome-svg-core/styles.css',
-    '/assets/css/main.css'
+    '/assets/css/main.css',
+    '/assets/css/tailwind.css'
   ],
 
   modules: [
@@ -196,4 +197,5 @@ export default defineNuxtConfig({
   },
 
   // compatibilityDate: '2024-07-09',
+  compatibilityDate: '2025-07-22',
 })
