@@ -42,46 +42,43 @@ export default defineNuxtConfig({
     //   include: ['@fortawesome/fontawesome-svg-core', '@fortawesome/free-solid-svg-icons', '@fortawesome/vue-fontawesome']
     // }
   },
-
+  
   content: {
-    // https://content.nuxtjs.org/api/configuration
-    highlight: {
-      theme: 'everforest-dark',
-      preload: [
-        'java',
-        'javascript',
-        'typescript',
-        'python',
-        'bash',
-        'c',
-        'cpp',
-        'csharp',
-        'css',
-        'html',
-        'csv',
-        'json',
-        'yaml',
-        'xml',
-        'markdown',
-        'php',
-        'ruby',
-        'sql',
-        'go',
-        'rust'
-      ]
-    },
-    markdown: {
-      anchorLinks: false,
-      // https://github.com/rehypejs/rehype-external-links
-      rehypePlugins: [
-        [
-        'rehype-external-links',
-          {
+    build: {
+      // https://content.nuxtjs.org/api/configuration
+      markdown: {
+        highlight: {
+        theme: 'everforest-dark',
+        preload: [
+          'java',
+          'javascript',
+          'typescript',
+          'python',
+          'bash',
+          'c',
+          'cpp',
+          'csharp',
+          'css',
+          'html',
+          'csv',
+          'json',
+          'yaml',
+          'xml',
+          'markdown',
+          'php',
+          'ruby',
+          'sql',
+          'go',
+          'rust'
+        ]
+      },
+      rehypePlugins: {
+          'rehype-external-links': {
             target: '_blank',
             rel: 'noopener noreferer'
           }
-        ]
-      ]
+        }
+      }
     }
   },
 
@@ -94,12 +91,12 @@ export default defineNuxtConfig({
           async: true
         },
         {
-          children: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-K7ZPX7THHN');
-          `,
+          // children: `
+          //   window.dataLayer = window.dataLayer || [];
+          //   function gtag(){dataLayer.push(arguments);}
+          //   gtag('js', new Date());
+          //   gtag('config', 'G-K7ZPX7THHN');
+          // `,
           type: "text/javascript",
         },
       ],
@@ -128,7 +125,7 @@ export default defineNuxtConfig({
   css: [
     '@fortawesome/fontawesome-svg-core/styles.css',
     '/assets/css/main.css',
-    '/assets/css/tailwind.css'
+    // '/assets/css/tailwind.css'
   ],
 
   modules: [
@@ -151,7 +148,7 @@ export default defineNuxtConfig({
   },
 
   ui: {
-    global: true
+    // global: true
   },
   
   runtimeConfig: {

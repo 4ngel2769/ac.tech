@@ -31,11 +31,11 @@ export default {
         'h4': '1.5rem',
         'h5': '1.25rem',
         'highlight_sm': '3.5rem',
-        'h1_sm': '3rem',
-        'h2_sm': '2.25rem',
-        'h3_sm': '1.75rem',
-        'h4_sm': '1.5rem',
-        'h5_sm': '1.25rem'
+        'h1-sm': '3rem',
+        'h2-sm': '2.25rem',
+        'h3-sm': '1.75rem',
+        'h4-sm': '1.5rem',
+        'h5-sm': '1.25rem'
       },
       lineHeight: {
         'xxs': '0.75rem',
@@ -50,11 +50,11 @@ export default {
         'h4': '1.75rem',
         'h5': '1.5rem',
         'highlight_sm': '3.75rem',
-        'h1_sm': '3.25rem',
-        'h2_sm': '2.5rem',
-        'h3_sm': '2rem',
-        'h4_sm': '1.75rem',
-        'h5_sm': '1.5rem',
+        'h1-sm': '3.25rem',
+        'h2-sm': '2.5rem',
+        'h3-sm': '2rem',
+        'h4-sm': '1.75rem',
+        'h5-sm': '1.5rem',
       },
       padding: {
         'section_x_sm': '1.5rem',

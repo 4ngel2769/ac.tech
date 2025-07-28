@@ -99,14 +99,14 @@ export default {
                 <font-awesome-icon icon="fa-solid fa-arrow-up-right-from-square" />
                 <p class="WebsiteText"><a target="_blank" href="https://angellabs.xyz">https://angellabs.xyz</a></p>
                 <UTooltip text="Under development as new website (Coming soon).">
-                    <UBadge color="green" variant="outline">Development</UBadge>
+                    <UBadge color="success" variant="outline">Development</UBadge>
                 </UTooltip>
             </div>
             <div class="Website">
                 <font-awesome-icon icon="fa-solid fa-arrow-up-right-from-square" />
                 <p class="WebsiteText"><a target="_blank" href="https://angelscoolstuff.pages.dev">https://angelscoolstuff</a></p>
                 <UTooltip text="Old personal website.">
-                    <UBadge color="pink" variant="outline">Old</UBadge>
+                    <UBadge color="error" variant="outline">Old</UBadge>
                 </UTooltip>
             </div>
         </div>
@@ -164,6 +164,7 @@ export default {
 </template>
 
 <style scoped>
+@reference '../assets/css/main.css';
     .menu {
         z-index: 0;
     }
