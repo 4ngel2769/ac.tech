@@ -30,6 +30,8 @@
   --breadcrumbs-main: rgb(139, 187, 226);
 
   --dark-bg: #0a0e0f;
+  --dark-bg2: #0f1313;
+  --dark-bg3: rgb(11, 17, 16);
   --dark-alt1: #0e1114;
   --dark-alt2: #0d1317;
   --dark-alt3: #222831;
@@ -134,7 +136,7 @@ body {
 }
 
 .projectsPage {
-  background-color: var(--dark-bg);
+  background-color: var(--dark-bg3);
   transition: background-color 0.3s ease;
 }
 

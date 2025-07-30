@@ -227,45 +227,56 @@ const formatBlogDate = (dateString: string) => {
         <span class="latest-blogs-label">LATEST BLOGS</span>
       </div>
       
-      <div class="latest-blogs-grid">
-        <ContentQuery
-          path="/projects"
-          :only="['headline', 'date', '_path', 'socialImage']"
-          :sort="{ date: -1 }"
-          :limit="3"
-        >
-          <template v-slot="{ data }">
-            <div
-              v-for="blog in data"
-              :key="blog._path"
-              class="blog-card"
-            >
-              <NuxtLink :to="blog._path" class="blog-card-link">
-                <div class="blog-card-image">
-                  <img
-                    v-if="blog.socialImage?.src"
-                    :src="blog.socialImage.src"
-                    :alt="blog.socialImage.alt || blog.headline"
-                    class="blog-image"
-                  />
-                  <div v-else class="blog-image-placeholder">
-                    <span class="text-gray-400">No image</span>
+      <div class="latest-blogs-wrapper">
+        <div class="latest-blogs-grid">
+          <ContentQuery
+            path="/projects"
+            :only="['headline', 'date', '_path', 'socialImage']"
+            :sort="{ date: -1 }"
+            :limit="3"
+          >
+            <template v-slot="{ data }">
+              <div
+                v-for="blog in data"
+                :key="blog._path"
+                class="blog-card"
+              >
+                <NuxtLink :to="blog._path" class="blog-card-link">
+                  <div class="blog-card-image">
+                    <img
+                      v-if="blog.socialImage?.src"
+                      :src="blog.socialImage.src"
+                      :alt="blog.socialImage.alt || blog.headline"
+                      class="blog-image"
+                    />
+                    <div v-else class="blog-image-placeholder">
+                      <span class="text-gray-400">No image</span>
+                    </div>
                   </div>
-                </div>
-                <div class="blog-card-content">
-                  <h3 class="blog-card-title">{{ blog.headline }}</h3>
-                  <p class="blog-card-date">{{ formatBlogDate(blog.date) }}</p>
-                </div>
-              </NuxtLink>
-            </div>
-          </template>
-          <template #not-found>
-            <div class="no-blogs-message">
-              <p>No blog posts found.</p>
-            </div>
-          </template>
-        </ContentQuery>
+                  <div class="blog-card-content">
+                    <h3 class="blog-card-title">{{ blog.headline }}</h3>
+                    <p class="blog-card-date">{{ formatBlogDate(blog.date) }}</p>
+                  </div>
+                </NuxtLink>
+              </div>
+            </template>
+            <template #not-found>
+              <div class="no-blogs-message">
+                <p>No blog posts found.</p>
+              </div>
+            </template>
+          </ContentQuery>
+        </div>
+        <!-- desktop “Click for More” under the first card -->
+        <NuxtLink to="/projects" class="more-link desktop">
+          <span class="line"></span>Click for More
+        </NuxtLink>
       </div>
+
+      <!-- mobile “Click for More” below all cards -->
+      <NuxtLink to="/projects" class="more-link mobile">
+        <span class="line"></span>Click for More
+      </NuxtLink>
     </div>
   </section>
 
@@ -832,7 +843,7 @@ body {
   object-fit: cover;
   transition: filter 0.3s ease;
   border-radius: 10px;
-  filter: brightness(0.6);
+  filter: brightness(0.8);
 }
 
 .blog-card:hover .blog-image {
@@ -878,6 +889,53 @@ body {
   font-size: 1.125rem;
   grid-column: 1 / -1;
   padding: 2rem;
+}
+
+.latest-blogs-wrapper {
+  position: relative;
+}
+
+/* base styles for both links */
+.more-link {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font3);
+  color: #ccc;
+  text-decoration: none;
+  margin-top: 2rem;
+  margin-left: 2rem;
+  transition: all 0.3s ease;
+}
+.more-link .line {
+  width: 1.5rem;
+  height: 1px;
+  background: #ccc;
+  margin-right: 0.5rem;
+}
+.more-link:hover {
+  color: #fff;
+}
+
+/* desktop only: absolutely positioned under first card */
+.more-link.desktop {
+  position: absolute;
+  top: 100%;
+  left: 0;
+}
+
+/* hide desktop link on mobile */
+.more-link.mobile {
+  display: none;
+}
+
+/* mobile only: show below grid, hide desktop */
+@media (max-width: 768px) {
+  .more-link.desktop {
+    display: none;
+  }
+  .more-link.mobile {
+    display: inline-flex;
+  }
 }
 
 /* Mobile responsive */
