@@ -373,10 +373,10 @@ p {
 .blog-breadcrumb {
   @apply inline-block text-center font-light;
   font-family: 'Montserrat', sans-serif;
-  font-optical-sizing: auto;
+  font-optical-sizing: none;
   /* font-weight: 200; */
   font-style: normal;
-  list-style-type: decimal;
+  list-style-type: none;
 }
 
 .blog-breadcrumb > span {

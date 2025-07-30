@@ -6,10 +6,10 @@
     </div>
 
     <!-- Main content -->
-    <div class="flex-grow pt-24 px-4 md:px-6 lg:px-8 projectsPage">
+    <div class="flex-grow px-4 md:px-6 lg:px-8 projectsPage">
       <div class="max-w-7xl mx-auto">
         <!-- Breadcrumbs -->
-        <nav class="mb-8 z-50" aria-label="Breadcrumb">
+        <nav class="z-50" aria-label="Breadcrumb">
           <ol class="flex items-center space-x-2 text-sm text-gray-500">
             <li>
               <NuxtLink to="/" class="hover:text-gray-700">Home</NuxtLink>

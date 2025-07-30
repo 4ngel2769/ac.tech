@@ -4,6 +4,17 @@
     <!-- Projects Hero Header -->
     <div class="projects-hero-header">
       <div class="projects-hero-content-header">
+    <nav class="projects-breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li>
+          <NuxtLink to="/" class="breadcrumb-link">Home</NuxtLink>
+        </li>
+        <li class="breadcrumb-separator">/</li>
+        <li>
+          <span class="breadcrumb-current">Projects</span>
+        </li>
+      </ol>
+    </nav>
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <h1 class="text-4xl font-bold">My Projects</h1>
           <div class="flex gap-4">
@@ -11,11 +22,13 @@
               v-model="searchQuery"
               type="text"
               placeholder="Search projects..."
-              class="px-4 py-2 border rounded-lg flex-grow"
+              class="px-4 py-2 border rounded-lg flex-grow backdrop-blur-sm bg-black/10"
+              style="font-family: var(--font3); color: var(--text-color);"
             />
             <select
               v-model="sortBy"
-              class="px-4 py-2 border rounded-lg"
+              class="px-4 py-2 border rounded-lg backdrop-blur-sm bg-black/10"
+              style="font-family: var(--font3); color: var(--text-color);"
             >
               <option value="date">Date</option>
               <option value="headline">Title</option>
@@ -273,9 +286,14 @@ const formatDate = (date) => {
   margin: 0;
   width: 100vw;
   margin-left: calc(-50vw + 50%);
-  padding: 4rem 2rem;
+  padding: 2rem 0 2.5rem 0; /* Less top/bottom padding */
   position: relative;
+  z-index: 1;
   overflow: hidden;
+  min-height: 320px;        /* Increase vertical space */
+  height: 340px;            /* Or set a fixed height if you prefer */
+  display: flex;
+  align-items: flex-end;    /* Align content closer to the top */
 }
 
 /* Background image sticks left, scales to cover */
@@ -284,11 +302,11 @@ const formatDate = (date) => {
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background-image: url("/bg_web_prj1.png");
+  background-image: url("/bg_web_prj4.png");
   background-repeat: no-repeat;
   background-position: left center;
   background-size: cover;
-  transform: scale(1.1);
+  transform: scale(1);
   transform-origin: left center;
   z-index: 1;
 }
@@ -299,16 +317,19 @@ const formatDate = (date) => {
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background-color: rgb(var(--dark-bg3), 0.6);
-  z-index: 1;
+  background-color: rgb(11 17 16 / 60%);
+  z-index: 2;
+  pointer-events: none;
 }
 
 /* Foreground content sits above background */
 .projects-hero-content-header {
   position: relative;
-  z-index: 2;
+  z-index: 3;
   max-width: 1200px;
   margin: 0 auto;
+  width: 100%;
+  padding: 0 2rem;
 }
 
 /* --- Enhanced Notification Card with Glowing Border --- */
@@ -539,7 +560,7 @@ const formatDate = (date) => {
   font-family: 'Montserrat', sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
-  list-style-type: decimal;
+  list-style-type: none;
 }
 
 .eor {
@@ -551,5 +572,42 @@ const formatDate = (date) => {
     /* e.g. make it a little taller on mobile */
     aspect-ratio: 16/9;
   }
+}
+
+/* Breadcrumbs Styles */
+.projects-breadcrumb {
+  font-family: var(--font3);
+  font-size: 1.1rem;
+  color: var(--breadcrumbs, #a7a7a7);
+  margin: 0 0 1.2rem 0;
+  padding: 0 0 0 0;
+  display: flex;
+  align-items: center;
+  z-index: 10;
+  position: relative;
+}
+.projects-breadcrumb ol {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.breadcrumb-link {
+  color: var(--breadcrumbs, #a7a7a7);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.breadcrumb-link:hover {
+  color: var(--breadcrumbs-main, #8bbbe2);
+  text-decoration: underline;
+}
+.breadcrumb-separator {
+  margin: 0 0.5em;
+  color: var(--breadcrumbs, #a7a7a7);
+}
+.breadcrumb-current {
+  color: var(--breadcrumbs-main, #8bbbe2);
+  font-weight: 600;
 }
 </style>
