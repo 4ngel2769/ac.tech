@@ -11,7 +11,9 @@ import {
   faLightbulb,
   faExclamationCircle,
   faExclamationTriangle,
-  faTimesCircle
+  faTimesCircle,
+  faSun,
+  faMoon
 } from '@fortawesome/free-solid-svg-icons'
 // import { far } from '@fortawesome/free-regular-svg-icons'
 import { fab, faYoutube, faDev, faTwitter, faInstagram, faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons'
@@ -36,7 +38,10 @@ library.add(
   faLightbulb,
   faExclamationCircle,
   faExclamationTriangle,
-  faTimesCircle
+  faTimesCircle,
+  // Theme toggle icons
+  faSun,
+  faMoon
 )
 
 export default defineNuxtPlugin((nuxtApp) => {

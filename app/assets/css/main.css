@@ -16,8 +16,8 @@
   --blog-heading-secondary: #f3f3f3;
   --radius: 0.8rem;
 
-  --blog-code-bg: #1b1f26;
-  --blog-code-text: #e3dfc2;
+  --blog-code-bg: #1b2326b0;
+  --blog-code-text: #ceff6b;
   --code-border: 1px solid rgba(154, 154, 154, 0.234);
   --code-shadow: 0 1px 2px rgba(9, 10, 10, 0.189);
 
@@ -34,10 +34,11 @@
   --dark-alt2: #0d1317;
   --dark-alt3: #222831;
   --dark-alt4: #151516;
-  --light-bg: #f2f2f2;
-  --light-alt1: #000000;
-  --light-alt2: #000000;
-  --light-alt3: #000000;
+  --light-bg: #f8fafc;
+  --light-alt1: #f1f5f9;
+  --light-alt2: #e2e8f0;
+  --light-alt3: #cbd5e1;
+  --light-alt4: #94a3b8;
   --red: #f52626;
   --l-red: #ff6060;
   --green: #18e436;
@@ -58,9 +59,7 @@
    /* Footer colors  */
   --fbg: #191c22;
 
-
   /* Txt colors*/
-
   /* Main page */
   --main-light: #000000;
   --main-dark: #eeeeee;
@@ -79,21 +78,72 @@
   --scroll-thumb-h: #0d1012;
 }
 
+/* Light mode overrides */
+.light {
+  --blog-bg: #ffffff;
+  --blog-text: #374151;
+  --blog-text-bold: #111827;
+  --blog-text-light: #6b7280;
+  --blog-text-secondary: #9ca3af;
+  --blog-link: #2563eb;
+  --blog-link-hover: #1d4ed8;
+  --blog-heading: #111827;
+  --blog-heading-secondary: #1f2937;
+
+  --blog-code-bg: #f3f4f6;
+  --blog-code-text: #059669;
+  --code-border: 1px solid #d1d5db;
+  --code-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+
+  --blog-tag-bg: #f3f4f6;
+  --blog-tag-bg-hover: #e5e7eb;
+  --blog-tag-text: #6b7280;
+  --blog-tag-text-hover: #374151;
+
+  --breadcrumbs: #6b7280;
+  --breadcrumbs-main: #2563eb;
+
+  --dark-bg: #ffffff;
+  --dark-alt1: #f8fafc;
+  --dark-alt2: #f1f5f9;
+  --dark-alt3: #e2e8f0;
+  --dark-alt4: #cbd5e1;
+
+  --main-dark: #111827;
+  --main-dsc: #374151;
+  --main-details: #6b7280;
+
+  --scroll-track: #f1f5f9;
+  --scroll-thumb: #cbd5e1;
+  --scroll-thumb-h: #94a3b8;
+}
+
+/* Base body styles */
+body {
+  background-color: var(--dark-bg);
+  color: var(--main-dark);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.light body {
+  color: var(--main-dark);
+}
+
+.router-link-exact-active {
+  color: var(--htb-green);
+}
+
 .projectsPage {
   background-color: var(--dark-bg);
-  /* background-image: url('/pppixelate.svg'); */
-  /* background-attachment: scroll; */
-  /* background-repeat: no-repeat; */
-  /* background-size: cover; */
-  /* background-position: center; */
-  /* min-height: 100vh; */
+  transition: background-color 0.3s ease;
 }
 
 /* Blog Content Custom Colors */
 .blog-content,
 .prose {
-  /* background: var(--blog-bg); */ /* <-- Commented out as requested */
+  /* background: var(--blog-bg); */
   color: var(--blog-text);
+  transition: color 0.3s ease;
 }
 
 .blog-content p,
@@ -221,6 +271,8 @@
   ); /* Customize the color of the squiggly line */
   text-decoration-thickness: 1.2px; /* Customize the thickness of the squiggly line */
 }
+
+
 
 html {
   scroll-behavior: smooth;

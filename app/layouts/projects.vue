@@ -58,15 +58,50 @@ const isProjectsPage = computed(() => {
 </script>
 
 <style scoped>
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 50;
-  background-color: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(8px);
-}
+  .navbar {
+    position: absolute;
+    z-index: 10000;
+  }
+
+  nav {
+    opacity: 0;
+    visibility: hidden;
+    width: 100%;
+    z-index: 0;
+    background: black;
+    transition-duration: 0.5s;
+    backface-visibility: visible;
+  }
+
+  nav ul {
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    padding-top: 5%;
+    text-align: center;
+    list-style: none;
+  }
+
+  nav ul li a {
+    display: block;
+    padding: 10px 0;
+    transition-duration: 0.6s;
+    font-size: 2rem;
+    color: white;
+    text-decoration: none;
+  }
+
+  nav ul li a:hover {
+    cursor: pointer;
+    color: gold;
+  }
+
+  .open {
+    visibility: visible;
+    opacity: 1;
+  }
 
 * h1,
 * h2 {

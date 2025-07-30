@@ -3,10 +3,7 @@
     <div class="flex navbar" style="justify-content: center;">
       <Header />
     </div>
-    <div
-      class="flex theSlot"
-      style="justify-content: center; background-image: url('/bbburst4.svg'); background-size: cover; background-repeat: no-repeat; background-position: center;"
-    >
+    <div class="flex theSlot">
       <slot />
       <div class="footerimg"></div>
     </div>
@@ -24,16 +21,15 @@
   .router-link-exact-active {
     color: rgb(34, 240, 195);
   }
-  
-  .navbar {
-    position: absolute;
-    z-index: 0;
-  }
 
   .theSlot {
     overflow-x: hidden;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
     align-items: center;
     width: 100%;
   }
@@ -50,6 +46,11 @@
     background-position: bottom !important;
     background-repeat: repeat-x !important;
     background-clip: inherit;
+  }
+  
+  .navbar {
+    position: absolute;
+    z-index: 10000;
   }
 
   nav {

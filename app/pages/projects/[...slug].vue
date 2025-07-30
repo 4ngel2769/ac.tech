@@ -284,7 +284,7 @@
                           d="M15 19l-7-7 7-7"
                         ></path>
                       </svg>
-                      <span>Previous</span>
+                      <span>Next</span>
                     </div>
                     <!-- <h3 class="nav-title">{{ data.surround[0].headline }}</h3> -->
                   </NuxtLink>
@@ -297,7 +297,7 @@
                 <div v-if="data.surround[1]" class="nav-item nav-next">
                   <NuxtLink :to="data.surround[1]._path" class="nav-link group">
                     <div class="nav-direction">
-                      <span>Next</span>
+                      <span>Previous</span>
                       <svg
                         class="nav-arrow"
                         fill="none"
@@ -631,7 +631,7 @@ h1 {
 }
 
 .prose code {
-  @apply text-yellow-300;
+  color: #9eee00;
 }
 
 .prose blockquote {
@@ -645,6 +645,7 @@ h1 {
 
 .prose strong {
   @apply text-white;
+  font-weight: 450;
 }
 
 /* Continue Reading Section */
@@ -711,7 +712,7 @@ h1 {
 /* Mobile adjustments - UPDATED */
 @media (max-width: 767px) {
   .navigation-container {
-    @apply gap-2; /* Reduced gap for mobile */
+    gap: 0.5rem; /* Reduced gap for mobile */
   }
 
   .nav-link {

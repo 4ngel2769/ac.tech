@@ -272,7 +272,7 @@ const formatDate = (date) => {
 
 <style scoped>
 /* --- Enhanced Notification Card with Glowing Border --- */
-.notification {
+.notifications {
   width: 100%;
   height: auto;
   border-radius: 1rem;
