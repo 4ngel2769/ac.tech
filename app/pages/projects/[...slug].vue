@@ -3,7 +3,7 @@
     <ContentDoc>
       <template v-slot="{ doc }">
         <!-- Header Section with Image and Meta -->
-        <Section id="blog-header" type="header" class="!pb-8">
+        <Section id="blog-header" type="header" class="blog-header-bg !pb-8">
           <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Added responsive padding -->
             <!-- Breadcrumbs -->
@@ -600,6 +600,9 @@ h1 {
   font-optical-sizing: auto;
   font-style: normal;
   list-style-type: decimal;
+  background-color: rgba(14, 165, 233, 0.1);
+  color: #38bdf8;
+  backdrop-filter: blur(5px);
 }
 
 /* Separator between title and meta */
@@ -805,6 +808,12 @@ h1 {
     overflow-x: auto !important;
     max-width: calc(100vw - 8px) !important;
   }
+
+  .blog-header-bg {
+    min-height: 200px;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
 }
 
 /* Ensure images don't break layout */
@@ -822,5 +831,50 @@ h1 {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+/* Background image for blog header */
+.blog-header-bg {
+  position: relative;
+  overflow: hidden;
+  min-height: 340px;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+  display: flex;
+  align-items: flex-end;
+  z-index: 1;
+}
+
+/* Background image pseudo-element */
+.blog-header-bg::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-image: url("/bg_website_m.png"); /* Use your projects image */
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: cover;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Overlay for darkening */
+.blog-header-bg::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(10, 14, 15, 0.75);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Make sure content is above overlays */
+.blog-header-bg > * {
+  position: relative;
+  z-index: 3;
 }
 </style>

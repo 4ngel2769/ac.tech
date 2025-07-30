@@ -224,7 +224,7 @@ const formatBlogDate = (dateString: string) => {
   <section class="latest-blogs-section">
     <div class="latest-blogs-container">
       <div class="latest-blogs-header">
-        <span class="latest-blogs-label">LATEST BLOGS</span>
+        <span class="latest-blogs-label">LATEST PROJECTS</span>
       </div>
       
       <div class="latest-blogs-wrapper">
@@ -342,7 +342,7 @@ const formatBlogDate = (dateString: string) => {
   width: 100%;
   height: 100%;
   z-index: 1;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(27, 27, 27, 0.4);
 }
 
 /* Vignette overlay */
@@ -799,7 +799,6 @@ body {
   font-weight: 600;
   letter-spacing: 0.1em;
   color: #d5d5d5;
-  text-transform: uppercase;
   font-family: var(--font3);
 }
 

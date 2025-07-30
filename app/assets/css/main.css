@@ -26,7 +26,7 @@
   --blog-tag-text: #878e91;
   --blog-tag-text-hover: #1a1e20;
 
-  --breadcrumbs: #a7a7a7;
+  --breadcrumbs: #cacaca;
   --breadcrumbs-main: rgb(139, 187, 226);
 
   --dark-bg: #0a0e0f;
@@ -389,6 +389,7 @@ p {
 
 .blog-breadcrumb > li a {
   color: var(--breadcrumbs);
+  font-weight: 300;
 }
 
 .blog-breadcrumb > li a:hover {
@@ -397,6 +398,7 @@ p {
 
 .blog-breadcrumb li:last-child span[itemprop="name"] {
   color: var(--breadcrumbs-main);
+  font-weight: 600;
 }
 
 /* Blog Aside */

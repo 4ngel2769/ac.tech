@@ -14,8 +14,8 @@
 
 <style scoped>
 .project-bg {
-  min-height: 100vh;
-  background: #121212;
+  min-height: 100vh;/*
+  background: #121212;*/
   width: 100%;
   max-width: 100vw; /* Prevent overflow */
   overflow-x: hidden; /* Prevent horizontal scroll */
