@@ -25,6 +25,21 @@ const showVideoBg = ref(true) // Set to false for image background
 function toggleBg() {
   showVideoBg.value = !showVideoBg.value
 }
+
+// Date formatter for blog posts
+const formatBlogDate = (dateString: string) => {
+  if (!dateString) return ""
+  try {
+    return new Date(dateString).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    })
+  } catch (e) {
+    console.error("Date formatting error:", e)
+    return dateString
+  }
+}
 </script>
 
 <template>
@@ -201,6 +216,55 @@ function toggleBg() {
         <p>PROJECTS</p>
         <!-- <font-awesome-icon :icon="['fas', 'rocket']" class="ml-2" /> -->
         </NuxtLink>
+      </div>
+    </div>
+  </section>
+
+  <!-- Latest Blogs Section -->
+  <section class="latest-blogs-section">
+    <div class="latest-blogs-container">
+      <div class="latest-blogs-header">
+        <span class="latest-blogs-label">LATEST BLOGS</span>
+      </div>
+      
+      <div class="latest-blogs-grid">
+        <ContentQuery
+          path="/projects"
+          :only="['headline', 'date', '_path', 'socialImage']"
+          :sort="{ date: -1 }"
+          :limit="3"
+        >
+          <template v-slot="{ data }">
+            <div
+              v-for="blog in data"
+              :key="blog._path"
+              class="blog-card"
+            >
+              <NuxtLink :to="blog._path" class="blog-card-link">
+                <div class="blog-card-image">
+                  <img
+                    v-if="blog.socialImage?.src"
+                    :src="blog.socialImage.src"
+                    :alt="blog.socialImage.alt || blog.headline"
+                    class="blog-image"
+                  />
+                  <div v-else class="blog-image-placeholder">
+                    <span class="text-gray-400">No image</span>
+                  </div>
+                </div>
+                <div class="blog-card-content">
+                  <h3 class="blog-card-title">{{ blog.headline }}</h3>
+                  <p class="blog-card-date">{{ formatBlogDate(blog.date) }}</p>
+                </div>
+              </NuxtLink>
+            </div>
+          </template>
+          <template #not-found>
+            <div class="no-blogs-message">
+              <p>No blog posts found.</p>
+            </div>
+          </template>
+        </ContentQuery>
       </div>
     </div>
   </section>
@@ -435,19 +499,6 @@ body {
   z-index: 1;
   opacity: 1;
 }
-
-/* Responsive adjustments */
-@media (min-width: 1200px) {
-  .projects-hero-section {
-    height: 650px; /* Even taller on larger screens */
-  }
-  
-  .projects-hero-section::before {
-    background-size: cover;
-    background-position: left center;
-  }
-}
-
 /* Add overlay for brightness control */
 .projects-hero-section::after {
   content: "";
@@ -471,6 +522,19 @@ body {
   z-index: 3; /* Changed from 2 to 3 to stay above the overlay */
   max-width: 1200px;
   margin: 0 auto;
+}
+
+
+/* Responsive adjustments */
+@media (min-width: 1200px) {
+  .projects-hero-section {
+    height: 650px; /* Even taller on larger screens */
+  }
+  
+  .projects-hero-section::before {
+    background-size: cover;
+    background-position: left center;
+  }
 }
 
 /* Desktop - ensure proper scaling */
@@ -516,9 +580,15 @@ body {
   height: 100%;
   padding: 2rem;
   position: relative;
-  z-index: 2; /* Ensure content stays above the rotated background */
+  z-index: 3; /* Changed from 2 to 3 to stay above the overlay */
   max-width: 1200px;
   margin: 0 auto;
+}
+
+.projects-hero-content {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.5rem;
 }
 
 .projects-hero-text {
@@ -606,113 +676,6 @@ body {
   left: 100%;
 }
 
-/* Mobile responsive */
-@media (max-width: 768px) {
-  .projects-hero-section::before {
-    background-size: auto 100%; /* Maintains aspect ratio */
-    background-position: left center;
-  }
-
-  .projects-hero-section {
-    margin: 0rem 0; /* Keep full width on mobile */
-    min-height: 300px;
-  }
-
-  .projects-hero-content {
-    flex-direction: column;
-    text-align: center;
-    padding: 1.5rem;
-  }
-
-  .projects-hero-bg {
-    width: 100%;
-    height: 40%;
-    background-position: center top;
-    opacity: 0.4;
-  }
-
-  .projects-hero-text {
-    align-items: center;
-    text-align: center;
-  }
-
-  .projects-hero-title {
-    font-size: 2.5rem;
-  }
-
-  .projects-hero-description {
-    font-size: 1rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .projects-hero-btn {
-    padding: 0.875rem 1.5rem;
-    font-size: 0.8rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .projects-hero-title {
-    font-size: 2rem;
-  }
-
-  .projects-hero-description {
-    font-size: 0.9rem;
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  .tContainer {
-    margin: 80px 40px 40px 40px;
-  }
-  .descriptiondivider {
-    display: flex;
-    visibility: visible;
-    margin: 0 0 10px 0;
-  }
-  .socialdivider {
-    display: flex;
-    visibility: visible;
-    margin: 20px 0 0 0;
-  }
-  .linkstitle {
-    display: none;
-  }
-  .linkscontainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-  .linkscontainer .link {
-    font-size: 30px;
-  }
-  /* .more-info-mobile {
-            display: flex;
-            visibility: visible;
-            height: auto;
-        } */
-  .undertext {
-    /* display: none; */
-    /* visibility: hidden; */
-    flex-direction: column;
-    gap: 5px;
-    margin: 0px 0 25px 0;
-  }
-  .assets-credits {
-    visibility: hidden;
-    display: none;
-  }
-}
-@media only screen and (min-width: 769px) {
-  .tContainer {
-    padding: 0 10px 0 10px;
-    max-width: 700px;
-  }
-}
-@media only screen and (max-width: 410px) {
-}
-
 .explore-projects-btn {
   position: relative;
   background-color: #262626; /* bg-neutral-800 */
@@ -735,11 +698,9 @@ body {
   gap: 0.5rem;
   z-index: 0;
 }
-
 .explore-projects-btn * {
   z-index: 1000;
 }
-
 /* Before pseudo-element (violet glow) */
 .explore-projects-btn::before {
   content: "";
@@ -754,7 +715,6 @@ body {
   filter: blur(16px);
   transition: all 0.5s ease;
 }
-
 /* After pseudo-element (rose glow) */
 .explore-projects-btn::after {
   content: "";
@@ -769,7 +729,6 @@ body {
   filter: blur(16px);
   transition: all 0.5s ease;
 }
-
 /* Hover effects */
 .explore-projects-btn:hover {
   border-color: #c1c1c1; /* hover:border-rose-300 */
@@ -779,7 +738,6 @@ body {
   text-underline-offset: 0.25rem;
   text-decoration-thickness: 2px;
 }
-
 .explore-projects-btn:hover::before {
   box-shadow: 20px 20px 20px 30px #a21caf;
   right: 3rem; /* hover:before:right-12 */
@@ -794,6 +752,236 @@ body {
 }
 .explore-projects-btn:hover::after {
   right: -2rem; /* hover:after:-right-8 */
+}
+
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .projects-hero-section::before {
+    background-size: auto 100%; /* Maintains aspect ratio */
+    background-position: left center;
+  }
+}
+/* Latest Blogs Section */
+.latest-blogs-section {
+  margin: 0.5rem 0;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  position: relative;
+}
+
+.latest-blogs-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.latest-blogs-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.latest-blogs-label {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: #d5d5d5;
+  text-transform: uppercase;
+  font-family: var(--font3);
+}
+
+.latest-blogs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 350px)); /* Changed minmax values */
+  gap: 2rem;
+  justify-content: center; /* Changed from justify-items to justify-content */
+}
+
+.blog-card {
+  transition: all 0.3s ease;
+  width: 100%;
+  max-width: 350px;
+  min-width: 280px; /* Added minimum width */
+  aspect-ratio: 350/300; /* Added aspect ratio to maintain proportions */
+  display: flex;
+  flex-direction: column;
+}
+
+.blog-card-link {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+  width: 100%;
+}
+
+.blog-card-image {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  flex-shrink: 0; /* Prevent image from shrinking */
+  overflow: hidden;
+}
+
+.blog-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: filter 0.3s ease;
+  border-radius: 10px;
+  filter: brightness(0.6);
+}
+
+.blog-card:hover .blog-image {
+  filter: brightness(1);
+}
+
+.blog-card-content {
+  padding: 1rem 0.5rem 0.4rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex: 1; /* Take remaining space */
+  justify-content: space-between;
+  min-height: 100px; /* Ensure minimum height for content */
+}
+
+.blog-card-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #f3f4f6;
+  line-height: 1.4;
+  font-family: var(--font3);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin: 0;
+  flex-shrink: 0; /* Prevent title from shrinking */
+}
+
+.blog-card-date {
+  font-size: 0.875rem;
+  color: #9ca3af;
+  font-family: var(--font3);
+  margin: 0;
+  margin-top: auto;
+  flex-shrink: 0; /* Prevent date from shrinking */
+}
+
+.no-blogs-message {
+  text-align: center;
+  color: #9ca3af;
+  font-size: 1.125rem;
+  grid-column: 1 / -1;
+  padding: 2rem;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .latest-blogs-section {
+    padding: 3rem 1rem;
+    margin: 2rem 0;
+  }
+  .projects-hero-bg {
+    width: 100%;
+    height: 40%;
+    background-position: center top;
+    opacity: 0.4;
+  }
+  .projects-hero-text {
+    align-items: center;
+    text-align: center;
+  }
+
+  .latest-blogs-label {
+    font-size: 2rem;
+  }
+
+  .latest-blogs-grid {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 320px)); /* Smaller but still maintaining ratio */
+    gap: 1.5rem;
+    justify-content: center;
+  }
+
+  .blog-card {
+    max-width: 320px;
+    min-width: 260px;
+    aspect-ratio: 320/280; /* Adjusted aspect ratio for mobile */
+  }
+
+  .blog-card-image {
+    height: 160px; /* Smaller image height on mobile */
+  }
+
+  .blog-card-content {
+    padding: 1rem 0.75rem 0.5rem 0.75rem;
+    min-height: 80px;
+  }
+
+  .latest-blogs-label {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .latest-blogs-section {
+    padding: 2rem 0.5rem;
+  }
+
+  .latest-blogs-grid {
+    grid-template-columns: 1fr; /* Single column on very small screens */
+    gap: 1rem;
+    justify-content: center;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .blog-card {
+    max-width: 300px;
+    min-width: 280px;
+    aspect-ratio: 300/260; /* Compact aspect ratio for small phones */
+    margin: 0 auto;
+  }
+
+  .blog-card-image {
+    height: 140px;
+  }
+
+  .blog-card-content {
+    padding: 0.75rem 0.5rem;
+    min-height: 70px;
+  }
+
+  .blog-card-title {
+    font-size: 1rem;
+    line-height: 1.3;
+    -webkit-line-clamp: 2; /* Ensure title stays visible */
+  }
+
+  .blog-card-date {
+    font-size: 0.8rem;
+  }
+
+  .latest-blogs-label {
+    font-size: 1.75rem;
+  }
+}
+
+/* Light mode support */
+.light .blog-card-title {
+  color: #111827;
+}
+
+.light .blog-card-date {
+  color: #6b7280;
+}
+
+.light .latest-blogs-label {
+  color: #111827;
 }
 </style>
 
