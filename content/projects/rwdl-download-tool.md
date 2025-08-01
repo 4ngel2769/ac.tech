@@ -96,7 +96,7 @@ RWDL uses a **breadth-first search (BFS)** algorithm to traverse web directories
 
 Here's a simplified version of the core logic:
 
-```python
+```python [rwdl.py]
 from collections import deque
 import os, requests, urllib.parse
 from bs4 import BeautifulSoup

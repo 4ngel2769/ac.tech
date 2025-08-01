@@ -436,7 +436,6 @@ p {
   padding: 0;
 }
 
-
 /* Remove unwanted background from code block wrappers */
 .blog-content pre,
 .prose pre {
@@ -873,9 +872,9 @@ p {
 @media (max-width: 768px) {
   .blog-content pre,
   .prose pre {
-    margin: 1rem -1rem;
-    border-radius: 0;
-    font-size: 0.875rem;
+    margin: 0;
+    border-radius: 10px;
+    font-size: 0.8rem;
     overflow-x: auto;
   }
 
@@ -883,4 +882,32 @@ p {
   .prose code {
     font-size: 0.8rem;
   }
+}
+
+/* Make markdown tables horizontally scrollable on small screens */
+.prose table,
+.blog-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+  .prose table,
+  .blog-content table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    /* Prevent table from wrapping cells */
+    white-space: nowrap;
+  }
+}
+
+/* Optional: Prevent table cells from wrapping text */
+.prose th,
+.prose td,
+.blog-content th,
+.blog-content td {
+  white-space: nowrap;
 }

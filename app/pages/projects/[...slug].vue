@@ -517,6 +517,8 @@ h1 {
 .blog-post-text {
   @apply text-zinc-300;
   color: white;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .separator {
@@ -534,10 +536,10 @@ h1 {
   aspect-ratio: 16/9;
   min-height: 200px;
 }
-
+/*
 .project-hero-image img {
   @apply transition-transform duration-300 hover:scale-105;
-}
+}*/
 
 /* Desktop specific image styling */
 .desktop-image {
@@ -559,6 +561,7 @@ h1 {
 /* Hero Content */
 .project-hero-content {
   @apply w-full;
+  margin: 0 0 20px 0;
 }
 
 /* Meta Information Styling */
@@ -613,6 +616,15 @@ h1 {
 /* Project Excerpt */
 .project-excerpt {
   @apply text-gray-300 leading-relaxed;
+}
+
+.prose {
+  font-family: var(--font3);
+}
+
+.prose :where(thead th):not(:where([class~=not-prose],[class~=not-prose] *)) {
+  color: var(--blog-tag-bg-hover);
+  font-weight: 400;
 }
 
 /* Enhanced prose styling for better readability */
@@ -765,8 +777,8 @@ h1 {
   /* Make hero image span full width with minimal margin */
   .project-hero-image {
     margin: 0 !important;
-    width: calc(100vw - 8px) !important; /* 4px margin on each side */
-    margin-left: calc(-50vw + 50% + 4px) !important;
+    width: calc(100vw - 40px) !important; /* 20px margin on each side */
+    margin-left: calc(-50vw + 50% + 20px) !important;
     border-radius: 0 !important;
   }
 
@@ -813,6 +825,12 @@ h1 {
     min-height: 200px;
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
+  }
+}
+
+@media (min-width: 1000px) {
+  .blog-content {
+    max-width: 900px;
   }
 }
 
