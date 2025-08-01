@@ -18,28 +18,27 @@ export default {
 -->
 
 <script setup lang="ts">
-
-const showVideoBg = ref(true) // Set to false for image background
+const showVideoBg = ref(true); // Set to false for image background
 
 // Optional: toggle function for demo/testing
 function toggleBg() {
-  showVideoBg.value = !showVideoBg.value
+  showVideoBg.value = !showVideoBg.value;
 }
 
 // Date formatter for blog posts
 const formatBlogDate = (dateString: string) => {
-  if (!dateString) return ""
+  if (!dateString) return "";
   try {
     return new Date(dateString).toLocaleDateString("en-US", {
       year: "numeric",
       month: "short",
       day: "numeric",
-    })
+    });
   } catch (e) {
-    console.error("Date formatting error:", e)
-    return dateString
+    console.error("Date formatting error:", e);
+    return dateString;
   }
-}
+};
 </script>
 
 <template>
@@ -91,9 +90,7 @@ const formatBlogDate = (dateString: string) => {
         <div class="Website">
           <font-awesome-icon icon="fa-solid fa-arrow-up-right-from-square" />
           <p class="WebsiteText">
-            <a target="_blank" href="https://adev0.eu"
-              >https://adev0.eu</a
-            >
+            <a target="_blank" href="https://adev0.eu">https://adev0.eu</a>
           </p>
           <UTooltip text="Under development as new website (Coming soon).">
             <UBadge color="green" variant="outline">Development</UBadge>
@@ -102,9 +99,7 @@ const formatBlogDate = (dateString: string) => {
         <div class="Website">
           <font-awesome-icon icon="fa-solid fa-arrow-up-right-from-square" />
           <p class="WebsiteText">
-            <a target="_blank" href="https://angelscoolstuff.pages.dev"
-              >Old</a
-            >
+            <a target="_blank" href="https://angelscoolstuff.pages.dev">Old</a>
           </p>
           <UTooltip text="Old personal website.">
             <UBadge color="pink" variant="outline">Old</UBadge>
@@ -112,7 +107,7 @@ const formatBlogDate = (dateString: string) => {
         </div>
       </div>
       <UDivider label="Socials" class="socialdivider" />
-      <p class="linkstitle">Find me here!</p>
+      <p class="linkstitle">My socials:</p>
       <div class="linkscontainer">
         <UTooltip text="YouTube | @angeldev0">
           <NuxtLink
@@ -183,13 +178,14 @@ const formatBlogDate = (dateString: string) => {
         </div>
         <div class="mb-6">
           <p class="tracking-normal leading-6">
-            I specialize in <span class="font-bold">cybersecurity</span>,
-            <span class="font-bold">ethical hacking</span>, and
-            <span class="font-bold">embedded systems development</span>, with
-            extensive experience in Docker, virtual environments, networking, and
-            server management.<br />
-            My work involves uncovering vulnerabilities, creating secure devices,
-            and developing innovative solutions using ESP32 microcontrollers.
+            I specialize in <span class="font-medium underline decoration-solid decoration-slate-200 decoration-1">cybersecurity</span>,
+            <span class="font-medium underline decoration-solid decoration-slate-200 decoration-1">ethical hacking</span>, and
+            <span class="font-medium underline decoration-solid decoration-slate-200 decoration-1">embedded systems development</span>, with
+            extensive experience in Docker, virtual environments, networking,
+            and server management.<br />
+            My work involves uncovering vulnerabilities, creating secure
+            devices, and developing innovative solutions using ESP32
+            microcontrollers.
           </p>
         </div>
       </div>
@@ -209,12 +205,13 @@ const formatBlogDate = (dateString: string) => {
         <span class="projects-hero-label">TAKE A PEEK</span>
         <h2 class="projects-hero-title">MY PROJECTS</h2>
         <p class="projects-hero-description">
-          I enjoy building things. Wether that's radio tools, scripts, hacking devices, applications,
-          or anything in between. Take a look at my arsenal of projects.
+          I enjoy building things. Wether that's radio tools, scripts, hacking
+          devices, applications, or anything in between. Take a look at my
+          arsenal of projects.
         </p>
         <NuxtLink to="/projects" class="explore-projects-btn projects-hero-btn">
-        <p>PROJECTS</p>
-        <!-- <font-awesome-icon :icon="['fas', 'rocket']" class="ml-2" /> -->
+          <p>PROJECTS</p>
+          <!-- <font-awesome-icon :icon="['fas', 'rocket']" class="ml-2" /> -->
         </NuxtLink>
       </div>
     </div>
@@ -226,7 +223,7 @@ const formatBlogDate = (dateString: string) => {
       <div class="latest-blogs-header">
         <span class="latest-blogs-label">LATEST PROJECTS</span>
       </div>
-      
+
       <div class="latest-blogs-wrapper">
         <div class="latest-blogs-grid">
           <ContentQuery
@@ -236,11 +233,7 @@ const formatBlogDate = (dateString: string) => {
             :limit="3"
           >
             <template v-slot="{ data }">
-              <div
-                v-for="blog in data"
-                :key="blog._path"
-                class="blog-card"
-              >
+              <div v-for="blog in data" :key="blog._path" class="blog-card">
                 <NuxtLink :to="blog._path" class="blog-card-link">
                   <div class="blog-card-image">
                     <img
@@ -255,7 +248,9 @@ const formatBlogDate = (dateString: string) => {
                   </div>
                   <div class="blog-card-content">
                     <h3 class="blog-card-title">{{ blog.headline }}</h3>
-                    <p class="blog-card-date">{{ formatBlogDate(blog.date) }}</p>
+                    <p class="blog-card-date">
+                      {{ formatBlogDate(blog.date) }}
+                    </p>
                   </div>
                 </NuxtLink>
               </div>
@@ -279,17 +274,24 @@ const formatBlogDate = (dateString: string) => {
       </NuxtLink>
     </div>
   </section>
-
-  <div class="assets-credits" id="assets-credits">
+  <!-- No longer needed since I make my own backgrounds -->
+  <!-- <div class="assets-credits" id="assets-credits">
     <p>
       Awesome backgrounds by Sébastien Noël's
       <a href="https://fffuel.co" target="_blank">fffuel.co</a> .
+    </p>
+  </div> -->
+  <div class="assets-credits" id="assets-credits">
+    <p>
+      Want to chat? Send me a DM 
+      <a href="https://www.instagram.com/angeldevz0" target="_blank">@angeldevz0</a> .
     </p>
   </div>
 </template>
 
 <style scoped>
-:root, p {
+:root,
+p {
   word-spacing: 0.1rem;
   letter-spacing: 0.03em;
 }
@@ -316,7 +318,7 @@ const formatBlogDate = (dateString: string) => {
   align-items: flex-start;
   justify-content: center;
   padding: 40px 0;
-  background: #000;        /* fallback color */
+  background: #000; /* fallback color */
   overflow: hidden;
 }
 .hero-video,
@@ -341,8 +343,9 @@ const formatBlogDate = (dateString: string) => {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 1;
-  background-color: rgba(27, 27, 27, 0.4);
+  z-index: 1;/*
+  background-color: rgba(27, 27, 27, 0.4);*/
+  background-color: rgba(11, 18, 17, 0.4);
 }
 
 /* Vignette overlay */
@@ -394,9 +397,15 @@ const formatBlogDate = (dateString: string) => {
 }
 .descriptiondiv p {
   line-height: 1.5;
-  font-weight: 500;
+  font-weight: 200;
   color: #ccc;
   font-family: var(--font3);
+}
+.descriptiondiv h1, h2, h3, h4 {
+  font-weight: 300;
+}
+.descriptiondiv strong {
+  font-weight: 200;
 }
 /* .more-info-mobile { */
 /* display: none; */
@@ -464,7 +473,7 @@ const formatBlogDate = (dateString: string) => {
   backdrop-filter: blur(5px);
 }
 .assets-credits a {
-  color: var(--l-green);
+  color: var(--htb-green);
 }
 .assets-credits p {
   color: var(--main-details);
@@ -479,6 +488,63 @@ const formatBlogDate = (dateString: string) => {
 }
 body {
   overflow-x: hidden;
+}
+
+@media only screen and (min-width: 769px) {
+  .linkscontainer {
+    margin-bottom: 1rem;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .tContainer {
+    margin: 80px 40px 40px 40px;
+  }
+  .descriptiondivider {
+    display: flex;
+    visibility: visible;
+    margin: 0 0 10px 0;
+  }
+  .socialdivider {
+    display: flex;
+    visibility: visible;
+    margin: 10px 0 0 0;
+  }
+  .linkstitle {
+    display: none;
+  }
+  .linkscontainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .linkscontainer .link {
+    font-size: 30px;
+  }
+  /* .more-info-mobile {
+    display: flex;
+    visibility: visible;
+    height: auto;
+  } */
+  .undertext {
+    /* display: none; */
+    /* visibility: hidden; */
+    flex-direction: column;
+    gap: 5px;
+    margin: 0px 0 25px 0;
+  }
+  .assets-credits {
+    visibility: hidden;
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 769px) {
+  .tContainer {
+    padding: 0 10px 0 10px;
+    max-width: 700px;
+  }
 }
 
 /* Projects Hero Section */
@@ -535,13 +601,12 @@ body {
   margin: 0 auto;
 }
 
-
 /* Responsive adjustments */
 @media (min-width: 1200px) {
   .projects-hero-section {
     height: 650px; /* Even taller on larger screens */
   }
-  
+
   .projects-hero-section::before {
     background-size: cover;
     background-position: left center;
@@ -553,7 +618,7 @@ body {
   .projects-hero-section {
     height: 600px;
   }
-  
+
   .projects-hero-section::before {
     background-size: cover;
     background-position: left center;
@@ -565,7 +630,7 @@ body {
   .projects-hero-section {
     height: 600px;
   }
-  
+
   .projects-hero-section::before {
     background-size: cover;
     background-position: left center;
@@ -577,7 +642,7 @@ body {
   .projects-hero-section {
     height: 500px; /* Shorter on mobile */
   }
-  
+
   .projects-hero-section::before {
     background-size: cover;
     background-position: left center;
@@ -597,9 +662,9 @@ body {
 }
 
 .projects-hero-content {
-    flex-direction: column;
-    text-align: center;
-    padding: 1.5rem;
+  flex-direction: column;
+  text-align: center;
+  padding: 1.5rem;
 }
 
 .projects-hero-text {
@@ -765,7 +830,6 @@ body {
   right: -2rem; /* hover:after:-right-8 */
 }
 
-
 /* Mobile responsive */
 @media (max-width: 768px) {
   .projects-hero-section::before {
@@ -804,7 +868,10 @@ body {
 
 .latest-blogs-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 350px)); /* Changed minmax values */
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(280px, 350px)
+  ); /* Changed minmax values */
   gap: 2rem;
   justify-content: center; /* Changed from justify-items to justify-content */
 }
@@ -959,7 +1026,10 @@ body {
   }
 
   .latest-blogs-grid {
-    grid-template-columns: repeat(auto-fit, minmax(260px, 320px)); /* Smaller but still maintaining ratio */
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(260px, 320px)
+    ); /* Smaller but still maintaining ratio */
     gap: 1.5rem;
     justify-content: center;
   }
@@ -1046,7 +1116,7 @@ body {
 export default {
   mounted() {
     // Set video playback speed
-    const video = document.querySelector('.hero-video') as HTMLVideoElement;
+    const video = document.querySelector(".hero-video") as HTMLVideoElement;
     if (video) {
       video.playbackRate = 0.75; // Change this value: 0.5 = half speed, 2.0 = double speed, etc.
     }

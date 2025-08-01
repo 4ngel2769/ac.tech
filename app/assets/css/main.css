@@ -781,7 +781,6 @@ p {
     margin: 0 auto !important;
     max-width: 100% !important;
     width: 100% !important;
-    overflow-x: hidden !important;
     box-sizing: border-box !important;
   }
 
@@ -846,7 +845,7 @@ p {
 @media (max-width: 1024px) and (min-width: 769px) {
   .blog-content,
   .prose {
-    padding: 0 2rem;
+    padding: 0 0rem;
   }
 
   .project-hero-container {

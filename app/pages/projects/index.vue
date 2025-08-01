@@ -1,6 +1,6 @@
 <!-- pages/projects/index.vue -->
 <template>
-  <main>
+  <main class="overflow-visible">
     <!-- Projects Hero Header -->
     <div class="projects-hero-header">
       <div class="projects-hero-content-header">
@@ -329,7 +329,7 @@ const formatDate = (date) => {
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
-  padding: 0 2rem;
+  padding: 0 0rem;
 }
 
 /* --- Enhanced Notification Card with Glowing Border --- */
