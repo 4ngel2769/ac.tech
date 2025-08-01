@@ -4,7 +4,7 @@
       <template v-slot="{ doc }">
         <!-- Header Section with Image and Meta -->
         <Section id="blog-header" type="header" class="blog-header-bg !pb-8">
-          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Added responsive padding -->
             <!-- Breadcrumbs -->
             <div class="border-t-2 pt-6 border-zinc-500 mb-8">

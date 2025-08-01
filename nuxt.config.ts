@@ -1,5 +1,4 @@
 import { defineNuxtConfig } from 'nuxt/config'
-import tailwindcss from "@tailwindcss/vite";
 
 declare global {
   namespace NodeJS {
@@ -47,7 +46,8 @@ export default defineNuxtConfig({
   content: {
     // https://content.nuxtjs.org/api/configuration
     highlight: {
-      theme: 'everforest-dark',
+      theme: 'nord',
+      // theme: 'poimandres',
       preload: [
         'java',
         'javascript',
@@ -79,7 +79,7 @@ export default defineNuxtConfig({
         'rehype-external-links',
           {
             target: '_blank',
-            rel: 'noopener noreferer'
+            rel: 'noopener noreferrer'
           }
         ]
       ]

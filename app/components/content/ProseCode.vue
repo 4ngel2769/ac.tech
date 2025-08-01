@@ -129,10 +129,10 @@ const languageText = computed(() => (props.language ? languageMap[props.language
     }
 }
 .language-text {
-    @apply absolute right-0 top-0 text-background px-2 py-1 rounded-bl-md;
+    @apply absolute right-0 top-0 text-background/75 px-2 py-1 rounded-bl-md;
     font-family: 'Sen', sans-serif;
-    font-weight: 300;
-    background-color: var(--htb-bg2);
+    font-weight: 300;/*
+    background-color: var(--htb-bg2);*/
 }
 :slotted(pre code) {
     @apply w-full flex flex-col;
@@ -150,6 +150,6 @@ const languageText = computed(() => (props.language ? languageMap[props.language
 :slotted(pre code .highlight) {
     /* @apply block -mx-4 pr-4 pl-3 border-l-4 border-brand_primary; */
     content: '';
-    background-color: #363b46;
+    background-color: #363b4600;
 }
 </style>

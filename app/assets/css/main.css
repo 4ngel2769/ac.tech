@@ -10,13 +10,13 @@
   --blog-text-bold: #f8fafc;
   --blog-text-light: #cbd5e1;
   --blog-text-secondary: #94a3b8;
-  --blog-link: #a6ddb1;
-  --blog-link-hover: #e5e5e5;
+  --blog-link: #7ed5ae;
+  --blog-link-hover: #e3e3e3;
   --blog-heading: #cecece;
   --blog-heading-secondary: #f3f3f3;
   --radius: 0.8rem;
 
-  --blog-code-bg: #1b2326b0;
+  --blog-code-bg: #191e20b0;
   --blog-code-text: #ceff6b;
   --code-border: 1px solid rgba(154, 154, 154, 0.234);
   --code-shadow: 0 1px 2px rgba(9, 10, 10, 0.189);
@@ -256,8 +256,7 @@ body {
 .prose code,
 .blog-content pre,
 .prose pre {
-  background: var(--blog-code-bg);
-  color: var(--blog-code-text);
+  /* color: var(--blog-code-text); */
   /* border-radius: 4px; */
   padding: 2px 6px;
 }
@@ -414,14 +413,16 @@ p {
 .blog-content pre,
 .prose pre {
   position: relative;
-  background: #29292c !important;
+  /* background: #474763; */
+  background: var(--blog-code-bg);
   /* Remove border or box-shadow from parent if present */
   /* box-shadow: 0 0 10px 0 #8efff933, 0 2px 8px 0 rgba(0,0,0,0.10); */
-  /* border-radius: 1rem; */
+  border-radius: calc(.9rem - 2px);
   border: none;
   margin: 2.5em 0 2.5em 0;
   overflow: visible;
   font-family: 'Fira Mono', 'Consolas', 'Menlo', 'Monaco', monospace;
+  /* font-family: var(--font3); */
   font-size: 1em;
   padding: 1.5em 1.2em 1.2em 2.5em;
   transition: box-shadow 0.3s, border-color 0.3s;
@@ -434,19 +435,6 @@ p {
   font-size: 1em;
   /* border-radius: 0.4em; */
   padding: 0;
-}
-
-/* Remove unwanted background from code block wrappers */
-.blog-content pre,
-.prose pre {
-  background: #29292c !important;
-  /* Remove border or box-shadow from parent if present */
-  /* box-shadow: 0 0 10px 0 #8efff933, 0 2px 8px 0 rgba(0,0,0,0.10); */
-  border-radius: calc(.9rem - 2px);
-  border: none;
-  margin: 2.5em 0 2.5em 0;
-  position: relative;
-  overflow: visible;
 }
 
 /* Remove background from code block wrappers */
