@@ -329,7 +329,24 @@ const formatDate = (date) => {
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
-  padding: 0 0rem;
+  padding-left: 20px;
+  padding-right: 20px;
+  /* Remove duplicate padding: 0 0rem; */
+  box-sizing: border-box;
+}
+
+/* Optional: Increase side padding on larger screens */
+@media (min-width: 640px) {
+  .projects-hero-content-header {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+@media (min-width: 1024px) {
+  .projects-hero-content-header {
+    padding-left: 48px;
+    padding-right: 48px;
+  }
 }
 
 /* --- Enhanced Notification Card with Glowing Border --- */
