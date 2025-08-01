@@ -326,7 +326,7 @@ const formatDate = (date) => {
 .projects-hero-content-header {
   position: relative;
   z-index: 3;
-  max-width: 1200px;
+  max-width: 1300px;
   margin: 0 auto;
   width: 100%;
   padding-left: 20px;
