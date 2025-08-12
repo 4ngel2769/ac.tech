@@ -3,8 +3,8 @@
     <ContentDoc>
       <template v-slot="{ doc }">
         <!-- Header Section with Image and Meta -->
-        <Section id="blog-header" type="header" class="!pb-8">
-          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <Section id="blog-header" type="header" class="blog-header-bg !pb-8">
+          <div class="mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Added responsive padding -->
             <!-- Breadcrumbs -->
             <div class="border-t-2 pt-6 border-zinc-500 mb-8">
@@ -284,7 +284,7 @@
                           d="M15 19l-7-7 7-7"
                         ></path>
                       </svg>
-                      <span>Previous</span>
+                      <span>Next</span>
                     </div>
                     <!-- <h3 class="nav-title">{{ data.surround[0].headline }}</h3> -->
                   </NuxtLink>
@@ -297,7 +297,7 @@
                 <div v-if="data.surround[1]" class="nav-item nav-next">
                   <NuxtLink :to="data.surround[1]._path" class="nav-link group">
                     <div class="nav-direction">
-                      <span>Next</span>
+                      <span>Previous</span>
                       <svg
                         class="nav-arrow"
                         fill="none"
@@ -517,6 +517,8 @@ h1 {
 .blog-post-text {
   @apply text-zinc-300;
   color: white;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .separator {
@@ -534,10 +536,10 @@ h1 {
   aspect-ratio: 16/9;
   min-height: 200px;
 }
-
+/*
 .project-hero-image img {
   @apply transition-transform duration-300 hover:scale-105;
-}
+}*/
 
 /* Desktop specific image styling */
 .desktop-image {
@@ -559,6 +561,7 @@ h1 {
 /* Hero Content */
 .project-hero-content {
   @apply w-full;
+  margin: 0 0 20px 0;
 }
 
 /* Meta Information Styling */
@@ -600,6 +603,9 @@ h1 {
   font-optical-sizing: auto;
   font-style: normal;
   list-style-type: decimal;
+  background-color: rgba(14, 165, 233, 0.1);
+  color: #38bdf8;
+  backdrop-filter: blur(5px);
 }
 
 /* Separator between title and meta */
@@ -610,6 +616,15 @@ h1 {
 /* Project Excerpt */
 .project-excerpt {
   @apply text-gray-300 leading-relaxed;
+}
+
+.prose {
+  font-family: var(--font3);
+}
+
+.prose :where(thead th):not(:where([class~=not-prose],[class~=not-prose] *)) {
+  color: var(--blog-tag-bg-hover);
+  font-weight: 400;
 }
 
 /* Enhanced prose styling for better readability */
@@ -631,7 +646,7 @@ h1 {
 }
 
 .prose code {
-  @apply text-yellow-300;
+  color: #9eee00;
 }
 
 .prose blockquote {
@@ -645,6 +660,7 @@ h1 {
 
 .prose strong {
   @apply text-white;
+  font-weight: 450;
 }
 
 /* Continue Reading Section */
@@ -711,7 +727,7 @@ h1 {
 /* Mobile adjustments - UPDATED */
 @media (max-width: 767px) {
   .navigation-container {
-    @apply gap-2; /* Reduced gap for mobile */
+    gap: 0.5rem; /* Reduced gap for mobile */
   }
 
   .nav-link {
@@ -761,8 +777,8 @@ h1 {
   /* Make hero image span full width with minimal margin */
   .project-hero-image {
     margin: 0 !important;
-    width: calc(100vw - 8px) !important; /* 4px margin on each side */
-    margin-left: calc(-50vw + 50% + 4px) !important;
+    width: calc(100vw - 40px) !important; /* 20px margin on each side */
+    margin-left: calc(-50vw + 50% + 20px) !important;
     border-radius: 0 !important;
   }
 
@@ -804,6 +820,18 @@ h1 {
     overflow-x: auto !important;
     max-width: calc(100vw - 8px) !important;
   }
+
+  .blog-header-bg {
+    min-height: 200px;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+}
+
+@media (min-width: 1000px) {
+  .blog-content {
+    max-width: 900px;
+  }
 }
 
 /* Ensure images don't break layout */
@@ -821,5 +849,50 @@ h1 {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+/* Background image for blog header */
+.blog-header-bg {
+  position: relative;
+  overflow: hidden;
+  min-height: 340px;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+  display: flex;
+  align-items: flex-end;
+  z-index: 1;
+}
+
+/* Background image pseudo-element */
+.blog-header-bg::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-image: url("/bg_website_m.png"); /* Use your projects image */
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: cover;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Overlay for darkening */
+.blog-header-bg::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(10, 14, 15, 0.75);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Make sure content is above overlays */
+.blog-header-bg > * {
+  position: relative;
+  z-index: 3;
 }
 </style>

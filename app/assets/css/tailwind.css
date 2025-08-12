@@ -6,7 +6,7 @@ Sen
 Nunito
 */
 
-@tailwind base;
+/* @tailwind base; */
 @tailwind components;
 @tailwind utilities;
 
@@ -209,7 +209,7 @@ Nunito
   --kde: #20e693;
   --kdeL: #7cd4af;
   --htb-green: #99ff23;
-  --htb-bg1: #0d1516;
+  --htb-bg1: #0b1211;
   --htb-bg2: #243035;
   --accent: #ffffff;
   --secondary: #801fff;
@@ -545,8 +545,8 @@ html, body {
   section,
   main,
   article {
-    max-width: 100% !important;
-    overflow-x: hidden !important;
+    max-width: 100% !important;/*
+    overflow-x: hidden !important;*/
     box-sizing: border-box !important;
   }
 }

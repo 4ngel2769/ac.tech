@@ -46,7 +46,40 @@ const languageMap: Record<string, { text: string }> = {
     },
     python: {
         text: 'Python'
-    }
+    },
+    typescript: {
+        text: 'TypeScript'
+    },
+    html: {
+        text: 'HTML'
+    },
+    css: {
+        text: 'CSS'
+    },
+    json: {
+        text: 'JSON'
+    },
+    bash: {
+        text: 'Bash'
+    },
+    sql: {
+        text: 'SQL'
+    },
+    php: {
+        text: 'PHP'
+    },
+    csharp: {
+        text: 'C#'
+    },
+    ruby: {
+        text: 'Ruby'
+    },
+    go: {
+        text: 'Go'
+    },
+    cpp: {
+        text: 'C++'
+    },
 };
 
 const languageText = computed(() => (props.language ? languageMap[props.language]?.text : null));
@@ -54,10 +87,17 @@ const languageText = computed(() => (props.language ? languageMap[props.language
 
 <style scoped>
 .container {
-    @apply w-full rounded-md relative overflow-hidden;
+    @apply w-full rounded-md relative overflow-hidden;/*
+    background-color: var(--htb-bg2);*/
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
 }
 :slotted(pre) {
-    @apply flex overflow-x-auto px-4 pb-4 text-sm;
+    display: flex;
+    overflow-x: auto;
+    padding: 1rem 1rem 1rem 1rem;
+    font-size: 8rem;
     line-height: 1.625;
     counter-reset: lines;
 }
@@ -89,7 +129,10 @@ const languageText = computed(() => (props.language ? languageMap[props.language
     }
 }
 .language-text {
-    @apply absolute right-0 bottom-0 text-background px-2 py-1 rounded-bl-md;
+    @apply absolute right-0 top-0 text-background/75 px-2 py-1 rounded-bl-md;
+    font-family: 'Sen', sans-serif;
+    font-weight: 300;/*
+    background-color: var(--htb-bg2);*/
 }
 :slotted(pre code) {
     @apply w-full flex flex-col;
@@ -107,6 +150,6 @@ const languageText = computed(() => (props.language ? languageMap[props.language
 :slotted(pre code .highlight) {
     /* @apply block -mx-4 pr-4 pl-3 border-l-4 border-brand_primary; */
     content: '';
-    background-color: #363b46;
+    background-color: #363b4600;
 }
 </style>
