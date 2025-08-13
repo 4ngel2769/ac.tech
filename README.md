@@ -1,108 +1,229 @@
-# ac.tech
- 🚀 Personal website and portfolio using Nuxt.js 3
+<div align="center">
+    <h1>angeldev0's portfolio website 🚀</h1>
+    <br/>
+    <p><b>A modern, responsive personal website and cybersecurity portfolio built with Nuxt.js 4, showcasing projects, skills, and technical expertise.</b></p>
+    <br/>
+    <hr/>
+    <p>Technologies Used:</p>
+    <img src="https://skillicons.dev/icons?i=nuxt,vue,npm,nodejs,tailwind,ts" alt="technologies used" />
+</div>
 
-Prerequisites: [node.js](https://nodejs.org), [git](https://git-scm.com).
 
+## 🌟 Live Website
 
-#### My personal website built with [Nuxt.js 3, a modern framework that makes web development intuitive and powerful with Vue components, hybrid rendering, SEO, and more](https://nuxt.com). The website showcases my skills, projects, interests, and blog posts.
+Visit the live site at: **[angellabs.xyz](https://angellabs.xyz)**
 
-# Installation and usage
+## 📋 Prerequisites
+
+- [Node.js](https://nodejs.org) (v22.17.1 recommended)
+- [Git](https://git-scm.com)
+- Your favorite package manager (npm, yarn, pnpm, or bun)
+
+## 🚀 Quick Start
+
+### Installation
 
 Clone the repository:
 ```bash
-git clone https://github.com/4ngel2769/ac.tech.git my-website
+git clone https://github.com/4ngel2769/ac.tech.git
+cd ac.tech
 ```
-Enter the directory:
+
+Install dependencies:
 ```bash
-cd my-website
-```
-Now install the dependencies using you favorite package manager:
-```bash
+# Using npm
 npm install
+
+# Using yarn
 yarn install
+
+# Using pnpm
 pnpm install
-bun install # experimental
+
+# Using bun (experimental)
+bun install
 ```
-To start a development server with hot reload, run one of this command:
+
+### Development
+
+Start the development server with hot reload:
 ```bash
-npm run dev -- -o
-yarn dev --open
-pnpm dev -o
-bun run dev -o # experimental
+# Using npm
+npm run dev
+
+# Using yarn
+yarn dev
+
+# Using pnpm
+pnpm dev
+
+# Using bun (experimental)
+bun run dev
 ```
-This will start a local instance on port `3000` and open it in your default browser.
 
-# Features roadmap
+The development server will start on `http://localhost:3000` and automatically open in your default browser.
 
-|Status|Feature|
-|:-:|:-|
-|✅|Cool styling|
-|✅|Decent SEO|
-|✅|About & links|
-|〰️|Blog page|
-|☑️|Resume|
-|||
+### Production
 
-<!--
-# AC.Tech
+Build for production:
+```bash
+npm run build
+```
 
-AC.Tech is a personal website built with [Nuxt.js 3](^1^), a modern framework that makes web development intuitive and powerful with Vue components, hybrid rendering, SEO, and more. The website showcases my skills, projects, interests, and blog posts.
+Preview production build:
+```bash
+npm run preview
+```
 
-## Installation and Usage
+Generate static site:
+```bash
+npm run generate
+```
 
-To install and run this project, you need to have [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed on your machine. Then, follow these steps:
+## ✨ Current Features
 
-- Clone this repository: `git clone https://github.com/4ngel2769/ac.tech.git`
-- Navigate to the project folder: `cd ac.tech`
-- Install the dependencies: `npm install`
-- Start the development server: `npm run dev`
-- Open your browser and go to `http://localhost:3000`
+### 🏠 Homepage
+- **Hero Section**: Interactive video/image background with personal introduction
+- **Projects Showcase**: Featured projects with dynamic content loading
+- **Latest Blog Posts**: Recent articles and technical writings
+- **Responsive Design**: Optimized for all devices and screen sizes
+- **Modern UI/UX**: Glassmorphism effects, smooth animations, and intuitive navigation
 
-## Features and Functionalities
+### 📂 Projects Portfolio
+- **Dynamic Project Listing**: Filterable and searchable project grid
+- **Fuzzy Search**: Powered by Fuse.js for intelligent content discovery
+- **Project Categories**: Organized by tags and technologies
+- **Detailed Project Pages**: Individual pages with rich content, images, and metadata
+- **Infinite Scroll**: Smooth pagination with lazy loading
+- **Breadcrumb Navigation**: Clear site hierarchy and navigation
 
-- Responsive design that adapts to different screen sizes and devices
-- Dynamic content that fetches data from external sources such as GitHub and Medium
-- Customizable theme and layout that can be changed from the settings page
-- Interactive animations and transitions that enhance the user experience
-- Contact form that sends messages to my email address
--->
-## Technologies, Tools, and Resources
+### 📝 Blog System
+- **SEO Optimized**: Rich meta tags and structured data
+- **Markdown Content**: Full MDX support with custom components
+- **Syntax Highlighting**: Code blocks with Nord theme
+- **Table of Contents**: Auto-generated navigation for long articles
+- **Social Sharing**: Built-in sharing buttons for social platforms
+- **Related Articles**: Smart content recommendations
 
-- [Nuxt.js 3](^1^): The intuitive Vue framework that powers the website
-- [Tailwind CSS](https://tailwindcss.com/): The utility-first CSS framework that styles the website
-- [GitHub API](https://docs.github.com/en/rest): The API that fetches data from my GitHub repositories
-<!-- - [Formspree](https://formspree.io/): The service that handles the contact form submissions -->
-- [Visual Studio Code](https://code.visualstudio.com/): The code editor that I used to write the code
-<!-- - [Figma](https://www.figma.com/): The tool that I used to design the website -->
-<!-- - [Unsplash](https://unsplash.com/): The source of the images that I used for the website -->
-<!--
-## Challenges and Learnings
+### 🎨 Design & UI
+- **Dark/Light Mode**: Toggle between themes (currently dark-focused) **[`WIP`]**
+- **Custom Typography**: Multiple font families including Montserrat, Sen, and custom fonts
+- **Responsive Grid**: CSS Grid and Flexbox layouts
+- **Loading States**: Elegant loading indicator
 
-- One of the challenges I faced was to make the website responsive and compatible with different browsers and devices. I learned how to use media queries, breakpoints, and browser prefixes to achieve this goal.
-- Another challenge was to fetch and display dynamic data from external sources such as GitHub and Medium. I learned how to use Nuxt's data fetching methods, such as `fetch` and `asyncData`, to get the data and render it on the website.
-- A third challenge was to create a customizable theme and layout for the website. I learned how to use Tailwind's dark mode and color palette features, as well as Nuxt's global and page layouts, to implement this feature.
+### 🔧 Technical Features
+- **SSR/SSG**: Server-side rendering with static generation support
+- **SEO Optimized**: Meta tags, Open Graph
+- **Performance**: Optimized images and lazy loading
+- **Sitemap & Robots**: Automated SEO file generation
+- **Error Handling**: Custom 404 pages and graceful error recovery
 
-## Future Plans and Improvements
+## 🛠️ Technology Stack
 
-- I plan to add more features and functionalities to the website, such as a portfolio section, a resume section, and a newsletter subscription.
-- I also plan to improve the performance and accessibility of the website, such as by using lazy loading, code splitting, and semantic HTML.
-- I welcome any feedback, suggestions, or contributions to the website. Feel free to open an issue or a pull request on GitHub, or contact me via email or social media.
+### Core Framework
+- **[Nuxt.js 4](https://nuxt.com)**: Vue.js framework with SSR/SSG
+- **[Vue](https://vuejs.org)**: Progressive JavaScript framework
+- **[TypeScript](https://www.typescriptlang.org)**: Type-safe development
 
-## License and Contribution
+### Styling & UI
+- **[Tailwind CSS](https://tailwindcss.com)**: Utility-first CSS framework
+- **[Nuxt UI](https://ui.nuxt.com)**: Vue component library
+- **[Font Awesome](https://fontawesome.com)**: Icon library
+- **Custom Fonts**: Extensive font collection for unique typography
 
-- This project is licensed under the [MIT License], which means you can use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the software, as long as you give appropriate credit, provide a link to the license, and indicate any changes made.
-- If you want to contribute to this project, please follow the [Contribution Guidelines](CONTRIBUTING.md), which provide instructions on how to fork, clone, branch, commit, push, and pull request the project..
+### Content Management
+- **[Nuxt Content](https://content.nuxtjs.org)**: File-based CMS with MDX support
+- **[Fuse.js](https://fusejs.io)**: Fuzzy search library
 
-Source: Conversation with Bing, 2/14/2024
-(1) Nuxt: The Intuitive Vue Framework · Nuxt. https://nuxt.com/.
-(2) Nuxt: The Intuitive Vue Framework · Nuxt. https://nuxt.com/.
-(3) Announcing 3.0 · Nuxt Blog. https://nuxt.com/v3.
-(4) Nuxt.js 3 Fundamentals, a Vue.js video course - Vue School. https://vueschool.io/courses/nuxt-js-3-fundamentals.
-(5) nuxt - npm. https://www.npmjs.com/package/nuxt.
-(6) How to Write a Good README File for Your GitHub Project - freeCodeCamp.org. https://www.freecodecamp.org/news/how-to-write-a-good-readme-file/.
-(7) A Step-by-Step Guide to Crafting a Successful README File for Your .... https://cubettech.com/resources/blog/the-essential-readme-file-elevating-your-project-with-a-comprehensive-document/.
-(8) How to Create the Perfect README for Your Open Source Project. https://dev.to/github/how-to-create-the-perfect-readme-for-your-open-source-project-1k69.
-(9) Make a README. https://www.makeareadme.com/.
-(10) Get started building your personal website - GitHub. https://github.com/github/personal-website/blob/master/README.md.
-(11) en.wikipedia.org. https://en.wikipedia.org/wiki/README.
--->
+### Utilities & Enhancements
+- **[@vueuse/core](https://vueuse.org)**: Vue composition utilities
+- **[@formkit/auto-animate](https://auto-animate.formkit.com)**: Smooth animations
+- **[Sass](https://sass-lang.com)**: CSS preprocessor
+
+### SEO & Analytics
+- **[@nuxtjs/seo](https://nuxtseo.com)**: SEO optimization tools
+- **[@nuxtjs/sitemap](https://sitemap.nuxtjs.org)**: Automatic sitemap generation
+- **[nuxt-gtag](https://github.com/johannschopplich/nuxt-gtag)**: Google Analytics
+
+## 📁 Project Structure
+
+```
+ac.tech/
+├── app/
+│   ├── components/          # Vue components
+│   │   ├── blog/           # Blog-specific components
+│   │   ├── content/        # MDX content components
+│   │   ├── icons/          # Custom icon components
+│   │   ├── nav/            # Navigation components
+│   │   └── sections/       # Section components
+│   ├── layouts/            # Page layouts
+│   ├── pages/              # Route pages
+│   │   ├── projects/       # Project pages and listing
+│   │   └── ...
+│   └── assets/             # Static assets
+│       ├── css/           # Stylesheets
+│       └── fonts/         # Custom fonts
+├── content/                # Markdown content
+│   ├── projects/          # Project articles
+│   └── authors/           # Author information
+├── public/                 # Public static files
+├── nuxt.config.ts         # Nuxt configuration
+├── tailwind.config.js     # Tailwind configuration
+└── package.json           # Dependencies and scripts
+```
+
+## Current Status & Roadmap
+
+### ✅ Completed Features
+- [x] Modern homepage with hero section
+- [x] Responsive design across all devices
+- [x] Projects portfolio with search and filtering
+- [x] Individual project pages with rich content
+- [x] Blog system with markdown support
+- [x] SEO optimization and meta tags
+- [x] Dark/Light theme implementation
+
+### 🚧 In Progress
+- [ ] Blog content expansion
+- [ ] Resume/CV page
+- [ ] Contact form functionality
+- [ ] Light theme refinement
+- [ ] Social media integration
+- [ ] Performance optimization
+
+### 🔮 Future Plans
+- [ ] Newsletter subscription
+- [ ] Comments system
+- [ ] Search functionality enhancement
+- [ ] Multi-language support
+- [ ] PWA features
+
+## 🌐 About
+
+This website serves as my digital portfolio, showcasing expertise in:
+
+- **Cybersecurity**: Ethical hacking, security research, and vulnerability assessment
+- **Embedded Development**: ESP32, Arduino, and IoT projects
+- **Web Development**: Modern JavaScript frameworks and full-stack development
+- **Technical Writing**: Documentation, tutorials, and technical blog posts
+
+## 🤝 Contributing
+
+While this is a personal website, suggestions and bug reports are welcome! Feel free to:
+
+1. Open an issue for bugs or feature requests
+2. Submit pull requests for improvements
+3. Share feedback on design or functionality
+
+## 📞 Contact
+
+- **LinkedIn**: [Angel Capra](https://www.linkedin.com/in/angelcapra)
+- **Twitter**: [@angeldev0](https://twitter.com/angeldev0)
+
+## 📄 License
+
+<div align="center">
+    This project is open source and available under the <a href="LICENSE">MIT License</a>.<br/>
+    <!-- <hr /> -->
+    <b>Built with ❤️ and 🐛 by angeldev0</b>
+</div>
