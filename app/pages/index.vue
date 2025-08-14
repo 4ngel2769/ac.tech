@@ -177,10 +177,10 @@ const formatBlogDate = (dateString: string) => {
           </h2>
         </div>
         <div class="mb-6">
-          <p class="tracking-normal leading-6">
-            I specialize in <span class="font-medium underline decoration-solid decoration-slate-200 decoration-1">cybersecurity</span>,
-            <span class="font-medium underline decoration-solid decoration-slate-200 decoration-1">ethical hacking</span>, and
-            <span class="font-medium underline decoration-solid decoration-slate-200 decoration-1">embedded systems development</span>, with
+          <p class="tracking-normal leading-6 text-gray-300">
+            I specialize in <span class="font-bold decoration-solid text-slate-200 decoration-1">cybersecurity</span>,
+            <span class="font-bold decoration-solid text-slate-200 decoration-1">ethical hacking</span>, and
+            <span class="font-bold decoration-solid text-slate-200 decoration-1">embedded systems development</span>, with
             extensive experience in Docker, virtual environments, networking,
             and server management.<br />
             My work involves uncovering vulnerabilities, creating secure
@@ -211,7 +211,7 @@ const formatBlogDate = (dateString: string) => {
         </p>
         <NuxtLink to="/projects" class="explore-projects-btn projects-hero-btn">
           <p>PROJECTS</p>
-          <!-- <font-awesome-icon :icon="['fas', 'rocket']" class="ml-2" /> -->
+          <font-awesome-icon icon="fa-solid fa-rocket" class="h-5" />
         </NuxtLink>
       </div>
     </div>
@@ -370,8 +370,8 @@ p {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  margin: 80px 0px 0px 0px;
-  left: 10px;
+  margin: 80px 0px 0px 0px;/*
+  left: 10px;*/
   max-width: 700px;
   /* background-color: #101417e2; */
   /* backdrop-filter: blur(5px); */
@@ -498,7 +498,7 @@ body {
 
 @media only screen and (max-width: 768px) {
   .tContainer {
-    margin: 80px 40px 40px 40px;
+    margin: 60px 30px 40px 30px;
   }
   .descriptiondivider {
     display: flex;
@@ -591,80 +591,16 @@ body {
 
 .projects-hero-content {
   display: flex;
-  align-items: center;
-  justify-content: space-around;
-  height: 100%;
-  padding: 2rem;
-  position: relative;
-  z-index: 3; /* Changed from 2 to 3 to stay above the overlay */
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* Responsive adjustments */
-@media (min-width: 1200px) {
-  .projects-hero-section {
-    height: 650px; /* Even taller on larger screens */
-  }
-
-  .projects-hero-section::before {
-    background-size: cover;
-    background-position: left center;
-  }
-}
-
-/* Desktop - ensure proper scaling */
-@media (min-width: 1024px) and (max-width: 1199px) {
-  .projects-hero-section {
-    height: 600px;
-  }
-
-  .projects-hero-section::before {
-    background-size: cover;
-    background-position: left center;
-  }
-}
-
-/* Tablet */
-@media (max-width: 1023px) and (min-width: 769px) {
-  .projects-hero-section {
-    height: 600px;
-  }
-
-  .projects-hero-section::before {
-    background-size: cover;
-    background-position: left center;
-  }
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-  .projects-hero-section {
-    height: 500px; /* Shorter on mobile */
-  }
-
-  .projects-hero-section::before {
-    background-size: cover;
-    background-position: left center;
-  }
-}
-
-.projects-hero-content {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  height: 100%;
-  padding: 2rem;
-  position: relative;
-  z-index: 3; /* Changed from 2 to 3 to stay above the overlay */
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.projects-hero-content {
   flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
   text-align: center;
-  padding: 1.5rem;
+  height: 100%;
+  padding: 1rem;
+  position: relative;
+  z-index: 3; /* Changed from 2 to 3 to stay above the overlay */
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .projects-hero-text {
@@ -672,7 +608,6 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 2rem;
   max-width: 500px;
   margin-right: auto;
   margin-left: auto;
@@ -770,6 +705,7 @@ body {
   text-decoration-color: transparent;
   transition: all 0.5s ease;
   display: flex;
+  justify-content: center;
   align-items: center;
   gap: 0.5rem;
   z-index: 0;
@@ -837,6 +773,55 @@ body {
     background-position: left center;
   }
 }
+
+/* Responsive adjustments */
+@media (min-width: 1200px) {
+  .projects-hero-section {
+    height: 650px; /* Even taller on larger screens */
+  }
+
+  .projects-hero-section::before {
+    background-size: cover;
+    background-position: left center;
+  }
+}
+
+/* Desktop - ensure proper scaling */
+@media (min-width: 1024px) and (max-width: 1199px) {
+  .projects-hero-section {
+    height: 600px;
+  }
+
+  .projects-hero-section::before {
+    background-size: cover;
+    background-position: left center;
+  }
+}
+
+/* Tablet */
+@media (max-width: 1023px) and (min-width: 769px) {
+  .projects-hero-section {
+    height: 600px;
+  }
+
+  .projects-hero-section::before {
+    background-size: cover;
+    background-position: left center;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .projects-hero-section {
+    height: 500px; /* Shorter on mobile */
+  }
+
+  .projects-hero-section::before {
+    background-size: cover;
+    background-position: left center;
+  }
+}
+
 /* Latest Blogs Section */
 .latest-blogs-section {
   margin: 0.5rem 0;
@@ -1110,6 +1095,7 @@ body {
 .light .latest-blogs-label {
   color: #111827;
 }
+
 </style>
 
 <script lang="ts">
