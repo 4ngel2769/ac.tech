@@ -4,7 +4,7 @@
       <template v-slot="{ doc }">
         <!-- Header Section with Image and Meta -->
         <Section id="blog-header" type="header" class="blog-header-bg !pb-8">
-          <div class="mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="mx-auto px-4 lg:px-8">
             <!-- Added responsive padding -->
             <!-- Breadcrumbs -->
             <div class="border-t-2 pt-6 border-zinc-500 mb-8">
@@ -241,8 +241,8 @@
         </Section>
 
         <!-- Content Section -->
-        <Section id="main" class="!pt-0">
-          <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <Section id="main" class="!p-0">
+          <div class="max-w-6xl mx-auto px-4 sm:px-0 lg:px-8">
             <!-- Added responsive padding -->
             <article class="prose prose-lg max-w-none">
               <!-- Update date -->
@@ -794,7 +794,7 @@ h1 {
   /* FIX: Force blog content to respect smaller mobile padding */
   .blog-content,
   .prose {
-    padding: 0 0.5rem !important; /* Reduced from 1rem */
+    padding: 0 0rem !important; /* Reduced from 1rem */
     margin: 0 !important;
     max-width: 100% !important;
     box-sizing: border-box !important;
