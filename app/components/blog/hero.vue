@@ -13,7 +13,9 @@
                 </li>
             </ol>
         </div>
-        <h1 class="font-bold mb-4 md:mb-6 text-h3 leading-h3 md:text-h1 md:leading-h1 text-center md:text-left">Blog</h1>
+        <h1 class="font-bold mb-4 md:mb-6 text-h3 leading-h3 md:text-h1 md:leading-h1 text-center md:text-left">
+            Blog
+        </h1>
         <p class="mb-3 md:w-8/12 md:text-lg md:leading-lg text-center md:text-left">
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quos porro consectetur aliquid debitis odit labore eveniet, nesciunt, deleniti
             totam aspernatur blanditiis laborum esse nam fugit ipsa sunt eum, provident consequuntur.
