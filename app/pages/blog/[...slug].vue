@@ -1,5 +1,14 @@
 <template>
   <main class="blog-post-text">
+    <!-- Back Button -->
+    <!-- <div class="back-btn-container">
+      <NuxtLink to="/blog" class="back-btn">
+        <svg class="back-arrow" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M12.707 15.707a1 1 0 01-1.414 0l-5-5a1 1 0 010-1.414l5-5a1 1 0 111.414 1.414L8.414 10l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+        </svg>
+        <span>Back to Blog</span>
+      </NuxtLink>
+    </div> -->
     <ContentDoc>
       <template v-slot="{ doc }">
         <article class="max-w-3xl mx-auto py-8 px-4">
@@ -7,7 +16,7 @@
           <div class="text-gray-400 mb-6">
             {{ formatDate(doc.date) }}
             <span v-if="doc.tags && doc.tags.length" class="ml-4">
-              <span v-for="tag in doc.tags" :key="tag" class="inline-block px-2 py-1 bg-gray-800 text-sm rounded-md mr-2 mb-2 meta-tag">
+              <span v-for="tag in doc.tags" :key="tag" class="inline-block px-2 py-1 bg-gray-800 text-sm rounded-sm mr-2 mb-2 meta-tag">
                 {{ tag }}
               </span>
             </span>
@@ -18,25 +27,25 @@
           <div v-if="data?.surround?.length" class="continue-reading-section mt-12">
             <div class="divider-line mb-6"></div>
             <div class="navigation-container">
-              <!-- Previous Article -->
+              <!-- Next Article -->
               <div v-if="data.surround[0]" class="nav-item group">
-                <NuxtLink :to="data.surround[0]._path" class="nav-link">
+                <NuxtLink :to="data.surround[0]._path" class="nav-link nav-next">
                   <div class="nav-direction">
                     <svg class="nav-arrow" viewBox="0 0 20 20" fill="currentColor">
                       <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
                     </svg>
-                    <span>Previous Article</span>
+                    <span>Next Article</span>
                   </div>
                   <div class="nav-title">{{ data.surround[0].title }}</div>
                 </NuxtLink>
               </div>
               <div v-else class="nav-spacer"></div>
 
-              <!-- Next Article -->
+              <!-- Previous Article -->
               <div v-if="data.surround[1]" class="nav-item group">
-                <NuxtLink :to="data.surround[1]._path" class="nav-link">
+                <NuxtLink :to="data.surround[1]._path" class="nav-link nav-prev">
                   <div class="nav-direction">
-                    <span>Next Article</span>
+                    <span>Previous Article</span>
                     <svg class="nav-arrow" viewBox="0 0 20 20" fill="currentColor">
                       <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
                     </svg>
@@ -136,6 +145,36 @@ useHead({
   max-width: 100%;
   overflow-x: hidden;
   padding-top: 80px;
+}
+
+/* Back Button Styles */
+.back-btn-container {
+  max-width: 700px;
+  margin: 0 auto 1.5rem auto;
+  padding-top: 1.5rem;
+  padding-left: 0.5rem;
+}
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--main-dsc, #38bdf8);
+  font-family: var(--font3, 'Sen', sans-serif);
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 0.375rem;
+  padding: 0.25rem 0.75rem;
+  transition: background 0.15s, color 0.15s;
+}
+.back-btn:hover {
+  background: rgba(56, 189, 248, 0.08);
+  color: var(--htb-green, #7fff00);
+  text-decoration: none;
+}
+.back-arrow {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: inherit;
 }
 
 /* Ensure proper styling of blog content */
@@ -252,40 +291,55 @@ useHead({
 }
 
 .nav-link {
-  @apply block py-4 hover:text-blue-300 transition-colors duration-300 w-full text-center;
+  @apply flex py-4 hover:text-blue-300 transition-colors duration-300 w-full text-center;
+  flex-direction: column;
+  align-items: center;
 }
 
 .nav-direction {
   @apply flex items-center gap-2 text-sm font-medium text-gray-400 tracking-wide;
 }
 
-.nav-previous .nav-direction {
-  @apply justify-start flex;
+.nav-next {
+    align-items: flex-start;
+}
+.nav-next .nav-direction {
+  @apply flex;
+}
+.nav-next .nav-arrow {
+  @apply group-hover:-translate-x-1;
+}
+.nav-next .nav-title {
+  @apply text-left;
 }
 
-.nav-next .nav-direction {
-  @apply justify-end flex;
+.nav-prev {
+    align-items: flex-end;
 }
+.nav-prev .nav-direction {
+  @apply justify-start flex;
+}
+.nav-prev .nav-arrow {
+  @apply group-hover:translate-x-1;
+}
+.nav-prev .nav-title {
+  @apply text-left;
+}
+
 
 .nav-arrow {
   @apply w-4 h-4 transition-transform duration-300 group-hover:translate-x-1;
 }
 
-.nav-previous .nav-arrow {
-  @apply group-hover:-translate-x-1;
-}
+
 
 .nav-title {
   @apply text-base font-medium text-white leading-tight group-hover:text-blue-300 transition-colors duration-300;
+  text-align: left;
 }
 
-.nav-previous .nav-title {
-  @apply text-left;
-}
 
-.nav-next .nav-title {
-  @apply text-right;
-}
+
 
 /* Mobile responsive */
 @media (max-width: 768px) {

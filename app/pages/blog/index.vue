@@ -22,7 +22,7 @@
                         Showing {{ filteredBlogs(data).length }} of {{ data.length }} posts
                       </div>
                       <!-- Category filters -->
-                      <div v-for="tag in allAvailableTags" :key="tag" class="flex items-center">
+                      <div v-for="tag in allAvailableTags" :key="tag" class="flex items-center filter-box flex-row">
                         <label class="flex items-center cursor-pointer w-full">
                           <input
                             type="checkbox"
@@ -86,13 +86,13 @@
                       class="blog-card">
                       <div class="flex">
                         <!-- Blog Image Placeholder -->
-                        <div class="blog-image">
+                        <!-- <div class="blog-image">
                           <svg class="image-placeholder" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"></path>
                           </svg>
-                        </div>
+                        </div> -->
                         <!-- Blog Content -->
-                        <div class="flex-1 p-6 flex justify-between">
+                        <div class="flex-1 p-4 flex justify-between">
                           <div class="flex-1">
                             <div class="flex items-center justify-between mb-2">
                               <span class="blog-date">
@@ -255,9 +255,9 @@ useSeoMeta({
 }
 
 /* Filter Sidebar Styles */
-.filter-sidebar {
+.filter-sidebar {/*
   background-color: var(--dark-alt2);
-  border: 1px solid var(--kde);
+  border: 1px solid var(--kdeD);*/
   border-radius: 0.5rem;
   padding: 1.5rem;
   position: sticky;
@@ -266,9 +266,10 @@ useSeoMeta({
 
 .filter-title {
   font-family: var(--font3);
-  color: var(--htb-green);
+  color: var(--main-dark);
   font-size: 1.25rem;
   font-weight: 600;
+  line-height: .5rem;
   margin-bottom: 1rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -276,7 +277,7 @@ useSeoMeta({
 
 .post-count {
   font-family: var(--font3);
-  color: var(--kde);
+  color: var(--kdeD);
   font-size: 0.875rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -285,7 +286,7 @@ useSeoMeta({
 .checkbox-custom {
   width: 1rem;
   height: 1rem;
-  border: 1px solid var(--kde);
+  border: 1px solid var(--kdeD);
   border-radius: 0.25rem;
   margin-right: 0.75rem;
   display: flex;
@@ -296,7 +297,7 @@ useSeoMeta({
 }
 
 .checkbox-checked {
-  background-color: var(--htb-green);
+  background-color: var(--l-green);
   border-color: var(--htb-green);
 }
 
@@ -309,6 +310,13 @@ useSeoMeta({
   transition: color 0.2s;
 }
 
+.filter-box {
+  border: 1px solid var(--kdeD);
+  border-radius: 0.5rem;
+  padding: 0.4rem;
+  background-color: var(--dark-alt2);
+}
+
 .tag-label:hover {
   color: white;
 }
@@ -318,7 +326,7 @@ useSeoMeta({
   width: 100%;
   padding: 0.5rem 2.5rem 0.5rem 2.5rem;
   border-radius: 0.375rem;
-  border: 1px solid var(--kde);
+  border: 1px solid var(--kdeD);
   background-color: var(--dark-alt2);
   color: var(--main-dsc);
   font-family: var(--font3);
@@ -334,13 +342,13 @@ useSeoMeta({
 .search-icon {
   width: 1.25rem;
   height: 1.25rem;
-  color: var(--kde);
+  color: var(--kdeD);
 }
 
 /* Blog Card Styles */
 .blog-card {
   background-color: var(--dark-alt2);
-  border: 1px solid var(--kde);
+  border: 1px solid var(--kdeD);
   border-radius: 0.5rem;
   overflow: hidden;
   transition: all 0.2s;
@@ -378,8 +386,9 @@ useSeoMeta({
   color: var(--main-dark);
   font-size: 1.25rem;
   font-weight: 600;
-  margin-bottom: 0.5rem;
+  line-height: 2rem;
   transition: color 0.2s;
+  margin-bottom: 0px;
 }
 
 .group:hover .blog-title {
@@ -395,10 +404,10 @@ useSeoMeta({
 }
 
 .blog-tag {
-  font-family: var(--font3);
-  background-color: var(--dark-alt3);
-  color: var(--kde);
-  border: 1px solid var(--kde);
+  font-family: var(--font3);/*
+  background-color: var(--dark-alt3);*/
+  color: var(--kdeD);
+  border: 1px solid var(--kdeD);
   padding: 0.25rem 0.5rem;
   font-size: 0.75rem;
   border-radius: 0.25rem;
@@ -441,7 +450,7 @@ useSeoMeta({
   font-family: var(--font3);
   background-color: var(--dark-alt2);
   color: var(--main-dsc);
-  border: 1px solid var(--kde);
+  border: 1px solid var(--kdeD);
   border-radius: 0.375rem;
   padding: 0.5rem 1.5rem 0.5rem 0.75rem; /* Match input vertical padding */
   font-size: 0.95rem;
