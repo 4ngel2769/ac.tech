@@ -28,15 +28,14 @@
       </ol>
     </div>
     <h1
-      class="font-bold mb-4 md:mb-6 text-h3 leading-h3 md:text-h1 md:leading-h1 text-center md:text-left blog-title"
+      class="font-bold mb-4 md:mb-6 text-3xl md:text-4xl text-center md:text-left blog-title"
+      style="font-family: var(--font3); color: var(--htb-green);"
     >
       Blog
     </h1>
-    <p class="mb-3 md:w-8/12 md:text-lg md:leading-lg text-center md:text-left blog-description">
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quos porro
-      consectetur aliquid debitis odit labore eveniet, nesciunt, deleniti totam
-      aspernatur blanditiis laborum esse nam fugit ipsa sunt eum, provident
-      consequuntur.
+    <p class="mb-3 md:w-8/12 text-lg text-center md:text-left blog-description max-w-2xl"
+       style="font-family: var(--font3); color: var(--main-dsc);">
+      Explore articles about cybersecurity, IoT development, and embedded systems.
     </p>
     <div
       class="border-t-2 mt-8 border-zinc-500 flex flex-col md:flex-row items-center md:justify-between md:text-right"

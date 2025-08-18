@@ -1,159 +1,160 @@
 <template>
-  <main>
-    <div class="py-12">
-      <!-- Blog listing with sidebar -->
-      <ContentQuery
-        path="/blog"
-        :only="['title', 'description', 'date', 'tags', '_path']"
-        :sort="{ date: sortOrder === 'newest' ? -1 : 1 }"
-      >
-        <template v-slot="{ data }">
-          <BlogHero />
-          <Section id="main" class="!pt-0">
-            <div class="max-w-7xl mx-auto">
-              <div class="flex gap-8">
-                <!-- Filter Sidebar -->
-                <div class="w-1/4 flex-shrink-0">
-                  <div class="filter-sidebar">
-                    <h3 class="filter-title">Filter</h3>
-                    <div class="space-y-4">
-                      <!-- Show post count -->
-                      <div class="post-count">
-                        Showing {{ filteredBlogs(data).length }} of {{ data.length }} posts
-                      </div>
-                      <!-- Category filters -->
-                      <div v-for="tag in allAvailableTags" :key="tag" class="flex items-center filter-box flex-row">
-                        <label class="flex items-center cursor-pointer w-full">
-                          <input
-                            type="checkbox"
-                            :value="tag"
-                            v-model="selectedTags"
-                            class="sr-only"
-                          />
-                          <div class="flex items-center justify-between w-full">
-                            <div class="flex items-center">
-                              <div class="relative">
-                                <div class="checkbox-custom" 
-                                     :class="{ 'checkbox-checked': selectedTags.includes(tag) }">
-                                  <svg v-if="selectedTags.includes(tag)" class="w-3 h-3 text-black" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                                  </svg>
-                                </div>
-                              </div>
-                              <span class="tag-label">{{ tag }}</span>
-                            </div>
-                          </div>
-                        </label>
-                      </div>
-                    </div>
+  <div class="py-12">
+    <!-- Blog listing with sidebar -->
+    <ContentQuery
+      path="/blog"
+      :only="['title', 'description', 'date', 'tags', '_path']"
+      :sort="{ date: sortOrder === 'newest' ? -1 : 1 }"
+    >
+      <template v-slot="{ data }">
+        <BlogHero />
+        <Section id="main" class="!pt-0">
+          <div class="flex gap-8">
+            <!-- Filter Sidebar -->
+            <div class="w-1/4 flex-shrink-0">
+              <div class="filter-sidebar">
+                <h3 class="filter-title">Filter</h3>
+                <div class="space-y-4">
+                  <!-- Show post count -->
+                  <div class="post-count">
+                    Showing {{ filteredBlogs(data).length }} of {{ data.length }} posts
                   </div>
-                </div>
-
-                <!-- Main Content Area -->
-                <div class="flex-1">
-                  <!-- Search and Sort Row -->
-                  <div class="mb-8 flex items-center gap-4 flex-wrap">
-                    <!-- Sort By -->
-                    <div class="flex items-center gap-2">
-                      <label for="sortOrder" class="sort-label">Sort by:</label>
-                      <select id="sortOrder" v-model="sortOrder" class="sort-select">
-                        <option value="newest">Newest</option>
-                        <option value="oldest">Oldest</option>
-                      </select>
-                    </div>
-                    <div class="relative max-w-md flex-1">
+                  <!-- Category filters -->
+                  <div v-for="tag in allAvailableTags" :key="tag" class="flex items-center filter-box flex-row">
+                    <label class="flex items-center cursor-pointer w-full">
                       <input
-                        type="text"
-                        v-model="searchQuery"
-                        placeholder="Search blogs..."
-                        class="search-input"
+                        type="checkbox"
+                        :value="tag"
+                        v-model="selectedTags"
+                        class="sr-only"
                       />
-                      <div class="absolute inset-y-0 left-0 flex items-center pl-3">
-                        <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Blog Cards -->
-                  <div class="grid gap-6">
-                    <div v-if="filteredBlogs(data).length === 0" class="text-center py-8">
-                      <p class="no-results">No blogs found matching your search.</p>
-                    </div>
-                    
-                    <article v-for="blog in sortedBlogs(filteredBlogs(data))" :key="blog._path" 
-                      class="blog-card">
-                      <div class="flex">
-                        <!-- Blog Image Placeholder -->
-                        <!-- <div class="blog-image">
-                          <svg class="image-placeholder" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"></path>
-                          </svg>
-                        </div> -->
-                        <!-- Blog Content -->
-                        <div class="flex-1 p-4 flex justify-between">
-                          <div class="flex-1">
-                            <div class="flex items-center justify-between mb-2">
-                              <span class="blog-date">
-                                {{ formatDate(blog.date) }}
-                              </span>
-                            </div>
-                            <NuxtLink :to="blog._path" class="group">
-                              <h2 class="blog-title">
-                                {{ blog.title }}
-                              </h2>
-                            </NuxtLink>
-                            <p class="blog-description">
-                              {{ blog.description }}
-                            </p>
-                            <div class="flex flex-wrap gap-2">
-                              <span v-for="tag in blog.tags" :key="tag" class="blog-tag">
-                                {{ tag }}
-                              </span>
-                            </div>
-                          </div>
-                          <!-- Arrow Icon -->
-                          <div class="flex items-center ml-4">
-                            <NuxtLink :to="blog._path" class="blog-arrow-link">
-                              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                      <div class="flex items-center justify-between w-full">
+                        <div class="flex items-center">
+                          <div class="relative">
+                            <div class="checkbox-custom" 
+                                 :class="{ 'checkbox-checked': selectedTags.includes(tag) }">
+                              <svg v-if="selectedTags.includes(tag)" class="w-3 h-3 text-black" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                               </svg>
-                            </NuxtLink>
+                            </div>
                           </div>
+                          <span class="tag-label">{{ tag }}</span>
                         </div>
                       </div>
-                    </article>
+                    </label>
                   </div>
-                  
-                  <!-- Pagination -->
-                  <ContentQuery
-                    path="/blog"
-                    :only="['title']"
-                  >
-                    <template v-slot="{ data }">
-                      <BlogPagination
-                        v-if="getPageLimit(data.length) > 1"
-                        class="mt-8"
-                        :currentPage="1"
-                        :totalPages="getPageLimit(data.length)"
-                        :nextPage="getPageLimit(data.length) > 1"
-                        baseUrl="/blog/"
-                        pageUrl="/blog/page/"
-                      />
-                    </template>
-                    <template #not-found>
-                      <!-- Nothing -->
-                    </template>
-                  </ContentQuery>
                 </div>
               </div>
             </div>
-          </Section>
-        </template>
-      </ContentQuery>
-    </div>
-  </main>
+
+            <!-- Main Content Area -->
+            <div class="flex-1">
+              <!-- Search and Sort Row -->
+              <div class="mb-8 flex items-center gap-4 flex-wrap">
+                <div class="relative max-w-md flex-1">
+                  <input
+                    type="text"
+                    v-model="searchQuery"
+                    placeholder="Search blogs..."
+                    class="search-input"
+                  />
+                  <div class="absolute inset-y-0 left-0 flex items-center pl-3">
+                    <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                  </div>
+                </div>
+                <!-- Sort By -->
+                <div class="flex items-center gap-2">
+                  <label for="sortOrder" class="sort-label">Sort by:</label>
+                  <select id="sortOrder" v-model="sortOrder" class="sort-select">
+                    <option value="newest">Newest</option>
+                    <option value="oldest">Oldest</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Blog Cards -->
+              <div class="grid gap-6">
+                <div v-if="filteredBlogs(data).length === 0" class="text-center py-8">
+                  <p class="no-results">No blogs found matching your search.</p>
+                </div>
+                
+                <article v-for="blog in sortedBlogs(filteredBlogs(data))" :key="blog._path" 
+                  class="blog-card">
+                  <div class="flex">
+                    <!-- Blog Image Placeholder -->
+                    <div class="blog-image">
+                      <svg class="image-placeholder" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"></path>
+                      </svg>
+                    </div>
+                    
+                    <!-- Blog Content -->
+                    <div class="flex-1 p-6 flex justify-between">
+                      <div class="flex-1">
+                        <div class="flex items-center justify-between mb-2">
+                          <span class="blog-date">
+                            {{ formatDate(blog.date) }}
+                          </span>
+                        </div>
+                        
+                        <NuxtLink :to="blog._path" class="group">
+                          <h2 class="blog-title">
+                            {{ blog.title }}
+                          </h2>
+                        </NuxtLink>
+                        
+                        <p class="blog-description">
+                          {{ blog.description }}
+                        </p>
+                        
+                        <div class="flex flex-wrap gap-2">
+                          <span v-for="tag in blog.tags" :key="tag" class="blog-tag">
+                            {{ tag }}
+                          </span>
+                        </div>
+                      </div>
+                      
+                      <!-- Arrow Icon -->
+                      <div class="flex items-center ml-4">
+                        <NuxtLink :to="blog._path" class="blog-arrow-link">
+                          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                          </svg>
+                        </NuxtLink>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </div>
+              
+              <!-- Pagination -->
+              <ContentQuery
+                path="/blog"
+                :only="['title']"
+              >
+                <template v-slot="{ data }">
+                  <BlogPagination
+                    v-if="getPageLimit(data.length) > 1"
+                    class="mt-8"
+                    :currentPage="1"
+                    :totalPages="getPageLimit(data.length)"
+                    :nextPage="getPageLimit(data.length) > 1"
+                    baseUrl="/blog/"
+                    pageUrl="/blog/page/"
+                  />
+                </template>
+                <template #not-found>
+                  <!-- Nothing -->
+                </template>
+              </ContentQuery>
+            </div>
+          </div>
+        </Section>
+      </template>
+    </ContentQuery>
+  </div>
 </template>
 
 <script setup>
