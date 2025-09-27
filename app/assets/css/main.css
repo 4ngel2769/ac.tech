@@ -6,13 +6,13 @@
 
 :root {
   --blog-bg: #101923;
-  --blog-text: #e0e6ed;
+  --blog-text: #f6faff;
   --blog-text-bold: #f8fafc;
   --blog-text-light: #cbd5e1;
-  --blog-text-secondary: #94a3b8;
+  --blog-text-secondary: #8b9097;
   --blog-link: #7ed5ae;
   --blog-link-hover: #e3e3e3;
-  --blog-heading: #cecece;
+  --blog-heading: #cccccc;
   --blog-heading-secondary: #f3f3f3;
   --radius: 0.8rem;
 
@@ -147,12 +147,13 @@ body {
   color: var(--blog-text);
   transition: color 0.3s ease;
 }
-
 .blog-content p,
 .prose p {
   color: var(--blog-text);
 }
-
+.blog-content th {
+  color: var(--blog-text-secondary);
+}
 .blog-content h1,
 .prose h1,
 .blog-content h2,

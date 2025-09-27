@@ -919,6 +919,7 @@ body {
   font-family: var(--font3);
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   margin: 0;
@@ -1071,7 +1072,8 @@ body {
   .blog-card-title {
     font-size: 1rem;
     line-height: 1.3;
-    -webkit-line-clamp: 2; /* Ensure title stays visible */
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
   }
 
   .blog-card-date {

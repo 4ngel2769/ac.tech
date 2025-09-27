@@ -66,13 +66,20 @@
             <div class="ray"></div>
             
             <NuxtLink :to="project._path" class="project-content-wrapper">
-              <!-- Image Container -->
+              <!-- Image Container with optimized loading -->
               <div class="project-image-container">
-                <img
+                <NuxtImg
                   v-if="project.socialImage?.src"
                   :src="project.socialImage.src"
                   :alt="project.socialImage.alt || project.headline"
                   class="project-image"
+                  width="350"
+                  height="197"
+                  quality="75"
+                  format="webp"
+                  loading="lazy"
+                  placeholder
+                  sizes="sm:350px md:300px lg:280px"
                 />
                 <div v-else class="project-image-placeholder">
                   <span class="text-gray-400">No image</span>
@@ -514,6 +521,7 @@ const formatDate = (date) => {
   transition: transform 300ms ease;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   position: relative;
@@ -526,6 +534,7 @@ const formatDate = (date) => {
   flex-grow: 1;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   position: relative;

@@ -56,6 +56,11 @@ const isBlogPage = computed(() => {
 </script>
 
 <style>
+
+body {
+  background-color: #111212;
+}
+
 .navbar {
   position: absolute;
   z-index: 40;

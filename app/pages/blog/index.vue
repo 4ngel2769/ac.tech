@@ -1,154 +1,151 @@
 <template>
-  <div class="py-12">
-    <!-- Blog listing with sidebar -->
+  <div>
+    <!-- Blog Hero Header -->
+    <div class="blog-hero-header">
+      <div class="blog-hero-content-header">
+        <nav class="blog-breadcrumb" aria-label="Breadcrumb">
+          <ol>
+            <li>
+              <NuxtLink to="/" class="breadcrumb-link">Home</NuxtLink>
+            </li>
+            <li class="breadcrumb-separator">/</li>
+            <li>
+              <span class="breadcrumb-current">Blog</span>
+            </li>
+          </ol>
+        </nav>
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <h1 class="text-4xl font-bold">Latest Articles</h1>
+          <div class="flex gap-4">
+            <input
+              v-model="searchQuery"
+              type="text"
+              placeholder="Search articles..."
+              class="px-4 py-2 border rounded-lg flex-grow backdrop-blur-sm bg-black/10"
+              style="font-family: var(--font3); color: var(--text-color);"
+            />
+            <select
+              v-model="sortOrder"
+              class="px-4 py-2 border rounded-lg backdrop-blur-sm bg-black/10"
+              style="font-family: var(--font3); color: var(--text-color);"
+            >
+              <option value="newest">Newest</option>
+              <option value="oldest">Oldest</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content -->
     <ContentQuery
       path="/blog"
-      :only="['title', 'description', 'date', 'tags', '_path']"
+      :only="['title', 'description', 'date', 'tags', '_path', 'socialImage']"
       :sort="{ date: sortOrder === 'newest' ? -1 : 1 }"
     >
       <template v-slot="{ data }">
-        <BlogHero />
         <Section id="main" class="!pt-0">
-          <div class="flex gap-8">
-            <!-- Filter Sidebar -->
-            <div class="w-1/4 flex-shrink-0">
-              <div class="filter-sidebar">
-                <h3 class="filter-title">Filter</h3>
-                <div class="space-y-4">
-                  <!-- Show post count -->
-                  <div class="post-count">
-                    Showing {{ filteredBlogs(data).length }} of {{ data.length }} posts
-                  </div>
-                  <!-- Category filters -->
-                  <div v-for="tag in allAvailableTags" :key="tag" class="flex items-center filter-box flex-row">
-                    <label class="flex items-center cursor-pointer w-full">
-                      <input
-                        type="checkbox"
-                        :value="tag"
-                        v-model="selectedTags"
-                        class="sr-only"
-                      />
-                      <div class="flex items-center justify-between w-full">
-                        <div class="flex items-center">
-                          <div class="relative">
-                            <div class="checkbox-custom" 
-                                 :class="{ 'checkbox-checked': selectedTags.includes(tag) }">
-                              <svg v-if="selectedTags.includes(tag)" class="w-3 h-3 text-black" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                              </svg>
-                            </div>
-                          </div>
-                          <span class="tag-label">{{ tag }}</span>
-                        </div>
-                      </div>
-                    </label>
-                  </div>
-                </div>
+          <div class="space-y-8">
+            <!-- Compact Tag Filters -->
+            <div v-if="allAvailableTags.length > 0" class="tag-filters-section">
+              <!-- Always show first few tags -->
+              <div class="tag-filters-compact">
+                <button
+                  v-for="tag in displayedTags"
+                  :key="tag"
+                  @click="toggleTag(tag)"
+                  :class="[
+                    'tag-btn-compact',
+                    selectedTags.includes(tag) ? 'tag-active' : 'tag-inactive'
+                  ]"
+                >
+                  {{ tag }}
+                </button>
+                
+                <!-- Show more/less button -->
+                <button
+                  v-if="allAvailableTags.length > 6"
+                  @click="showAllTags = !showAllTags"
+                  class="tag-show-more"
+                >
+                  {{ showAllTags ? 'Show Less' : `+${allAvailableTags.length - 6} More` }}
+                </button>
+              </div>
+
+              <!-- Clear filters if any selected -->
+              <div v-if="selectedTags.length > 0" class="mt-2 text-center">
+                <button @click="selectedTags = []" class="clear-filters-compact">
+                  Clear filters ({{ selectedTags.length }})
+                </button>
               </div>
             </div>
 
-            <!-- Main Content Area -->
-            <div class="flex-1">
-              <!-- Search and Sort Row -->
-              <div class="mb-8 flex items-center gap-4 flex-wrap">
-                <div class="relative max-w-md flex-1">
-                  <input
-                    type="text"
-                    v-model="searchQuery"
-                    placeholder="Search blogs..."
-                    class="search-input"
-                  />
-                  <div class="absolute inset-y-0 left-0 flex items-center pl-3">
-                    <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                    </svg>
-                  </div>
-                </div>
-                <!-- Sort By -->
-                <div class="flex items-center gap-2">
-                  <label for="sortOrder" class="sort-label">Sort by:</label>
-                  <select id="sortOrder" v-model="sortOrder" class="sort-select">
-                    <option value="newest">Newest</option>
-                    <option value="oldest">Oldest</option>
-                  </select>
-                </div>
-              </div>
+            <!-- Results count (only show when filtering) -->
+            <div v-if="filteredAndSortedBlogs(data).length !== data.length" class="results-count">
+              {{ filteredAndSortedBlogs(data).length }} of {{ data.length }} articles
+            </div>
 
-              <!-- Blog Cards -->
-              <div class="grid gap-6">
-                <div v-if="filteredBlogs(data).length === 0" class="text-center py-8">
-                  <p class="no-results">No blogs found matching your search.</p>
-                </div>
-                
-                <article v-for="blog in sortedBlogs(filteredBlogs(data))" :key="blog._path" 
-                  class="blog-card">
-                  <div class="flex">
-                    <!-- Blog Image Placeholder -->
-                    <div class="blog-image">
-                      <svg class="image-placeholder" fill="currentColor" viewBox="0 0 20 20">
+            <!-- Blog Grid -->
+            <div v-if="filteredAndSortedBlogs(data).length === 0" class="text-center py-16">
+              <p class="no-results">No articles found matching your criteria.</p>
+            </div>
+
+            <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <article
+                v-for="blog in filteredAndSortedBlogs(data)"
+                :key="blog._path"
+                class="blog-card"
+              >
+                <NuxtLink :to="blog._path" class="blog-card-link">
+                  <div class="blog-card-image">
+                    <!-- Updated image handling with NuxtImg -->
+                    <NuxtImg
+                      v-if="blog.socialImage?.src"
+                      :src="blog.socialImage.src"
+                      :alt="blog.socialImage.alt || blog.title"
+                      class="blog-image"
+                      width="400"
+                      height="225"
+                      quality="75"
+                      format="webp"
+                      loading="lazy"
+                      placeholder
+                      sizes="sm:400px md:350px lg:300px"
+                    />
+                    <div v-else class="blog-image-placeholder">
+                      <svg class="placeholder-icon" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"></path>
                       </svg>
                     </div>
-                    
-                    <!-- Blog Content -->
-                    <div class="flex-1 p-6 flex justify-between">
-                      <div class="flex-1">
-                        <div class="flex items-center justify-between mb-2">
-                          <span class="blog-date">
-                            {{ formatDate(blog.date) }}
-                          </span>
-                        </div>
-                        
-                        <NuxtLink :to="blog._path" class="group">
-                          <h2 class="blog-title">
-                            {{ blog.title }}
-                          </h2>
-                        </NuxtLink>
-                        
-                        <p class="blog-description">
-                          {{ blog.description }}
-                        </p>
-                        
-                        <div class="flex flex-wrap gap-2">
-                          <span v-for="tag in blog.tags" :key="tag" class="blog-tag">
-                            {{ tag }}
-                          </span>
-                        </div>
-                      </div>
-                      
-                      <!-- Arrow Icon -->
-                      <div class="flex items-center ml-4">
-                        <NuxtLink :to="blog._path" class="blog-arrow-link">
-                          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                          </svg>
-                        </NuxtLink>
+                    <div class="blog-card-overlay"></div>
+                  </div>
+                  <div class="blog-card-content">
+                    <div class="blog-card-meta">
+                      <span class="blog-card-date">{{ formatDate(blog.date) }}</span>
+                      <div v-if="blog.tags && blog.tags.length > 0" class="blog-card-tags">
+                        <span
+                          v-for="tag in blog.tags.slice(0, 2)"
+                          :key="tag"
+                          class="blog-card-tag"
+                        >
+                          {{ tag }}
+                        </span>
+                        <span v-if="blog.tags.length > 2" class="more-tags-indicator">
+                          +{{ blog.tags.length - 2 }}
+                        </span>
                       </div>
                     </div>
+                    <h2 class="blog-card-title">{{ blog.title }}</h2>
+                    <p class="blog-card-description">{{ blog.description }}</p>
+                    <div class="blog-card-footer">
+                      <span class="read-more">Read article</span>
+                      <svg class="read-more-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                      </svg>
+                    </div>
                   </div>
-                </article>
-              </div>
-              
-              <!-- Pagination -->
-              <ContentQuery
-                path="/blog"
-                :only="['title']"
-              >
-                <template v-slot="{ data }">
-                  <BlogPagination
-                    v-if="getPageLimit(data.length) > 1"
-                    class="mt-8"
-                    :currentPage="1"
-                    :totalPages="getPageLimit(data.length)"
-                    :nextPage="getPageLimit(data.length) > 1"
-                    baseUrl="/blog/"
-                    pageUrl="/blog/page/"
-                  />
-                </template>
-                <template #not-found>
-                  <!-- Nothing -->
-                </template>
-              </ContentQuery>
+                </NuxtLink>
+              </article>
             </div>
           </div>
         </Section>
@@ -166,7 +163,7 @@ definePageMeta({
 
 const searchQuery = ref('');
 const selectedTags = ref([]);
-const blogCountLimit = 6;
+const showAllTags = ref(false);
 const sortOrder = ref('newest');
 
 // Format the date
@@ -175,13 +172,9 @@ const formatDate = (dateString) => {
   const date = new Date(dateString);
   return date.toLocaleDateString("en-US", {
     year: "numeric",
-    month: "long",
+    month: "short",
     day: "numeric"
   });
-};
-
-const getPageLimit = (totalPosts) => {
-  return Math.ceil(totalPosts / blogCountLimit);
 };
 
 // Get all available tags from blog posts
@@ -189,7 +182,7 @@ const { data: blogData } = await useAsyncData('blog-tags', () =>
   queryContent('/blog').only(['tags']).find()
 );
 
-// Extract unique tags - Fix for the filter not showing tags
+// Extract unique tags
 const allAvailableTags = computed(() => {
   if (!blogData.value) return [];
   
@@ -203,8 +196,23 @@ const allAvailableTags = computed(() => {
   return Array.from(tags).sort();
 });
 
-// Filter blogs based on search query and selected tags
-const filteredBlogs = (blogs) => {
+// Show limited tags by default
+const displayedTags = computed(() => {
+  return showAllTags.value ? allAvailableTags.value : allAvailableTags.value.slice(0, 6);
+});
+
+// Toggle tag selection
+const toggleTag = (tag) => {
+  const index = selectedTags.value.indexOf(tag);
+  if (index > -1) {
+    selectedTags.value.splice(index, 1);
+  } else {
+    selectedTags.value.push(tag);
+  }
+};
+
+// Filter and sort blogs
+const filteredAndSortedBlogs = (blogs) => {
   let filtered = blogs;
 
   // Apply tag filter
@@ -221,15 +229,11 @@ const filteredBlogs = (blogs) => {
       includeScore: true,
       threshold: 0.4
     });
-    return fuse.search(searchQuery.value).map(result => result.item);
+    filtered = fuse.search(searchQuery.value).map(result => result.item);
   }
 
-  return filtered;
-};
-
-// Sort blogs by date
-const sortedBlogs = (blogs) => {
-  return [...blogs].sort((a, b) => {
+  // Sort by date
+  return [...filtered].sort((a, b) => {
     if (!a.date || !b.date) return 0;
     const dateA = new Date(a.date);
     const dateB = new Date(b.date);
@@ -248,260 +252,489 @@ useSeoMeta({
 </script>
 
 <style scoped>
-.line-clamp-2 {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;  
+/* Blog Hero Header with enhanced gradient fade */
+.blog-hero-header {
+  margin: 0;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  padding: 0 0 2.5rem 0;
+  position: relative;
+  z-index: 1;
   overflow: hidden;
+  min-height: 320px;
+  height: 340px;
+  display: flex;
+  align-items: flex-end;
 }
 
-/* Filter Sidebar Styles */
-.filter-sidebar {/*
-  background-color: var(--dark-alt2);
-  border: 1px solid var(--kdeD);*/
-  border-radius: 0.5rem;
-  padding: 1.5rem;
-  position: sticky;
-  top: 2rem;
+.blog-hero-header::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-image: url("/bg_web_prj4.png");
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: cover;
+  transform: scale(1);
+  transform-origin: left center;
+  z-index: 1;
+  pointer-events: none;
 }
 
-.filter-title {
+.blog-hero-header::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(
+    180deg, 
+    rgba(17, 17, 18, 0.4) 0%, 
+    rgba(17, 17, 18, 0.6) 40%, 
+    rgba(17, 17, 18, 0.75) 70%,
+    rgba(17, 17, 18, 0.9) 85%,
+    #111212 100%
+  );
+  z-index: 2;
+  pointer-events: none;
+}
+
+.blog-hero-content-header {
+  position: relative;
+  z-index: 3;
+  max-width: 1300px;
+  margin: 0 auto;
+  width: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
+  box-sizing: border-box;
+}
+
+/* Breadcrumbs */
+.blog-breadcrumb {
   font-family: var(--font3);
-  color: var(--main-dark);
-  font-size: 1.25rem;
-  font-weight: 600;
-  line-height: .5rem;
-  margin-bottom: 1rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.post-count {
-  font-family: var(--font3);
-  color: var(--kdeD);
-  font-size: 0.875rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.checkbox-custom {
-  width: 1rem;
-  height: 1rem;
-  border: 1px solid var(--kdeD);
-  border-radius: 0.25rem;
-  margin-right: 0.75rem;
+  font-size: 1.1rem;
+  color: var(--breadcrumbs, #a7a7a7);
+  margin: 0 0 1.2rem 0;
   display: flex;
   align-items: center;
-  justify-content: center;
-  transition: all 0.2s;
-  background-color: var(--dark-bg);
+  z-index: 10;
+  position: relative;
 }
 
-.checkbox-checked {
-  background-color: var(--l-green);
-  border-color: var(--htb-green);
+.blog-breadcrumb ol {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-.tag-label {
-  font-family: var(--font3);
-  color: var(--main-dsc);
-  font-size: 0.875rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+.breadcrumb-link {
+  color: var(--breadcrumbs, #a7a7a7);
+  text-decoration: none;
   transition: color 0.2s;
 }
 
-.filter-box {
-  border: 1px solid var(--kdeD);
-  border-radius: 0.5rem;
-  padding: 0.4rem;
-  background-color: var(--dark-alt2);
+.breadcrumb-link:hover {
+  color: var(--breadcrumbs-main, #8bbbe2);
+  text-decoration: underline;
 }
 
-.tag-label:hover {
-  color: white;
+.breadcrumb-separator {
+  margin: 0 0.5em;
+  color: var(--breadcrumbs, #a7a7a7);
 }
 
-/* Search Input Styles */
-.search-input {
-  width: 100%;
-  padding: 0.5rem 2.5rem 0.5rem 2.5rem;
-  border-radius: 0.375rem;
-  border: 1px solid var(--kdeD);
-  background-color: var(--dark-alt2);
-  color: var(--main-dsc);
+.breadcrumb-current {
+  color: var(--breadcrumbs-main, #8bbbe2);
+  font-weight: 600;
+}
+
+/* Compact Tag Filters */
+.tag-filters-section {
+  margin: 1.5rem 0;
+}
+
+.tag-filters-compact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.tag-btn-compact {
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.25rem;
   font-family: var(--font3);
-  outline: none;
-  transition: all 0.2s;
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
 }
 
-.search-input:focus {
-  ring: 2px solid var(--htb-green);
-  border-color: var(--htb-green);
+.tag-active {
+  background-color: var(--htb-green, #7fff00);
+  color: #000;
 }
 
-.search-icon {
-  width: 1.25rem;
-  height: 1.25rem;
-  color: var(--kdeD);
+.tag-inactive {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: var(--main-dsc, #ccc);
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-/* Blog Card Styles */
+.tag-inactive:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
+.tag-show-more {
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.25rem;
+  background-color: rgba(127, 255, 0, 0.1);
+  color: var(--htb-green, #7fff00);
+  border: 1px solid rgba(127, 255, 0, 0.3);
+  font-family: var(--font3);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tag-show-more:hover {
+  background-color: rgba(127, 255, 0, 0.2);
+  border-color: rgba(127, 255, 0, 0.5);
+}
+
+.clear-filters-compact {
+  color: var(--main-details, #808080);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font3);
+  font-size: 0.8rem;
+  text-decoration: underline;
+  padding: 0.25rem 0.5rem;
+  transition: color 0.2s;
+}
+
+.clear-filters-compact:hover {
+  color: var(--htb-green, #7fff00);
+}
+
+/* Results count */
+.results-count {
+  text-align: center;
+  color: var(--main-details, #808080);
+  font-family: var(--font3);
+  font-size: 0.85rem;
+  margin: 0.5rem 0;
+}
+
+/* Enhanced Blog Cards */
 .blog-card {
-  background-color: var(--dark-alt2);
-  border: 1px solid var(--kdeD);
-  border-radius: 0.5rem;
+  background: linear-gradient(145deg, #1e1e1e 0%, #161616 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
   overflow: hidden;
-  transition: all 0.2s;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  height: 100%;
+  position: relative;
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.blog-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(127, 255, 0, 0.02) 0%, transparent 50%, rgba(127, 255, 0, 0.02) 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 1;
 }
 
 .blog-card:hover {
-  background-color: var(--dark-alt1);
-  border-opacity: 0.8;
+  transform: translateY(-8px) scale(1.02);
+  border-color: rgba(127, 255, 0, 0.3);
+  box-shadow: 
+    0 20px 40px -12px rgba(0, 0, 0, 0.4),
+    0 8px 16px -4px rgba(127, 255, 0, 0.1),
+    0 0 0 1px rgba(127, 255, 0, 0.1);
+}
+
+.blog-card:hover::before {
+  opacity: 1;
+}
+
+.blog-card-link {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  z-index: 2;
+}
+
+.blog-card-image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  overflow: hidden;
 }
 
 .blog-image {
-  width: 12rem;
-  height: 8rem;
-  flex-shrink: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: brightness(0.9) contrast(1.1);
+}
+
+.blog-card:hover .blog-image {
+  transform: scale(1.1);
+  filter: brightness(1) contrast(1.2);
+}
+
+.blog-card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 60%,
+    rgba(0, 0, 0, 0.4) 80%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.blog-card:hover .blog-card-overlay {
+  opacity: 1;
+}
+
+.blog-image-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #2a2a2a 0%, #1e1e1e 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--dark-alt3);
+  position: relative;
 }
 
-.image-placeholder {
+.blog-image-placeholder::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.02) 50%, transparent 70%);
+}
+
+.placeholder-icon {
   width: 3rem;
   height: 3rem;
-  color: var(--main-details);
+  color: var(--main-details, #808080);
+  opacity: 0.6;
 }
 
-.blog-date {
-  font-family: var(--font3);
-  color: var(--main-details);
-  font-size: 0.875rem;
+.blog-card-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  background: linear-gradient(180deg, rgba(30, 30, 30, 0.95) 0%, rgba(20, 20, 20, 0.98) 100%);
 }
 
-.blog-title {
-  font-family: var(--font3);
-  color: var(--main-dark);
-  font-size: 1.25rem;
-  font-weight: 600;
-  line-height: 2rem;
-  transition: color 0.2s;
-  margin-bottom: 0px;
-}
-
-.group:hover .blog-title {
-  color: var(--htb-green);
-}
-
-.blog-description {
-  font-family: var(--font3);
-  color: var(--main-dsc);
-  font-size: 0.875rem;
-  line-height: 1.6;
+.blog-card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
   margin-bottom: 1rem;
+  gap: 1rem;
 }
 
-.blog-tag {
-  font-family: var(--font3);/*
-  background-color: var(--dark-alt3);*/
-  color: var(--kdeD);
-  border: 1px solid var(--kdeD);
-  padding: 0.25rem 0.5rem;
-  font-size: 0.75rem;
-  border-radius: 0.25rem;
+.blog-card-date {
+  color: var(--main-details, #808080);
+  font-family: var(--font3);
+  font-size: 0.8rem;
+  font-weight: 500;
+  flex-shrink: 0;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  transition: opacity 0.2s;
 }
 
-.blog-tag:hover {
-  opacity: 0.8;
+.blog-card-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
-.blog-arrow-link {
-  color: var(--main-details);
-  transition: color 0.2s;
+.blog-card-tag {
+  background: linear-gradient(135deg, rgba(127, 255, 0, 0.15) 0%, rgba(127, 255, 0, 0.1) 100%);
+  color: var(--htb-green, #7fff00);
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.375rem;
+  font-size: 0.7rem;
+  font-family: var(--font3);
+  font-weight: 600;
+  border: 1px solid rgba(127, 255, 0, 0.2);
+  transition: all 0.3s ease;
 }
 
-.blog-arrow-link:hover {
-  color: var(--htb-green);
+.more-tags-indicator {
+  color: var(--main-details, #808080);
+  font-size: 0.7rem;
+  font-family: var(--font3);
+  font-weight: 500;
+}
+
+.blog-card:hover .blog-card-tag {
+  background: linear-gradient(135deg, rgba(127, 255, 0, 0.25) 0%, rgba(127, 255, 0, 0.15) 100%);
+  border-color: rgba(127, 255, 0, 0.4);
+  transform: translateY(-1px);
+}
+
+.blog-card-title {
+  font-family: var(--font3);
+  color: #ffffff;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 0.75rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color 0.3s ease;
+}
+
+.blog-card:hover .blog-card-title {
+  color: var(--htb-green, #7fff00);
+}
+
+.blog-card-description {
+  font-family: var(--font3);
+  color: #b3b3b3;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  flex-grow: 1;
+  margin-bottom: 1rem;
+  transition: color 0.3s ease;
+}
+
+.blog-card:hover .blog-card-description {
+  color: #d1d1d1;
+}
+
+.blog-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.read-more {
+  font-family: var(--font3);
+  color: var(--main-details, #808080);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: all 0.3s ease;
+}
+
+.blog-card:hover .read-more {
+  color: var(--htb-green, #7fff00);
+}
+
+.read-more-arrow {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--main-details, #808080);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.blog-card:hover .read-more-arrow {
+  color: var(--htb-green, #7fff00);
+  transform: translateX(4px);
 }
 
 .no-results {
   font-family: var(--font3);
-  color: var(--main-details);
+  color: var(--main-details, #808080);
+  font-size: 1rem;
 }
 
-/* Sort Select Styles */
-.sort-label {
-  font-family: var(--font3);
-  color: var(--main-dsc);
-  font-size: 0.95rem;
-  margin-right: 0.25rem;
-  /* Align label vertically */
-  display: flex;
-  align-items: center;
-  height: 2.5rem;
-}
-
-.sort-select {
-  font-family: var(--font3);
-  background-color: var(--dark-alt2);
-  color: var(--main-dsc);
-  border: 1px solid var(--kdeD);
-  border-radius: 0.375rem;
-  padding: 0.5rem 1.5rem 0.5rem 0.75rem; /* Match input vertical padding */
-  font-size: 0.95rem;
-  outline: none;
-  transition: border-color 0.2s;
-  height: 2.5rem; /* Match search input height */
-  min-width: 120px;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  /* Remove default select arrow for consistency if desired: */
-  /* appearance: none; */
-}
-.sort-select:focus {
-  border-color: var(--htb-green);
-}
-
-/* Mobile responsive adjustments */
-@media (max-width: 1024px) {
-  .flex {
-    flex-direction: column;
+/* Mobile responsive */
+@media (min-width: 640px) {
+  .blog-hero-content-header {
+    padding-left: 32px;
+    padding-right: 32px;
   }
-  
-  .w-1\/4 {
-    width: 100%;
-    margin-bottom: 2rem;
-  }
-  
-  .sticky {
-    position: relative;
+}
+
+@media (min-width: 1024px) {
+  .blog-hero-content-header {
+    padding-left: 48px;
+    padding-right: 48px;
   }
 }
 
 @media (max-width: 768px) {
-  .flex {
-    flex-direction: column;
+  .tag-filters-compact {
+    padding: 0 1rem;
   }
   
-  .w-48 {
-    width: 100%;
-    height: 12rem;
+  .tag-btn-compact,
+  .tag-show-more {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
   }
-  
-  article .flex {
-    flex-direction: column;
+
+  .blog-card {
+    margin: 0 0.5rem;
   }
-  
-  .blog-image {
-    width: 100%;
-    height: 12rem;
+
+  .blog-card:hover {
+    transform: translateY(-4px) scale(1.01);
+  }
+
+  .blog-card-content {
+    padding: 1.25rem;
+  }
+
+  .blog-card-title {
+    font-size: 1.1rem;
+  }
+
+  .blog-card-description {
+    font-size: 0.85rem;
   }
 }
 </style>
