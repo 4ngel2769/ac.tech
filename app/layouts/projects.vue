@@ -1,5 +1,13 @@
 <template>
   <div class="flex flex-col min-h-screen">
+    <!-- Page Loader with door animation -->
+    <PageLoader 
+      :is-loading="isLoading" 
+      :loading-text="loadingText"
+      :is-closing="isClosing"
+      :is-opening="isOpening"
+    />
+
     <!-- Header -->
     <div class="flex navbar" style="justify-content: center">
       <Header />
@@ -41,20 +49,18 @@
 </template>
 
 <script setup>
-const route = useRoute();
+import PageLoader from '~/components/ui/PageLoader.vue'
 
-// Handle potential SSR issues gracefully
-const isProjectsPage = computed(() => {
-  try {
-    return route?.path === "/projects" || route?.path === "/projects/";
-  } catch (error) {
-    // Log error in development
-    if (process.dev) {
-      console.warn("Route access during SSR:", error);
-    }
-    return true; // Safe fallback
-  }
-});
+const route = useRoute()
+const { isLoading, loadingText, isClosing, isOpening, showLoader, hideLoader } = usePageLoader()
+
+// Show loader on initial page load
+onMounted(() => {
+  // Small delay to ensure smooth initial load
+  setTimeout(() => {
+    hideLoader(100)
+  }, 200)
+})
 </script>
 
 <style scoped>

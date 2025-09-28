@@ -1,5 +1,13 @@
 <template>
   <div class="flex flex-col min-h-screen">
+    <!-- Page Loader -->
+    <PageLoader 
+      :is-loading="isLoading" 
+      :loading-text="loadingText"
+      :is-closing="isClosing"
+      :is-opening="isOpening"
+    />
+
     <!-- Header -->
     <div class="flex navbar" style="justify-content: center;">
       <Header />
@@ -8,7 +16,7 @@
     <!-- Main content -->
     <div class="flex-grow px-4 md:px-6 lg:px-8 blogPage">
       <div class="max-w-7xl mx-auto">
-        <!-- Breadcrumbs -->
+        <!-- Old Breadcrumbs -->
         <!-- <nav class="z-50" aria-label="Breadcrumb">
           <ol class="flex items-center space-x-2 text-sm text-gray-500">
             <li>
@@ -41,17 +49,15 @@
 </template>
 
 <script setup>
-const route = useRoute()
+import PageLoader from '~/components/ui/PageLoader.vue'
 
-const isBlogPage = computed(() => {
-  try {
-    return route?.path === '/blog' || route?.path === '/blog/'
-  } catch (error) {
-    if (process.dev) {
-      console.warn('Route access during SSR:', error)
-    }
-    return true
-  }
+const route = useRoute()
+const { isLoading, loadingText, isClosing, isOpening, showLoader, hideLoader } = usePageLoader()
+
+onMounted(() => {
+  setTimeout(() => {
+    hideLoader(100)
+  }, 200)
 })
 </script>
 

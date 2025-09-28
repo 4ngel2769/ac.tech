@@ -25,14 +25,12 @@
               class="px-4 py-2 border rounded-lg flex-grow backdrop-blur-sm bg-black/10"
               style="font-family: var(--font3); color: var(--text-color);"
             />
-            <select
+            <CustomSelect
               v-model="sortBy"
-              class="px-4 py-2 border rounded-lg backdrop-blur-sm bg-black/10"
-              style="font-family: var(--font3); color: var(--text-color);"
-            >
-              <option value="date">Date</option>
-              <option value="headline">Title</option>
-            </select>
+              :options="sortOptions"
+              placeholder="Sort by"
+              class="w-48"
+            />
           </div>
         </div>
       </div>
@@ -59,9 +57,8 @@
         <div
           v-for="project in visibleProjects"
           :key="project._path"
-          class="project-card enhanced-card"
+          class="project-card"
         >
-          <div class="card-glow-border"></div>
           <NuxtLink :to="project._path" class="project-content-wrapper">
             <!-- Image Container with optimized loading -->
             <div class="project-image-container">
@@ -83,7 +80,6 @@
                   <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"></path>
                 </svg>
               </div>
-              <div class="project-image-overlay"></div>
             </div>
 
             <!-- Content -->
@@ -141,6 +137,7 @@
 
 <script setup>
 import Fuse from "fuse.js";
+import CustomSelect from '~/components/ui/CustomSelect.vue';
 
 definePageMeta({
   layout: "projects",
@@ -168,11 +165,19 @@ useSeoMeta({
 });
 
 const searchQuery = ref("");
-const sortBy = ref("date");
+const sortBy = ref("date-desc");
 const projectsPerPage = 9;
 const currentPage = ref(1);
 const isLoading = ref(false);
 const hasMoreProjects = ref(true);
+
+// Sort options for the dropdown
+const sortOptions = [
+  { value: 'date-desc', label: 'Date (Newest)' },
+  { value: 'date-asc', label: 'Date (Oldest)' },
+  { value: 'title-asc', label: 'Title (A-Z)' },
+  { value: 'title-desc', label: 'Title (Z-A)' }
+];
 
 // Fetch all project content with error handling
 const { data: allProjects, error } = await useAsyncData("projects", () =>
@@ -208,10 +213,18 @@ const filteredProjects = computed(() => {
 
   // Apply sorting
   return filtered.sort((a, b) => {
-    if (sortBy.value === "date") {
-      return new Date(b.date) - new Date(a.date);
+    switch (sortBy.value) {
+      case 'date-desc':
+        return new Date(b.date) - new Date(a.date);
+      case 'date-asc':
+        return new Date(a.date) - new Date(b.date);
+      case 'title-asc':
+        return (a.headline || '').localeCompare(b.headline || '');
+      case 'title-desc':
+        return (b.headline || '').localeCompare(a.headline || '');
+      default:
+        return new Date(b.date) - new Date(a.date);
     }
-    return (a.headline || "").localeCompare(b.headline || "");
   });
 });
 
@@ -303,8 +316,8 @@ const formatDate = (date) => {
   margin-left: calc(-50vw + 50%);
   padding: 0 0 2.5rem 0;
   position: relative;
-  z-index: 1;
-  overflow: hidden;
+  z-index: 1000;
+  overflow: visible;
   min-height: 320px;
   height: 340px;
   display: flex;
@@ -352,6 +365,15 @@ const formatDate = (date) => {
   padding-left: 20px;
   padding-right: 20px;
   box-sizing: border-box;
+  overflow: visible;
+}
+
+.projects-hero-content-header .custom-select {
+  z-index: 200;
+}
+
+.projects-hero-content-header .select-dropdown {
+  z-index: 1000;
 }
 
 /* Breadcrumbs Styles */
@@ -395,54 +417,30 @@ const formatDate = (date) => {
   font-weight: 600;
 }
 
-/* Enhanced Project Cards - Similar to Blog */
+/* Simplified Project Cards */
 .project-card {
-  background: linear-gradient(145deg, #1e1e1e 0%, #161616 100%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 1rem;
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 0.75rem;
   overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: border-color 0.2s ease;
   height: 100%;
-  position: relative;
-  box-shadow: 
-    0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
-}
-
-.project-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, rgba(127, 255, 0, 0.02) 0%, transparent 50%, rgba(127, 255, 0, 0.02) 100%);
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  max-height: 420px;
 }
 
 .project-card:hover {
-  transform: translateY(-8px) scale(1.02);
-  border-color: rgba(127, 255, 0, 0.3);
-  box-shadow: 
-    0 20px 40px -12px rgba(0, 0, 0, 0.4),
-    0 8px 16px -4px rgba(127, 255, 0, 0.1),
-    0 0 0 1px rgba(127, 255, 0, 0.1);
-}
-
-.project-card:hover::before {
-  opacity: 1;
+  border-color: #3a3a3a;
 }
 
 .project-content-wrapper {
-  position: relative;
-  z-index: 2;
   display: flex;
   flex-direction: column;
   height: 100%;
   text-decoration: none;
   color: inherit;
+  flex: 1;
 }
 
 .project-image-container {
@@ -450,89 +448,60 @@ const formatDate = (date) => {
   width: 100%;
   aspect-ratio: 16/9;
   overflow: hidden;
+  background: #222;
+  flex-shrink: 0;
+  height: 200px;
 }
 
 .project-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  filter: brightness(0.9) contrast(1.1);
+  transition: opacity 0.2s ease;
 }
 
 .project-card:hover .project-image {
-  transform: scale(1.1);
-  filter: brightness(1) contrast(1.2);
-}
-
-.project-image-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    transparent 60%,
-    rgba(0, 0, 0, 0.4) 80%,
-    rgba(0, 0, 0, 0.7) 100%
-  );
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
-.project-card:hover .project-image-overlay {
-  opacity: 1;
+  opacity: 0.9;
 }
 
 .project-image-placeholder {
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, #2a2a2a 0%, #1e1e1e 100%);
+  background: #2a2a2a;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
-}
-
-.project-image-placeholder::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.02) 50%, transparent 70%);
 }
 
 .placeholder-icon {
-  width: 3rem;
-  height: 3rem;
-  color: var(--main-details, #808080);
-  opacity: 0.6;
+  width: 2rem;
+  height: 2rem;
+  color: #666;
 }
 
 .project-content {
-  padding: 1.5rem;
+  padding: 1.25rem;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  background: linear-gradient(180deg, rgba(30, 30, 30, 0.95) 0%, rgba(20, 20, 20, 0.98) 100%);
+  background: #1a1a1a;
+  justify-content: space-between;
+  min-height: 0;
 }
 
 .project-meta {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
   gap: 1rem;
+  flex-shrink: 0;
 }
 
 .project-date {
-  color: var(--main-details, #808080);
+  color: #888;
   font-family: var(--font3);
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 500;
   flex-shrink: 0;
   text-transform: uppercase;
@@ -541,72 +510,56 @@ const formatDate = (date) => {
 
 .project-tags-display {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.4rem;
   flex-wrap: wrap;
   align-items: center;
 }
 
 .project-tag {
-  background: linear-gradient(135deg, rgba(127, 255, 0, 0.15) 0%, rgba(127, 255, 0, 0.1) 100%);
-  color: var(--htb-green, #7fff00);
-  padding: 0.2rem 0.5rem;
-  border-radius: 0.375rem;
-  font-size: 0.7rem;
+  background: #2a2a2a;
+  color: #ccc;
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.25rem;
+  font-size: 0.65rem;
   font-family: var(--font3);
-  font-weight: 600;
-  border: 1px solid rgba(127, 255, 0, 0.2);
-  transition: all 0.3s ease;
+  font-weight: 500;
+  border: 1px solid #3a3a3a;
 }
 
 .more-tags-indicator {
-  color: var(--main-details, #808080);
-  font-size: 0.7rem;
+  color: #888;
+  font-size: 0.65rem;
   font-family: var(--font3);
   font-weight: 500;
-}
-
-.project-card:hover .project-tag {
-  background: linear-gradient(135deg, rgba(127, 255, 0, 0.25) 0%, rgba(127, 255, 0, 0.15) 100%);
-  border-color: rgba(127, 255, 0, 0.4);
-  transform: translateY(-1px);
 }
 
 .project-title {
   font-family: var(--font3);
   color: #ffffff;
-  font-size: 1.25rem;
-  font-weight: 700;
-  line-height: 1.4;
-  margin-bottom: 0.75rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 0.5rem;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  transition: color 0.3s ease;
-}
-
-.project-card:hover .project-title {
-  color: var(--htb-green, #7fff00);
+  flex-shrink: 0;
 }
 
 .project-excerpt {
   font-family: var(--font3);
-  color: #b3b3b3;
-  font-size: 0.9rem;
-  line-height: 1.6;
+  color: #ccc;
+  font-size: 0.85rem;
+  line-height: 1.5;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
-  line-clamp: 3;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   flex-grow: 1;
-  margin-bottom: 1rem;
-  transition: color 0.3s ease;
-}
-
-.project-card:hover .project-excerpt {
-  color: #d1d1d1;
+  margin-bottom: 0.75rem;
 }
 
 .project-footer {
@@ -614,34 +567,35 @@ const formatDate = (date) => {
   align-items: center;
   justify-content: space-between;
   margin-top: auto;
-  padding-top: 1rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 0.75rem;
+  border-top: 1px solid #2a2a2a;
+  flex-shrink: 0;
 }
 
 .read-more {
   font-family: var(--font3);
-  color: var(--main-details, #808080);
-  font-size: 0.85rem;
-  font-weight: 600;
+  color: #888;
+  font-size: 0.8rem;
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  transition: all 0.3s ease;
+  letter-spacing: 0.05em;
+  transition: color 0.2s ease;
 }
 
 .project-card:hover .read-more {
-  color: var(--htb-green, #7fff00);
+  color: #ccc;
 }
 
 .read-more-arrow {
-  width: 1.25rem;
-  height: 1.25rem;
-  color: var(--main-details, #808080);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 0.9rem;
+  height: 0.9rem;
+  color: #888;
+  transition: all 0.2s ease;
 }
 
 .project-card:hover .read-more-arrow {
-  color: var(--htb-green, #7fff00);
-  transform: translateX(4px);
+  color: #ccc;
+  transform: translateX(2px);
 }
 
 /* Loading spinner */
@@ -649,7 +603,7 @@ const formatDate = (date) => {
   width: 2rem;
   height: 2rem;
   border: 2px solid rgba(255, 255, 255, 0.1);
-  border-top: 2px solid var(--htb-green, #7fff00);
+  border-top: 2px solid #666;
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
@@ -663,7 +617,7 @@ const formatDate = (date) => {
 .eor {
   font-weight: 300;
   font-family: var(--font3);
-  color: var(--main-details, #808080);
+  color: #888;
 }
 
 /* Mobile responsive */
@@ -684,37 +638,54 @@ const formatDate = (date) => {
 @media (max-width: 768px) {
   .project-card {
     margin: 0 0.5rem;
+    max-height: 380px;
   }
 
-  .project-card:hover {
-    transform: translateY(-4px) scale(1.01);
-  }
-
-  .project-content {
-    padding: 1.25rem;
-  }
-
-  .project-title {
-    font-size: 1.1rem;
-  }
-
-  .project-excerpt {
-    font-size: 0.85rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .project-title {
-    font-size: 1rem;
-  }
-
-  .project-tag {
-    font-size: 0.65rem;
-    padding: 0.125rem 0.375rem;
+  .project-image-container {
+    height: 160px;
   }
 
   .project-content {
     padding: 1rem;
+  }
+
+  .project-title {
+    font-size: 1rem;
+    line-height: 1.25;
+  }
+
+  .project-excerpt {
+    font-size: 0.8rem;
+    line-height: 1.4;
+  }
+}
+
+@media (max-width: 480px) {
+  .project-card {
+    max-height: 360px;
+  }
+
+  .project-image-container {
+    height: 140px;
+  }
+
+  .project-title {
+    font-size: 0.95rem;
+  }
+
+  .project-tag {
+    font-size: 0.6rem;
+    padding: 0.15rem 0.3rem;
+  }
+
+  .project-content {
+    padding: 0.875rem;
+  }
+
+  .project-excerpt {
+    font-size: 0.75rem;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
   }
 }
 </style>

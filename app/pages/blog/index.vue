@@ -24,14 +24,12 @@
               class="px-4 py-2 border rounded-lg flex-grow backdrop-blur-sm bg-black/10"
               style="font-family: var(--font3); color: var(--text-color);"
             />
-            <select
+            <CustomSelect
               v-model="sortOrder"
-              class="px-4 py-2 border rounded-lg backdrop-blur-sm bg-black/10"
-              style="font-family: var(--font3); color: var(--text-color);"
-            >
-              <option value="newest">Newest</option>
-              <option value="oldest">Oldest</option>
-            </select>
+              :options="sortOptions"
+              placeholder="Sort by"
+              class="w-48"
+            />
           </div>
         </div>
       </div>
@@ -43,12 +41,11 @@
       :only="['title', 'description', 'date', 'tags', '_path', 'socialImage']"
       :sort="{ date: sortOrder === 'newest' ? -1 : 1 }"
     >
-      <template v-slot="{ data }">
+      <template #default="{ data }">
         <Section id="main" class="!pt-0">
           <div class="space-y-8">
-            <!-- Compact Tag Filters -->
-            <div v-if="allAvailableTags.length > 0" class="tag-filters-section">
-              <!-- Always show first few tags -->
+            <!-- Tag Filters -->
+            <div v-if="allAvailableTags.length" class="tag-filters-section">
               <div class="tag-filters-compact">
                 <button
                   v-for="tag in displayedTags"
@@ -61,8 +58,6 @@
                 >
                   {{ tag }}
                 </button>
-                
-                <!-- Show more/less button -->
                 <button
                   v-if="allAvailableTags.length > 6"
                   @click="showAllTags = !showAllTags"
@@ -71,21 +66,17 @@
                   {{ showAllTags ? 'Show Less' : `+${allAvailableTags.length - 6} More` }}
                 </button>
               </div>
-
-              <!-- Clear filters if any selected -->
-              <div v-if="selectedTags.length > 0" class="mt-2 text-center">
+              <div v-if="selectedTags.length" class="mt-2 text-center">
                 <button @click="selectedTags = []" class="clear-filters-compact">
                   Clear filters ({{ selectedTags.length }})
                 </button>
               </div>
             </div>
 
-            <!-- Results count (only show when filtering) -->
             <div v-if="filteredAndSortedBlogs(data).length !== data.length" class="results-count">
               {{ filteredAndSortedBlogs(data).length }} of {{ data.length }} articles
             </div>
 
-            <!-- Blog Grid -->
             <div v-if="filteredAndSortedBlogs(data).length === 0" class="text-center py-16">
               <p class="no-results">No articles found matching your criteria.</p>
             </div>
@@ -98,7 +89,6 @@
               >
                 <NuxtLink :to="blog._path" class="blog-card-link">
                   <div class="blog-card-image">
-                    <!-- Updated image handling with NuxtImg -->
                     <NuxtImg
                       v-if="blog.socialImage?.src"
                       :src="blog.socialImage.src"
@@ -122,7 +112,7 @@
                   <div class="blog-card-content">
                     <div class="blog-card-meta">
                       <span class="blog-card-date">{{ formatDate(blog.date) }}</span>
-                      <div v-if="blog.tags && blog.tags.length > 0" class="blog-card-tags">
+                      <div v-if="blog.tags?.length" class="blog-card-tags">
                         <span
                           v-for="tag in blog.tags.slice(0, 2)"
                           :key="tag"
@@ -156,17 +146,22 @@
 
 <script setup>
 import Fuse from "fuse.js";
+import CustomSelect from '~/components/ui/CustomSelect.vue';
 
-definePageMeta({
-  layout: 'blog'
-});
+definePageMeta({ layout: 'blog' });
 
 const searchQuery = ref('');
 const selectedTags = ref([]);
 const showAllTags = ref(false);
 const sortOrder = ref('newest');
 
-// Format the date
+const sortOptions = [
+  { value: 'newest', label: 'Date (Newest)' },
+  { value: 'oldest', label: 'Date (Oldest)' },
+  { value: 'title-asc', label: 'Title (A-Z)' },
+  { value: 'title-desc', label: 'Title (Z-A)' }
+];
+
 const formatDate = (dateString) => {
   if (!dateString) return "";
   const date = new Date(dateString);
@@ -177,52 +172,38 @@ const formatDate = (dateString) => {
   });
 };
 
-// Get all available tags from blog posts
-const { data: blogData } = await useAsyncData('blog-tags', () => 
+const { data: blogData } = await useAsyncData('blog-tags', () =>
   queryContent('/blog').only(['tags']).find()
 );
 
-// Extract unique tags
 const allAvailableTags = computed(() => {
   if (!blogData.value) return [];
-  
   const tags = new Set();
   blogData.value.forEach(blog => {
-    if (blog.tags && Array.isArray(blog.tags)) {
+    if (Array.isArray(blog.tags)) {
       blog.tags.forEach(tag => tags.add(tag));
     }
   });
-  
   return Array.from(tags).sort();
 });
 
-// Show limited tags by default
-const displayedTags = computed(() => {
-  return showAllTags.value ? allAvailableTags.value : allAvailableTags.value.slice(0, 6);
-});
+const displayedTags = computed(() =>
+  showAllTags.value ? allAvailableTags.value : allAvailableTags.value.slice(0, 6)
+);
 
-// Toggle tag selection
 const toggleTag = (tag) => {
-  const index = selectedTags.value.indexOf(tag);
-  if (index > -1) {
-    selectedTags.value.splice(index, 1);
-  } else {
-    selectedTags.value.push(tag);
-  }
+  const idx = selectedTags.value.indexOf(tag);
+  if (idx > -1) selectedTags.value.splice(idx, 1);
+  else selectedTags.value.push(tag);
 };
 
-// Filter and sort blogs
 const filteredAndSortedBlogs = (blogs) => {
   let filtered = blogs;
-
-  // Apply tag filter
-  if (selectedTags.value.length > 0) {
-    filtered = filtered.filter(blog => 
+  if (selectedTags.value.length) {
+    filtered = filtered.filter(blog =>
       blog.tags && blog.tags.some(tag => selectedTags.value.includes(tag))
     );
   }
-
-  // Apply search filter
   if (searchQuery.value.trim()) {
     const fuse = new Fuse(filtered, {
       keys: ['title', 'description', 'tags'],
@@ -231,15 +212,19 @@ const filteredAndSortedBlogs = (blogs) => {
     });
     filtered = fuse.search(searchQuery.value).map(result => result.item);
   }
-
-  // Sort by date
   return [...filtered].sort((a, b) => {
-    if (!a.date || !b.date) return 0;
-    const dateA = new Date(a.date);
-    const dateB = new Date(b.date);
-    return sortOrder.value === 'newest'
-      ? dateB - dateA
-      : dateA - dateB;
+    switch (sortOrder.value) {
+      case 'newest':
+        return new Date(b.date || 0) - new Date(a.date || 0);
+      case 'oldest':
+        return new Date(a.date || 0) - new Date(b.date || 0);
+      case 'title-asc':
+        return (a.title || '').localeCompare(b.title || '');
+      case 'title-desc':
+        return (b.title || '').localeCompare(a.title || '');
+      default:
+        return 0;
+    }
   });
 };
 
@@ -248,25 +233,24 @@ useSeoMeta({
   description: 'Explore articles about cybersecurity, IoT development, and embedded systems.',
   ogTitle: 'Blog | Angel Capra',
   ogDescription: 'Explore articles about cybersecurity, IoT development, and embedded systems.',
-})
+});
 </script>
 
 <style scoped>
-/* Blog Hero Header with enhanced gradient fade */
+/* --- Hero Header --- */
 .blog-hero-header {
   margin: 0;
   width: 100vw;
   margin-left: calc(-50vw + 50%);
   padding: 0 0 2.5rem 0;
   position: relative;
-  z-index: 1;
-  overflow: hidden;
+  z-index: 1000;
+  overflow: visible;
   min-height: 320px;
   height: 340px;
   display: flex;
   align-items: flex-end;
 }
-
 .blog-hero-header::before {
   content: "";
   position: absolute;
@@ -281,7 +265,6 @@ useSeoMeta({
   z-index: 1;
   pointer-events: none;
 }
-
 .blog-hero-header::after {
   content: "";
   position: absolute;
@@ -298,7 +281,6 @@ useSeoMeta({
   z-index: 2;
   pointer-events: none;
 }
-
 .blog-hero-content-header {
   position: relative;
   z-index: 3;
@@ -308,9 +290,16 @@ useSeoMeta({
   padding-left: 20px;
   padding-right: 20px;
   box-sizing: border-box;
+  overflow: visible;
+}
+.blog-hero-content-header .custom-select {
+  z-index: 200;
+}
+.blog-hero-content-header .select-dropdown {
+  z-index: 1000;
 }
 
-/* Breadcrumbs */
+/* --- Breadcrumbs --- */
 .blog-breadcrumb {
   font-family: var(--font3);
   font-size: 1.1rem;
@@ -321,7 +310,6 @@ useSeoMeta({
   z-index: 10;
   position: relative;
 }
-
 .blog-breadcrumb ol {
   display: flex;
   align-items: center;
@@ -329,33 +317,28 @@ useSeoMeta({
   padding: 0;
   margin: 0;
 }
-
 .breadcrumb-link {
   color: var(--breadcrumbs, #a7a7a7);
   text-decoration: none;
   transition: color 0.2s;
 }
-
 .breadcrumb-link:hover {
   color: var(--breadcrumbs-main, #8bbbe2);
   text-decoration: underline;
 }
-
 .breadcrumb-separator {
   margin: 0 0.5em;
   color: var(--breadcrumbs, #a7a7a7);
 }
-
 .breadcrumb-current {
   color: var(--breadcrumbs-main, #8bbbe2);
   font-weight: 600;
 }
 
-/* Compact Tag Filters */
+/* --- Tag Filters --- */
 .tag-filters-section {
   margin: 1.5rem 0;
 }
-
 .tag-filters-compact {
   display: flex;
   flex-wrap: wrap;
@@ -365,7 +348,6 @@ useSeoMeta({
   max-width: 900px;
   margin: 0 auto;
 }
-
 .tag-btn-compact {
   padding: 0.375rem 0.75rem;
   border-radius: 0.25rem;
@@ -376,23 +358,19 @@ useSeoMeta({
   border: none;
   cursor: pointer;
 }
-
 .tag-active {
   background-color: var(--htb-green, #7fff00);
   color: #000;
 }
-
 .tag-inactive {
   background-color: rgba(255, 255, 255, 0.08);
   color: var(--main-dsc, #ccc);
   border: 1px solid rgba(255, 255, 255, 0.15);
 }
-
 .tag-inactive:hover {
   background-color: rgba(255, 255, 255, 0.15);
   color: #fff;
 }
-
 .tag-show-more {
   padding: 0.375rem 0.75rem;
   border-radius: 0.25rem;
@@ -405,12 +383,10 @@ useSeoMeta({
   cursor: pointer;
   transition: all 0.2s ease;
 }
-
 .tag-show-more:hover {
   background-color: rgba(127, 255, 0, 0.2);
   border-color: rgba(127, 255, 0, 0.5);
 }
-
 .clear-filters-compact {
   color: var(--main-details, #808080);
   background: none;
@@ -422,12 +398,9 @@ useSeoMeta({
   padding: 0.25rem 0.5rem;
   transition: color 0.2s;
 }
-
 .clear-filters-compact:hover {
   color: var(--htb-green, #7fff00);
 }
-
-/* Results count */
 .results-count {
   text-align: center;
   color: var(--main-details, #808080);
@@ -436,7 +409,7 @@ useSeoMeta({
   margin: 0.5rem 0;
 }
 
-/* Enhanced Blog Cards */
+/* --- Blog Cards --- */
 .blog-card {
   background: linear-gradient(145deg, #1e1e1e 0%, #161616 100%);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -449,7 +422,6 @@ useSeoMeta({
     0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
-
 .blog-card::before {
   content: '';
   position: absolute;
@@ -462,7 +434,6 @@ useSeoMeta({
   transition: opacity 0.4s ease;
   z-index: 1;
 }
-
 .blog-card:hover {
   transform: translateY(-8px) scale(1.02);
   border-color: rgba(127, 255, 0, 0.3);
@@ -471,11 +442,9 @@ useSeoMeta({
     0 8px 16px -4px rgba(127, 255, 0, 0.1),
     0 0 0 1px rgba(127, 255, 0, 0.1);
 }
-
 .blog-card:hover::before {
   opacity: 1;
 }
-
 .blog-card-link {
   display: flex;
   flex-direction: column;
@@ -485,14 +454,12 @@ useSeoMeta({
   position: relative;
   z-index: 2;
 }
-
 .blog-card-image {
   position: relative;
   width: 100%;
   aspect-ratio: 16/9;
   overflow: hidden;
 }
-
 .blog-image {
   width: 100%;
   height: 100%;
@@ -500,12 +467,10 @@ useSeoMeta({
   transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   filter: brightness(0.9) contrast(1.1);
 }
-
 .blog-card:hover .blog-image {
   transform: scale(1.1);
   filter: brightness(1) contrast(1.2);
 }
-
 .blog-card-overlay {
   position: absolute;
   top: 0;
@@ -522,11 +487,9 @@ useSeoMeta({
   opacity: 0;
   transition: opacity 0.4s ease;
 }
-
 .blog-card:hover .blog-card-overlay {
   opacity: 1;
 }
-
 .blog-image-placeholder {
   width: 100%;
   height: 100%;
@@ -536,7 +499,6 @@ useSeoMeta({
   justify-content: center;
   position: relative;
 }
-
 .blog-image-placeholder::before {
   content: '';
   position: absolute;
@@ -546,14 +508,12 @@ useSeoMeta({
   bottom: 0;
   background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.02) 50%, transparent 70%);
 }
-
 .placeholder-icon {
   width: 3rem;
   height: 3rem;
   color: var(--main-details, #808080);
   opacity: 0.6;
 }
-
 .blog-card-content {
   padding: 1.5rem;
   display: flex;
@@ -561,7 +521,6 @@ useSeoMeta({
   flex-grow: 1;
   background: linear-gradient(180deg, rgba(30, 30, 30, 0.95) 0%, rgba(20, 20, 20, 0.98) 100%);
 }
-
 .blog-card-meta {
   display: flex;
   justify-content: space-between;
@@ -569,7 +528,6 @@ useSeoMeta({
   margin-bottom: 1rem;
   gap: 1rem;
 }
-
 .blog-card-date {
   color: var(--main-details, #808080);
   font-family: var(--font3);
@@ -579,14 +537,12 @@ useSeoMeta({
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
-
 .blog-card-tags {
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
   align-items: center;
 }
-
 .blog-card-tag {
   background: linear-gradient(135deg, rgba(127, 255, 0, 0.15) 0%, rgba(127, 255, 0, 0.1) 100%);
   color: var(--htb-green, #7fff00);
@@ -598,20 +554,17 @@ useSeoMeta({
   border: 1px solid rgba(127, 255, 0, 0.2);
   transition: all 0.3s ease;
 }
-
 .more-tags-indicator {
   color: var(--main-details, #808080);
   font-size: 0.7rem;
   font-family: var(--font3);
   font-weight: 500;
 }
-
 .blog-card:hover .blog-card-tag {
   background: linear-gradient(135deg, rgba(127, 255, 0, 0.25) 0%, rgba(127, 255, 0, 0.15) 100%);
   border-color: rgba(127, 255, 0, 0.4);
   transform: translateY(-1px);
 }
-
 .blog-card-title {
   font-family: var(--font3);
   color: #ffffff;
@@ -626,11 +579,9 @@ useSeoMeta({
   overflow: hidden;
   transition: color 0.3s ease;
 }
-
 .blog-card:hover .blog-card-title {
   color: var(--htb-green, #7fff00);
 }
-
 .blog-card-description {
   font-family: var(--font3);
   color: #b3b3b3;
@@ -645,11 +596,9 @@ useSeoMeta({
   margin-bottom: 1rem;
   transition: color 0.3s ease;
 }
-
 .blog-card:hover .blog-card-description {
   color: #d1d1d1;
 }
-
 .blog-card-footer {
   display: flex;
   align-items: center;
@@ -658,7 +607,6 @@ useSeoMeta({
   padding-top: 1rem;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
-
 .read-more {
   font-family: var(--font3);
   color: var(--main-details, #808080);
@@ -668,71 +616,59 @@ useSeoMeta({
   letter-spacing: 0.1em;
   transition: all 0.3s ease;
 }
-
 .blog-card:hover .read-more {
   color: var(--htb-green, #7fff00);
 }
-
 .read-more-arrow {
   width: 1.25rem;
   height: 1.25rem;
   color: var(--main-details, #808080);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
 .blog-card:hover .read-more-arrow {
   color: var(--htb-green, #7fff00);
   transform: translateX(4px);
 }
-
 .no-results {
   font-family: var(--font3);
   color: var(--main-details, #808080);
   font-size: 1rem;
 }
 
-/* Mobile responsive */
+/* --- Responsive --- */
 @media (min-width: 640px) {
   .blog-hero-content-header {
     padding-left: 32px;
     padding-right: 32px;
   }
 }
-
 @media (min-width: 1024px) {
   .blog-hero-content-header {
     padding-left: 48px;
     padding-right: 48px;
   }
 }
-
 @media (max-width: 768px) {
   .tag-filters-compact {
     padding: 0 1rem;
   }
-  
   .tag-btn-compact,
   .tag-show-more {
     font-size: 0.75rem;
     padding: 0.25rem 0.5rem;
   }
-
   .blog-card {
     margin: 0 0.5rem;
   }
-
   .blog-card:hover {
     transform: translateY(-4px) scale(1.01);
   }
-
   .blog-card-content {
     padding: 1.25rem;
   }
-
   .blog-card-title {
     font-size: 1.1rem;
   }
-
   .blog-card-description {
     font-size: 0.85rem;
   }
