@@ -4,17 +4,17 @@
     <!-- Projects Hero Header -->
     <div class="projects-hero-header">
       <div class="projects-hero-content-header">
-    <nav class="projects-breadcrumb" aria-label="Breadcrumb">
-      <ol>
-        <li>
-          <NuxtLink to="/" class="breadcrumb-link">Home</NuxtLink>
-        </li>
-        <li class="breadcrumb-separator">/</li>
-        <li>
-          <span class="breadcrumb-current">Projects</span>
-        </li>
-      </ol>
-    </nav>
+        <nav class="projects-breadcrumb" aria-label="Breadcrumb">
+          <ol>
+            <li>
+              <NuxtLink to="/" class="breadcrumb-link">Home</NuxtLink>
+            </li>
+            <li class="breadcrumb-separator">/</li>
+            <li>
+              <span class="breadcrumb-current">Projects</span>
+            </li>
+          </ol>
+        </nav>
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <h1 class="text-4xl font-bold">My Projects</h1>
           <div class="flex gap-4">
@@ -59,52 +59,60 @@
         <div
           v-for="project in visibleProjects"
           :key="project._path"
-          class="project-card notification"
+          class="project-card enhanced-card"
         >
-          <div class="card__border"></div>
-          <div class="card-inner">
-            <div class="ray"></div>
-            
-            <NuxtLink :to="project._path" class="project-content-wrapper">
-              <!-- Image Container with optimized loading -->
-              <div class="project-image-container">
-                <NuxtImg
-                  v-if="project.socialImage?.src"
-                  :src="project.socialImage.src"
-                  :alt="project.socialImage.alt || project.headline"
-                  class="project-image"
-                  width="350"
-                  height="197"
-                  quality="75"
-                  format="webp"
-                  loading="lazy"
-                  placeholder
-                  sizes="sm:350px md:300px lg:280px"
-                />
-                <div v-else class="project-image-placeholder">
-                  <span class="text-gray-400">No image</span>
-                </div>
+          <div class="card-glow-border"></div>
+          <NuxtLink :to="project._path" class="project-content-wrapper">
+            <!-- Image Container with optimized loading -->
+            <div class="project-image-container">
+              <NuxtImg
+                v-if="project.socialImage?.src"
+                :src="project.socialImage.src"
+                :alt="project.socialImage.alt || project.headline"
+                class="project-image"
+                width="400"
+                height="225"
+                quality="75"
+                format="webp"
+                loading="lazy"
+                placeholder
+                sizes="sm:400px md:350px lg:300px"
+              />
+              <div v-else class="project-image-placeholder">
+                <svg class="placeholder-icon" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"></path>
+                </svg>
               </div>
+              <div class="project-image-overlay"></div>
+            </div>
 
-              <!-- Content -->
-              <div class="project-content">
-                <h2 class="project-title">{{ project.headline }}</h2>
-                <p class="project-excerpt">{{ project.excerpt }}</p>
-                <!-- <div class="project-tags">
+            <!-- Content -->
+            <div class="project-content">
+              <div class="project-meta">
+                <span class="project-date">{{ formatDate(project.date) }}</span>
+                <div v-if="project.tags && project.tags.length > 0" class="project-tags-display">
                   <span
-                    v-for="tag in project.tags"
+                    v-for="tag in project.tags.slice(0, 2)"
                     :key="tag"
                     class="project-tag"
                   >
                     {{ tag }}
                   </span>
-                </div> -->
-                <div class="project-date">
-                  {{ formatDate(project.date) }}
+                  <span v-if="project.tags.length > 2" class="more-tags-indicator">
+                    +{{ project.tags.length - 2 }}
+                  </span>
                 </div>
               </div>
-            </NuxtLink>
-          </div>
+              <h2 class="project-title">{{ project.headline }}</h2>
+              <p class="project-excerpt">{{ project.excerpt }}</p>
+              <div class="project-footer">
+                <span class="read-more">View project</span>
+                <svg class="read-more-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+              </div>
+            </div>
+          </NuxtLink>
         </div>
       </div>
 
@@ -277,7 +285,7 @@ const formatDate = (date) => {
   try {
     return new Date(date).toLocaleDateString("en-US", {
       year: "numeric",
-      month: "long",
+      month: "short",
       day: "numeric",
     });
   } catch (e) {
@@ -288,22 +296,21 @@ const formatDate = (date) => {
 </script>
 
 <style scoped>
-/* Projects Hero Header */
+/* Projects Hero Header with enhanced gradient fade */
 .projects-hero-header {
   margin: 0;
   width: 100vw;
   margin-left: calc(-50vw + 50%);
-  padding: 2rem 0 2.5rem 0; /* Less top/bottom padding */
+  padding: 0 0 2.5rem 0;
   position: relative;
   z-index: 1;
   overflow: hidden;
-  min-height: 320px;        /* Increase vertical space */
-  height: 340px;            /* Or set a fixed height if you prefer */
+  min-height: 320px;
+  height: 340px;
   display: flex;
-  align-items: flex-end;    /* Align content closer to the top */
+  align-items: flex-end;
 }
 
-/* Background image sticks left, scales to cover */
 .projects-hero-header::before {
   content: "";
   position: absolute;
@@ -316,20 +323,26 @@ const formatDate = (date) => {
   transform: scale(1);
   transform-origin: left center;
   z-index: 1;
+  pointer-events: none;
 }
 
-/* Optional dark overlay to match main‐page style */
 .projects-hero-header::after {
   content: "";
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background-color: rgb(11 17 16 / 60%);
+  background: linear-gradient(
+    180deg, 
+    rgba(17, 17, 18, 0.4) 0%, 
+    rgba(17, 17, 18, 0.6) 40%, 
+    rgba(17, 17, 18, 0.75) 70%,
+    rgba(17, 17, 18, 0.9) 85%,
+    #111212 100%
+  );
   z-index: 2;
   pointer-events: none;
 }
 
-/* Foreground content sits above background */
 .projects-hero-content-header {
   position: relative;
   z-index: 3;
@@ -338,266 +351,7 @@ const formatDate = (date) => {
   width: 100%;
   padding-left: 20px;
   padding-right: 20px;
-  /* Remove duplicate padding: 0 0rem; */
   box-sizing: border-box;
-}
-
-/* Optional: Increase side padding on larger screens */
-@media (min-width: 640px) {
-  .projects-hero-content-header {
-    padding-left: 32px;
-    padding-right: 32px;
-  }
-}
-@media (min-width: 1024px) {
-  .projects-hero-content-header {
-    padding-left: 48px;
-    padding-right: 48px;
-  }
-}
-
-/* --- Enhanced Notification Card with Glowing Border --- */
-.notifications {
-  width: 100%;
-  height: auto;
-  border-radius: 1rem;
-  padding: 1px;
-  background: radial-gradient(circle 230px at 0% 0%, #ffffff, #0c0d0d);
-  position: relative;
-  transition: transform 300ms ease;
-}
-
-/* Add glowing border element */
-.notification .card__border {
-  overflow: hidden;
-  pointer-events: none;
-  position: absolute;
-  z-index: -1;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: calc(100% + 2px);
-  height: calc(100% + 2px);
-  background-image: linear-gradient(
-    0deg,
-    hsl(0, 0%, 100%) -50%,
-    hsl(0, 0%, 40%) 100%
-  );
-  border-radius: 1rem;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.notification .card__border::before {
-  content: "";
-  pointer-events: none;
-  position: absolute;
-  z-index: 1;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 200%;
-  height: 10rem;
-  background-image: linear-gradient(
-    0deg,
-    hsla(0, 0%, 100%, 0) 0%,
-    hsl(277, 95%, 60%) 40%,
-    hsl(277, 95%, 60%) 60%,
-    hsla(0, 0%, 40%, 0) 100%
-  );
-  animation: rotate 8s linear infinite;
-  animation-play-state: paused;
-}
-
-@keyframes rotate {
-  to {
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
-}
-
-/* Show glow on hover */
-.notification:hover .card__border {
-  opacity: 1;
-}
-
-.notification:hover .card__border::before {
-  animation-play-state: running;
-}
-
-.notification .card-inner {
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  border-radius: 10px;
-  position: relative;
-  overflow: hidden;
-  transition: box-shadow 0.3s ease;
-}
-
-/* Add inner glow on hover */
-.notification:hover .card-inner {
-  box-shadow: 0px -16px 24px 0px rgba(184, 100, 240, 0.15) inset;
-}
-
-.notification .ray {
-  width: 180px;
-  height: 35px;
-  border-radius: 100px;
-  position: absolute;
-  background-color: #c7c7c7;
-  opacity: 0.2;
-  box-shadow: 0 0 30px #fff;
-  filter: blur(8px);
-  transform-origin: 10%;
-  top: 5%;
-  left: 0;
-  transform: rotate(35deg);
-  z-index: 2;
-}
-
-/* Rest of your existing styles with minor adjustments */
-.project-content-wrapper {
-  position: relative;
-  z-index: 5;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  transition: transform 300ms ease;
-}
-
-.project-image-container {
-  position: relative;
-  border-radius: 10px 10px 10px 10px;
-  width: 100%;
-  aspect-ratio: 16/9;       /* choose your ratio, e.g. 16/9 or 4/3 */
-  overflow: hidden;
-  border-radius: calc(1rem - 1px) calc(1rem - 1px) 0 0;
-  z-index: 10; /* Ensure images stay above the glow */
-}
-
-.project-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 10px;
-  filter: brightness(70%);
-  transition: transform 0.6s ease, filter 0.3s ease;
-  position: relative;
-  z-index: 10; /* Ensure images stay above the glow */
-}
-
-.project-card:hover .project-image {
-  filter: brightness(100%);
-  transform: scale(1.05);
-}
-
-.project-image-placeholder {
-  width: 100%;
-  height: 100%;
-  background: #374151;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: calc(1rem - 1px) calc(1rem - 1px) 0 0;
-  position: relative;
-  z-index: 10; /* Ensure placeholder stays above the glow */
-}
-
-.project-content {
-  padding: 1rem;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 0rem;
-  position: relative;
-  z-index: 10; /* Ensure content stays above the glow */
-}
-
-.project-title {
-  font-weight: 600;
-  font-size: 1.125rem;
-  color: #d6d6d6;
-  line-height: 1.4;
-  transition: transform 300ms ease;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  position: relative;
-  z-index: 10; /* Ensure title stays above the glow */
-}
-
-.project-excerpt {
-  color: #99999d;
-  font-size: 0.875rem;
-  flex-grow: 1;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  position: relative;
-  z-index: 10; /* Ensure excerpt stays above the glow */
-}
-
-.project-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: auto;
-  position: relative;
-  z-index: 10; /* Ensure tags stay above the glow */
-}
-
-.project-tag {
-  padding: 0.25rem 0.5rem;
-  font-size: 0.75rem;
-  border-radius: 0.375rem;
-  background-color: rgba(50, 166, 255, 0.1);
-  color: #d6d6d6;
-  border: 1px solid rgba(50, 166, 255, 0.3);
-  transition: background-color 0.3s ease;
-  position: relative;
-  z-index: 10; /* Ensure tags stay above the glow */
-}
-
-.project-tag:hover {
-  background-color: rgba(50, 166, 255, 0.2);
-}
-
-.project-date {
-  font-size: 0.75rem;
-  color: #99999d;
-  margin-top: 0.5rem;
-  position: relative;
-  z-index: 10; /* Ensure date stays above the glow */
-}
-
-/* Remove old notification styles that conflict */
-.notification:before,
-.notification:after,
-.notiglow,
-.notiborderglow {
-  display: none;
-}
-
-*, h1, h2, h3, h4, h5, h6, ul, ol, li, p, blockquote, figure, figcaption, table, th, td, ol, pre, code, kbd, samp, placeholder {
-  font-family: 'Montserrat', sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
-  list-style-type: none;
-}
-
-.eor {
-  font-weight: 300;
-}
-
-@media (max-width: 768px) {
-  .project-image-container {
-    /* e.g. make it a little taller on mobile */
-    aspect-ratio: 16/9;
-  }
 }
 
 /* Breadcrumbs Styles */
@@ -606,12 +360,12 @@ const formatDate = (date) => {
   font-size: 1.1rem;
   color: var(--breadcrumbs, #a7a7a7);
   margin: 0 0 1.2rem 0;
-  padding: 0 0 0 0;
   display: flex;
   align-items: center;
   z-index: 10;
   position: relative;
 }
+
 .projects-breadcrumb ol {
   display: flex;
   align-items: center;
@@ -619,21 +373,348 @@ const formatDate = (date) => {
   padding: 0;
   margin: 0;
 }
+
 .breadcrumb-link {
   color: var(--breadcrumbs, #a7a7a7);
   text-decoration: none;
   transition: color 0.2s;
 }
+
 .breadcrumb-link:hover {
   color: var(--breadcrumbs-main, #8bbbe2);
   text-decoration: underline;
 }
+
 .breadcrumb-separator {
   margin: 0 0.5em;
   color: var(--breadcrumbs, #a7a7a7);
 }
+
 .breadcrumb-current {
   color: var(--breadcrumbs-main, #8bbbe2);
   font-weight: 600;
+}
+
+/* Enhanced Project Cards - Similar to Blog */
+.project-card {
+  background: linear-gradient(145deg, #1e1e1e 0%, #161616 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  height: 100%;
+  position: relative;
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(127, 255, 0, 0.02) 0%, transparent 50%, rgba(127, 255, 0, 0.02) 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 1;
+}
+
+.project-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: rgba(127, 255, 0, 0.3);
+  box-shadow: 
+    0 20px 40px -12px rgba(0, 0, 0, 0.4),
+    0 8px 16px -4px rgba(127, 255, 0, 0.1),
+    0 0 0 1px rgba(127, 255, 0, 0.1);
+}
+
+.project-card:hover::before {
+  opacity: 1;
+}
+
+.project-content-wrapper {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+.project-image-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+}
+
+.project-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: brightness(0.9) contrast(1.1);
+}
+
+.project-card:hover .project-image {
+  transform: scale(1.1);
+  filter: brightness(1) contrast(1.2);
+}
+
+.project-image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 60%,
+    rgba(0, 0, 0, 0.4) 80%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.project-card:hover .project-image-overlay {
+  opacity: 1;
+}
+
+.project-image-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #2a2a2a 0%, #1e1e1e 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.project-image-placeholder::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.02) 50%, transparent 70%);
+}
+
+.placeholder-icon {
+  width: 3rem;
+  height: 3rem;
+  color: var(--main-details, #808080);
+  opacity: 0.6;
+}
+
+.project-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  background: linear-gradient(180deg, rgba(30, 30, 30, 0.95) 0%, rgba(20, 20, 20, 0.98) 100%);
+}
+
+.project-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+.project-date {
+  color: var(--main-details, #808080);
+  font-family: var(--font3);
+  font-size: 0.8rem;
+  font-weight: 500;
+  flex-shrink: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.project-tags-display {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.project-tag {
+  background: linear-gradient(135deg, rgba(127, 255, 0, 0.15) 0%, rgba(127, 255, 0, 0.1) 100%);
+  color: var(--htb-green, #7fff00);
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.375rem;
+  font-size: 0.7rem;
+  font-family: var(--font3);
+  font-weight: 600;
+  border: 1px solid rgba(127, 255, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.more-tags-indicator {
+  color: var(--main-details, #808080);
+  font-size: 0.7rem;
+  font-family: var(--font3);
+  font-weight: 500;
+}
+
+.project-card:hover .project-tag {
+  background: linear-gradient(135deg, rgba(127, 255, 0, 0.25) 0%, rgba(127, 255, 0, 0.15) 100%);
+  border-color: rgba(127, 255, 0, 0.4);
+  transform: translateY(-1px);
+}
+
+.project-title {
+  font-family: var(--font3);
+  color: #ffffff;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 0.75rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color 0.3s ease;
+}
+
+.project-card:hover .project-title {
+  color: var(--htb-green, #7fff00);
+}
+
+.project-excerpt {
+  font-family: var(--font3);
+  color: #b3b3b3;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  flex-grow: 1;
+  margin-bottom: 1rem;
+  transition: color 0.3s ease;
+}
+
+.project-card:hover .project-excerpt {
+  color: #d1d1d1;
+}
+
+.project-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.read-more {
+  font-family: var(--font3);
+  color: var(--main-details, #808080);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: all 0.3s ease;
+}
+
+.project-card:hover .read-more {
+  color: var(--htb-green, #7fff00);
+}
+
+.read-more-arrow {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--main-details, #808080);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.project-card:hover .read-more-arrow {
+  color: var(--htb-green, #7fff00);
+  transform: translateX(4px);
+}
+
+/* Loading spinner */
+.loader {
+  width: 2rem;
+  height: 2rem;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-top: 2px solid var(--htb-green, #7fff00);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* End of results styling */
+.eor {
+  font-weight: 300;
+  font-family: var(--font3);
+  color: var(--main-details, #808080);
+}
+
+/* Mobile responsive */
+@media (min-width: 640px) {
+  .projects-hero-content-header {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .projects-hero-content-header {
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+}
+
+@media (max-width: 768px) {
+  .project-card {
+    margin: 0 0.5rem;
+  }
+
+  .project-card:hover {
+    transform: translateY(-4px) scale(1.01);
+  }
+
+  .project-content {
+    padding: 1.25rem;
+  }
+
+  .project-title {
+    font-size: 1.1rem;
+  }
+
+  .project-excerpt {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .project-title {
+    font-size: 1rem;
+  }
+
+  .project-tag {
+    font-size: 0.65rem;
+    padding: 0.125rem 0.375rem;
+  }
+
+  .project-content {
+    padding: 1rem;
+  }
 }
 </style>
