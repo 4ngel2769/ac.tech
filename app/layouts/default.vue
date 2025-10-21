@@ -41,8 +41,8 @@
     align-items: center;
     height: 180px;
     width: 100vw;
-    margin: 0 auto;
-    background-image: url('/wave-haikei4.svg');
+    margin: 0 auto;/*
+    background-image: url('/wave-haikei4.svg')*/;
     background-position: bottom !important;
     background-repeat: repeat-x !important;
     background-clip: inherit;
