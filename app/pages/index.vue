@@ -206,7 +206,9 @@ const formatBlogDate = (dateString: string) => {
          - parent (.projects-hero-section) already clips overflow so the
            backdrop blur won't bleed outside the section
     -->
-    <div class="projects-contrast-panel" aria-hidden="true"></div>
+    <!-- <div class="projects-contrast-panel" aria-hidden="true"></div> -->
+    <!-- Fade-out overlay at the bottom for content fade effect -->
+    <!-- <div class="projects-hero-fade" aria-hidden="true"></div> -->
     <div class="projects-hero-content">
       <div class="projects-hero-text">
         <span class="projects-hero-label">TAKE A PEEK</span>
@@ -635,6 +637,25 @@ body {
   position: relative;
   overflow: hidden; /* This ensures rotated SVG doesn't show outside the div */
   border: none;
+}
+
+/* Fade-out overlay for hero content */
+.projects-hero-fade {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 120px;
+  z-index: 4; /* Above background, below content */
+  pointer-events: none;
+  /* Fade from transparent to site background color (#101417 or #000) */
+  background: linear-gradient(
+    to bottom,
+    rgba(16,20,23,0) 0%,
+    rgba(16,20,23,0.7) 60%,
+    #0d1516 100%
+  );
+  /* fallback for very dark backgrounds */
 }
 
 /* Rotated translucent contrast panel used to add subtle contrast behind
