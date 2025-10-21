@@ -5,9 +5,9 @@
     </div>
     <div class="flex theSlot">
       <slot />
-      <div class="footerimg"></div>
+      <!-- <div class="footerimg"></div> -->
     </div>
-    <div class="flex" style="justify-content: center;">
+    <div class="flex" style="justify-content: center; background-color: var(--htb-bg1);">
       <Footer />
     </div>
   </div>
@@ -47,7 +47,7 @@
     background-repeat: repeat-x !important;
     background-clip: inherit;
   }
-  
+
   .navbar {
     position: absolute;
     z-index: 10000;
