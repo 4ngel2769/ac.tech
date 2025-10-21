@@ -200,6 +200,13 @@ const formatBlogDate = (dateString: string) => {
 
   <!-- Projects Hero Section -->
   <section class="projects-hero-section">
+    <!-- Contrast panel: subtle translucent rotated bar behind the hero text
+         - 500px wide, rotated ~100deg, tall enough to cover the section
+         - aria-hidden because it's purely decorative
+         - parent (.projects-hero-section) already clips overflow so the
+           backdrop blur won't bleed outside the section
+    -->
+    <div class="projects-contrast-panel" aria-hidden="true"></div>
     <div class="projects-hero-content">
       <div class="projects-hero-text">
         <span class="projects-hero-label">TAKE A PEEK</span>
@@ -280,7 +287,7 @@ const formatBlogDate = (dateString: string) => {
     <div class="latest-posts-container">
       <!-- Centered Title -->
       <div class="latest-posts-header">
-        <span class="latest-posts-label">LATEST BLOGS</span>
+        <span class="latest-posts-label">NEWEST BLOGS</span>
       </div>
 
       <!-- Desktop Layout: 2 cards + description panel -->
@@ -628,6 +635,27 @@ body {
   position: relative;
   overflow: hidden; /* This ensures rotated SVG doesn't show outside the div */
   border: none;
+}
+
+/* Rotated translucent contrast panel used to add subtle contrast behind
+   the projects hero text. Kept decorative and non-interactive. */
+.projects-contrast-panel {
+  position: absolute;
+  z-index: 2; /* sits above background pseudo-elements but under content (projects-hero-content z-index:3) */
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -54%) rotate(40deg);
+  transform-origin: center center;
+  width: 500px; /* requested width */
+  /* taller than 100% so the rotated bar always covers the hero section */
+  height: 220%;
+  border-left: 1px solid rgba(190, 190, 190, 0.22);
+  border-right: 1px solid rgba(190, 190, 190, 0.22);
+  pointer-events: none;
+  backdrop-filter: blur(8px) saturate(120%);
+  -webkit-backdrop-filter: blur(8px) saturate(120%);
+  border-radius: 12px;
+  box-shadow: none;
 }
 
 /* Add a pseudo-element for the rotated background */
