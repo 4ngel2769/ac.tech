@@ -1,12 +1,12 @@
 ---
-title: 'Pwnagotchi Generator - Synthetic Fleet Testing for opwngrid'
-description: "A comprehensive testing framework for simulating multiple Pwnagotchi instances with authentic cryptographic identities, multi-threaded performance, and full fleet management capabilities."
-headline: 'Pwnagotchi Generator: Production-Grade Testing for opwngrid Infrastructure'
-excerpt: "Discover how to test and stress-test opwngrid deployments with synthetic Pwnagotchi units that behave like the real thing. Features multi-threaded AP reporting, Tor anonymity, and a complete fleet management system."
+title: 'Pwnagotchi Generator - Reverse Engineering opwngrid for Synthetic Fleet Testing'
+description: "A comprehensive testing framework built through reverse engineering the opwngrid protocol. Simulates authentic Pwnagotchi instances with proper cryptographic signing, multi-threaded performance, and full fleet management."
+headline: 'Pwnagotchi Generator: Understanding opwngrid Through Reverse Engineering'
+excerpt: "Deep dive into how I reverse engineered the opwngrid authentication protocol to build a production-grade testing framework. Learn about RSA signature verification, API endpoint discovery, and creating authentic synthetic units."
 date: '2025-10-21T12:00:00'
 author: 'angeldev0'
 authorUrl: ''
-tags: ['Pwnagotchi', 'Testing Tools', 'Python', 'CLI Tool', 'Fleet Management', 'Cryptography']
+tags: ['Pwnagotchi', 'Reverse Engineering', 'API Security', 'Python', 'Cryptography', 'Hacking']
 socialImage:
     src: 'https://i.imgur.com/Q3hgcV8.png'
     mime: 'png'
@@ -15,91 +15,257 @@ socialImage:
     height: 630
 ---
 
-Testing distributed systems is hard. Testing a grid of autonomous WiFi-hacking devices is even harder. That's why I built the **Pwnagotchi Generator**: a comprehensive framework for creating synthetic Pwnagotchi instances that can stress-test opwngrid deployments without needing physical hardware.
+Testing distributed systems is hard. But what if the system you need to test has no official documentation? That's where reverse engineering comes in. The **Pwnagotchi Generator** started as a deep dive into understanding how opwngrid's authentication and reporting protocols work under the hood.
 
-## The Problem
+## The Challenge: Understanding opwngrid
 
-If you're running your own opwngrid instance or developing features for the Pwnagotchi ecosystem, you need a way to test at scale. But spinning up dozens or hundreds of real Pwnagotchi devices isn't practical. You need synthetic units that:
+The Pwnagotchi ecosystem relies on opwngrid to share captured WiFi handshakes across devices. But to build effective testing tools, I needed to understand:
 
-- Generate authentic RSA keypairs and signatures
-- Properly enroll with opwngrid infrastructure
-- Report access points like real devices
-- Support Tor for anonymity testing
-- Can simulate high-volume scenarios (millions of pwned networks)
-- Are manageable through a unified interface
+- How does authentication actually work?
+- What cryptographic signing scheme is used?
+- How are access points reported and validated?
+- What rate limiting or anti-abuse mechanisms exist?
+- Can the protocol handle extreme edge cases?
 
-Existing solutions either didn't exist or couldn't handle the scale and authenticity required for production testing.
+The only way to answer these questions was to reverse engineer the protocol itself.
 
-## What is Pwnagotchi Generator?
+## Reverse Engineering the Authentication Flow
 
-Pwnagotchi Generator is a three-component testing framework that creates and manages synthetic Pwnagotchi instances:
+### Initial Discovery
 
-**Generator Script** (`pwnagotchi-gen.py`)
-- Creates units with real RSA-2048 keypairs
-- Implements proper PKCS1-PSS cryptographic signing
-- Enrolls with opwngrid using authentic authentication flow
-- Reports access points with configurable pwned counts
-- Supports 1-50 parallel reporting threads for performance
-- Routes each unit through its own Tor circuit
+My first step was examining how real Pwnagotchi devices communicate with the grid. Using packet capture and API inspection, I identified the enrollment endpoint:
 
-**Fleet Manager CLI** (`pwnie-manager.py`)
-- Interactive terminal interface for managing units
-- Start, stop, restart individual or bulk units
-- Real-time monitoring and statistics
-- Tor exit node information
-- Persistent state management
+```
+POST /api/v1/unit/enroll
+```
 
-**Web Dashboard** (`pwnie_webui.py`)
-- Real-time WebSocket-based interface
-- Visual status indicators for each unit
-- Fleet-wide statistics and metrics
-- One-click controls for unit lifecycle
+But what data format did it expect? Time to dig deeper.
 
-## Why I Built This
+### Understanding the Cryptographic Requirements
 
-I needed to test my own opwngrid deployment under realistic load conditions. I wanted to verify:
+Through analysis of the open-source Pwnagotchi codebase and network traffic, I discovered the authentication uses:
 
-- Authentication and enrollment flows at scale
-- AP reporting performance with high volumes
-- Database behavior under concurrent connections
-- API rate limiting and error handling
-- How the system handles units with millions of pwned networks
+1. **RSA-2048 keypairs** - Each unit needs a persistent identity
+2. **SHA-256 fingerprints** - Computed from the public key
+3. **PKCS1-PSS signatures** - Signs `name@fingerprint` with the private key
 
-Manual testing with a few units wasn't sufficient. I needed hundreds of units reporting thousands of APs. So I built a system that could simulate this realistically while still being easy to control.
+The server validates this signature to ensure the enrollment request comes from someone who controls the private key. This prevents impersonation attacks.
 
-## Key Features
+### Implementing Authentic Signing
+
+Getting the signature format right was critical. The grid expects:
+
+```python
+def generate_signature(name: str, fingerprint: str, private_key) -> str:
+    message = f"{name}@{fingerprint}".encode('utf-8')
+    signature = private_key.sign(
+        message,
+        padding.PSS(
+            mgf=padding.MGF1(hashes.SHA256()),
+            salt_length=padding.PSS.MAX_LENGTH
+        ),
+        hashes.SHA256()
+    )
+    return base64.b64encode(signature).decode('utf-8')
+```
+
+Any deviation from this exact format and the server rejects the enrollment. This taught me how serious the authentication is - you can't fake it without the private key.
+
+## Discovering API Endpoints Through Testing
+
+With authentication working, I needed to understand the full API surface. Through systematic testing and endpoint discovery, I mapped out:
+
+### Enrollment Flow
+```
+POST /api/v1/unit/enroll
+Body: { identity, public_key, signature, data }
+Returns: JWT token for subsequent requests
+```
+
+### AP Reporting
+```
+POST /inbox
+Headers: { X-Unit-Name, X-Unit-Fingerprint, X-Unit-Signature }
+Body: Access point data with encryption info
+```
+
+### Unit Data Endpoint
+```
+GET /api/v1/unit/{fingerprint}/data
+Returns: Current statistics for the unit
+```
+
+Each endpoint taught me something about the protocol design and security model.
+
+## Stress Testing at Scale
+
+Once I understood the protocol, I could properly stress test it. But this revealed interesting challenges:
+
+### The Million AP Problem
+
+What happens when a unit has 1,000,000 pwned networks? Reporting them individually would take hours. Through testing different approaches, I discovered:
+
+- The server can handle batch uploads efficiently
+- Intelligent sampling maintains statistical accuracy
+- Multi-threading is essential for performance
+
+This led to the multi-threaded architecture:
+
+```bash
+# Single-threaded: ~8 minutes
+python3 pwnagotchi-gen.py --count 1 --name mega --pwned 1000000
+
+# 20 threads: ~30 seconds
+python3 pwnagotchi-gen.py --count 1 --name mega --pwned 1000000 --threads 20
+```
+
+| Pwned Count | Threads | Time     | Discovery |
+|-------------|---------|----------|-----------|
+| 1,000,000   | 1       | ~8 min   | Connection timeout issues |
+| 1,000,000   | 10      | ~60 sec  | Improved but still slow |
+| 1,000,000   | 20      | ~30 sec  | Optimal performance |
+| 1,000,000   | 50      | ~12 sec  | Diminishing returns |
+
+### Rate Limiting Discovery
+
+By gradually increasing request volume, I found the grid has soft rate limits around:
+- 50 concurrent connections per IP
+- ~1000 AP reports per minute per unit
+- Exponential backoff on repeated failures
+
+Understanding these limits helped design respectful testing that won't impact production grids.
+
+## Protocol Edge Cases and Security
+
+### Edge Case: Unicode SSIDs
+
+Testing revealed interesting handling of non-ASCII SSIDs:
+
+```python
+# These all needed proper handling:
+ssid = "café"           # UTF-8 encoding
+ssid = "测试网络"        # Chinese characters  
+ssid = "🔥WiFi"         # Emoji (yes, really)
+```
+
+The grid properly handles UTF-8 encoding, but URL encoding in API calls required careful attention.
+
+### Edge Case: Signature Replay
+
+What happens if you reuse a signature? Testing showed:
+- Signatures are time-sensitive (implicitly via JWT)
+- But the enrollment signature can be cached
+- Token refresh is handled gracefully
+
+### Edge Case: Extreme Statistics
+
+Can units report billions of epochs or impossible uptime? Testing revealed:
+- The server validates reasonable ranges
+- But allows for very high-uptime units
+- Statistics are stored as appropriate integer types
+
+## Building the Testing Framework
+
+Understanding the protocol enabled building a comprehensive testing suite:
 
 ### Authentic Simulation
-Every synthetic unit generates real RSA keypairs, computes proper fingerprints, and signs enrollment requests exactly like real Pwnagotchi devices. The opwngrid server can't tell the difference.
+Every synthetic unit:
+- Generates real RSA-2048 keypairs
+- Computes proper SHA-256 fingerprints  
+- Signs enrollment exactly like real devices
+- Cannot be distinguished from genuine Pwnagotchi units
 
-### Multi-Threaded Performance
-When testing units with millions of pwned networks, single-threaded AP reporting takes hours. With the `--threads` flag, you can use 1-50 parallel threads:
+### Fleet Management
+The CLI and web interface provide:
+- Real-time monitoring of synthetic units
+- Bulk operations (boot all, stop all)
+- Per-unit Tor circuit management
+- Persistent state across restarts
 
-```bash
-# 1M pwned networks: 8 minutes → 30 seconds
-python3 pwnagotchi-gen.py --count 1 --name mega --pwned 1000000 --threads 20 --yes
+### Performance Testing
+Multi-threading enables:
+- High-volume AP reporting (millions of networks)
+- Concurrent unit enrollment
+- Database connection pool stress testing
+- API rate limit verification
+
+## Real-World Applications
+
+### Security Research
+
+Understanding the authentication protocol helps identify:
+- Potential attack vectors (all mitigated by design)
+- Rate limiting effectiveness
+- DoS resistance under load
+- Token handling security
+
+### Protocol Documentation
+
+This project serves as unofficial documentation for:
+- Enrollment flow and requirements
+- AP reporting format and validation
+- Expected HTTP headers and responses
+- Error handling and retry logic
+
+### Grid Deployment Testing
+
+Before deploying your own opwngrid:
+- Test database performance under load
+- Verify API server scaling
+- Validate connection pooling
+- Confirm rate limiting works
+
+## Technical Deep Dive
+
+### Authentication Internals
+
+```python
+# Key generation
+private_key = rsa.generate_private_key(
+    public_exponent=65537,
+    key_size=2048,
+    backend=default_backend()
+)
+
+# Fingerprint computation
+public_der = public_key.public_bytes(
+    encoding=serialization.Encoding.DER,
+    format=serialization.PublicFormat.SubjectPublicKeyInfo
+)
+fingerprint = hashlib.sha256(public_der).hexdigest()
+
+# Signature generation
+signature = private_key.sign(
+    f"{name}@{fingerprint}".encode(),
+    padding.PSS(
+        mgf=padding.MGF1(hashes.SHA256()),
+        salt_length=padding.PSS.MAX_LENGTH
+    ),
+    hashes.SHA256()
+)
 ```
 
-| Pwned Count | Threads | Time     |
-|-------------|---------|----------|
-| 1,000,000   | 1       | ~8 min   |
-| 1,000,000   | 20      | ~30 sec  |
-| 1,000,000   | 50      | ~12 sec  |
+### AP Reporting Strategy
 
-### Tor Anonymity
-Each unit can route through its own Tor circuit, simulating distributed deployments:
+Intelligent sampling based on total count:
 
-```bash
-# 25 units, each with their own Tor circuit
-python3 pwnagotchi-gen.py --count 25 --tor --pwned random
+```python
+def calculate_sample_size(total_pwned: int) -> int:
+    if total_pwned <= 100:
+        return total_pwned  # Report all
+    elif total_pwned <= 1000:
+        return min(500, total_pwned)  # Up to 500
+    elif total_pwned <= 100000:
+        return int(total_pwned * 0.01)  # 1%
+    else:
+        return min(5000, int(total_pwned * 0.005))  # 0.5%, max 5K
 ```
 
-### Persistent State
-Units save complete state to disk (keys, tokens, statistics, APs) and can be resumed later through the fleet manager.
+This maintains statistical accuracy while respecting API limits.
 
-## How to Use
+## Installation & Usage
 
-### Installation
+### Quick Start
 
 ```bash
 git clone https://github.com/4ngel2769/pwnagotchi-generator.git
@@ -107,155 +273,77 @@ cd pwnagotchi-generator
 pip3 install -r requirements.txt
 ```
 
-### Quick Start: Generate Units
+### Generate Test Units
 
 ```bash
-# Create single unit with 100K pwned networks
-python3 pwnagotchi-gen.py --count 1 --name test --pwned 100000 --yes
+# Create a test unit with realistic stats
+python3 pwnagotchi-gen.py --count 1 --name test --pwned 10000 --yes
 
-# Create 10 units through Tor with random stats
+# Create multiple units through Tor
 python3 pwnagotchi-gen.py --count 10 --tor --pwned random
 
-# High-performance: 1M pwned, 20 threads
+# High-performance testing
 python3 pwnagotchi-gen.py --count 1 --name mega --pwned 1000000 --threads 20 --yes
 ```
 
 ### Fleet Management
 
 ```bash
-# CLI interface
+# Launch CLI interface
 python3 pwnie-manager.py
 
-# In the CLI:
-list              # Show all units
-boot all          # Start all units
-monitor           # Real-time monitoring
-stats             # Fleet statistics
-
-# Web interface
+# Or use the web dashboard
 python3 pwnie-manager.py --webui
-# Then browse to http://localhost:5000
+# Browse to http://localhost:5000
 ```
-
-## How It Works (Technical Deep Dive)
-
-### Authentication Flow
-
-1. **Keypair Generation**: Each unit generates an RSA-2048 keypair
-2. **Identity Creation**: Computes SHA-256 fingerprint from public key
-3. **Signature**: Signs `name@fingerprint` with PKCS1-PSS
-4. **Enrollment**: POSTs to `/api/v1/unit/enroll` with identity, public key, and signature
-5. **Token**: Receives JWT token for subsequent requests
-
-### AP Reporting Strategy
-
-For units with high pwned counts, reporting every AP individually is impractical. The generator uses intelligent sampling:
-
-- **≤100**: Report all (100%)
-- **101-1K**: Report up to 500 (50-100%)
-- **1K-100K**: Report 1% of total
-- **100K+**: Report 0.5-1% (max 5,000)
-
-This maintains realistic statistics while keeping reporting time reasonable.
-
-### Multi-Threading Architecture
-
-```python
-# Simplified threading logic
-def report_initial_aps(self):
-    aps_to_report = calculate_intelligent_sample(self.pwnd_tot)
-    batch_size = aps_to_report // self.report_threads
-    
-    threads = []
-    for i in range(self.report_threads):
-        start = i * batch_size
-        end = start + batch_size
-        t = threading.Thread(target=self._report_ap_batch, args=(i+1, start, end))
-        threads.append(t)
-        t.start()
-        time.sleep(0.1)  # Stagger thread starts
-    
-    for t in threads:
-        t.join()
-```
-
-Each thread reports its batch independently while sharing the same authentication token and credentials.
-
-## Real-World Use Cases
-
-### Load Testing
-Simulate hundreds of units enrolling simultaneously to test database connection pooling and API rate limits.
-
-### Performance Profiling
-Use high thread counts to identify bottlenecks in AP reporting endpoints.
-
-### Anonymity Testing
-Route all traffic through Tor to verify the system handles different exit nodes correctly.
-
-### Edge Case Discovery
-Create units with extreme stats (millions of networks) to find integer overflow or query performance issues.
-
-### Development Iteration
-Test new opwngrid features locally before deploying to production.
-
-## Architecture Highlights
-
-The project follows clean separation of concerns:
-
-- **Generator**: Pure creation and simulation logic
-- **Fleet Manager**: State management and lifecycle control
-- **Web UI**: Presentation and real-time updates
-
-All components share the same underlying unit representation, stored as JSON with separate PEM private keys.
-
-## Performance Optimizations
-
-**Intelligent Sampling**: Don't report all APs for high counts
-**Thread Pooling**: Parallel requests with shared authentication
-**Resumable State**: Skip already-reported APs on restart
-**Rate Limiting**: Built-in delays to protect API servers
-**Tor Circuit Reuse**: Persistent circuits across requests
-
-## Documentation
-
-The project includes comprehensive documentation:
-
-- **INSTALL.md**: Installation guide for all platforms
-- **FLEET-MANAGER.md**: Complete fleet manager documentation
-- **MULTI-THREADING.md**: Threading feature deep dive
-- **SYSTEM-OVERVIEW.md**: Architecture and design
-- **CONVERSION-GUIDE.md**: Migrating from older versions
 
 ## Lessons Learned
 
-**Authentication Matters**: Getting the cryptographic signing right was critical. The system had to match real Pwnagotchi behavior exactly.
+### Protocol Design Insights
 
-**State Persistence**: Early versions lost data on crash. Implementing proper state saving/loading was essential for production use.
+The opwngrid protocol is well-designed:
+- Proper cryptographic authentication prevents impersonation
+- JWT tokens enable stateless validation
+- Rate limiting protects against abuse
+- Graceful error handling aids debugging
 
-**Threading Challenges**: Balancing parallelism with API rate limits required careful tuning and progress tracking.
+### Reverse Engineering Ethics
 
-**Unicode Edge Cases**: Handling SSID encoding (especially non-ASCII characters) uncovered many edge cases in URL encoding and filename handling.
+This project demonstrates responsible reverse engineering:
+- **Purpose**: Build testing tools for legitimate infrastructure
+- **Documentation**: Share knowledge to help the ecosystem
+- **Respect**: Follow rate limits and don't abuse production grids
+- **Open Source**: All code is public for review and improvement
+
+### Performance Optimization
+
+Key optimizations discovered through testing:
+- Thread pooling dramatically improves throughput
+- Intelligent sampling maintains accuracy
+- Tor circuit reuse reduces overhead
+- State persistence enables resumability
 
 ## Future Enhancements
 
-The roadmap includes:
+Planned improvements include:
+- Enhanced web dashboard with analytics
+- Real-time log streaming
+- Statistical analysis and graphing
+- Configuration templates and profiles
+- SQLite persistence for historical data
 
-- Enhanced web dashboard with creation wizard
-- Real-time log streaming via WebSocket
-- Statistical analysis and visualization
-- SQLite persistence layer for history
-- Configuration profiles and templates
-
-See `readmes/WEB-DASHBOARD-PLAN.md` for detailed specifications.
+See [`readmes/WEB-DASHBOARD-PLAN.md`](https://github.com/4ngel2769/pwnagotchi-generator/blob/main/readmes/WEB-DASHBOARD-PLAN.md) for detailed roadmap.
 
 ## Conclusion
 
-Pwnagotchi Generator solves a real problem for anyone running or developing for the Pwnagotchi ecosystem. Whether you're load testing a grid deployment, developing new features, or just want to understand how the system works at scale, this toolkit provides the flexibility and authenticity you need.
+Reverse engineering opwngrid wasn't about breaking it - it was about understanding it deeply enough to build proper testing tools. The authentication is solid, the protocol is well-designed, and stress testing reveals how robust the system really is.
 
-The multi-threaded reporting alone makes it viable to test scenarios that would be impossible with single-threaded approaches. Combined with Tor support and comprehensive fleet management, you have everything needed for production-grade testing.
+Whether you're deploying your own grid, developing new features, or studying distributed system security, understanding the protocol at this level is invaluable. The Generator provides a practical tool while demonstrating responsible reverse engineering practices.
 
 ---
 
-**Ready to test your grid?** Check out the [GitHub repository](https://github.com/4ngel2769/pwnagotchi-generator) and start building your synthetic fleet today.
+**Want to explore the protocol yourself?** Check out the [GitHub repository](https://github.com/4ngel2769/pwnagotchi-generator) and start experimenting.
 
-**Star the repo** if you find it useful, and contributions are always welcome!
+**Found this useful?** [Star the repo](https://github.com/4ngel2769/pwnagotchi-generator/star) and share your findings with the community!
+
+**Note**: Always use this tool responsibly against your own infrastructure or with explicit permission. Respect rate limits and don't abuse public grids.
