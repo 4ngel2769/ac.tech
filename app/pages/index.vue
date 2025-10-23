@@ -230,7 +230,7 @@ const formatBlogDate = (dateString: string) => {
   <section class="latest-blogs-section">
     <div class="latest-blogs-container">
       <div class="latest-blogs-header">
-        <span class="latest-blogs-label">LATEST PROJECTS</span>
+        <span class="latest-blogs-label">LATEST PROJECTs</span>
       </div>
 
       <div class="latest-blogs-wrapper">
@@ -289,7 +289,7 @@ const formatBlogDate = (dateString: string) => {
     <div class="latest-posts-container">
       <!-- Centered Title -->
       <div class="latest-posts-header">
-        <span class="latest-posts-label">NEWEST BLOGS</span>
+        <span class="latest-posts-label">NEWEST BLOGs</span>
       </div>
 
       <!-- Desktop Layout: 2 cards + description panel -->

@@ -1,0 +1,96 @@
+# Dependencies# Dependencies
+
+node_modulesnode_modules
+
+npm-debug.log*npm-debug.log*
+
+yarn-debug.log*yarn-debug.log*
+
+yarn-error.log*yarn-error.log*
+
+pnpm-debug.log*pnpm-debug.log*
+
+
+
+# Build outputs# Build outputs
+
+.output.output
+
+.nuxt.nuxt
+
+distdist
+
+.cache.cache
+
+
+
+# Environment files# Environment files
+
+.env.env
+
+.env.*.env.*
+
+!.env.example!.env.example
+
+
+
+# IDE# IDE
+
+.vscode.vscode
+
+.idea.idea
+
+*.swp*.swp
+
+*.swo*.swo
+
+*~*~
+
+
+
+# OS# OS
+
+.DS_Store.DS_Store
+
+Thumbs.dbThumbs.db
+
+*.log
+
+# Git
+
+.git# Git
+
+.gitignore.git
+
+.gitattributes.gitignore
+
+.gitattributes
+
+# Docker
+
+.dockerignore# Docker
+
+docker-compose.yml.dockerignore
+
+
+
+# Testing# Testing
+
+coveragecoverage
+
+.nyc_output.nyc_output
+
+
+
+# Logs# Misc
+
+*.log*.md
+
+logs!README.md
+
+
+# Misc
+README.md
+LICENSE
+*.md
+!content/**/*.md
