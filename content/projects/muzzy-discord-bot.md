@@ -24,7 +24,7 @@ socialImage:
 ## High quality muzzic!
 
 
-### Muzzy provides users with an easy to use interface, high quality music, and cool features such as audi filters!
+### Muzzy provides users with an easy to use interface, high quality music, and cool features such as audio filters!
 
 ### Command List
 
