@@ -184,4 +184,4 @@ RWDL is my go-to tool for bulk downloading from web directories. Whether you're 
 
 ---
 
-*Ready to download? Check out the [GitHub repository](https://github.com/4ngel2769/rwdl) and start mirroring your favorite web
+*Ready to download? Check out the [GitHub repository](https://github.com/4ngel2769/rwdl) and start mirroring your favorite web directories!*
