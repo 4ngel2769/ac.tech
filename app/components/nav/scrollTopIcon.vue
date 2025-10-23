@@ -5,10 +5,10 @@
             isVisible ? '' : 'scroll-to-top--hidden'
         ]"
     >
-        <a href="#" aria-label="Scroll to Top" class="animated-button">
+        <button type="button" aria-label="Scroll to Top" class="animated-button" @click="scrollToTop">
             <span class="button-text">Scroll to Top</span>
             <IconsArrowUp class="button-icon" width="20" height="20"/>
-        </a>
+        </button>
     </div>
 </template>
 
@@ -32,6 +32,12 @@ onUnmounted(() => {
         window.removeEventListener('scroll', handleScroll);
     }
 });
+
+function scrollToTop() {
+    if (typeof window !== 'undefined') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+}
 </script>
 
 <style scoped>
