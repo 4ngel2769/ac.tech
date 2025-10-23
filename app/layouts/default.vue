@@ -5,9 +5,9 @@
     </div>
     <div class="flex theSlot">
       <slot />
-      <div class="footerimg"></div>
+      <!-- <div class="footerimg"></div> -->
     </div>
-    <div class="flex" style="justify-content: center;">
+    <div class="flex" style="justify-content: center; background-color: var(--htb-bg1);">
       <Footer />
     </div>
   </div>
@@ -41,13 +41,13 @@
     align-items: center;
     height: 180px;
     width: 100vw;
-    margin: 0 auto;
-    background-image: url('/wave-haikei4.svg');
+    margin: 0 auto;/*
+    background-image: url('/wave-haikei4.svg')*/;
     background-position: bottom !important;
     background-repeat: repeat-x !important;
     background-clip: inherit;
   }
-  
+
   .navbar {
     position: absolute;
     z-index: 10000;

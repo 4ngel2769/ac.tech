@@ -5,8 +5,11 @@ import {
   faAt, 
   faLocationDot, 
   fas, 
+  faEnvelope,
   faRocket, 
   faArrowLeft,
+  faArrowRight,
+  faBars,
   faInfoCircle,
   faLightbulb,
   faExclamationCircle,
@@ -15,8 +18,15 @@ import {
   faSun,
   faMoon
 } from '@fortawesome/free-solid-svg-icons'
-// import { far } from '@fortawesome/free-regular-svg-icons'
-import { fab, faYoutube, faDev, faTwitter, faInstagram, faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons'
+import { 
+  fab, 
+  faYoutube, 
+  faDev, 
+  faTwitter, 
+  faInstagram, 
+  faLinkedin, 
+  faGithub 
+} from '@fortawesome/free-brands-svg-icons'
 import { defineNuxtPlugin } from '#app'
 
 config.autoAddCss = false
@@ -25,8 +35,11 @@ library.add(
   faLocationDot,
   faArrowUpRightFromSquare,
   faAt,
+  faEnvelope,
   faRocket,
   faArrowLeft,
+  faArrowRight,
+  faBars,
   faGithub,
   faYoutube,
   faDev,
@@ -41,7 +54,8 @@ library.add(
   faTimesCircle,
   // Theme toggle icons
   faSun,
-  faMoon
+  faMoon,
+  fab
 )
 
 export default defineNuxtPlugin((nuxtApp) => {

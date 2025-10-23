@@ -4,17 +4,17 @@
     <!-- Projects Hero Header -->
     <div class="projects-hero-header">
       <div class="projects-hero-content-header">
-    <nav class="projects-breadcrumb" aria-label="Breadcrumb">
-      <ol>
-        <li>
-          <NuxtLink to="/" class="breadcrumb-link">Home</NuxtLink>
-        </li>
-        <li class="breadcrumb-separator">/</li>
-        <li>
-          <span class="breadcrumb-current">Projects</span>
-        </li>
-      </ol>
-    </nav>
+        <nav class="projects-breadcrumb" aria-label="Breadcrumb">
+          <ol>
+            <li>
+              <NuxtLink to="/" class="breadcrumb-link">Home</NuxtLink>
+            </li>
+            <li class="breadcrumb-separator">/</li>
+            <li>
+              <span class="breadcrumb-current">Projects</span>
+            </li>
+          </ol>
+        </nav>
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <h1 class="text-4xl font-bold">My Projects</h1>
           <div class="flex gap-4">
@@ -25,14 +25,12 @@
               class="px-4 py-2 border rounded-lg flex-grow backdrop-blur-sm bg-black/10"
               style="font-family: var(--font3); color: var(--text-color);"
             />
-            <select
+            <CustomSelect
               v-model="sortBy"
-              class="px-4 py-2 border rounded-lg backdrop-blur-sm bg-black/10"
-              style="font-family: var(--font3); color: var(--text-color);"
-            >
-              <option value="date">Date</option>
-              <option value="headline">Title</option>
-            </select>
+              :options="sortOptions"
+              placeholder="Sort by"
+              class="w-48"
+            />
           </div>
         </div>
       </div>
@@ -59,45 +57,58 @@
         <div
           v-for="project in visibleProjects"
           :key="project._path"
-          class="project-card notification"
+          class="project-card"
         >
-          <div class="card__border"></div>
-          <div class="card-inner">
-            <div class="ray"></div>
-            
-            <NuxtLink :to="project._path" class="project-content-wrapper">
-              <!-- Image Container -->
-              <div class="project-image-container">
-                <img
-                  v-if="project.socialImage?.src"
-                  :src="project.socialImage.src"
-                  :alt="project.socialImage.alt || project.headline"
-                  class="project-image"
-                />
-                <div v-else class="project-image-placeholder">
-                  <span class="text-gray-400">No image</span>
-                </div>
+          <NuxtLink :to="project._path" class="project-content-wrapper">
+            <!-- Image Container with optimized loading -->
+            <div class="project-image-container">
+              <NuxtImg
+                v-if="project.socialImage?.src"
+                :src="project.socialImage.src"
+                :alt="project.socialImage.alt || project.headline"
+                class="project-image"
+                width="400"
+                height="225"
+                quality="75"
+                format="webp"
+                loading="lazy"
+                placeholder
+                sizes="sm:400px md:350px lg:300px"
+              />
+              <div v-else class="project-image-placeholder">
+                <svg class="placeholder-icon" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"></path>
+                </svg>
               </div>
+            </div>
 
-              <!-- Content -->
-              <div class="project-content">
-                <h2 class="project-title">{{ project.headline }}</h2>
-                <p class="project-excerpt">{{ project.excerpt }}</p>
-                <!-- <div class="project-tags">
+            <!-- Content -->
+            <div class="project-content">
+              <div class="project-meta">
+                <span class="project-date">{{ formatDate(project.date) }}</span>
+                <div v-if="project.tags && project.tags.length > 0" class="project-tags-display">
                   <span
-                    v-for="tag in project.tags"
+                    v-for="tag in project.tags.slice(0, 2)"
                     :key="tag"
                     class="project-tag"
                   >
                     {{ tag }}
                   </span>
-                </div> -->
-                <div class="project-date">
-                  {{ formatDate(project.date) }}
+                  <span v-if="project.tags.length > 2" class="more-tags-indicator">
+                    +{{ project.tags.length - 2 }}
+                  </span>
                 </div>
               </div>
-            </NuxtLink>
-          </div>
+              <h2 class="project-title">{{ project.headline }}</h2>
+              <p class="project-excerpt">{{ project.excerpt }}</p>
+              <div class="project-footer">
+                <span class="read-more">View project</span>
+                <svg class="read-more-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+              </div>
+            </div>
+          </NuxtLink>
         </div>
       </div>
 
@@ -126,6 +137,7 @@
 
 <script setup>
 import Fuse from "fuse.js";
+import CustomSelect from '~/components/ui/CustomSelect.vue';
 
 definePageMeta({
   layout: "projects",
@@ -153,11 +165,19 @@ useSeoMeta({
 });
 
 const searchQuery = ref("");
-const sortBy = ref("date");
+const sortBy = ref("date-desc");
 const projectsPerPage = 9;
 const currentPage = ref(1);
 const isLoading = ref(false);
 const hasMoreProjects = ref(true);
+
+// Sort options for the dropdown
+const sortOptions = [
+  { value: 'date-desc', label: 'Date (Newest)' },
+  { value: 'date-asc', label: 'Date (Oldest)' },
+  { value: 'title-asc', label: 'Title (A-Z)' },
+  { value: 'title-desc', label: 'Title (Z-A)' }
+];
 
 // Fetch all project content with error handling
 const { data: allProjects, error } = await useAsyncData("projects", () =>
@@ -193,10 +213,18 @@ const filteredProjects = computed(() => {
 
   // Apply sorting
   return filtered.sort((a, b) => {
-    if (sortBy.value === "date") {
-      return new Date(b.date) - new Date(a.date);
+    switch (sortBy.value) {
+      case 'date-desc':
+        return new Date(b.date) - new Date(a.date);
+      case 'date-asc':
+        return new Date(a.date) - new Date(b.date);
+      case 'title-asc':
+        return (a.headline || '').localeCompare(b.headline || '');
+      case 'title-desc':
+        return (b.headline || '').localeCompare(a.headline || '');
+      default:
+        return new Date(b.date) - new Date(a.date);
     }
-    return (a.headline || "").localeCompare(b.headline || "");
   });
 });
 
@@ -270,7 +298,7 @@ const formatDate = (date) => {
   try {
     return new Date(date).toLocaleDateString("en-US", {
       year: "numeric",
-      month: "long",
+      month: "short",
       day: "numeric",
     });
   } catch (e) {
@@ -281,22 +309,21 @@ const formatDate = (date) => {
 </script>
 
 <style scoped>
-/* Projects Hero Header */
+/* Projects Hero Header with enhanced gradient fade */
 .projects-hero-header {
   margin: 0;
   width: 100vw;
   margin-left: calc(-50vw + 50%);
-  padding: 2rem 0 2.5rem 0; /* Less top/bottom padding */
+  padding: 0 0 2.5rem 0;
   position: relative;
-  z-index: 1;
-  overflow: hidden;
-  min-height: 320px;        /* Increase vertical space */
-  height: 340px;            /* Or set a fixed height if you prefer */
+  z-index: 1000;
+  overflow: visible;
+  min-height: 320px;
+  height: 340px;
   display: flex;
-  align-items: flex-end;    /* Align content closer to the top */
+  align-items: flex-end;
 }
 
-/* Background image sticks left, scales to cover */
 .projects-hero-header::before {
   content: "";
   position: absolute;
@@ -309,20 +336,26 @@ const formatDate = (date) => {
   transform: scale(1);
   transform-origin: left center;
   z-index: 1;
+  pointer-events: none;
 }
 
-/* Optional dark overlay to match main‐page style */
 .projects-hero-header::after {
   content: "";
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background-color: rgb(11 17 16 / 60%);
+  background: linear-gradient(
+    180deg, 
+    rgba(17, 17, 18, 0.4) 0%, 
+    rgba(17, 17, 18, 0.6) 40%, 
+    rgba(17, 17, 18, 0.75) 70%,
+    rgba(17, 17, 18, 0.9) 85%,
+    #111212 100%
+  );
   z-index: 2;
   pointer-events: none;
 }
 
-/* Foreground content sits above background */
 .projects-hero-content-header {
   position: relative;
   z-index: 3;
@@ -331,264 +364,16 @@ const formatDate = (date) => {
   width: 100%;
   padding-left: 20px;
   padding-right: 20px;
-  /* Remove duplicate padding: 0 0rem; */
   box-sizing: border-box;
+  overflow: visible;
 }
 
-/* Optional: Increase side padding on larger screens */
-@media (min-width: 640px) {
-  .projects-hero-content-header {
-    padding-left: 32px;
-    padding-right: 32px;
-  }
-}
-@media (min-width: 1024px) {
-  .projects-hero-content-header {
-    padding-left: 48px;
-    padding-right: 48px;
-  }
+.projects-hero-content-header .custom-select {
+  z-index: 200;
 }
 
-/* --- Enhanced Notification Card with Glowing Border --- */
-.notifications {
-  width: 100%;
-  height: auto;
-  border-radius: 1rem;
-  padding: 1px;
-  background: radial-gradient(circle 230px at 0% 0%, #ffffff, #0c0d0d);
-  position: relative;
-  transition: transform 300ms ease;
-}
-
-/* Add glowing border element */
-.notification .card__border {
-  overflow: hidden;
-  pointer-events: none;
-  position: absolute;
-  z-index: -1;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: calc(100% + 2px);
-  height: calc(100% + 2px);
-  background-image: linear-gradient(
-    0deg,
-    hsl(0, 0%, 100%) -50%,
-    hsl(0, 0%, 40%) 100%
-  );
-  border-radius: 1rem;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.notification .card__border::before {
-  content: "";
-  pointer-events: none;
-  position: absolute;
-  z-index: 1;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 200%;
-  height: 10rem;
-  background-image: linear-gradient(
-    0deg,
-    hsla(0, 0%, 100%, 0) 0%,
-    hsl(277, 95%, 60%) 40%,
-    hsl(277, 95%, 60%) 60%,
-    hsla(0, 0%, 40%, 0) 100%
-  );
-  animation: rotate 8s linear infinite;
-  animation-play-state: paused;
-}
-
-@keyframes rotate {
-  to {
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
-}
-
-/* Show glow on hover */
-.notification:hover .card__border {
-  opacity: 1;
-}
-
-.notification:hover .card__border::before {
-  animation-play-state: running;
-}
-
-.notification .card-inner {
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  border-radius: 10px;
-  position: relative;
-  overflow: hidden;
-  transition: box-shadow 0.3s ease;
-}
-
-/* Add inner glow on hover */
-.notification:hover .card-inner {
-  box-shadow: 0px -16px 24px 0px rgba(184, 100, 240, 0.15) inset;
-}
-
-.notification .ray {
-  width: 180px;
-  height: 35px;
-  border-radius: 100px;
-  position: absolute;
-  background-color: #c7c7c7;
-  opacity: 0.2;
-  box-shadow: 0 0 30px #fff;
-  filter: blur(8px);
-  transform-origin: 10%;
-  top: 5%;
-  left: 0;
-  transform: rotate(35deg);
-  z-index: 2;
-}
-
-/* Rest of your existing styles with minor adjustments */
-.project-content-wrapper {
-  position: relative;
-  z-index: 5;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  transition: transform 300ms ease;
-}
-
-.project-image-container {
-  position: relative;
-  border-radius: 10px 10px 10px 10px;
-  width: 100%;
-  aspect-ratio: 16/9;       /* choose your ratio, e.g. 16/9 or 4/3 */
-  overflow: hidden;
-  border-radius: calc(1rem - 1px) calc(1rem - 1px) 0 0;
-  z-index: 10; /* Ensure images stay above the glow */
-}
-
-.project-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 10px;
-  filter: brightness(70%);
-  transition: transform 0.6s ease, filter 0.3s ease;
-  position: relative;
-  z-index: 10; /* Ensure images stay above the glow */
-}
-
-.project-card:hover .project-image {
-  filter: brightness(100%);
-  transform: scale(1.05);
-}
-
-.project-image-placeholder {
-  width: 100%;
-  height: 100%;
-  background: #374151;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: calc(1rem - 1px) calc(1rem - 1px) 0 0;
-  position: relative;
-  z-index: 10; /* Ensure placeholder stays above the glow */
-}
-
-.project-content {
-  padding: 1rem;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 0rem;
-  position: relative;
-  z-index: 10; /* Ensure content stays above the glow */
-}
-
-.project-title {
-  font-weight: 600;
-  font-size: 1.125rem;
-  color: #d6d6d6;
-  line-height: 1.4;
-  transition: transform 300ms ease;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  position: relative;
-  z-index: 10; /* Ensure title stays above the glow */
-}
-
-.project-excerpt {
-  color: #99999d;
-  font-size: 0.875rem;
-  flex-grow: 1;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  position: relative;
-  z-index: 10; /* Ensure excerpt stays above the glow */
-}
-
-.project-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: auto;
-  position: relative;
-  z-index: 10; /* Ensure tags stay above the glow */
-}
-
-.project-tag {
-  padding: 0.25rem 0.5rem;
-  font-size: 0.75rem;
-  border-radius: 0.375rem;
-  background-color: rgba(50, 166, 255, 0.1);
-  color: #d6d6d6;
-  border: 1px solid rgba(50, 166, 255, 0.3);
-  transition: background-color 0.3s ease;
-  position: relative;
-  z-index: 10; /* Ensure tags stay above the glow */
-}
-
-.project-tag:hover {
-  background-color: rgba(50, 166, 255, 0.2);
-}
-
-.project-date {
-  font-size: 0.75rem;
-  color: #99999d;
-  margin-top: 0.5rem;
-  position: relative;
-  z-index: 10; /* Ensure date stays above the glow */
-}
-
-/* Remove old notification styles that conflict */
-.notification:before,
-.notification:after,
-.notiglow,
-.notiborderglow {
-  display: none;
-}
-
-*, h1, h2, h3, h4, h5, h6, ul, ol, li, p, blockquote, figure, figcaption, table, th, td, ol, pre, code, kbd, samp, placeholder {
-  font-family: 'Montserrat', sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
-  list-style-type: none;
-}
-
-.eor {
-  font-weight: 300;
-}
-
-@media (max-width: 768px) {
-  .project-image-container {
-    /* e.g. make it a little taller on mobile */
-    aspect-ratio: 16/9;
-  }
+.projects-hero-content-header .select-dropdown {
+  z-index: 1000;
 }
 
 /* Breadcrumbs Styles */
@@ -597,12 +382,12 @@ const formatDate = (date) => {
   font-size: 1.1rem;
   color: var(--breadcrumbs, #a7a7a7);
   margin: 0 0 1.2rem 0;
-  padding: 0 0 0 0;
   display: flex;
   align-items: center;
   z-index: 10;
   position: relative;
 }
+
 .projects-breadcrumb ol {
   display: flex;
   align-items: center;
@@ -610,21 +395,297 @@ const formatDate = (date) => {
   padding: 0;
   margin: 0;
 }
+
 .breadcrumb-link {
   color: var(--breadcrumbs, #a7a7a7);
   text-decoration: none;
   transition: color 0.2s;
 }
+
 .breadcrumb-link:hover {
   color: var(--breadcrumbs-main, #8bbbe2);
   text-decoration: underline;
 }
+
 .breadcrumb-separator {
   margin: 0 0.5em;
   color: var(--breadcrumbs, #a7a7a7);
 }
+
 .breadcrumb-current {
   color: var(--breadcrumbs-main, #8bbbe2);
   font-weight: 600;
+}
+
+/* Simplified Project Cards */
+.project-card {
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  max-height: 420px;
+}
+
+.project-card:hover {
+  border-color: #3a3a3a;
+}
+
+.project-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+  flex: 1;
+}
+
+.project-image-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  background: #222;
+  flex-shrink: 0;
+  height: 200px;
+}
+
+.project-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.2s ease;
+}
+
+.project-card:hover .project-image {
+  opacity: 0.9;
+}
+
+.project-image-placeholder {
+  width: 100%;
+  height: 100%;
+  background: #2a2a2a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.placeholder-icon {
+  width: 2rem;
+  height: 2rem;
+  color: #666;
+}
+
+.project-content {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  background: #1a1a1a;
+  justify-content: space-between;
+  min-height: 0;
+}
+
+.project-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+  gap: 1rem;
+  flex-shrink: 0;
+}
+
+.project-date {
+  color: #888;
+  font-family: var(--font3);
+  font-size: 0.75rem;
+  font-weight: 500;
+  flex-shrink: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.project-tags-display {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.project-tag {
+  background: #2a2a2a;
+  color: #ccc;
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.25rem;
+  font-size: 0.65rem;
+  font-family: var(--font3);
+  font-weight: 500;
+  border: 1px solid #3a3a3a;
+}
+
+.more-tags-indicator {
+  color: #888;
+  font-size: 0.65rem;
+  font-family: var(--font3);
+  font-weight: 500;
+}
+
+.project-title {
+  font-family: var(--font3);
+  color: #ffffff;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 0.5rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.project-excerpt {
+  font-family: var(--font3);
+  color: #ccc;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  flex-grow: 1;
+  margin-bottom: 0.75rem;
+}
+
+.project-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 0.75rem;
+  border-top: 1px solid #2a2a2a;
+  flex-shrink: 0;
+}
+
+.read-more {
+  font-family: var(--font3);
+  color: #888;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: color 0.2s ease;
+}
+
+.project-card:hover .read-more {
+  color: #ccc;
+}
+
+.read-more-arrow {
+  width: 0.9rem;
+  height: 0.9rem;
+  color: #888;
+  transition: all 0.2s ease;
+}
+
+.project-card:hover .read-more-arrow {
+  color: #ccc;
+  transform: translateX(2px);
+}
+
+/* Loading spinner */
+.loader {
+  width: 2rem;
+  height: 2rem;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-top: 2px solid #666;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* End of results styling */
+.eor {
+  font-weight: 300;
+  font-family: var(--font3);
+  color: #888;
+}
+
+/* Mobile responsive */
+@media (min-width: 640px) {
+  .projects-hero-content-header {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .projects-hero-content-header {
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+}
+
+@media (max-width: 768px) {
+  .project-card {
+    margin: 0 0.5rem;
+    max-height: 380px;
+  }
+
+  .project-image-container {
+    height: 160px;
+  }
+
+  .project-content {
+    padding: 1rem;
+  }
+
+  .project-title {
+    font-size: 1rem;
+    line-height: 1.25;
+  }
+
+  .project-excerpt {
+    font-size: 0.8rem;
+    line-height: 1.4;
+  }
+}
+
+@media (max-width: 480px) {
+  .project-card {
+    max-height: 360px;
+  }
+
+  .project-image-container {
+    height: 140px;
+  }
+
+  .project-title {
+    font-size: 0.95rem;
+  }
+
+  .project-tag {
+    font-size: 0.6rem;
+    padding: 0.15rem 0.3rem;
+  }
+
+  .project-content {
+    padding: 0.875rem;
+  }
+
+  .project-excerpt {
+    font-size: 0.75rem;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+  }
 }
 </style>

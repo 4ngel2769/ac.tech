@@ -88,7 +88,7 @@ const formatBlogDate = (dateString: string) => {
           <p class="LocationText">Bucharest, Romania</p>
         </div>
         <div class="Website">
-          <font-awesome-icon icon="fa-solid fa-arrow-up-right-from-square" />
+          <font-awesome-icon :icon="['fas', 'arrow-up-right-from-square']" />
           <p class="WebsiteText">
             <a target="_blank" href="https://adev0.eu">https://adev0.eu</a>
           </p>
@@ -97,7 +97,7 @@ const formatBlogDate = (dateString: string) => {
           </UTooltip>
         </div>
         <div class="Website">
-          <font-awesome-icon icon="fa-solid fa-arrow-up-right-from-square" />
+          <font-awesome-icon :icon="['fas','arrow-up-right-from-square']" />
           <p class="WebsiteText">
             <a target="_blank" href="https://angelscoolstuff.pages.dev">Old</a>
           </p>
@@ -109,14 +109,14 @@ const formatBlogDate = (dateString: string) => {
       <UDivider label="Socials" class="socialdivider" />
       <p class="linkstitle">My socials:</p>
       <div class="linkscontainer">
-        <UTooltip text="YouTube | @angeldev0">
+          <UTooltip text="YouTube | @angeldev0">
           <NuxtLink
             class="link"
             to="https://youtube.com/@angeldev0"
             external
             target="_blank"
-            ><font-awesome-icon icon="fas fa-brands fa-youtube"
-          /></NuxtLink>
+            ><font-awesome-icon :icon="['fab','youtube']" />
+          </NuxtLink>
         </UTooltip>
         <UTooltip text="GitHub | 4ngel2769">
           <NuxtLink
@@ -124,8 +124,8 @@ const formatBlogDate = (dateString: string) => {
             to="https://github.com/4ngel2769"
             external
             target="_blank"
-            ><font-awesome-icon icon="fa-brands fa-github"
-          /></NuxtLink>
+            ><font-awesome-icon :icon="['fab','github']" />
+          </NuxtLink>
         </UTooltip>
         <UTooltip text="Dev.to | @angeldev0">
           <NuxtLink
@@ -133,8 +133,8 @@ const formatBlogDate = (dateString: string) => {
             to="https://dev.to/angeldev0"
             external
             target="_blank"
-            ><font-awesome-icon icon="fa-brands fa-dev"
-          /></NuxtLink>
+            ><font-awesome-icon :icon="['fab','dev']" />
+          </NuxtLink>
         </UTooltip>
         <UTooltip text="Twitter | @angeldev0">
           <NuxtLink
@@ -142,8 +142,8 @@ const formatBlogDate = (dateString: string) => {
             to="https://twitter.com/angeldev0"
             external
             target="_blank"
-            ><font-awesome-icon icon="fa-brands fa-twitter"
-          /></NuxtLink>
+            ><font-awesome-icon :icon="['fab','twitter']" />
+          </NuxtLink>
         </UTooltip>
         <UTooltip text="LinkedIn | @angelcapra">
           <NuxtLink
@@ -151,8 +151,8 @@ const formatBlogDate = (dateString: string) => {
             to="http://linkedin.com/in/angelcapra"
             external
             target="_blank"
-            ><font-awesome-icon icon="fa-brands fa-linkedin"
-          /></NuxtLink>
+            ><font-awesome-icon :icon="['fab','linkedin']" />
+          </NuxtLink>
         </UTooltip>
         <UTooltip text="Instagram | @angeldevz0">
           <NuxtLink
@@ -160,13 +160,13 @@ const formatBlogDate = (dateString: string) => {
             to="https://instagram.com/angeldevz0"
             external
             target="_blank"
-            ><font-awesome-icon icon="fa-brands fa-instagram"
-          /></NuxtLink>
+            ><font-awesome-icon :icon="['fab','instagram']" />
+          </NuxtLink>
         </UTooltip>
         <UTooltip text="Email me | angeldevz0@proton.me">
           <NuxtLink class="link" to="mailto:angeldevz0@proton.me" external
-            ><font-awesome-icon icon="fa-solid fa-at"
-          /></NuxtLink>
+            ><font-awesome-icon :icon="['fas','at']" />
+          </NuxtLink>
         </UTooltip>
       </div>
       <UDivider label="About Me" class="descriptiondivider" />
@@ -200,10 +200,19 @@ const formatBlogDate = (dateString: string) => {
 
   <!-- Projects Hero Section -->
   <section class="projects-hero-section">
+    <!-- Contrast panel: subtle translucent rotated bar behind the hero text
+         - 500px wide, rotated ~100deg, tall enough to cover the section
+         - aria-hidden because it's purely decorative
+         - parent (.projects-hero-section) already clips overflow so the
+           backdrop blur won't bleed outside the section
+    -->
+    <!-- <div class="projects-contrast-panel" aria-hidden="true"></div> -->
+    <!-- Fade-out overlay at the bottom for content fade effect -->
+    <!-- <div class="projects-hero-fade" aria-hidden="true"></div> -->
     <div class="projects-hero-content">
       <div class="projects-hero-text">
         <span class="projects-hero-label">TAKE A PEEK</span>
-        <h2 class="projects-hero-title">MY PROJECTS</h2>
+        <h2 class="projects-hero-title">PROJECTs</h2>
         <p class="projects-hero-description">
           I enjoy building things. Wether that's radio tools, scripts, hacking
           devices, applications, or anything in between. Take a look at my
@@ -211,17 +220,17 @@ const formatBlogDate = (dateString: string) => {
         </p>
         <NuxtLink to="/projects" class="explore-projects-btn projects-hero-btn">
           <p>PROJECTS</p>
-          <font-awesome-icon icon="fa-solid fa-rocket" class="h-5" />
+          <font-awesome-icon :icon="['fas','rocket']" class="h-5" />
         </NuxtLink>
       </div>
     </div>
   </section>
 
-  <!-- Latest Blogs Section -->
+  <!-- Latest Projects Section -->
   <section class="latest-blogs-section">
     <div class="latest-blogs-container">
       <div class="latest-blogs-header">
-        <span class="latest-blogs-label">LATEST PROJECTS</span>
+        <span class="latest-blogs-label">LATEST PROJECTs</span>
       </div>
 
       <div class="latest-blogs-wrapper">
@@ -272,6 +281,77 @@ const formatBlogDate = (dateString: string) => {
       <NuxtLink to="/projects" class="more-link mobile">
         <span class="line"></span>Click for More
       </NuxtLink>
+    </div>
+  </section>
+
+  <!-- Latest Blogs Section -->
+  <section class="latest-posts-section">
+    <div class="latest-posts-container">
+      <!-- Centered Title -->
+      <div class="latest-posts-header">
+        <span class="latest-posts-label">NEWEST BLOGs</span>
+      </div>
+
+      <!-- Desktop Layout: 2 cards + description panel -->
+      <div class="latest-posts-content">
+        <!-- Left/Middle: Blog Cards -->
+        <div class="posts-cards-wrapper">
+          <ContentQuery
+            path="/blog"
+            :only="['title', 'date', '_path', 'socialImage']"
+            :sort="{ date: -1 }"
+            :limit="2"
+          >
+            <template v-slot="{ data }">
+              <div class="posts-grid">
+                <div v-for="post in data" :key="post._path" class="post-card">
+                  <NuxtLink :to="post._path" class="post-card-link">
+                    <div class="post-card-image">
+                      <img
+                        v-if="post.socialImage?.src"
+                        :src="post.socialImage.src"
+                        :alt="post.socialImage.alt || post.headline"
+                        class="post-image"
+                      />
+                      <div v-else class="post-image-placeholder">
+                        <span class="text-gray-400">No image</span>
+                      </div>
+                    </div>
+                    <div class="post-card-content">
+                      <h3 class="post-card-title">{{ post.title || post.headline || 'Untitled' }}</h3>
+                      <p class="post-card-date">
+                        {{ post.date ? formatBlogDate(post.date) : '' }}
+                      </p>
+                    </div>
+                  </NuxtLink>
+                </div>
+              </div>
+            </template>
+            <template #not-found>
+              <div class="no-posts-message">
+                <p>No blog posts found.</p>
+              </div>
+            </template>
+          </ContentQuery>
+        </div>
+
+        <!-- Right: Description Panel -->
+        <div class="flex justify-center flex-col align-center">
+          <!-- <h3 class="description-title">Read My Blogs</h3> -->
+          <div class="posts-description-panel">
+            <div class="description-content">
+              <p class="description-text">
+                Dive into articles about cybersecurity, ethical hacking, embedded systems, and IoT development. 
+                Discover insights from real-world projects, reverse engineering adventures, and technical deep-dives into the latest security research.
+              </p>
+              <NuxtLink to="/blog" class="view-all-btn">
+                <span>View All Blogs</span>
+                <font-awesome-icon :icon="['fas', 'arrow-right']" class="arrow-icon" />
+              </NuxtLink>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
   <!-- No longer needed since I make my own backgrounds -->
@@ -559,6 +639,46 @@ body {
   border: none;
 }
 
+/* Fade-out overlay for hero content */
+.projects-hero-fade {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 120px;
+  z-index: 4; /* Above background, below content */
+  pointer-events: none;
+  /* Fade from transparent to site background color (#101417 or #000) */
+  background: linear-gradient(
+    to bottom,
+    rgba(16,20,23,0) 0%,
+    rgba(16,20,23,0.7) 60%,
+    #0d1516 100%
+  );
+  /* fallback for very dark backgrounds */
+}
+
+/* Rotated translucent contrast panel used to add subtle contrast behind
+   the projects hero text. Kept decorative and non-interactive. */
+.projects-contrast-panel {
+  position: absolute;
+  z-index: 2; /* sits above background pseudo-elements but under content (projects-hero-content z-index:3) */
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -54%) rotate(40deg);
+  transform-origin: center center;
+  width: 500px; /* requested width */
+  /* taller than 100% so the rotated bar always covers the hero section */
+  height: 220%;
+  border-left: 1px solid rgba(190, 190, 190, 0.22);
+  border-right: 1px solid rgba(190, 190, 190, 0.22);
+  pointer-events: none;
+  backdrop-filter: blur(8px) saturate(120%);
+  -webkit-backdrop-filter: blur(8px) saturate(120%);
+  border-radius: 12px;
+  box-shadow: none;
+}
+
 /* Add a pseudo-element for the rotated background */
 .projects-hero-section::before {
   content: "";
@@ -584,7 +704,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #0b12118f; /* Adjust opacity to control brightness */
+  background-color: #0b1211ad; /* Adjust opacity to control brightness */
   z-index: 1;
   pointer-events: none; /* <-- Add this line */
 }
@@ -919,6 +1039,7 @@ body {
   font-family: var(--font3);
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   margin: 0;
@@ -1071,7 +1192,8 @@ body {
   .blog-card-title {
     font-size: 1rem;
     line-height: 1.3;
-    -webkit-line-clamp: 2; /* Ensure title stays visible */
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
   }
 
   .blog-card-date {
@@ -1094,6 +1216,325 @@ body {
 
 .light .latest-blogs-label {
   color: #111827;
+}
+
+/* Latest Posts Section (Blog Posts) */
+.latest-posts-section {
+  margin: 3rem 0;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  padding-top: 2rem;
+  padding-bottom: 4rem;
+  position: relative;
+}
+
+.latest-posts-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.latest-posts-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.latest-posts-label {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: #d5d5d5;
+  font-family: var(--font3);
+}
+
+/* Desktop Layout: 2 cards + description panel */
+.latest-posts-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.posts-cards-wrapper {
+  width: 100%;
+}
+
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.post-card {
+  transition: all 0.3s ease;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.post-card-link {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+  width: 100%;
+}
+
+.post-card-image {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.post-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: filter 0.3s ease;
+  filter: brightness(0.8);
+}
+
+.post-card:hover .post-image {
+  filter: brightness(1);
+}
+
+.post-image-placeholder {
+  width: 100%;
+  height: 100%;
+  background: #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+}
+
+.post-card-content {
+  padding: 1rem 0.5rem 0.4rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex: 1;
+  justify-content: space-between;
+}
+
+.post-card-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #f3f4f6;
+  line-height: 1.4;
+  font-family: var(--font3);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin: 0;
+}
+
+.post-card-date {
+  font-size: 0.875rem;
+  color: #9ca3af;
+  font-family: var(--font3);
+  margin: 0;
+}
+
+.no-posts-message {
+  text-align: center;
+  color: #9ca3af;
+  font-size: 1.125rem;
+  padding: 2rem;
+  grid-column: 1 / -1;
+}
+
+/* Description Panel */
+.posts-description-panel {
+  position: sticky;
+  top: 2rem;
+  padding: 1rem 1.5rem;/*
+  background: rgba(30, 30, 30, 0.5);*/
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  height: fit-content;
+}
+
+.description-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.description-title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--htb-green);
+  font-family: var(--font3);
+  margin: 0;
+  padding-bottom: 0.5rem;
+}
+
+.description-text {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #d1d5db;
+  font-family: var(--font3);
+  margin: 0;
+}
+
+.view-all-btn {
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+  gap: 0.75rem;
+  padding: 0.675rem 1rem;
+  background: rgba(127, 255, 0, 0.1);
+  border: 1px solid var(--htb-green);
+  border-radius: 12px;
+  color: var(--htb-green);
+  font-family: var(--font3);
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  align-self: flex-start;
+}
+
+.view-all-btn:hover {
+  background: var(--htb-green);
+  color: #000;
+  transform: translateX(4px);
+}
+
+.arrow-icon {
+  transition: transform 0.3s ease;
+}
+
+.view-all-btn:hover .arrow-icon {
+  transform: translateX(4px);
+}
+
+/* Tablet Layout */
+@media (max-width: 1024px) {
+  .latest-posts-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .posts-description-panel {
+    position: relative;
+    top: 0;
+  }
+
+  .posts-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+/* Mobile Layout */
+@media (max-width: 768px) {
+  .latest-posts-section {
+    padding: 2rem 1rem;
+    margin: 2rem 0;
+  }
+
+  .latest-posts-container {
+    padding: 0 1rem;
+  }
+
+  .latest-posts-label {
+    font-size: 2rem;
+  }
+
+  .latest-posts-content {
+    gap: 2rem;
+  }
+
+  .posts-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .post-card-image {
+    height: 180px;
+  }
+
+  .posts-description-panel {
+    padding: 1.5rem;
+  }
+
+  .description-title {
+    font-size: 1.5rem;
+  }
+
+  .description-text {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .latest-posts-section {
+    padding: 2rem 0.5rem;
+  }
+
+  .latest-posts-container {
+    padding: 0 0.5rem;
+  }
+
+  .latest-posts-label {
+    font-size: 1.75rem;
+  }
+
+  .post-card-image {
+    height: 160px;
+  }
+
+  .post-card-title {
+    font-size: 1rem;
+  }
+
+  .post-card-date {
+    font-size: 0.8rem;
+  }
+
+  .description-title {
+    font-size: 1.25rem;
+  }
+
+  .description-text {
+    font-size: 0.9rem;
+  }
+
+  .view-all-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Light mode support for Latest Posts */
+.light .post-card-title {
+  color: #111827;
+}
+
+.light .post-card-date {
+  color: #6b7280;
+}
+
+.light .latest-posts-label {
+  color: #111827;
+}
+
+.light .description-text {
+  color: #374151;
+}
+
+.light .posts-description-panel {
+  background: rgba(255, 255, 255, 0.5);
+  border-color: rgba(0, 0, 0, 0.1);
 }
 
 </style>

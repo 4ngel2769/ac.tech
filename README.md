@@ -5,7 +5,7 @@
     <br/>
     <hr/>
     <p>Technologies Used:</p>
-    <img src="https://skillicons.dev/icons?i=nuxt,vue,npm,nodejs,tailwind,ts" alt="technologies used" />
+    <img src="https://skillicons.dev/icons?i=nuxt,vue,npm,nodejs,tailwind,ts,docker,nginx" alt="technologies used" />
 </div>
 
 
@@ -15,9 +15,14 @@ Visit the live site at: **[angellabs.xyz](https://angellabs.xyz)**
 
 ## 📋 Prerequisites
 
+### For Local Development
 - [Node.js](https://nodejs.org) (v22.17.1 recommended)
 - [Git](https://git-scm.com)
 - Your favorite package manager (npm, yarn, pnpm, or bun)
+
+### For Docker Deployment
+- [Docker](https://www.docker.com/get-started) (20.10+)
+- [Docker Compose](https://docs.docker.com/compose/install/) (v2.0+) (optional)
 
 ## 🚀 Quick Start
 
@@ -79,6 +84,99 @@ Generate static site:
 ```bash
 npm run generate
 ```
+
+## 🐳 Docker Deployment
+
+### Quick Start with Docker Compose (Recommended)
+
+The easiest way to run the website is using Docker Compose:
+
+```bash
+# Build and start the container
+docker compose up -d --build
+
+# View logs
+docker compose logs -f
+
+# Stop the container
+docker compose down
+```
+
+The website will be available at `http://localhost:3000`
+
+### Manual Docker Build
+
+If you prefer to use Docker directly:
+
+```bash
+# Build the image
+docker build -t ac-tech .
+
+# Run the container
+docker run -d -p 3000:80 --name ac-tech ac-tech
+
+# View logs
+docker logs -f ac-tech
+
+# Stop and remove container
+docker stop ac-tech && docker rm ac-tech
+```
+
+### Deploying to Coolify
+
+[Coolify](https://coolify.io) is a self-hosted platform that makes deployment simple:
+
+1. [Connect your repository to Coolify](https://coolify.io/docs/knowledge-base/git/github/integration)
+2. Select "Dockerfile" as the build pack (Coolify will auto-detect the Dockerfile)
+3. Configure environment (optional, if you have env variables)
+4. Click Deploy 🚀
+
+Coolify will automatically:
+- Build your Docker image
+- Deploy the container
+- Set up SSL certificates
+- Provide a public URL
+
+### Deploying to Linux Servers
+
+For manual deployment on any Linux server with Docker installed:
+
+```bash
+# Clone the repository
+git clone https://github.com/4ngel2769/ac.tech.git
+cd ac.tech
+
+# Build the Docker image
+docker build -t ac-tech .
+
+# Run the container on port 80
+docker run -d \
+  -p 80:80 \
+  --name ac-tech \
+  --restart unless-stopped \
+  ac-tech
+
+# Optional: Set up with nginx reverse proxy
+# Create nginx config at /etc/nginx/sites-available/ac-tech
+# Point it to http://localhost:80
+```
+
+### Docker Architecture
+
+The Dockerfile uses a **multi-stage build** for optimal performance:
+
+- **Stage 1 (Builder)**: Uses Node.js 22 Alpine to build the static site with `npm run generate`
+- **Stage 2 (Production)**: Uses nginx Alpine to serve the generated files
+
+**Benefits:**
+- **Small image size** (~25MB final image)
+- **Fast builds** with layer caching
+- **Secure** with minimal attack surface
+- **Production-ready** nginx configuration with:
+  - Static asset caching
+  - Gzip compression
+  - Security headers
+  - Health checks
 
 ## ✨ Current Features
 
@@ -182,9 +280,10 @@ ac.tech/
 - [x] Blog system with markdown support
 - [x] SEO optimization and meta tags
 - [x] Dark/Light theme implementation
+- [x] Search functionality enhancement
+- [x] Blog content expansion
 
 ### 🚧 In Progress
-- [ ] Blog content expansion
 - [ ] Resume/CV page
 - [ ] Contact form functionality
 - [ ] Light theme refinement
@@ -194,7 +293,6 @@ ac.tech/
 ### 🔮 Future Plans
 - [ ] Newsletter subscription
 - [ ] Comments system
-- [ ] Search functionality enhancement
 - [ ] Multi-language support
 - [ ] PWA features
 
