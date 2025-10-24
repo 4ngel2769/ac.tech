@@ -6,7 +6,7 @@
         <Section id="blog-header" type="header" class="blog-header-bg !pb-0">
           <div class="mx-auto px-4 lg:px-8">
             <!-- Breadcrumbs -->
-            <div class="border-t-2 pt-4 border-zinc-500 mb-6">
+            <div class="border-t-2 pt-4 border-zinc-500 mb-6 mt-20">
               <ol
                 itemscope
                 itemtype="https://schema.org/BreadcrumbList"

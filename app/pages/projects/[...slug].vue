@@ -7,7 +7,7 @@
           <div class="mx-auto px-4 lg:px-8">
             <!-- Added responsive padding -->
             <!-- Breadcrumbs -->
-            <div class="border-t-2 pt-6 border-zinc-500 mb-8">
+            <div class="border-t-2 pt-6 border-zinc-500 mb-8 mt-20">
               <ol
                 itemscope
                 itemtype="https://schema.org/BreadcrumbList"
