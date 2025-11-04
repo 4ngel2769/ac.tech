@@ -2,7 +2,7 @@
     <footer class="footer-container">
         <div class="footer-content">
             <div class="footer-section">
-                <p class="copyright">© {{ new Date().getFullYear() }} Angel Capra. All rights reserved.</p>
+                <p class="copyright">© {{ currentYear }} Angel Capra. All rights reserved.</p>
                 
                 <div class="social-links">
                     <a href="mailto:angeldevz0@proton.me" class="social-link" title="Email">
@@ -31,6 +31,11 @@
         </div>
     </footer>
 </template>
+
+<script setup>
+// Compute year once to avoid hydration mismatch
+const currentYear = new Date().getFullYear()
+</script>
 
 <style scoped>
 .footer-container {
