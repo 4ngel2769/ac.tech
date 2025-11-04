@@ -131,8 +131,8 @@ export default defineNuxtConfig({
 
   css: [
     '@fortawesome/fontawesome-svg-core/styles.css',
-    '~/app/assets/css/main.css',
-    '~/app/assets/css/tailwind.css'
+    '~/assets/css/main.css',
+    '~/assets/css/tailwind.css'
   ],
 
   modules: [
