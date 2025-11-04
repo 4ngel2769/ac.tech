@@ -704,7 +704,7 @@ useHead({
 
   .featured-image {
     border-radius: 0;
-    margin: 0 0rem;
+    margin: 0;
     width: calc(100% - 0);
   }
 
