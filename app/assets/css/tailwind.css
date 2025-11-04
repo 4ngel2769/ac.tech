@@ -15,176 +15,180 @@ Nunito
 /* font-family: 'Sen', sans-serif; */
 
 /*     ## Fonts ##      */
+/* Only load fonts that are actually used in the codebase */
 
-@font-face {
+/* @font-face {
   font-family: 'Creamy Sugar';
   src: url('/assets/fonts/CreamySugar.ttf');
-}
-@font-face {
+} */
+/* @font-face {
   font-family: 'Drip October';
   src: url('/assets/fonts/DripOctober-vm0JA.ttf');
-}
+} */
 @font-face {
   font-family: 'Progress';
   src: url('/assets/fonts/progress_personal.ttf');
+  font-display: swap;
 }
-@font-face {
+/* @font-face {
   font-family: 'TypewriteInk';
   src: url('/assets/fonts/TypewriterInkedRegular-lgwPZ.ttf');
-}
-@font-face {
+} */
+/* @font-face {
   font-family: 'TripDeniedPersonal';
   src: url('/assets/fonts/TripDeniedPersonalUseRegular-d98q6.ttf');
-}
-@font-face {
+} */
+/* @font-face {
   font-family: 'TripDeniedBackground';
   src: url('/assets/fonts/TripDeniedBackgroundRegular-mLmyx.ttf');
-}
-@font-face {
+} */
+/* @font-face {
   font-family: 'ShineTypewriter';
   src: url('/assets/fonts/ShineTypewriter-lgwzd.ttf');
-}
-@font-face {
+} */
+/* @font-face {
   font-family: 'Rough';
   src: url('/assets/fonts/RoughSerif-ALjqA.ttf');
-}
-@font-face {
+} */
+/* @font-face {
   font-family: 'OldPrint';
   src: url('/assets/fonts/OldPrintingPressFreeVersion-8jd0.ttf');
-}
-@font-face {
+} */
+/* @font-face {
   font-family: 'Marny';
   src: url('/assets/fonts/MarnyRegular-lg3GX.otf');
-}
-@font-face {
+} */
+/* @font-face {
   font-family: 'Mango';
   src: url('/assets/fonts/MangoMingle-1G32Z.ttf');
-}
-@font-face {
+} */
+/* @font-face {
   font-family: 'Kyiv';
   src: url('/assets/fonts/KyivMachine-nR0aM.ttf');
-}
-@font-face {
+} */
+/* @font-face {
   font-family: 'Kg';
   src: url('/assets/fonts/KgHoloceneRegular-lgjKy.ttf');
-}
+} */
 @font-face {
   font-family: 'Infamous';
   src: url('/assets/fonts/Infamous-Yznao.ttf');
+  font-display: swap;
 }
-@font-face {
+/* @font-face {
   font-family: 'Holingston';
   src: url('/assets/fonts/Holingston-x32x5.otf');
-}
-@font-face {
+} */
+/* @font-face {
   font-family: 'Darkosta';
   src: url('/assets/fonts/DarkostaRegular-X3w0o.otf');
-}
-@font-face {
+} */
+/* @font-face {
   font-family: 'Craglland';
   src: url('/assets/fonts/Craglland-RpZmW.ttf');
-}
-@font-face {
+} */
+/* @font-face {
   font-family: 'Cornetta';
   src: url('/assets/fonts/Cornetta-EaLVn.ttf');
-}
+} */
 @font-face {
   font-family: 'Barcelona';
   src: url('/assets/fonts/Barcelona-x3qOV.otf');
+  font-display: swap;
 }
-@font-face {
+/* @font-face {
   font-family: 'BarcelonaItalic';
   src: url('/assets/fonts/BarcelonaItalic-p7Ljv.otf');
-}
-@font-face {
+} */
+/* @font-face {
   font-family: 'Balacksix';
   src: url('/assets/fonts/Balacksix-ZVAgm.ttf');
-}
-@font-face {
+} */
+/* @font-face {
   font-family: 'Vonique';
   src: url('/assets/fonts/Vonique64.ttf');
-}
-@font-face {
+} */
+/* @font-face {
   font-family: 'SpaceAge';
   src: url('/assets/fonts/space_age.ttf');
-}
-@font-face {
+} */
+/* @font-face {
   font-family: 'Pixel';
   src: url('/assets/fonts/Pixel.ttf');
-}
-@font-face {
+} */
+/* @font-face {
   font-family: 'Opificio';
   src: url('/assets/fonts/opificio_regular.ttf');
   font-weight: normal;
   font-style: normal;
-}
-@font-face {
+} */
+/* @font-face {
   font-family: 'Opificio';
   src: url('/assets/fonts/opificio_bold.ttf');
   font-weight: bold;
   font-style: normal;
-}
-@font-face {
+} */
+/* @font-face {
   font-family: 'Opificio';
   src: url('/assets/fonts/opificio_light.ttf');
   font-weight: lighter;
   font-style: normal;
-}
-@font-face {
+} */
+/* @font-face {
   font-family: 'Opificio';
   src: url('/assets/fonts/opificio_rounded.ttf');
   font-weight: normal;
   font-style: round;
-}
-@font-face {
+} */
+/* @font-face {
   font-family: 'Opificio';
   src: url('/assets/fonts/opificio_light_rounded.ttf');
   font-weight: lighter;
   font-style: round;
-}
-@font-face {
+} */
+/* @font-face {
   font-family: 'Opificio';
   src: url('/assets/fonts/opificio_bold_rounded.ttf');
   font-weight: bold;
   font-style: round;
-}
-@font-face {
+} */
+/* @font-face {
   font-family: 'Guildof';
   src: url('/assets/fonts/guildof.ttf');
-}
+} */
 
  /* Fonts  */
 :root {
   --font1: 'Lexend Deca', sans-serif;
   --font2: 'Montserrat', sans-serif;
   --font3: 'Sen', sans-serif;
-  --font4: 'Creamy Sugar';
-  --font5: 'Drip October';
+  /* --font4: 'Creamy Sugar'; */
+  /* --font5: 'Drip October'; */
   --font6: 'Progress';
-  --font7: 'TypewriteInk';
-  --font8: 'TripDeniedPersonal';
-  --font9: 'TripDeniedBackground';
-  --font10: 'ShineTypewriter';
-  --font11: 'Rough';
-  --font12: 'OldPrint';
-  --font13: 'Marny';
-  --font14: 'Mango';
-  --font15: 'Kyiv';
-  --font16: 'Kg';
+  /* --font7: 'TypewriteInk'; */
+  /* --font8: 'TripDeniedPersonal'; */
+  /* --font9: 'TripDeniedBackground'; */
+  /* --font10: 'ShineTypewriter'; */
+  /* --font11: 'Rough'; */
+  /* --font12: 'OldPrint'; */
+  /* --font13: 'Marny'; */
+  /* --font14: 'Mango'; */
+  /* --font15: 'Kyiv'; */
+  /* --font16: 'Kg'; */
   --font17: 'Infamous';
-  --font18: 'Holingston';
-  --font19: 'Darkosta';
-  --font20: 'Craglland';
-  --font21: 'Cornetta';
+  /* --font18: 'Holingston'; */
+  /* --font19: 'Darkosta'; */
+  /* --font20: 'Craglland'; */
+  /* --font21: 'Cornetta'; */
   --font22: 'Barcelona';
-  --font23: 'BarcelonaItalic';
-  --font24: 'Nalacksix';
-  --font25: 'Balacksix';
-  --font26: 'Vonique';
-  --font27: 'SpaceAge';
-  --font28: 'Pixel';
-  --font29: 'Opificio';
-  --font30: 'Guildof';
+  /* --font23: 'BarcelonaItalic'; */
+  /* --font24: 'Nalacksix'; */
+  /* --font25: 'Balacksix'; */
+  /* --font26: 'Vonique'; */
+  /* --font27: 'SpaceAge'; */
+  /* --font28: 'Pixel'; */
+  /* --font29: 'Opificio'; */
+  /* --font30: 'Guildof'; */
 }
 
 

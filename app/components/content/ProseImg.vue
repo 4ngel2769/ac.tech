@@ -1,6 +1,15 @@
 <template>
     <figure>
-        <img :src="refinedSrc" :alt="alt" :width="width" :height="height" class="mx-auto"/>
+        <NuxtImg 
+            :src="refinedSrc" 
+            :alt="alt" 
+            :width="width" 
+            :height="height" 
+            class="mx-auto"
+            loading="lazy"
+            format="webp"
+            quality="80"
+        />
         <figcaption class="text-base leading-base text-center mt-2 opacity-70">{{ alt }}</figcaption>    
     </figure>
 </template>

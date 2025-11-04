@@ -1,13 +1,27 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
-    `components/**/*.{vue,js}`,
-    `layouts/**/*.vue`,
-    `pages/**/*.vue`,
-    `composables/**/*.{js,ts}`,
-    `plugins/**/*.{js,ts}`,
-    `App.{js,ts,vue}`,
-    `app.{js,ts,vue}`
+    './app/components/**/*.{vue,js,ts}',
+    './app/layouts/**/*.{vue,js,ts}',
+    './app/pages/**/*.{vue,js,ts}',
+    './app/composables/**/*.{js,ts}',
+    './app/plugins/**/*.{js,ts}',
+    './app/app.{js,ts,vue}',
+    './app/App.{js,ts,vue}',
+    './content/**/*.md',
+    './nuxt.config.{js,ts}'
+  ],
+  // Aggressive purge configuration
+  safelist: [
+    // Dynamic classes that can be generated
+    'dark',
+    'light',
+    /^bg-/,
+    /^text-/,
+    /^border-/,
+    /^hover:/,
+    /^focus:/,
+    /^prose/,
   ],
   theme: {
     extend: {

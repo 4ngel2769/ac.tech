@@ -3,7 +3,14 @@
         <NuxtLink :to="post._path">
             <!-- <div class="card text-center rounded-t-xl "> -->
             <div class="card flex rounded-md">
-                <img :src="post.img" class="hoverBanner absolute z-20" />
+                <NuxtImg 
+                    :src="post.img" 
+                    class="hoverBanner absolute z-20" 
+                    loading="lazy"
+                    format="webp"
+                    quality="80"
+                    :alt="post.title || 'Blog post thumbnail'"
+                />
 
                 <!-- <div class="hoverBG"
                 :style="{ 

@@ -51,12 +51,15 @@ const formatBlogDate = (dateString: string) => {
       <!-- <source src="https://i.imgur.com/KeWZEUr.mp4" type="video/mp4" /> -->
       <source src="https://i.imgur.com/LefCJn4.mp4" type="video/mp4" />
     </video>
-    <img
+    <NuxtImg
       v-else
       class="hero-image-bg"
       src="https://cdn.pixabay.com/photo/2016/11/30/20/58/programming-1873854_1280.png"
       alt="Background"
       draggable="false"
+      loading="eager"
+      format="webp"
+      quality="80"
     />
 
     <!-- Overlays (filters) -->
@@ -240,11 +243,14 @@ const formatBlogDate = (dateString: string) => {
               <div v-for="blog in data" :key="blog._path" class="blog-card">
                 <NuxtLink :to="blog._path" class="blog-card-link">
                   <div class="blog-card-image">
-                    <img
+                    <NuxtImg
                       v-if="blog.socialImage?.src"
                       :src="blog.socialImage.src"
                       :alt="blog.socialImage.alt || blog.headline"
                       class="blog-image"
+                      loading="lazy"
+                      format="webp"
+                      quality="80"
                     />
                     <div v-else class="blog-image-placeholder">
                       <span class="text-gray-400">No image</span>
@@ -302,11 +308,14 @@ const formatBlogDate = (dateString: string) => {
                 <div v-for="post in data" :key="post._path" class="post-card">
                   <NuxtLink :to="post._path" class="post-card-link">
                     <div class="post-card-image">
-                      <img
+                      <NuxtImg
                         v-if="post.socialImage?.src"
                         :src="post.socialImage.src"
                         :alt="post.socialImage.alt || post.headline"
                         class="post-image"
+                        loading="lazy"
+                        format="webp"
+                        quality="80"
                       />
                       <div v-else class="post-image-placeholder">
                         <span class="text-gray-400">No image</span>

@@ -24,6 +24,36 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       routes: ['/projects', '/']
+    },
+    routeRules: {
+      // Cache static assets aggressively
+      '/_nuxt/**': { 
+        headers: { 
+          'cache-control': 'public, max-age=31536000, immutable' 
+        } 
+      },
+      '/fonts/**': { 
+        headers: { 
+          'cache-control': 'public, max-age=31536000, immutable' 
+        } 
+      },
+      '/assets/**': { 
+        headers: { 
+          'cache-control': 'public, max-age=31536000, immutable' 
+        } 
+      },
+      // Cache images
+      '/**/*.{png,jpg,jpeg,gif,webp,avif,svg,ico,mp4}': { 
+        headers: { 
+          'cache-control': 'public, max-age=2592000' // 30 days
+        } 
+      },
+      // Cache HTML pages for shorter duration
+      '/**/*.html': { 
+        headers: { 
+          'cache-control': 'public, max-age=3600, must-revalidate' // 1 hour
+        } 
+      },
     }
   },
   routeRules: {

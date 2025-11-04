@@ -75,7 +75,7 @@
                       +{{ doc.tags.length - 3 }} more
                     </span>
                   </div>
-                  <button class="share-btn" @click="sharePage">
+                  <button class="share-btn" @click="sharePage" aria-label="Share this article">
                     <font-awesome-icon :icon="['fa-solid', 'fa-share']" />
                     Share
                   </button>
