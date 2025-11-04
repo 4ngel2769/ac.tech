@@ -698,10 +698,6 @@ useHead({
     padding: 0.125rem 0.375rem;
   }
 
-  .blog-content .prose {
-    padding: 0;
-  }
-
   .featured-image {
     border-radius: 0;
     margin: 0;
