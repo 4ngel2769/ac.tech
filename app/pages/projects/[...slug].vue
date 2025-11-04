@@ -684,7 +684,6 @@ h1 {
   font-family: 'Montserrat', sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
-  list-style-type: decimal;
 }
 
 .meta-value {
