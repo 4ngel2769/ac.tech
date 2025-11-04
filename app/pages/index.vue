@@ -20,11 +20,6 @@ export default {
 <script setup lang="ts">
 const showVideoBg = ref(true); // Set to false for image background
 
-// Optional: toggle function for demo/testing
-function toggleBg() {
-  showVideoBg.value = !showVideoBg.value;
-}
-
 // Date formatter for blog posts
 const formatBlogDate = (dateString: string) => {
   if (!dateString) return "";
