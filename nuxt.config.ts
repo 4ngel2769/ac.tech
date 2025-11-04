@@ -131,8 +131,8 @@ export default defineNuxtConfig({
 
   css: [
     '@fortawesome/fontawesome-svg-core/styles.css',
-    '/assets/css/main.css',
-    '/assets/css/tailwind.css'
+    '~/app/assets/css/main.css',
+    '~/app/assets/css/tailwind.css'
   ],
 
   modules: [
@@ -210,6 +210,16 @@ export default defineNuxtConfig({
     name: 'Angel Capra 🚀',
   //   // description: 'Personal website; find my projects, social links, and more. 📄',
     defaultLocale: 'en',
+  },
+
+  sitemap: {
+    sources: [
+      '/api/__sitemap__/urls',
+    ],
+    exclude: [
+      '/api/**',
+      '/admin/**',
+    ],
   },
 
   // compatibilityDate: '2024-07-09',
