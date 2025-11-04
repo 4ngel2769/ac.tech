@@ -214,7 +214,7 @@ const formatBlogDate = (dateString: string) => {
         <span class="projects-hero-label">TAKE A PEEK</span>
         <h2 class="projects-hero-title">PROJECTs</h2>
         <p class="projects-hero-description">
-          I enjoy building things. Wether that's radio tools, scripts, hacking
+          I enjoy building things. Whether that's radio tools, scripts, hacking
           devices, applications, or anything in between. Take a look at my
           arsenal of projects.
         </p>

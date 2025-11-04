@@ -4,9 +4,9 @@
       <template v-slot="{ doc }">
         <!-- Simplified Header Section with better flow -->
         <Section id="blog-header" type="header" class="blog-header-bg !pb-0">
-          <div class="mx-auto px-4 lg:px-8">
+          <div class="mx-auto lg:px-8">
             <!-- Breadcrumbs -->
-            <div class="border-t-2 pt-4 border-zinc-500 mb-6">
+            <div class="border-t-2 pt-4 border-zinc-500 mb-6 mt-20 flex items-center gap-4">
               <ol
                 itemscope
                 itemtype="https://schema.org/BreadcrumbList"
@@ -49,6 +49,9 @@
                   <meta itemprop="position" content="3" />
                 </li>
               </ol>
+              <!-- <button class="copy-link-btn" @click="copyLink">
+                <font-awesome-icon :icon="['fas', 'arrow-up-right-from-square']" />
+              </button> -->
             </div>
 
             <!-- Simplified Hero Section -->
@@ -59,7 +62,6 @@
                 <!-- Compact meta info -->
                 <div class="blog-meta-simple">
                   <span class="blog-date">{{ formatDate(doc.date) }}</span>
-                  
                   <!-- Simplified tags display -->
                   <div v-if="doc.tags && doc.tags.length > 0" class="blog-tags-simple">
                     <span
@@ -73,6 +75,10 @@
                       +{{ doc.tags.length - 3 }} more
                     </span>
                   </div>
+                  <button class="share-btn" @click="sharePage">
+                    <font-awesome-icon :icon="['fa-solid', 'fa-share']" />
+                    Share
+                  </button>
                 </div>
 
                 <!-- Optional description -->
@@ -86,7 +92,7 @@
 
         <!-- Content Section with better spaced featured image -->
         <Section id="main" class="!p-0 content-section">
-          <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="mx-auto lg:px-8">
             <!-- Featured image (if exists) - with optimized loading -->
             <div v-if="doc.socialImage?.src" class="featured-image-container">
               <div class="featured-image">
@@ -173,6 +179,21 @@
 </template>
 
 <script setup>
+const copyLink = () => {
+  navigator.clipboard.writeText(window.location.href);
+};
+
+const sharePage = () => {
+  if (navigator.share) {
+    navigator.share({
+      title: document.title,
+      url: window.location.href
+    });
+  } else {
+    copyLink();
+    alert('Link copied!');
+  }
+};
 definePageMeta({
   layout: "blog",
   scrollToTop: true,
@@ -242,6 +263,39 @@ useHead({
 </script>
 
 <style scoped>
+.copy-link-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #222;
+  color: #8bbbe2;
+  border: 1px solid #8bbbe2;
+  border-radius: 0.375rem;
+  padding: 0.30rem 0.60rem;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.copy-link-btn:hover {
+  background: #8bbbe2;
+  color: #222;
+}
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: rgba(78, 155, 0, 0.1);
+  color: #7fff00;
+  border-radius: 0.375rem;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.share-btn:hover {
+  background: #7fff00;
+  color: #222;
+}
 .blog-post-text {
   color: #d4d4d8;
   padding-left: 0;
@@ -593,6 +647,10 @@ useHead({
     margin-bottom: 0.75rem;
   }
 
+  .blog-content .prose {
+    padding: 0;
+  }
+
   .blog-meta-simple {
     flex-direction: column;
     align-items: flex-start;
@@ -605,8 +663,6 @@ useHead({
 
   .featured-image {
     border-radius: 0.75rem;
-    margin: 0 1rem;
-    width: calc(100% - 2rem);
     max-width: none;
   }
 
@@ -643,14 +699,18 @@ useHead({
   }
 
   .featured-image {
-    border-radius: 0.5rem;
-    margin: 0 0.5rem;
-    width: calc(100% - 1rem);
+    border-radius: 0;
+    margin: 0;
+    width: calc(100% - 0);
   }
 
   .featured-image-img {
     min-height: 200px;
     max-height: 300px;
+  }
+
+  .featured-image-container {
+    margin-bottom: 0;
   }
 
   .article-wrapper {

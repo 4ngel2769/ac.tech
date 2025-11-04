@@ -16,6 +16,7 @@ import {
   faExclamationTriangle,
   faTimesCircle,
   faSun,
+  faShare,
   faMoon
 } from '@fortawesome/free-solid-svg-icons'
 import { 
@@ -55,6 +56,7 @@ library.add(
   // Theme toggle icons
   faSun,
   faMoon,
+  faShare,
   fab
 )
 

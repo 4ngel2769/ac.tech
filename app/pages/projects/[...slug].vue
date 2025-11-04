@@ -7,7 +7,7 @@
           <div class="mx-auto px-4 lg:px-8">
             <!-- Added responsive padding -->
             <!-- Breadcrumbs -->
-            <div class="border-t-2 pt-6 border-zinc-500 mb-8">
+            <div class="border-t-2 pt-6 border-zinc-500 mb-8 mt-20 flex items-center gap-4">
               <ol
                 itemscope
                 itemtype="https://schema.org/BreadcrumbList"
@@ -50,6 +50,9 @@
                   <meta itemprop="position" content="3" />
                 </li>
               </ol>
+              <!-- <button class="copy-link-btn" @click="copyLink">
+                <font-awesome-icon :icon="['fas', 'arrow-up-right-from-square']" />
+              </button> -->
             </div>
 
             <!-- Hero Section with Image and Title -->
@@ -98,19 +101,40 @@
                     v-if="doc.tags && doc.tags.length > 0"
                     class="meta-item flex flex-row items-start gap-4"
                   >
-                    <span class="meta-label flex-shrink-0 w-1/2">
+                    <span class="meta-label flex-shrink-0 w-1/3">
                       {{ doc.tags.length === 1 ? "Category" : "Categories" }}
                     </span>
-                    <div class="meta-content w-1/2">
+                    <div class="meta-content w-2/3">
                       <div class="meta-tags flex flex-wrap gap-2">
-                        <span
-                          v-for="tag in doc.tags"
-                          :key="tag"
-                          class="meta-tag"
-                        >
-                          {{ tag }}
-                        </span>
+                        <template v-if="!showAllTags && doc.tags.length > 3">
+                          <span
+                            v-for="tag in doc.tags.slice(0, 3)"
+                            :key="tag"
+                            class="meta-tag"
+                          >
+                            {{ tag }}
+                          </span>
+                          <button class="meta-tag-dropdown" @click="showAllTags = true">
+                            +{{ doc.tags.length - 3 }} more
+                          </button>
+                        </template>
+                        <template v-else>
+                          <span
+                            v-for="tag in doc.tags"
+                            :key="tag"
+                            class="meta-tag"
+                          >
+                            {{ tag }}
+                          </span>
+                          <button v-if="doc.tags.length > 3" class="meta-tag-dropdown" @click="showAllTags = false">
+                            Show less
+                          </button>
+                        </template>
                       </div>
+                      <!-- <button class="share-btn" @click="sharePage">
+                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12v-2a4 4 0 014-4h8a4 4 0 014 4v2m-4 4v4m0 0h-4m4 0l-4-4"/></svg>
+                        Share
+                      </button> -->
                     </div>
                   </div>
                 </div>
@@ -186,18 +210,35 @@
                       v-if="doc.tags && doc.tags.length > 0"
                       class="meta-item flex flex-row items-start gap-4"
                     >
-                      <span class="meta-label flex-shrink-0 w-1/2">
+                      <span class="meta-label flex-shrink-0 w-1/3">
                         {{ doc.tags.length === 1 ? "Category" : "Categories" }}
                       </span>
-                      <div class="meta-content w-1/2">
+                      <div class="meta-content w-2/3">
                         <div class="meta-tags flex flex-wrap gap-2">
-                          <span
-                            v-for="tag in doc.tags"
-                            :key="tag"
-                            class="meta-tag"
-                          >
-                            {{ tag }}
-                          </span>
+                          <template v-if="!showAllTags && doc.tags.length > 3">
+                            <span
+                              v-for="tag in doc.tags.slice(0, 3)"
+                              :key="tag"
+                              class="meta-tag"
+                            >
+                              {{ tag }}
+                            </span>
+                            <button class="meta-tag-dropdown" @click="showAllTags = true">
+                              +{{ doc.tags.length - 3 }} more
+                            </button>
+                          </template>
+                          <template v-else>
+                            <span
+                              v-for="tag in doc.tags"
+                              :key="tag"
+                              class="meta-tag"
+                            >
+                              {{ tag }}
+                            </span>
+                            <button v-if="doc.tags.length > 3" class="meta-tag-dropdown" @click="showAllTags = false">
+                              Show less
+                            </button>
+                          </template>
                         </div>
                       </div>
                     </div>
@@ -335,6 +376,23 @@
 </template>
 
 <script setup>
+const copyLink = () => {
+  navigator.clipboard.writeText(window.location.href);
+};
+
+const sharePage = () => {
+  if (navigator.share) {
+    navigator.share({
+      title: document.title,
+      url: window.location.href
+    });
+  } else {
+    copyLink();
+    alert('Link copied!');
+  }
+};
+import { ref } from 'vue';
+const showAllTags = ref(false);
 definePageMeta({
   layout: "project",
   scrollToTop: true,
@@ -501,6 +559,41 @@ useHead({
 </script>
 
 <style scoped>
+.copy-link-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #222;
+  color: #8bbbe2;
+  border: 1px solid #8bbbe2;
+  border-radius: 0.375rem;
+  padding: 0.30rem 0.60rem;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.copy-link-btn:hover {
+  background: #8bbbe2;
+  color: #222;
+}
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #222;
+  color: #7fff00;
+  border: 1px solid #7fff00;
+  border-radius: 0.375rem;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.95rem;
+  cursor: pointer;
+  margin-left: 1rem;
+  transition: background 0.2s, color 0.2s;
+}
+.share-btn:hover {
+  background: #7fff00;
+  color: #222;
+}
 .project-hero-title,
 h1 {
   font-family: "Montserrat", sans-serif;
@@ -574,7 +667,7 @@ h1 {
 }
 
 .meta-label {
-  @apply text-base font-light text-gray-300 tracking-wide flex-shrink-0 w-1/2;
+  @apply text-base font-light text-gray-300 tracking-wide flex-shrink-0 w-1/3;
   font-family: "Montserrat", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
@@ -582,7 +675,15 @@ h1 {
 }
 
 .meta-content {
-  @apply w-1/2;
+  @apply w-2/3;
+}
+
+.meta-tag-dropdown {
+  @apply px-2 py-1 bg-gray-700 text-blue-300 text-xs rounded-full border border-blue-500/30 cursor-pointer transition-colors;
+  margin-left: 0.25rem;
+  font-family: 'Montserrat', sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
 }
 
 .meta-value {
