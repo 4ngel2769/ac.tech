@@ -85,7 +85,7 @@ const languageMap: Record<string, { text: string }> = {
 const languageText = computed(() => (props.language ? languageMap[props.language]?.text : null));
 </script>
 
-<style scoped>
+<style scoped lang="postcss">
 .container {
     @apply w-full rounded-md relative overflow-hidden;/*
     background-color: var(--htb-bg2);*/
