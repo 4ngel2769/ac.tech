@@ -20,15 +20,13 @@ export default {
 <script setup lang="ts">
 const showVideoBg = ref(true); // Set to false for image background
 
-// Date formatter for blog posts
+// Date formatter for blog posts - use consistent format to avoid hydration mismatch
 const formatBlogDate = (dateString: string) => {
   if (!dateString) return "";
   try {
-    return new Date(dateString).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    });
+    const date = new Date(dateString);
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
   } catch (e) {
     console.error("Date formatting error:", e);
     return dateString;

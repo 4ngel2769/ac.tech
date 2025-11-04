@@ -292,15 +292,13 @@ onMounted(() => {
   });
 });
 
-// Date formatter with error handling
+// Date formatter with error handling - manual format to avoid hydration mismatch
 const formatDate = (date) => {
   if (!date) return "";
   try {
-    return new Date(date).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    });
+    const d = new Date(date);
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    return `${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
   } catch (e) {
     console.error("Date formatting error:", e);
     return date;
