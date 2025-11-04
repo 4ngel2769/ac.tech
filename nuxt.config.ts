@@ -9,7 +9,13 @@ declare global {
 }
 
 export default defineNuxtConfig({
-  devtools: { enabled: false },
+  devtools: {
+    enabled: true,
+
+    timeline: {
+      enabled: true
+    }
+  },
   ssr: true,
   experimental: {
     payloadExtraction: false,
@@ -106,7 +112,8 @@ export default defineNuxtConfig({
         'ruby',
         'sql',
         'go',
-        'rust'
+        'rust',
+        'ini'
       ]
     },
     markdown: {
@@ -179,16 +186,7 @@ export default defineNuxtConfig({
     '~/assets/css/tailwind.css'
   ],
 
-  modules: [
-    '@formkit/auto-animate',
-    '@nuxt/ui',
-    '@nuxtjs/robots',
-    "@nuxt/image",
-    "nuxt-gtag",
-    "@nuxtjs/sitemap",
-    "@nuxtjs/color-mode",
-    '@nuxt/content'
-  ],
+  modules: ['@formkit/auto-animate', '@nuxt/ui', '@nuxtjs/robots', "@nuxt/image", "nuxt-gtag", "@nuxtjs/sitemap", "@nuxtjs/color-mode", '@nuxt/content', 'nuxt-og-image'],
 
   image: {
     format: ['webp', 'avif'],

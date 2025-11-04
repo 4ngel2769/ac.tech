@@ -16,12 +16,11 @@ export default {
     // Dynamic classes that can be generated
     'dark',
     'light',
-    /^bg-/,
-    /^text-/,
-    /^border-/,
-    /^hover:/,
-    /^focus:/,
-    /^prose/,
+    // Tailwind v4 pattern matching for utility classes
+    { pattern: /^bg-/ },
+    { pattern: /^text-/ },
+    { pattern: /^border-/ },
+    { pattern: /^prose/ },
   ],
   theme: {
     extend: {
