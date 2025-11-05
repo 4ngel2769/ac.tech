@@ -10,11 +10,11 @@ declare global {
 
 export default defineNuxtConfig({
   devtools: {
-    enabled: true,
+    enabled: false,
 
-    timeline: {
-      enabled: true
-    }
+    // timeline: {
+    //   enabled: true
+    // }
   },
   ssr: true,
   experimental: {
