@@ -31,6 +31,14 @@ export default defineNuxtConfig({
     prerender: {
       routes: ['/projects', '/']
     },
+    // Exclude large assets from worker bundle - serve from /public instead
+    publicAssets: [
+      {
+        baseURL: '/fonts',
+        dir: 'public/fonts',
+        maxAge: 31536000 // 1 year
+      }
+    ],
     routeRules: {
       // Cache static assets aggressively
       '/_nuxt/**': { 
@@ -92,27 +100,30 @@ export default defineNuxtConfig({
     highlight: {
       theme: 'nord',
       // theme: 'poimandres',
+      // CRITICAL: Only preload languages ACTUALLY used in blog posts to reduce bundle size
+      // Cloudflare Workers have 3 MB limit (free) / 10 MB (paid)
+      // Each language adds ~50-200 KB to the bundle
       preload: [
-        'java',
+        // 'java',
         'javascript',
-        'typescript',
+        // 'typescript',
         'python',
         'bash',
         'c',
         'cpp',
-        'csharp',
-        'css',
-        'html',
-        'csv',
+        // 'csharp',
+        // 'css',
+        // 'html',
+        // 'csv',
         'json',
         'yaml',
-        'xml',
+        // 'xml',
         'markdown',
-        'php',
-        'ruby',
-        'sql',
-        'go',
-        'rust',
+        // 'php',
+        // 'ruby',
+        // 'sql',
+        // 'go',
+        // 'rust',
         'ini'
       ]
     },
