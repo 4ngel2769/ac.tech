@@ -480,7 +480,7 @@ const jsonScripts = [
       dateModified:
         data.value?.article?.dateUpdated || data.value?.article?.date,
       author: authorData.value?.[data.value?.article?.author],
-      publisher: authorData.value?.["Angel Capra"],
+      publisher: authorData.value?.[data.value?.article?.author],
     }),
   },
 ];
