@@ -51,7 +51,8 @@ export const siteContent = {
   footer: {
     credits: "Awesome backgrounds by Sébastien Noël's",
     creditsLink: "fffuel.co",
-    creditsUrl: "https://fffuel.co"
+    creditsUrl: "https://fffuel.co",
+    copyrightText: "© {year} {author}. All rights reserved."
   },
 
   // Navigation
@@ -71,6 +72,14 @@ export const siteContent = {
     linkedin: "LinkedIn | @angelcapra",
     instagram: "Instagram | @angeldevz0",
     email: "Email me | angeldevz0@proton.me"
+  },
+
+  // Social Links URLs
+  socialUrls: {
+    email: "mailto:angeldevz0@proton.me",
+    github: "https://github.com/4ngel2769",
+    linkedin: "https://linkedin.com/in/angelcapra",
+    twitter: "https://twitter.com/angeldev0"
   },
 
   // Blog/Project Post Content
