@@ -33,7 +33,7 @@
 </template>
 
 <script setup>
-import { siteContent } from '~/config/content'
+import { siteContent } from '../../config/content'
 
 // Compute year once to avoid hydration mismatch
 const currentYear = new Date().getFullYear()
