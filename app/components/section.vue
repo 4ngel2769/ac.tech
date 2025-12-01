@@ -38,7 +38,7 @@ const props = defineProps({
 .full-height.full-height--forced {
     height: calc(100vh - theme('spacing.nav'));
 }
-@screen md {
+@media (min-width: 768px) {
     .full-height:not(.full-height--forced) {
         height: calc(100vh - theme('spacing.nav'));
     }

@@ -19,7 +19,7 @@
                 <!-- </ul> -->
                 <div class="navbar-center container mx-auto">
                     <a class="navTitle glassy-pill" id="navTitle" href="/">
-                        <p>ANGELCAPRA</p><p class="colored-tech">.TECH</p>
+                        <p>ANGELLABS</p><p class="colored-tech">.XYZ</p>
                     </a>
                 </div>
                 

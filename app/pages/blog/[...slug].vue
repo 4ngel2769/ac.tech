@@ -75,7 +75,7 @@
                       +{{ doc.tags.length - 3 }} more
                     </span>
                   </div>
-                  <button class="share-btn" @click="sharePage">
+                  <button class="share-btn" @click="sharePage" aria-label="Share this article">
                     <font-awesome-icon :icon="['fa-solid', 'fa-share']" />
                     Share
                   </button>
@@ -202,12 +202,13 @@ definePageMeta({
 // Create a local date formatting function
 const formatDate = (dateString) => {
   if (!dateString) return "";
-  const date = new Date(dateString);
-  return date.toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+  try {
+    const d = new Date(dateString);
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    return `${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
+  } catch (error) {
+    return "";
+  }
 };
 
 const { path } = useRoute();

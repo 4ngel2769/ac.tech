@@ -55,19 +55,21 @@
                     'tag-btn-compact',
                     selectedTags.includes(tag) ? 'tag-active' : 'tag-inactive'
                   ]"
+                  :aria-label="`Filter by ${tag}`"
                 >
                   {{ tag }}
                 </button>
                 <button
                   v-if="allAvailableTags.length > 6"
                   @click="showAllTags = !showAllTags"
-                  class="tag-show-more"
+                  class="show-all-tags-btn tag-show-more"
+                  :aria-label="showAllTags ? 'Show less tags' : 'Show all tags'"
                 >
                   {{ showAllTags ? 'Show Less' : `+${allAvailableTags.length - 6} More` }}
                 </button>
               </div>
               <div v-if="selectedTags.length" class="mt-2 text-center">
-                <button @click="selectedTags = []" class="clear-filters-compact">
+                <button @click="selectedTags = []" class="clear-filters-compact" aria-label="Clear all tag filters">
                   Clear filters ({{ selectedTags.length }})
                 </button>
               </div>
@@ -164,12 +166,14 @@ const sortOptions = [
 
 const formatDate = (dateString) => {
   if (!dateString) return "";
-  const date = new Date(dateString);
-  return date.toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric"
-  });
+  try {
+    const date = new Date(dateString);
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+  } catch (e) {
+    console.error("Date formatting error:", e);
+    return dateString;
+  }
 };
 
 const { data: blogData } = await useAsyncData('blog-tags', () =>

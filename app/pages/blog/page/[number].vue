@@ -207,12 +207,13 @@ const getPageNumber = () => {
 // Format the date
 const formatDate = (dateString) => {
   if (!dateString) return "";
-  const date = new Date(dateString);
-  return date.toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric"
-  });
+  try {
+    const d = new Date(dateString);
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    return `${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
+  } catch (error) {
+    return "";
+  }
 };
 
 // Filter blogs based on search query and selected tags

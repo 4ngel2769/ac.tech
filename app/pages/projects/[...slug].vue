@@ -114,7 +114,7 @@
                           >
                             {{ tag }}
                           </span>
-                          <button class="meta-tag-dropdown" @click="showAllTags = true">
+                          <button class="meta-tag-dropdown" @click="showAllTags = true" aria-label="Show all tags">
                             +{{ doc.tags.length - 3 }} more
                           </button>
                         </template>
@@ -126,7 +126,7 @@
                           >
                             {{ tag }}
                           </span>
-                          <button v-if="doc.tags.length > 3" class="meta-tag-dropdown" @click="showAllTags = false">
+                          <button v-if="doc.tags.length > 3" class="meta-tag-dropdown" @click="showAllTags = false" aria-label="Show less tags">
                             Show less
                           </button>
                         </template>
@@ -145,11 +145,14 @@
                 <!-- Featured Image - Left Half -->
                 <div class="lg:w-1/2 lg:flex-shrink-0">
                   <div class="project-hero-image desktop-image">
-                    <img
+                    <NuxtImg
                       v-if="doc.socialImage?.src"
                       :src="doc.socialImage.src"
                       :alt="doc.socialImage.alt || doc.headline"
                       class="w-full h-full object-cover rounded-lg"
+                      loading="eager"
+                      format="webp"
+                      quality="85"
                     />
                     <div
                       v-else
@@ -223,7 +226,7 @@
                             >
                               {{ tag }}
                             </span>
-                            <button class="meta-tag-dropdown" @click="showAllTags = true">
+                            <button class="meta-tag-dropdown" @click="showAllTags = true" aria-label="Show all tags">
                               +{{ doc.tags.length - 3 }} more
                             </button>
                           </template>
@@ -235,7 +238,7 @@
                             >
                               {{ tag }}
                             </span>
-                            <button v-if="doc.tags.length > 3" class="meta-tag-dropdown" @click="showAllTags = false">
+                            <button v-if="doc.tags.length > 3" class="meta-tag-dropdown" @click="showAllTags = false" aria-label="Show less tags">
                               Show less
                             </button>
                           </template>
@@ -256,11 +259,14 @@
               <!-- Mobile & Tablet: Image Below Content -->
               <div class="lg:hidden">
                 <div class="project-hero-image mobile-tablet-image">
-                  <img
+                  <NuxtImg
                     v-if="doc.socialImage?.src"
                     :src="doc.socialImage.src"
                     :alt="doc.socialImage.alt || doc.headline"
                     class="w-full h-full object-cover rounded-lg"
+                    loading="eager"
+                    format="webp"
+                    quality="85"
                   />
                   <div
                     v-else
@@ -400,12 +406,13 @@ definePageMeta({
 // Create a local date formatting function
 const formatDate = (dateString) => {
   if (!dateString) return "";
-  const date = new Date(dateString);
-  return date.toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+  try {
+    const d = new Date(dateString);
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    return `${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
+  } catch (error) {
+    return "";
+  }
 };
 
 const { path } = useRoute();
@@ -473,7 +480,7 @@ const jsonScripts = [
       dateModified:
         data.value?.article?.dateUpdated || data.value?.article?.date,
       author: authorData.value?.[data.value?.article?.author],
-      publisher: authorData.value?.["Angel Capra"],
+      publisher: authorData.value?.[data.value?.article?.author],
     }),
   },
 ];

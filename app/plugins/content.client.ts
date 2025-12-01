@@ -1,4 +1,4 @@
-import { siteContent } from '../../config/content.js'
+import { siteContent } from '../../config/content'
 
 export default defineNuxtPlugin(() => {
     return {

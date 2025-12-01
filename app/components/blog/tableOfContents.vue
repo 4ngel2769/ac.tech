@@ -48,10 +48,10 @@ const toggleToc = () => {
 
 <style scoped>
 .toc-link_3 {
-    @apply pl-4;
+    padding-left: 1rem;
 }
 .toc-link_3::before {
-    @apply pr-2;
-    content: "-"
+    padding-right: 0.5rem;
+    content: "-";
 }
 </style>
