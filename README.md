@@ -4,7 +4,6 @@
     <p><b>A modern, responsive personal website and cybersecurity portfolio built with Nuxt.js 4, showcasing projects, skills, and technical expertise.</b></p>
     <br/>
     <img src="https://i.imgur.com/nR94oAy.gif" alt="https://angellabs.xyz website preview" />
-    <!-- <video src="https://i.imgur.com/Z15hMq8.mp4" controls autoplay muted loop style="max-width: 100%; height: auto;"></video> -->
     <br/>
     <p>Technologies Used:</p>
     <img src="https://skillicons.dev/icons?i=nuxt,vue,npm,nodejs,tailwind,ts,docker,nginx" alt="technologies used" />
