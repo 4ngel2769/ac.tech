@@ -177,7 +177,7 @@ const formatBlogDate = (dateString: string) => {
             I specialize in <span class="font-bold decoration-solid text-slate-200 decoration-1">cybersecurity</span>,
             <span class="font-bold decoration-solid text-slate-200 decoration-1">ethical hacking</span>, and
             <span class="font-bold decoration-solid text-slate-200 decoration-1">embedded systems development</span>, with
-            extensive experience in Docker, virtual environments, networking,
+            experience with Docker, Linux, virtualization, networking,
             and server management.<br />
             My work involves uncovering vulnerabilities, creating secure
             devices, and developing innovative solutions using ESP32
