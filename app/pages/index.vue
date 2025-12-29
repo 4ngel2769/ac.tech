@@ -83,7 +83,7 @@ const formatBlogDate = (dateString: string) => {
           <font-awesome-icon :icon="['fas', 'location-dot']" />
           <p class="LocationText">Bucharest, Romania</p>
         </div>
-        <div class="Website">
+        <!-- <div class="Website">
           <font-awesome-icon :icon="['fas', 'arrow-up-right-from-square']" />
           <p class="WebsiteText">
             <a target="_blank" href="https://adev0.eu">https://adev0.eu</a>
@@ -100,7 +100,7 @@ const formatBlogDate = (dateString: string) => {
           <UTooltip text="Old personal website.">
             <UBadge color="pink" variant="outline">Old</UBadge>
           </UTooltip>
-        </div>
+        </div> -->
       </div>
       <UDivider label="Socials" class="socialdivider" />
       <p class="linkstitle">My socials:</p>
