@@ -45,6 +45,7 @@
     "@nuxtjs/dotenv": "^1.4.2",
     "@nuxtjs/google-analytics": "^2.4.0",
     "@tailwindcss/vite": "^4.1.16",
+    "better-sqlite3": "^12.6.2",
     "daisyui": "^5.4.3",
     "fuse.js": "^7.1.0",
     "import": "^0.0.6",
