@@ -36,113 +36,115 @@
     </div>
 
     <!-- Main Content -->
-    <ContentQuery
-      path="/blog"
-      :only="['title', 'description', 'date', 'tags', '_path', 'socialImage']"
-      :sort="{ date: sortOrder === 'newest' ? -1 : 1 }"
-    >
-      <template #default="{ data }">
-        <Section id="main" class="!pt-0">
-          <div class="space-y-8">
-            <!-- Tag Filters -->
-            <div v-if="allAvailableTags.length" class="tag-filters-section">
-              <div class="tag-filters-compact">
-                <button
-                  v-for="tag in displayedTags"
-                  :key="tag"
-                  @click="toggleTag(tag)"
-                  :class="[
-                    'tag-btn-compact',
-                    selectedTags.includes(tag) ? 'tag-active' : 'tag-inactive'
-                  ]"
-                  :aria-label="`Filter by ${tag}`"
-                >
-                  {{ tag }}
-                </button>
-                <button
-                  v-if="allAvailableTags.length > 6"
-                  @click="showAllTags = !showAllTags"
-                  class="show-all-tags-btn tag-show-more"
-                  :aria-label="showAllTags ? 'Show less tags' : 'Show all tags'"
-                >
-                  {{ showAllTags ? 'Show Less' : `+${allAvailableTags.length - 6} More` }}
-                </button>
-              </div>
-              <div v-if="selectedTags.length" class="mt-2 text-center">
-                <button @click="selectedTags = []" class="clear-filters-compact" aria-label="Clear all tag filters">
-                  Clear filters ({{ selectedTags.length }})
-                </button>
-              </div>
-            </div>
+    <Section id="main" class="!pt-0">
+      <div class="space-y-8">
+        <div v-if="pending" class="text-center py-16">
+          <p class="no-results">Loading articles...</p>
+        </div>
 
-            <div v-if="filteredAndSortedBlogs(data).length !== data.length" class="results-count">
-              {{ filteredAndSortedBlogs(data).length }} of {{ data.length }} articles
-            </div>
+        <div v-else-if="error" class="text-center py-16">
+          <p class="no-results">Failed to load articles.</p>
+        </div>
 
-            <div v-if="filteredAndSortedBlogs(data).length === 0" class="text-center py-16">
-              <p class="no-results">No articles found matching your criteria.</p>
-            </div>
-
-            <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <article
-                v-for="blog in filteredAndSortedBlogs(data)"
-                :key="blog._path"
-                class="blog-card"
+        <template v-else>
+          <!-- Tag Filters -->
+          <div v-if="allAvailableTags.length" class="tag-filters-section">
+            <div class="tag-filters-compact">
+              <button
+                v-for="tag in displayedTags"
+                :key="tag"
+                @click="toggleTag(tag)"
+                :class="[
+                  'tag-btn-compact',
+                  selectedTags.includes(tag) ? 'tag-active' : 'tag-inactive'
+                ]"
+                :aria-label="`Filter by ${tag}`"
               >
-                <NuxtLink :to="blog._path" class="blog-card-link">
-                  <div class="blog-card-image">
-                    <NuxtImg
-                      v-if="blog.socialImage?.src"
-                      :src="blog.socialImage.src"
-                      :alt="blog.socialImage.alt || blog.title"
-                      class="blog-image"
-                      width="400"
-                      height="225"
-                      quality="75"
-                      format="webp"
-                      loading="lazy"
-                      placeholder
-                      sizes="sm:400px md:350px lg:300px"
-                    />
-                    <div v-else class="blog-image-placeholder">
-                      <svg class="placeholder-icon" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"></path>
-                      </svg>
-                    </div>
-                    <div class="blog-card-overlay"></div>
-                  </div>
-                  <div class="blog-card-content">
-                    <div class="blog-card-meta">
-                      <span class="blog-card-date">{{ formatDate(blog.date) }}</span>
-                      <div v-if="blog.tags?.length" class="blog-card-tags">
-                        <span
-                          v-for="tag in blog.tags.slice(0, 2)"
-                          :key="tag"
-                          class="blog-card-tag"
-                        >
-                          {{ tag }}
-                        </span>
-                        <span v-if="blog.tags.length > 2" class="more-tags-indicator">
-                          +{{ blog.tags.length - 2 }}
-                        </span>
-                      </div>
-                    </div>
-                    <h2 class="blog-card-title">{{ blog.title }}</h2>
-                    <p class="blog-card-description">{{ blog.description }}</p>
-                    <div class="blog-card-footer">
-                      <span class="read-more">Read article</span>
-                      <svg class="read-more-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                      </svg>
-                    </div>
-                  </div>
-                </NuxtLink>
-              </article>
+                {{ tag }}
+              </button>
+              <button
+                v-if="allAvailableTags.length > 6"
+                @click="showAllTags = !showAllTags"
+                class="show-all-tags-btn tag-show-more"
+                :aria-label="showAllTags ? 'Show less tags' : 'Show all tags'"
+              >
+                {{ showAllTags ? 'Show Less' : `+${allAvailableTags.length - 6} More` }}
+              </button>
+            </div>
+            <div v-if="selectedTags.length" class="mt-2 text-center">
+              <button @click="selectedTags = []" class="clear-filters-compact" aria-label="Clear all tag filters">
+                Clear filters ({{ selectedTags.length }})
+              </button>
             </div>
           </div>
-        </Section>
-      </template>
-    </ContentQuery>
+
+          <div v-if="filteredAndSortedBlogs(allBlogs).length !== allBlogs.length" class="results-count">
+            {{ filteredAndSortedBlogs(allBlogs).length }} of {{ allBlogs.length }} articles
+          </div>
+
+          <div v-if="filteredAndSortedBlogs(allBlogs).length === 0" class="text-center py-16">
+            <p class="no-results">No articles found matching your criteria.</p>
+          </div>
+
+          <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <article
+              v-for="blog in filteredAndSortedBlogs(allBlogs)"
+              :key="blog._path"
+              class="blog-card"
+            >
+              <NuxtLink :to="blog._path" class="blog-card-link">
+                <div class="blog-card-image">
+                  <NuxtImg
+                    v-if="blog.socialImage?.src"
+                    :src="blog.socialImage.src"
+                    :alt="blog.socialImage.alt || blog.title"
+                    class="blog-image"
+                    width="400"
+                    height="225"
+                    quality="75"
+                    format="webp"
+                    loading="lazy"
+                    placeholder
+                    sizes="sm:400px md:350px lg:300px"
+                  />
+                  <div v-else class="blog-image-placeholder">
+                    <svg class="placeholder-icon" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"></path>
+                    </svg>
+                  </div>
+                  <div class="blog-card-overlay"></div>
+                </div>
+                <div class="blog-card-content">
+                  <div class="blog-card-meta">
+                    <span class="blog-card-date">{{ formatDate(blog.date) }}</span>
+                    <div v-if="blog.tags?.length" class="blog-card-tags">
+                      <span
+                        v-for="tag in blog.tags.slice(0, 2)"
+                        :key="tag"
+                        class="blog-card-tag"
+                      >
+                        {{ tag }}
+                      </span>
+                      <span v-if="blog.tags.length > 2" class="more-tags-indicator">
+                        +{{ blog.tags.length - 2 }}
+                      </span>
+                    </div>
+                  </div>
+                  <h2 class="blog-card-title">{{ blog.title }}</h2>
+                  <p class="blog-card-description">{{ blog.description }}</p>
+                  <div class="blog-card-footer">
+                    <span class="read-more">Read article</span>
+                    <svg class="read-more-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                    </svg>
+                  </div>
+                </div>
+              </NuxtLink>
+            </article>
+          </div>
+        </template>
+      </div>
+    </Section>
   </div>
 </template>
 
@@ -176,14 +178,24 @@ const formatDate = (dateString) => {
   }
 };
 
-const { data: blogData } = await useAsyncData('blog-tags', () =>
-  queryContent('/blog').only(['tags']).find()
-);
+const { data: allBlogsRaw, pending, error } = await useAsyncData('blog-all', async () => {
+  const rows = await queryCollection('content')
+    .where('path', 'LIKE', '/blog/%')
+    .select('title', 'description', 'date', 'tags', 'path', 'socialImage')
+    .all();
+
+  return rows.map((b) => ({
+    ...b,
+    _path: b._path ?? b.path,
+  }));
+});
+
+const allBlogs = computed(() => allBlogsRaw.value ?? []);
 
 const allAvailableTags = computed(() => {
-  if (!blogData.value) return [];
+  if (!allBlogs.value?.length) return [];
   const tags = new Set();
-  blogData.value.forEach(blog => {
+  allBlogs.value.forEach(blog => {
     if (Array.isArray(blog.tags)) {
       blog.tags.forEach(tag => tags.add(tag));
     }

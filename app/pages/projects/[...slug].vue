@@ -1,7 +1,6 @@
 <template>
   <main class="blog-post-text">
-    <ContentDoc>
-      <template v-slot="{ doc }">
+    <template v-if="doc">
         <!-- Header Section with Image and Meta -->
         <Section id="blog-header" type="header" class="blog-header-bg !pb-8">
           <div class="mx-auto px-4 lg:px-8">
@@ -86,13 +85,9 @@
                     v-if="doc.dateUpdated"
                     class="meta-item flex flex-row items-start gap-4"
                   >
-                    <span class="meta-label flex-shrink-0 w-1/2"
-                      >Updated</span
-                    >
+                    <span class="meta-label flex-shrink-0 w-1/2">Updated</span>
                     <div class="meta-content w-1/2">
-                      <span class="meta-value">{{
-                        formatDate(doc.dateUpdated)
-                      }}</span>
+                      <span class="meta-value">{{ formatDate(doc.dateUpdated) }}</span>
                     </div>
                   </div>
 
@@ -372,16 +367,22 @@
 
         <!-- Scroll to top -->
         <NavScrollTopIcon />
+
       </template>
-      <!-- Error in case not found -->
-      <template #not-found>
-        <SectionsError />
-      </template>
-    </ContentDoc>
+
+    <div v-else class="max-w-4xl mx-auto px-4 py-16 text-center">
+      <h1 class="text-2xl font-bold text-white mb-4">Project Not Found</h1>
+      <p class="text-gray-400 mb-8">The project you're looking for doesn't exist.</p>
+      <NuxtLink to="/projects" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors">
+        ← Back to Projects
+      </NuxtLink>
+    </div>
   </main>
 </template>
 
 <script setup>
+import authors from '~~/content/authors.json'
+
 const copyLink = () => {
   navigator.clipboard.writeText(window.location.href);
 };
@@ -422,25 +423,32 @@ let cleanPath = path.replace(/\/+$/, "");
 cleanPath = cleanPath.replace(/^\/(projects\/)+/, "/projects/");
 
 const { data, error } = await useAsyncData(`content-${cleanPath}`, async () => {
-  // Remove a trailing slash in case the browser adds it, it might break the routing
-  // fetch document where the document path matches with the cuurent route
-  let article = queryContent("/projects").where({ _path: cleanPath }).findOne();
-  // get the surround information,
-  // which is an array of documeents that come before and after the current document
-  let surround = queryContent("/projects")
-    .sort({ date: -1 })
-    .only(["_path", "headline", "excerpt"])
-    .findSurround(cleanPath, { before: 1, after: 1 });
+  const article = await queryCollection('content')
+    .where('path', '=', cleanPath)
+    .first();
+
+  const all = await queryCollection('content')
+    .where('path', 'LIKE', '/projects/%')
+    .select('path', 'headline', 'excerpt', 'date')
+    .order('date', 'DESC')
+    .all();
+
+  const currentIndex = all.findIndex((p) => p?.path === cleanPath || p?._path === cleanPath);
+  const before = currentIndex > 0 ? all[currentIndex - 1] : null;
+  const after = currentIndex >= 0 && currentIndex < all.length - 1 ? all[currentIndex + 1] : null;
+
+  const normalize = (p) => (p ? { ...p, _path: p._path ?? p.path } : null);
+
   return {
-    article: await article,
-    surround: await surround,
+    article: article ? { ...article, _path: article._path ?? article.path } : null,
+    surround: [normalize(before), normalize(after)],
   };
 });
 
-// Get the authors
-const { data: authorData } = await useAsyncData("home", () =>
-  queryContent("/authors").findOne()
-);
+const doc = computed(() => data.value?.article ?? null);
+const surround = computed(() => data.value?.surround ?? []);
+
+const authorData = authors;
 
 // Set the meta - Fix the image URL construction
 const runtimeConfig = useRuntimeConfig();
@@ -479,8 +487,8 @@ const jsonScripts = [
       datePublished: data.value?.article?.date,
       dateModified:
         data.value?.article?.dateUpdated || data.value?.article?.date,
-      author: authorData.value?.[data.value?.article?.author],
-      publisher: authorData.value?.[data.value?.article?.author],
+      author: authorData?.[data.value?.article?.author],
+      publisher: authorData?.[data.value?.article?.author],
     }),
   },
 ];
@@ -492,7 +500,7 @@ useHead({
     { name: "description", content: data.value?.article?.description },
     {
       property: "article:published_time",
-      content: data.value?.article?.date.split("T")[0],
+      content: data.value?.article?.date?.split("T")?.[0],
     },
     // OG
     {

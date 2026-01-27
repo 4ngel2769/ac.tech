@@ -32,6 +32,39 @@ const formatBlogDate = (dateString: string) => {
     return dateString;
   }
 };
+
+const { data: latestProjectsRaw } = useAsyncData('home-latest-projects', () =>
+  queryCollection('content')
+    .where('path', 'LIKE', '/projects/%')
+    .select('headline', 'date', 'path', 'socialImage')
+    .order('date', 'DESC')
+    .limit(3)
+    .all()
+)
+
+const latestProjects = computed(() =>
+  (latestProjectsRaw.value ?? []).map((p: any) => ({
+    ...p,
+    _path: p._path ?? p.path,
+  }))
+)
+
+const { data: latestBlogsRaw } = useAsyncData('home-latest-blogs', () =>
+  queryCollection('content')
+    .where('path', 'LIKE', '/blog/%')
+    .select('title', 'headline', 'date', 'path', 'socialImage')
+    .order('date', 'DESC')
+    .limit(2)
+    .all()
+)
+
+const latestBlogs = computed(() =>
+  (latestBlogsRaw.value ?? []).map((p: any) => ({
+    ...p,
+    _path: p._path ?? p.path,
+    displayTitle: p.title ?? p.headline ?? 'Untitled',
+  }))
+)
 </script>
 
 <template>
@@ -231,44 +264,33 @@ const formatBlogDate = (dateString: string) => {
 
       <div class="latest-blogs-wrapper">
         <div class="latest-blogs-grid">
-          <ContentQuery
-            path="/projects"
-            :only="['headline', 'date', '_path', 'socialImage']"
-            :sort="{ date: -1 }"
-            :limit="3"
-          >
-            <template v-slot="{ data }">
-              <div v-for="blog in data" :key="blog._path" class="blog-card">
-                <NuxtLink :to="blog._path" class="blog-card-link">
-                  <div class="blog-card-image">
-                    <NuxtImg
-                      v-if="blog.socialImage?.src"
-                      :src="blog.socialImage.src"
-                      :alt="blog.socialImage.alt || blog.headline"
-                      class="blog-image"
-                      loading="lazy"
-                      format="webp"
-                      quality="80"
-                    />
-                    <div v-else class="blog-image-placeholder">
-                      <span class="text-gray-400">No image</span>
-                    </div>
+          <template v-if="latestProjects.length">
+            <div v-for="project in latestProjects" :key="project._path" class="blog-card">
+              <NuxtLink :to="project._path" class="blog-card-link">
+                <div class="blog-card-image">
+                  <NuxtImg
+                    v-if="project.socialImage?.src"
+                    :src="project.socialImage.src"
+                    :alt="project.socialImage.alt || project.headline"
+                    class="blog-image"
+                    loading="lazy"
+                    format="webp"
+                    quality="80"
+                  />
+                  <div v-else class="blog-image-placeholder">
+                    <span class="text-gray-400">No image</span>
                   </div>
-                  <div class="blog-card-content">
-                    <h3 class="blog-card-title">{{ blog.headline }}</h3>
-                    <p class="blog-card-date">
-                      {{ formatBlogDate(blog.date) }}
-                    </p>
-                  </div>
-                </NuxtLink>
-              </div>
-            </template>
-            <template #not-found>
-              <div class="no-blogs-message">
-                <p>No blog posts found.</p>
-              </div>
-            </template>
-          </ContentQuery>
+                </div>
+                <div class="blog-card-content">
+                  <h3 class="blog-card-title">{{ project.headline }}</h3>
+                  <p class="blog-card-date">{{ formatBlogDate(project.date) }}</p>
+                </div>
+              </NuxtLink>
+            </div>
+          </template>
+          <div v-else class="no-blogs-message">
+            <p>No projects found.</p>
+          </div>
         </div>
         <!-- desktop “Click for More” under the first card -->
         <NuxtLink to="/projects" class="more-link desktop">
@@ -295,46 +317,33 @@ const formatBlogDate = (dateString: string) => {
       <div class="latest-posts-content">
         <!-- Left/Middle: Blog Cards -->
         <div class="posts-cards-wrapper">
-          <ContentQuery
-            path="/blog"
-            :only="['title', 'date', '_path', 'socialImage']"
-            :sort="{ date: -1 }"
-            :limit="2"
-          >
-            <template v-slot="{ data }">
-              <div class="posts-grid">
-                <div v-for="post in data" :key="post._path" class="post-card">
-                  <NuxtLink :to="post._path" class="post-card-link">
-                    <div class="post-card-image">
-                      <NuxtImg
-                        v-if="post.socialImage?.src"
-                        :src="post.socialImage.src"
-                        :alt="post.socialImage.alt || post.headline"
-                        class="post-image"
-                        loading="lazy"
-                        format="webp"
-                        quality="80"
-                      />
-                      <div v-else class="post-image-placeholder">
-                        <span class="text-gray-400">No image</span>
-                      </div>
-                    </div>
-                    <div class="post-card-content">
-                      <h3 class="post-card-title">{{ post.title || post.headline || 'Untitled' }}</h3>
-                      <p class="post-card-date">
-                        {{ post.date ? formatBlogDate(post.date) : '' }}
-                      </p>
-                    </div>
-                  </NuxtLink>
+          <div v-if="latestBlogs.length" class="posts-grid">
+            <div v-for="post in latestBlogs" :key="post._path" class="post-card">
+              <NuxtLink :to="post._path" class="post-card-link">
+                <div class="post-card-image">
+                  <NuxtImg
+                    v-if="post.socialImage?.src"
+                    :src="post.socialImage.src"
+                    :alt="post.socialImage.alt || post.displayTitle"
+                    class="post-image"
+                    loading="lazy"
+                    format="webp"
+                    quality="80"
+                  />
+                  <div v-else class="post-image-placeholder">
+                    <span class="text-gray-400">No image</span>
+                  </div>
                 </div>
-              </div>
-            </template>
-            <template #not-found>
-              <div class="no-posts-message">
-                <p>No blog posts found.</p>
-              </div>
-            </template>
-          </ContentQuery>
+                <div class="post-card-content">
+                  <h3 class="post-card-title">{{ post.displayTitle }}</h3>
+                  <p class="post-card-date">{{ post.date ? formatBlogDate(post.date) : '' }}</p>
+                </div>
+              </NuxtLink>
+            </div>
+          </div>
+          <div v-else class="no-posts-message">
+            <p>No blog posts found.</p>
+          </div>
         </div>
 
         <!-- Right: Description Panel -->

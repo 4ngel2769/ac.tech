@@ -39,11 +39,11 @@
     <div class="space-y-8">
       <!-- Debug info -->
       <div v-if="error" class="text-red-500 mb-4">
-        Error loading projects: {{ error }}
+        Error loading projects: {{ error?.message || error }}
       </div>
 
       <!-- Loading initial state -->
-      <div v-if="!allProjects" class="text-center py-8">
+      <div v-if="pending" class="text-center py-8">
         Loading projects...
       </div>
 
@@ -180,11 +180,20 @@ const sortOptions = [
 ];
 
 // Fetch all project content with error handling
-const { data: allProjects, error } = await useAsyncData("projects", () =>
-  queryContent("projects")
-    .only(["headline", "excerpt", "date", "tags", "_path", "socialImage"])
-    .find()
-);
+const { data: allProjectsRaw, pending, error } = await useAsyncData("projects", async () => {
+  const rows = await queryCollection('content')
+    .where('path', 'LIKE', '/projects/%')
+    .select('headline', 'excerpt', 'date', 'tags', 'path', 'socialImage')
+    .order('date', 'DESC')
+    .all();
+
+  return rows.map((p) => ({
+    ...p,
+    _path: p._path ?? p.path,
+  }));
+});
+
+const allProjects = computed(() => allProjectsRaw.value ?? []);
 
 // Initialize Fuse.js for fuzzy search
 const fuseSearch = computed(() => {

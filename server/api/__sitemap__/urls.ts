@@ -1,8 +1,10 @@
-import { serverQueryContent } from '#content/server'
 import { asSitemapUrl, defineSitemapEventHandler } from '#imports'
+import { queryCollection } from '@nuxt/content/server'
 
 export default defineSitemapEventHandler(async (e) => {
-  const contentList = await serverQueryContent(e).find()
+  const contentList = await queryCollection(e, 'content')
+    .select('path')
+    .all()
   
   // Static pages that should be included
   const staticRoutes = [
@@ -14,14 +16,13 @@ export default defineSitemapEventHandler(async (e) => {
   
   // Dynamic content routes
   const contentRoutes = contentList
-    .filter(c => c._path && !c._path.includes('/_')) // Exclude partials and drafts
-    .map((c) => {
+    .filter((c: any) => c.path && !String(c.path).includes('/_')) // Exclude partials and drafts
+    .map((c: any) => {
+      const depth = String(c.path).split('/').filter(Boolean).length
       return asSitemapUrl({
-        loc: c._path!,
-        lastmod: c.updatedAt || c.createdAt || new Date().toISOString(),
-        // Higher priority for main pages (blog, projects index)
-        // Lower priority for individual posts/projects
-        priority: c._path!.split('/').length === 2 ? 1.0 : 0.8,
+        loc: c.path,
+        lastmod: new Date().toISOString(),
+        priority: depth === 1 ? 1.0 : 0.8,
       })
     })
   

@@ -1,50 +1,28 @@
 <template>
     <main>
-        <!-- Query for the given blog page number -->
-        <ContentQuery
-            path="/projects"
-            :only="['headline', 'excerpt', 'date', 'tags', '_path', 'image']"
-            :sort="{
-                date: -1
-            }"
-            :skip="blogCountLimit * (getPageNumber() - 1)"
-            :limit="blogCountLimit"
-        >
-            <!-- In case it is found -->
-            <template v-slot="{ data }">
-                <BlogHero />
-                <Section id="main" class="!pt-0">
-                    <BlogList :data="data" />
-                    <ContentQuery
-                        path="/projects"
-                        :only="['headline']"
-                    >
-                        <template v-slot="{ data }">
-                            <BlogPagination
-                                v-if="getPageLimit(data.length) > 1"
-                                class="mt-8"
-                                :currentPage="getPageNumber()"
-                                :totalPages="getPageLimit(data.length)"
-                                :nextPage="getPageNumber() < getPageLimit(data.length)"
-                                baseUrl="/projects/"
-                                pageUrl="/projects/page/"
-                            />
-                        </template>
-                        <template #not-found>
-                            <!-- Nothing -->
-                        </template>
-                    </ContentQuery>
-                </Section>
-            </template>
-            <!-- In case not found -->
-            <template #not-found>
-                <!-- Show hero and message -->
-                <BlogHero />
-                <Section id="main" class="!pt-0">
-                    <BlogList :data="[]" message="There are no posts in this page, maybe try searching on another one."/>
-                </Section>
-            </template>
-        </ContentQuery>
+        <BlogHero />
+        <Section id="main" class="!pt-0">
+            <div v-if="pending" class="text-center py-8">
+                <p class="no-results">Loading projects...</p>
+            </div>
+
+            <div v-else-if="error" class="text-center py-8">
+                <p class="no-results">Failed to load projects.</p>
+            </div>
+
+            <div v-else>
+                <BlogList :data="pageProjects" message="There are no posts in this page, maybe try searching on another one."/>
+                <BlogPagination
+                    v-if="totalPages > 1"
+                    class="mt-8"
+                    :currentPage="getPageNumber()"
+                    :totalPages="totalPages"
+                    :nextPage="getPageNumber() < totalPages"
+                    baseUrl="/projects/"
+                    pageUrl="/projects/page/"
+                />
+            </div>
+        </Section>
     </main>
 </template>
 
@@ -61,10 +39,35 @@ const getPageNumber = () => {
     return Number(params.number);
 };
 
+const pageNo = getPageNumber();
+
+const { data: pageProjectsRaw, pending, error } = await useAsyncData(`projects-page-${pageNo}`, async () => {
+    const rows = await queryCollection('content')
+        .where('path', 'LIKE', '/projects/%')
+        .select('headline', 'excerpt', 'date', 'tags', 'path', 'socialImage')
+        .order('date', 'DESC')
+        .skip(blogCountLimit * (pageNo - 1))
+        .limit(blogCountLimit)
+        .all();
+
+    return rows.map((p) => ({
+        ...p,
+        _path: p._path ?? p.path,
+    }));
+});
+
+const pageProjects = computed(() => pageProjectsRaw.value ?? []);
+
+const { data: totalCountRaw } = await useAsyncData('projects-total-count', () =>
+    queryCollection('content')
+        .where('path', 'LIKE', '/projects/%')
+        .count()
+);
+
+const totalPages = computed(() => Math.ceil((Number(totalCountRaw.value) || 0) / blogCountLimit));
+
 // Attempt to get the number
 const router = useRouter();
-let pageNo = Number(params.number);
-
 if (!Number.isInteger(pageNo) || pageNo < 1 || pageNo > 999) {
     // Avoid potential deep page paths like /projects/page/999999...
     router.replace('/projects/');

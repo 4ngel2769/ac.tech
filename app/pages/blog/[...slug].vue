@@ -1,7 +1,6 @@
 <template>
   <main class="blog-post-text">
-    <ContentDoc>
-      <template v-slot="{ doc }">
+    <template v-if="doc">
         <!-- Simplified Header Section with better flow -->
         <Section id="blog-header" type="header" class="blog-header-bg !pb-0">
           <div class="mx-auto lg:px-8">
@@ -76,7 +75,7 @@
                     </span>
                   </div>
                   <button class="share-btn" @click="sharePage" aria-label="Share this article">
-                    <font-awesome-icon :icon="['fa-solid', 'fa-share']" />
+                    <font-awesome-icon :icon="['fas', 'share']" />
                     Share
                   </button>
                 </div>
@@ -164,17 +163,15 @@
         </Section>
 
         <NavScrollTopIcon />
-      </template>
-      <template #not-found>
-        <div class="max-w-4xl mx-auto px-4 py-16 text-center">
-          <h1 class="text-2xl font-bold text-white mb-4">Blog Post Not Found</h1>
-          <p class="text-gray-400 mb-8">The blog post you're looking for doesn't exist.</p>
-          <NuxtLink to="/blog" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors">
-            ← Back to Blog
-          </NuxtLink>
-        </div>
-      </template>
-    </ContentDoc>
+    </template>
+
+    <div v-else class="max-w-4xl mx-auto px-4 py-16 text-center">
+      <h1 class="text-2xl font-bold text-white mb-4">Blog Post Not Found</h1>
+      <p class="text-gray-400 mb-8">The blog post you're looking for doesn't exist.</p>
+      <NuxtLink to="/blog" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors">
+        ← Back to Blog
+      </NuxtLink>
+    </div>
   </main>
 </template>
 
@@ -215,17 +212,30 @@ const { path } = useRoute();
 let cleanPath = path.replace(/\/+$/, "");
 cleanPath = cleanPath.replace(/^\/(blog\/)+/, "/blog/");
 
-// Simplified data fetching
-const { data: article } = await useAsyncData(`blog-${cleanPath}`, () => 
-  queryContent("/blog").where({ _path: cleanPath }).findOne()
-);
+const { data: article } = await useAsyncData(`blog-${cleanPath}`, async () => {
+  const doc = await queryCollection('content')
+    .where('path', '=', cleanPath)
+    .first();
 
-const { data: surround } = await useAsyncData(`blog-surround-${cleanPath}`, () =>
-  queryContent("/blog")
-    .sort({ date: -1 })
-    .only(["_path", "title", "description"])
-    .findSurround(cleanPath, { before: 1, after: 1 })
-);
+  return doc ? { ...doc, _path: doc._path ?? doc.path } : null;
+});
+
+const doc = computed(() => article.value);
+
+const { data: surround } = await useAsyncData(`blog-surround-${cleanPath}`, async () => {
+  const all = await queryCollection('content')
+    .where('path', 'LIKE', '/blog/%')
+    .select('path', 'title', 'description', 'headline', 'date')
+    .order('date', 'DESC')
+    .all();
+
+  const currentIndex = all.findIndex((p) => p?.path === cleanPath || p?._path === cleanPath);
+  const before = currentIndex > 0 ? all[currentIndex - 1] : null;
+  const after = currentIndex >= 0 && currentIndex < all.length - 1 ? all[currentIndex + 1] : null;
+
+  const normalize = (p) => (p ? { ...p, _path: p._path ?? p.path } : null);
+  return [normalize(before), normalize(after)];
+});
 
 // Set the meta
 const runtimeConfig = useRuntimeConfig();
