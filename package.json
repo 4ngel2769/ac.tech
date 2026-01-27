@@ -35,7 +35,7 @@
     "vitest": "^4.0.13",
     "vue": "^3.5.22",
     "vue-router": "^4.6.3",
-    "zod": "^4.3.6"
+    "zod": "^3.25.76"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
