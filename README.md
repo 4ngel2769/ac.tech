@@ -1,20 +1,16 @@
 <div align="center">
-    <h1>angeldev0's portfolio website 🚀</h1>
-    <br/>
-    <p><b>A modern, responsive personal website and cybersecurity portfolio built with Nuxt.js 4, showcasing projects, skills, and technical expertise.</b></p>
-    <br/>
+    <!-- <h1>my </h1> -->
+    <!-- <br/> -->
+    <h2>A modern and responsive portfolio built with Nuxt 4, showcasing projects, skills, blogs, and practical experience.</h2>
     <img src="https://i.imgur.com/nR94oAy.gif" alt="https://angellabs.xyz website preview" />
     <br/>
-    <p>Technologies Used:</p>
-    <img src="https://skillicons.dev/icons?i=nuxt,vue,npm,nodejs,tailwind,ts,docker,nginx" alt="technologies used" />
+    <h3>Tech stack used</h3>
+    <img src="https://skillicons.dev/icons?i=nuxt,vue,tailwind,ts,docker,nginx" alt="technologies used" />
+    <h1 align="center" style="color:#00ff00; font-family:monospace;"></h1>
+    <p>Live at: <a href="https://angellabs.xyz">angellabs.xyz</a></p>
 </div>
 
-
-## 🌟 Live Website
-
-Visit the live site at: **[angellabs.xyz](https://angellabs.xyz)**
-
-## 📋 Prerequisites
+## Prerequisites
 
 ### For Local Development
 - [Node.js](https://nodejs.org) (v22.17.1 recommended)
@@ -25,7 +21,7 @@ Visit the live site at: **[angellabs.xyz](https://angellabs.xyz)**
 - [Docker](https://www.docker.com/get-started) (20.10+)
 - [Docker Compose](https://docs.docker.com/compose/install/) (v2.0+) (optional)
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Installation
 
@@ -86,7 +82,7 @@ Generate static site:
 npm run generate
 ```
 
-## 🐳 Docker Deployment
+## Docker Deployment
 
 ### Quick Start with Docker Compose (Recommended)
 
@@ -164,60 +160,56 @@ docker run -d \
 
 ### Docker Architecture
 
-The Dockerfile uses a **multi-stage build** for optimal performance:
+The Dockerfile uses a multi-stage build for optimal performance:
 
 - **Stage 1 (Builder)**: Uses Node.js 22 Alpine to build the static site with `npm run generate`
 - **Stage 2 (Production)**: Uses nginx Alpine to serve the generated files
 
 **Benefits:**
-- **Small image size** (~25MB final image)
-- **Fast builds** with layer caching
-- **Secure** with minimal attack surface
-- **Production-ready** nginx configuration with:
-  - Static asset caching
-  - Gzip compression
-  - Security headers
-  - Health checks
+- Small image size (~25MB final image)
+- Fast builds with layer caching
+- Secure with minimal attack surface
+- Production-ready nginx configuration with static asset caching, gzip compression, security headers, and health checks
 
-## ✨ Current Features
+## Features
 
-### 🏠 Homepage
-- **Hero Section**: Interactive video/image background with personal introduction
-- **Projects Showcase**: Featured projects with dynamic content loading
-- **Latest Blog Posts**: Recent articles and technical writings
-- **Responsive Design**: Optimized for all devices and screen sizes
-- **Modern UI/UX**: Glassmorphism effects, smooth animations, and intuitive navigation
+### Homepage
+- Hero section with interactive video/image background
+- Projects showcase with dynamic content loading
+- Latest blog posts display
+- Responsive design for all devices
+- Modern UI with glassmorphism effects and smooth animations
 
-### 📂 Projects Portfolio
-- **Dynamic Project Listing**: Filterable and searchable project grid
-- **Fuzzy Search**: Powered by Fuse.js for intelligent content discovery
-- **Project Categories**: Organized by tags and technologies
-- **Detailed Project Pages**: Individual pages with rich content, images, and metadata
-- **Infinite Scroll**: Smooth pagination with lazy loading
-- **Breadcrumb Navigation**: Clear site hierarchy and navigation
+### Projects Portfolio
+- Dynamic project listing with search and filtering
+- Fuzzy search powered by Fuse.js
+- Project categories and tags
+- Detailed project pages with rich content
+- Infinite scroll pagination
+- Breadcrumb navigation
 
-### 📝 Blog System
-- **SEO Optimized**: Rich meta tags and structured data
-- **Markdown Content**: Full MDX support with custom components
-- **Syntax Highlighting**: Code blocks with Nord theme
-- **Table of Contents**: Auto-generated navigation for long articles
-- **Social Sharing**: Built-in sharing buttons for social platforms
-- **Related Articles**: Smart content recommendations
+### Blog System
+- SEO optimized with rich meta tags
+- Markdown content with MDX support
+- Syntax highlighting with Nord theme
+- Auto-generated table of contents
+- Social sharing buttons
+- Related articles recommendations
 
-### 🎨 Design & UI
-- **Dark/Light Mode**: Toggle between themes (currently dark-focused) **[`WIP`]**
-- **Custom Typography**: Multiple font families including Montserrat, Sen, and custom fonts
-- **Responsive Grid**: CSS Grid and Flexbox layouts
-- **Loading States**: Elegant loading indicator
+### Design & UI
+- Dark/Light mode toggle (currently dark-focused)
+- Custom typography with multiple font families
+- Responsive grid layouts
+- Loading states and animations
 
-### 🔧 Technical Features
-- **SSR/SSG**: Server-side rendering with static generation support
-- **SEO Optimized**: Meta tags, Open Graph
-- **Performance**: Optimized images and lazy loading
-- **Sitemap & Robots**: Automated SEO file generation
-- **Error Handling**: Custom 404 pages and graceful error recovery
+### Technical Features
+- SSR/SSG with static generation support
+- SEO optimization with meta tags and Open Graph
+- Optimized images and lazy loading
+- Automated sitemap and robots.txt generation
+- Custom 404 pages and error handling
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 ### Core Framework
 - **[Nuxt.js 4](https://nuxt.com)**: Vue.js framework with SSR/SSG
@@ -244,7 +236,7 @@ The Dockerfile uses a **multi-stage build** for optimal performance:
 - **[@nuxtjs/sitemap](https://sitemap.nuxtjs.org)**: Automatic sitemap generation
 - **[nuxt-gtag](https://github.com/johannschopplich/nuxt-gtag)**: Google Analytics
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 ac.tech/
@@ -271,33 +263,33 @@ ac.tech/
 └── package.json           # Dependencies and scripts
 ```
 
-## Current Status & Roadmap
+## Status
 
-### ✅ Completed Features
-- [x] Modern homepage with hero section
-- [x] Responsive design across all devices
-- [x] Projects portfolio with search and filtering
-- [x] Individual project pages with rich content
-- [x] Blog system with markdown support
-- [x] SEO optimization and meta tags
-- [x] Dark/Light theme implementation
-- [x] Search functionality enhancement
-- [x] Blog content expansion
+### Completed Features
+- Modern homepage with hero section
+- Responsive design across all devices
+- Projects portfolio with search and filtering
+- Individual project pages with rich content
+- Blog system with markdown support
+- SEO optimization and meta tags
+- Dark/Light theme implementation
+- Search functionality enhancement
+- Blog content expansion
 
-### 🚧 In Progress
-- [ ] Resume/CV page
-- [ ] Contact form functionality
-- [ ] Light theme refinement
-- [ ] Social media integration
-- [ ] Performance optimization
+### In Progress
+- Resume/CV page
+- Contact form functionality
+- Light theme refinement
+- Social media integration
+- Performance optimization
 
-### 🔮 Future Plans
-- [ ] Newsletter subscription
-- [ ] Comments system
-- [ ] Multi-language support
-- [ ] PWA features
+### Future Plans
+- Newsletter subscription
+- Comments system
+- Multi-language support
+- PWA features
 
-## 🌐 About
+## About
 
 This website serves as my digital portfolio, showcasing expertise in:
 
@@ -314,12 +306,12 @@ While this is a personal website, suggestions and bug reports are welcome! Feel 
 2. Submit pull requests for improvements
 3. Share feedback on design or functionality
 
-## 📞 Contact
+## Contact
 
-- **LinkedIn**: [Angel Capra](https://www.linkedin.com/in/angelcapra)
+- **Email**: [angeldevz0 [@] proton [.] me](mailto:angeldevz0@proton.me)
 - **Twitter**: [@angeldev0](https://twitter.com/angeldev0)
 
-## 📄 License
+## License
 
 <div align="center">
     This project is open source and available under the <a href="LICENSE">MIT License</a>.<br/>
