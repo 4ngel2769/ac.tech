@@ -156,6 +156,39 @@ export default defineNuxtConfig({
 
   modules: ['@formkit/auto-animate', '@nuxt/ui', '@nuxtjs/robots', "@nuxt/image", "nuxt-gtag", "@nuxtjs/sitemap", "@nuxtjs/color-mode", '@nuxt/content', 'nuxt-og-image'],
 
+  content: {
+    markdown: {
+      anchorLinks: false,
+      highlight: {
+        theme: 'nord',
+        // CRITICAL: Only preload languages ACTUALLY used in blog posts to reduce bundle size
+        // Cloudflare Workers have 3 MB limit (free) / 10 MB (paid)
+        // Each language adds ~50-200 KB to the bundle
+        preload: [
+          'javascript',
+          'python',
+          'bash',
+          'c',
+          'cpp',
+          'json',
+          'yaml',
+          'markdown',
+          'ini'
+        ]
+      },
+      // https://github.com/rehypejs/rehype-external-links
+      rehypePlugins: [
+        [
+          'rehype-external-links',
+          {
+            target: '_blank',
+            rel: 'noopener noreferrer'
+          }
+        ]
+      ]
+    }
+  } as any,
+
   image: {
     format: ['webp', 'avif'],
     quality: 80,
