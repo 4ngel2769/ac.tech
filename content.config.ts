@@ -32,5 +32,48 @@ export default defineContentConfig({
         })
         .passthrough()
     })
+  },
+  markdown: {
+    anchorLinks: false,
+    highlight: {
+      theme: 'nord',
+      // theme: 'poimandres',
+      // CRITICAL: Only preload languages ACTUALLY used in blog posts to reduce bundle size
+      // Cloudflare Workers have 3 MB limit (free) / 10 MB (paid)
+      // Each language adds ~50-200 KB to the bundle
+      preload: [
+        // 'java',
+        'javascript',
+        // 'typescript',
+        'python',
+        'bash',
+        'c',
+        'cpp',
+        // 'csharp',
+        // 'css',
+        // 'html',
+        // 'csv',
+        'json',
+        'yaml',
+        // 'xml',
+        'markdown',
+        // 'php',
+        // 'ruby',
+        // 'sql',
+        // 'go',
+        // 'rust',
+        'ini'
+      ]
+    },
+    // https://github.com/rehypejs/rehype-external-links
+    rehypePlugins: [
+      [
+        'rehype-external-links',
+        {
+          target: '_blank',
+          rel: 'noopener noreferrer'
+        }
+      ]
+    ]
   }
 })

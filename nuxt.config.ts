@@ -29,7 +29,7 @@ export default defineNuxtConfig({
   },
   nitro: {
     prerender: {
-      routes: ['/projects', '/']
+      routes: ['/projects', '/blog', '/']
     },
     // Exclude large assets from worker bundle - serve from /public instead
     publicAssets: [
@@ -73,6 +73,10 @@ export default defineNuxtConfig({
   routeRules: {
     // Homepage pre-rendered at build time
     '/': { prerender: true },
+    // Blog page pre-rendered at build time
+    '/blog': { prerender: true },
+    // Individual blog posts can be SSR or static
+    '/blog/**': { prerender: true },
     // Projects page pre-rendered at build time
     '/projects': { prerender: true },
     // Individual projects can be SSR or static
@@ -92,53 +96,6 @@ export default defineNuxtConfig({
           }
         }
       }
-    }
-  },
-
-  content: {
-    // https://content.nuxtjs.org/api/configuration
-    highlight: {
-      theme: 'nord',
-      // theme: 'poimandres',
-      // CRITICAL: Only preload languages ACTUALLY used in blog posts to reduce bundle size
-      // Cloudflare Workers have 3 MB limit (free) / 10 MB (paid)
-      // Each language adds ~50-200 KB to the bundle
-      preload: [
-        // 'java',
-        'javascript',
-        // 'typescript',
-        'python',
-        'bash',
-        'c',
-        'cpp',
-        // 'csharp',
-        // 'css',
-        // 'html',
-        // 'csv',
-        'json',
-        'yaml',
-        // 'xml',
-        'markdown',
-        // 'php',
-        // 'ruby',
-        // 'sql',
-        // 'go',
-        // 'rust',
-        'ini'
-      ]
-    },
-    markdown: {
-      anchorLinks: false,
-      // https://github.com/rehypejs/rehype-external-links
-      rehypePlugins: [
-        [
-        'rehype-external-links',
-          {
-            target: '_blank',
-            rel: 'noopener noreferrer'
-          }
-        ]
-      ]
     }
   },
 
