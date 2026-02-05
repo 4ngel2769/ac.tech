@@ -2,7 +2,7 @@
     <!-- <h1>my </h1> -->
     <!-- <br/> -->
     <h2>A modern and responsive portfolio built with Nuxt 4, showcasing projects, skills, blogs, and practical experience.</h2>
-    <img src="https://i.imgur.com/nR94oAy.gif" alt="https://angellabs.xyz website preview" />
+    <img src=".github/readmesrc/nR94oAy.gif" alt="https://angellabs.xyz website preview" />
     <br/>
     <h3>Tech stack used</h3>
     <img src="https://skillicons.dev/icons?i=nuxt,vue,tailwind,ts,docker,nginx" alt="technologies used" />
