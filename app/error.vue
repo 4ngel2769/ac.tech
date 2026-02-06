@@ -8,16 +8,15 @@
       playsinline
       aria-hidden="true"
     >
-      <source src="https://i.imgur.com/gvRhu9Y.mp4" type="video/mp4" />
+      <source src="https://i.imgur.com/LefCJn4.mp4" type="video/mp4" />
     </video>
-    <Header />
     <main class="error-main">
       <Section id="error">
         <div class="error-content">
-          <p class="error-code">404</p>
-          <h1 class="error-title">Page not found</h1>
+          <p class="error-code">{{ statusCode }}</p>
+          <h1 class="error-title">{{ errorTitle }}</h1>
           <p class="error-message">
-            The page you are looking for does not exist or was moved.
+            {{ errorMessage }}
           </p>
           <div class="error-actions">
             <NuxtLink to="/" class="error-link">Go home</NuxtLink>
@@ -35,6 +34,32 @@
 <script setup lang="ts">
 import { clearError } from '#app'
 
+const props = defineProps({
+  error: Object
+})
+
+const statusCode = computed(() => props.error?.statusCode || 500)
+const statusMessage = computed(() => props.error?.statusMessage || 'Error')
+
+const errorTitle = computed(() => {
+  const code = statusCode.value
+  if (code === 404) return 'Page not found'
+  if (code === 403) return 'Access forbidden'
+  if (code === 500) return 'Server error'
+  if (code >= 500) return 'Server error'
+  if (code >= 400) return 'Client error'
+  return 'An error occurred'
+})
+
+const errorMessage = computed(() => {
+  const code = statusCode.value
+  if (code === 404) return 'The page you are looking for does not exist or was moved.'
+  if (code === 403) return 'You do not have permission to access this resource.'
+  if (code === 500) return 'Something went wrong on our end. Please try again later.'
+  if (code >= 500) return 'The server encountered an error. Please try again later.'
+  return props.error?.message || 'Something went wrong. Please try again.'
+})
+
 const handleBack = () => {
   if (import.meta.client && window.history.length > 1) {
     window.history.back()
@@ -45,7 +70,7 @@ const handleBack = () => {
 }
 
 useHead({
-  title: '404 | Angel Capra'
+  title: computed(() => `${statusCode.value} | Angel Capra`)
 })
 </script>
 
@@ -79,7 +104,10 @@ useHead({
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  padding: clamp(1.5rem, 6vh, 3.5rem) 1.5rem 1.5rem;
+}
+
+#error {
+  margin-top: 20vh;
 }
 
 .error-content {
