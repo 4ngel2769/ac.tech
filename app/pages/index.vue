@@ -214,7 +214,7 @@ const latestBlogs = computed(() =>
             experience in Linux, Docker, virtualization, networking,
             and server management.<br />
             My work involves creating secure hardware and firmware, uncovering and mitigating vulnerabilities, and creating occasional scripts for convenience.<br/>
-            I write most of my code in C/C++ for embedded projects, and Python, Node.js, or Go for scripts and backend services.<br/>
+            I write most of my code in C/C++ for embedded projects, and Python, Node.js, or Go for scripts and backend services. For the occasional website I like to use Nuxt or Svelte.<br/>
           </p>
         </div>
       </div>
