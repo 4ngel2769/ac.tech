@@ -207,7 +207,7 @@ const latestBlogs = computed(() =>
         </div>
         <div class="mb-6">
           <p class="tracking-normal leading-6 text-gray-300">
-            I specialize in <span class="font-bold decoration-solid text-slate-200 decoration-1">cybersecurity</span>,
+            I write secure firmware for IoT and embedded devices. I specialize in <span class="font-bold decoration-solid text-slate-200 decoration-1">cybersecurity</span>,
             <span class="font-bold decoration-solid text-slate-200 decoration-1">backend development</span>, and
             <span class="font-bold decoration-solid text-slate-200 decoration-1">embedded systems development</span>, with
             experience in Docker, Linux, virtualization, networking,
