@@ -4,7 +4,6 @@ import {
   faArrowUpRightFromSquare, 
   faAt, 
   faLocationDot, 
-  fas, 
   faEnvelope,
   faRocket, 
   faArrowLeft,
@@ -20,7 +19,6 @@ import {
   faMoon
 } from '@fortawesome/free-solid-svg-icons'
 import { 
-  fab, 
   faYoutube, 
   faDev, 
   faTwitter, 
@@ -41,12 +39,6 @@ library.add(
   faArrowLeft,
   faArrowRight,
   faBars,
-  faGithub,
-  faYoutube,
-  faDev,
-  faTwitter,
-  faLinkedin,
-  faInstagram,
   // Alert icons
   faInfoCircle,
   faLightbulb,
@@ -57,7 +49,12 @@ library.add(
   faSun,
   faMoon,
   faShare,
-  fab
+  faGithub,
+  faYoutube,
+  faDev,
+  faTwitter,
+  faLinkedin,
+  faInstagram
 )
 
 export default defineNuxtPlugin((nuxtApp) => {

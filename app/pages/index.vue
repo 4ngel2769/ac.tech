@@ -138,22 +138,22 @@ const latestBlogs = computed(() =>
       <UDivider label="Socials" class="socialdivider" />
       <p class="linkstitle">My socials:</p>
       <div class="linkscontainer">
-          <UTooltip text="YouTube | @angeldev0">
-          <NuxtLink
-            class="link"
-            to="https://youtube.com/@angeldev0"
-            external
-            target="_blank"
-            ><font-awesome-icon :icon="['fab','youtube']" />
-          </NuxtLink>
-        </UTooltip>
-        <UTooltip text="GitHub | 4ngel2769">
+        <UTooltip text="GitHub | angeldev0/4ngel2769">
           <NuxtLink
             class="link"
             to="https://github.com/4ngel2769"
             external
             target="_blank"
             ><font-awesome-icon :icon="['fab','github']" />
+          </NuxtLink>
+        </UTooltip>
+        <UTooltip text="YouTube | @angeldev0">
+          <NuxtLink
+            class="link"
+            to="https://youtube.com/@angeldev0"
+            external
+            target="_blank"
+            ><font-awesome-icon :icon="['fab','youtube']" />
           </NuxtLink>
         </UTooltip>
         <UTooltip text="Dev.to | @angeldev0">
@@ -203,23 +203,23 @@ const latestBlogs = computed(() =>
         <div class="Description">
           <h2 class="DescriptionText leading-h4 font-semibold">
             Hi, I'm Angel, Cybersecurity Researcher & Embedded Systems Developer<br/>
-            I write secure firmware for IoT and embedded devices.
+            I write secure firmware for IoT and other embedded devices.
           </h2>
         </div>
         <div class="mb-6">
           <p class="tracking-normal leading-6 text-gray-300">
-            I specialize in <span class="font-bold decoration-solid text-slate-200 decoration-1">embedded systems engineering</span>,
+              I specialize in <span class="font-bold decoration-solid text-slate-200 decoration-1">embedded systems engineering</span>,
             <span class="font-bold decoration-solid text-slate-200 decoration-1">security operations</span>, and
             <span class="font-bold decoration-solid text-slate-200 decoration-1">backend software development</span>, with
             experience in Linux, Docker, virtualization, networking,
             and server management.<br />
-            My work involves around creating secure hardware and firmware,
-            uncovering vulnerabilities, and mitigating them.
+            My work involves creating secure hardware and firmware, uncovering and mitigating vulnerabilities, and creating occasional scripts for convenience.<br/>
+            I write most of my code in C/C++ for embedded projects, and Python, Node.js, or Go for scripts and backend services.<br/>
           </p>
         </div>
       </div>
     </div>
-
+    
     <!-- Example toggle button (remove in production) -->
     <!-- <button @click="toggleBg" style="position:absolute;top:10px;right:10px;z-index:10;">
       Toggle BG

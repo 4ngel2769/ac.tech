@@ -11,10 +11,7 @@ declare global {
 export default defineNuxtConfig({
   devtools: {
     enabled: false,
-
-    // timeline: {
-    //   enabled: true
-    // }
+    // timeline: {enabled: false}
   },
   ssr: true,
   experimental: {
@@ -90,22 +87,39 @@ export default defineNuxtConfig({
       cssCodeSplit: true,
       rollupOptions: {
         output: {
-          manualChunks: {
-            'vendor': ['vue', 'vue-router'],
-            'fontawesome': ['@fortawesome/fontawesome-svg-core', '@fortawesome/vue-fontawesome'],
+          manualChunks: (id) => {
+            // Separate vendor chunks for better caching
+            if (id.includes('node_modules')) {
+              if (id.includes('vue')) return 'vendor-vue'
+              if (id.includes('@fortawesome')) return 'vendor-icons'
+              if (id.includes('fuse')) return 'vendor-search'
+              return 'vendor-other'
+            }
           }
         }
       }
+    },
+    // optimized dependencies in dev
+    optimizeDeps: {
+      include: [
+        'vue',
+        'vue-router',
+        '@vueuse/core',
+        'fuse.js'
+      ],
+      exclude: [
+        '@nuxt/content'  // nuxt handles this
+      ]
     }
   },
 
-  //
   app: {
     head: {
       script: [
         {
           src: "https://www.googletagmanager.com/gtag/js?id=G-K7ZPX7THHN",
-          async: true
+          async: true,
+          defer: true
         },
         {
           innerHTML: `
@@ -143,7 +157,19 @@ export default defineNuxtConfig({
         { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap', media: 'print', onload: "this.media='all'" },
         { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900;1,1000&display=swap', media: 'print', onload: "this.media='all'" },
         { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sen:wght@400;500;600;700;800&display=swap', media: 'print', onload: "this.media='all'" },
-        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Sen:wght@400..800&family=Syncopate:wght@400;700&display=swap', media: 'print', onload: "this.media='all'" }
+        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Sen:wght@400..800&family=Syncopate:wght@400;700&display=swap', media: 'print', onload: "this.media='all'" },
+        { 
+          rel: 'stylesheet', 
+          href: 'https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;700&family=Sen:wght@400;700&display=swap',
+          media: 'print', 
+          onload: "this.media='all'" 
+        },
+
+        // { rel: 'stylesheet', href: 'https://www.nerdfonts.com/assets/css/webfont.css', media: 'print', onload: "this.media='all'" },
+        // { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined...', media: 'print', onload: "this.media='all'" },
+        // { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Permanent+Marker...', media: 'print', onload: "this.media='all'" },
+        // { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Lexend+Deca...', media: 'print', onload: "this.media='all'" },
+        // { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Nunito+Sans...', media: 'print', onload: "this.media='all'" }
       ]
     }
   },
@@ -154,7 +180,18 @@ export default defineNuxtConfig({
     '~/assets/css/tailwind.css'
   ],
 
-  modules: ['@formkit/auto-animate', '@nuxt/ui', '@nuxtjs/robots', "@nuxt/image", "nuxt-gtag", "@nuxtjs/sitemap", "@nuxtjs/color-mode", '@nuxt/content', 'nuxt-og-image'],
+  modules: [
+    // '@formkit/auto-animate',
+    '@nuxt/ui', 
+    '@nuxtjs/robots',
+    "@nuxt/image", 
+    "nuxt-gtag",
+    // '@nuxtjs/google-analytics',
+    "@nuxtjs/sitemap", 
+    "@nuxtjs/color-mode", 
+    '@nuxt/content',
+    // 'nuxt-og-image'
+  ],
 
   content: {
     markdown: {
@@ -186,7 +223,12 @@ export default defineNuxtConfig({
           }
         ]
       ]
-    }
+    },
+    // ignore files that don't need indexing
+    ignores: [
+      '/node_modules/',
+      '/\\..*',
+    ]
   } as any,
 
   image: {
@@ -203,7 +245,8 @@ export default defineNuxtConfig({
   },
 
   icon: {
-    
+    // serverBundle: 'local',
+    // collections: ['heroicons']
   },
 
   gtag: {
@@ -282,6 +325,10 @@ export default defineNuxtConfig({
     ],
   },
 
-  // compatibilityDate: '2024-07-09',
   compatibilityDate: '2025-07-22',
+
+  typescript: {
+    typeCheck: false,  // disabled type checking during dev (faster HMR)
+    strict: true,
+  },
 })
