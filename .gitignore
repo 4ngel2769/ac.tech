@@ -27,3 +27,5 @@ logs
 # package-lock.json
 
 *.bak
+PERFORMANCE.md
+/scripts

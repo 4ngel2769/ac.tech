@@ -138,22 +138,22 @@ const latestBlogs = computed(() =>
       <UDivider label="Socials" class="socialdivider" />
       <p class="linkstitle">My socials:</p>
       <div class="linkscontainer">
-          <UTooltip text="YouTube | @angeldev0">
-          <NuxtLink
-            class="link"
-            to="https://youtube.com/@angeldev0"
-            external
-            target="_blank"
-            ><font-awesome-icon :icon="['fab','youtube']" />
-          </NuxtLink>
-        </UTooltip>
-        <UTooltip text="GitHub | 4ngel2769">
+        <UTooltip text="GitHub | angeldev0/4ngel2769">
           <NuxtLink
             class="link"
             to="https://github.com/4ngel2769"
             external
             target="_blank"
             ><font-awesome-icon :icon="['fab','github']" />
+          </NuxtLink>
+        </UTooltip>
+        <UTooltip text="YouTube | @angeldev0">
+          <NuxtLink
+            class="link"
+            to="https://youtube.com/@angeldev0"
+            external
+            target="_blank"
+            ><font-awesome-icon :icon="['fab','youtube']" />
           </NuxtLink>
         </UTooltip>
         <UTooltip text="Dev.to | @angeldev0">
@@ -202,24 +202,24 @@ const latestBlogs = computed(() =>
       <div class="descriptiondiv">
         <div class="Description">
           <h2 class="DescriptionText leading-h4 font-semibold">
-            Hi, I'm Angel, Cybersecurity Researcher & Embedded Systems Developer
+            Hi, I'm Angel, Cybersecurity Researcher & Embedded Systems Developer<br/>
+            I write secure firmware for IoT and other embedded devices.
           </h2>
         </div>
         <div class="mb-6">
           <p class="tracking-normal leading-6 text-gray-300">
-            I write secure firmware for IoT and embedded devices. I specialize in <span class="font-bold decoration-solid text-slate-200 decoration-1">cybersecurity</span>,
-            <span class="font-bold decoration-solid text-slate-200 decoration-1">backend development</span>, and
-            <span class="font-bold decoration-solid text-slate-200 decoration-1">embedded systems development</span>, with
-            experience in Docker, Linux, virtualization, networking,
+              I specialize in <span class="font-bold decoration-solid text-slate-200 decoration-1">embedded systems engineering</span>,
+            <span class="font-bold decoration-solid text-slate-200 decoration-1">security operations</span>, and
+            <span class="font-bold decoration-solid text-slate-200 decoration-1">backend software development</span>, with
+            experience in Linux, Docker, virtualization, networking,
             and server management.<br />
-            My work involves uncovering vulnerabilities, creating secure
-            hardware and software, and developing innovative solutions using ESP32
-            microcontrollers.
+            My work involves creating secure hardware and firmware, uncovering and mitigating vulnerabilities, and creating occasional scripts for convenience.<br/>
+            I write most of my code in C/C++ for embedded projects, and Python, Node.js, or Go for scripts and backend services. For the occasional website I like to use Nuxt or Svelte.<br/>
           </p>
         </div>
       </div>
     </div>
-
+    
     <!-- Example toggle button (remove in production) -->
     <!-- <button @click="toggleBg" style="position:absolute;top:10px;right:10px;z-index:10;">
       Toggle BG
@@ -240,7 +240,7 @@ const latestBlogs = computed(() =>
     <!-- <div class="projects-hero-fade" aria-hidden="true"></div> -->
     <div class="projects-hero-content">
       <div class="projects-hero-text">
-        <span class="projects-hero-label">TAKE A PEEK</span>
+        <span class="projects-hero-label">TAKE A PEEK AT MY</span>
         <h2 class="projects-hero-title">PROJECTs</h2>
         <p class="projects-hero-description">
           I enjoy building things. Whether that's radio tools, scripts, hacking
@@ -504,7 +504,7 @@ p {
 /* width: ; */
 /* } */
 .linkstitle {
-  margin: 15px 0px 0px 0px;
+  margin: 10px 0px 0px 0px;
   /* font-family: var(--font29); */
   /* font-weight: normal; */
   /* font-style: round; */
@@ -536,11 +536,12 @@ p {
   visibility: hidden;
 }
 .undertext {
+  font-family: var(--font3);
   display: flex;
   flex-direction: row;
   gap: 25px;
   color: #aaaaaa;
-  margin: 5px 0px 25px 0px;
+  margin: 5px 0px 15px 0px;
   font-size: 0.9em;
 }
 .descriptiondivider {
