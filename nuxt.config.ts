@@ -89,7 +89,6 @@ export default defineNuxtConfig({
         output: {
           manualChunks: {
             'vendor': ['vue', 'vue-router'],
-            'fontawesome': ['@fortawesome/fontawesome-svg-core', '@fortawesome/vue-fontawesome', '@fortawesome/free-solid-svg-icons', '@fortawesome/free-brands-svg-icons'],
           }
         }
       }

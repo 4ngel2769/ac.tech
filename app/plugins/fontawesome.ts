@@ -1,7 +1,6 @@
 import { library, config } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import {
-  fas,
   faArrowUpRightFromSquare, 
   faAt, 
   faLocationDot, 
@@ -25,8 +24,7 @@ import {
   faTwitter, 
   faInstagram, 
   faLinkedin, 
-  faGithub,
-  fab
+  faGithub
 } from '@fortawesome/free-brands-svg-icons'
 import { defineNuxtPlugin } from '#app'
 
@@ -56,9 +54,7 @@ library.add(
   faDev,
   faTwitter,
   faLinkedin,
-  faInstagram,
-  fab,
-  fas
+  faInstagram
 )
 
 export default defineNuxtPlugin((nuxtApp) => {
