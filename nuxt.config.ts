@@ -15,7 +15,7 @@ export default defineNuxtConfig({
   },
   ssr: true,
   experimental: {
-    payloadExtraction: false,
+    payloadExtraction: true,
     renderJsonPayloads: true,
   },
   router: {
@@ -87,14 +87,9 @@ export default defineNuxtConfig({
       cssCodeSplit: true,
       rollupOptions: {
         output: {
-          manualChunks: (id) => {
-            // Separate vendor chunks for better caching
-            if (id.includes('node_modules')) {
-              if (id.includes('vue')) return 'vendor-vue'
-              if (id.includes('@fortawesome')) return 'vendor-icons'
-              if (id.includes('fuse')) return 'vendor-search'
-              return 'vendor-other'
-            }
+          manualChunks: {
+            'vendor': ['vue', 'vue-router'],
+            'fontawesome': ['@fortawesome/fontawesome-svg-core', '@fortawesome/vue-fontawesome', '@fortawesome/free-solid-svg-icons', '@fortawesome/free-brands-svg-icons'],
           }
         }
       }
@@ -232,6 +227,12 @@ export default defineNuxtConfig({
   } as any,
 
   image: {
+    domains: [
+      'raw.githubusercontent.com',
+      'images.unsplash.com',
+      'cdn.pixabay.com',
+      'i.imgur.com',
+    ],
     format: ['webp', 'avif'],
     quality: 80,
     screens: {
