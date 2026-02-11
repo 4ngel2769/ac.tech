@@ -136,8 +136,8 @@ const latestBlogs = computed(() =>
         </div> -->
       </div>
       <UDivider label="Socials" class="socialdivider" />
-      <p class="linkstitle">My socials:</p>
       <div class="linkscontainer">
+        <p class="linkstitle">My socials:</p>
         <UTooltip text="GitHub | angeldev0/4ngel2769">
           <NuxtLink
             class="link"
@@ -207,14 +207,15 @@ const latestBlogs = computed(() =>
           </h2>
         </div>
         <div class="mb-6">
-          <p class="tracking-normal leading-6 text-gray-300">
-              I specialize in <span class="font-bold decoration-solid text-slate-200 decoration-1">embedded systems engineering</span>,
+          <p class="tracking-normal leading-6 text-gray-300 first-line-indent mb-4">
+            I specialize in <span class="font-bold decoration-solid text-slate-200 decoration-1">embedded systems engineering</span>,
             <span class="font-bold decoration-solid text-slate-200 decoration-1">security operations</span>, and
             <span class="font-bold decoration-solid text-slate-200 decoration-1">backend software development</span>, with
             experience in Linux, Docker, virtualization, networking,
-            and server management.<br />
+            and server managementa.</p>
+          <p class="tracking-normal leading-6 text-gray-300 first-line-indent mb-4">
             My work involves creating secure hardware and firmware, uncovering and mitigating vulnerabilities, and creating occasional scripts for convenience.<br/>
-            I write most of my code in C/C++ for embedded projects, and Python, Node.js, or Go for scripts and backend services. For the occasional website I like to use Nuxt or Svelte.<br/>
+            I write most of my code in C/C++ for embedded projects, and Python, Node.js, or Go for scripts and backend services. For the occasional website I like to use Nuxt or Svelte.
           </p>
         </div>
       </div>
@@ -243,9 +244,8 @@ const latestBlogs = computed(() =>
         <span class="projects-hero-label">TAKE A PEEK AT MY</span>
         <h2 class="projects-hero-title">PROJECTs</h2>
         <p class="projects-hero-description">
-          I enjoy building things. Whether that's radio tools, scripts, hacking
-          devices, applications, or anything in between. Take a look at my
-          arsenal of projects.
+          I enjoy building things that solve problems.<br/>
+          Things such as handheld wireless devices, web applications, scripts, and other miscellaneous things. Take a look at my projects.
         </p>
         <NuxtLink to="/projects" class="explore-projects-btn projects-hero-btn">
           <p>PROJECTS</p>
@@ -504,7 +504,7 @@ p {
 /* width: ; */
 /* } */
 .linkstitle {
-  margin: 10px 0px 0px 0px;
+  margin: 0px 0px 0px 0px;
   /* font-family: var(--font29); */
   /* font-weight: normal; */
   /* font-style: round; */
@@ -512,6 +512,7 @@ p {
 .linkscontainer {
   margin: 10px 0px 10px 0px;
   display: flex;
+  align-items: center;
 }
 .link {
   font-size: 20px;
@@ -740,7 +741,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  max-width: 500px;
+  max-width: 600px;
   margin-right: auto;
   margin-left: auto;
   text-align: left;
@@ -830,7 +831,7 @@ body {
   color: #f9fafb; /* text-gray-50 */
   font-size: 2.3rem;
   font-weight: bold;
-  font-family: var(--font6);
+  font-family: var(--font1);
   border-radius: 0.5rem;
   overflow: hidden;
   text-underline-offset: 0.125rem;
@@ -1547,6 +1548,17 @@ body {
 .light .posts-description-panel {
   background: rgba(255, 255, 255, 0.5);
   border-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Simple first-line indent and paragraph spacing utility for hero intro */
+.first-line-indent {
+  text-indent: 1.5rem; /* indent first line */
+  margin-bottom: 1rem; /* spacing after this paragraph */
+}
+
+/* If you use multiple adjacent paragraphs, ensure spacing between them */
+.first-line-indent + .first-line-indent {
+  margin-top: 0.75rem;
 }
 
 </style>
