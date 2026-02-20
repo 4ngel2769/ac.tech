@@ -202,18 +202,18 @@ const latestBlogs = computed(() =>
       <div class="descriptiondiv">
         <div class="Description">
           <h2 class="DescriptionText leading-h4 font-semibold">
-            Hi, I'm Angel, Cybersecurity Researcher & Embedded Systems Developer<br/>
+            I am an Embedded Systems Developer and Cybersecurity Researcher<br/>
             I write secure firmware for IoT and other embedded devices.
           </h2>
         </div>
         <div class="mb-6">
-          <p class="tracking-normal leading-6 text-gray-300 first-line-indent mb-4">
+          <p class="tracking-normal leading-6 text-gray-300 first-line-indent mb-0">
             I specialize in <span class="font-bold decoration-solid text-slate-200 decoration-1">embedded systems engineering</span>,
             <span class="font-bold decoration-solid text-slate-200 decoration-1">security operations</span>, and
             <span class="font-bold decoration-solid text-slate-200 decoration-1">backend software development</span>, with
             experience in Linux, Docker, virtualization, networking,
             and server managementa.</p>
-          <p class="tracking-normal leading-6 text-gray-300 first-line-indent mb-4">
+          <p class="tracking-normal leading-6 text-gray-300 first-line-indent mb-4 mt-1">
             My work involves creating secure hardware and firmware, uncovering and mitigating vulnerabilities, and creating occasional scripts for convenience.<br/>
             I write most of my code in C/C++ for embedded projects, and Python, Node.js, or Go for scripts and backend services. For the occasional website I like to use Nuxt or Svelte.
           </p>
