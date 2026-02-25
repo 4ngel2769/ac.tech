@@ -1,4 +1,6 @@
 import { defineNuxtConfig } from 'nuxt/config'
+import { readdirSync, existsSync } from 'fs'
+import { join } from 'path'
 
 declare global {
   namespace NodeJS {
@@ -6,6 +8,23 @@ declare global {
       GITHUB: string
     }
   }
+}
+
+/** Recursively collect all .md files under a directory and return Nuxt routes */
+function collectContentRoutes(dir: string, base: string): string[] {
+  if (!existsSync(dir)) return []
+  const routes: string[] = []
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    // Skip hidden files/dirs (e.g. editor temp files like .#foo.md) and draft markers
+    if (entry.name.startsWith('.') || entry.name.startsWith('_')) continue
+    if (entry.isDirectory()) {
+      routes.push(...collectContentRoutes(join(dir, entry.name), `${base}/${entry.name}`))
+    } else if (entry.name.endsWith('.md')) {
+      const slug = entry.name.replace(/\.md$/, '')
+      routes.push(`${base}/${slug}`)
+    }
+  }
+  return routes
 }
 
 export default defineNuxtConfig({
@@ -24,8 +43,24 @@ export default defineNuxtConfig({
           hashMode: false,
       }
   },
+  hooks: {
+    'nitro:config'(nitroConfig) {
+      // Explicitly add every content page so `nuxt generate` always produces
+      // a static HTML file for each article, regardless of link-crawling.
+      const contentDir = join(process.cwd(), 'content')
+      const extraRoutes = [
+        ...collectContentRoutes(join(contentDir, 'blog'),     '/blog'),
+        ...collectContentRoutes(join(contentDir, 'projects'), '/projects'),
+      ]
+      if (!nitroConfig.prerender) nitroConfig.prerender = {}
+      const existing = (nitroConfig.prerender.routes as string[] | undefined) ?? []
+      nitroConfig.prerender.routes = [...new Set([...existing, ...extraRoutes])]
+    },
+  },
+
   nitro: {
     prerender: {
+      crawlLinks: true,
       routes: ['/projects', '/blog', '/'],
       // Ignore IPX routes for external images — they contain ":" in URLs
       // which is illegal in Windows directory names and can't be written to disk
