@@ -27,7 +27,7 @@
             />
             <CustomSelect
               v-model="sortBy"
-              :options="sortOptions"
+              :items="sortOptions"
               placeholder="Sort by"
               class="w-48"
             />

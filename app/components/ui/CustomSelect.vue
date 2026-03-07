@@ -21,7 +21,7 @@
     <transition name="dropdown">
       <div v-if="isOpen" class="select-dropdown">
         <button
-          v-for="option in options"
+          v-for="option in items"
           :key="option.value"
           @click="selectOption(option)"
           class="select-option"
@@ -49,14 +49,14 @@ const props = defineProps({
     type: String,
     required: true
   },
-  options: {
+  items: {
     type: Array,
     required: true,
-    validator: (options) => {
-      return options.every(option => 
-        typeof option === 'object' && 
-        'value' in option && 
-        'label' in option
+    validator: (items) => {
+      return items.every(item => 
+        typeof item === 'object' && 
+        'value' in item && 
+        'label' in item
       )
     }
   },
@@ -72,7 +72,7 @@ const isOpen = ref(false)
 const dropdownRef = ref(null)
 
 const currentOptionLabel = computed(() => {
-  const option = props.options.find(opt => opt.value === props.modelValue)
+  const option = props.items.find(opt => opt.value === props.modelValue)
   return option ? option.label : props.placeholder
 })
 
