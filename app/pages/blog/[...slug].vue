@@ -2,7 +2,7 @@
   <main class="blog-post-text">
     <template v-if="doc">
         <!-- Simplified Header Section with better flow -->
-        <Section id="blog-header" type="header" class="blog-header-bg !pb-0">
+        <Section id="blog-header" type="header" class="blog-header-bg pb-0!">
           <div class="mx-auto lg:px-8">
             <!-- Breadcrumbs -->
             <div class="border-t-2 pt-4 border-zinc-500 mb-6 mt-20 flex items-center gap-4">
@@ -90,7 +90,7 @@
         </Section>
 
         <!-- Content Section with better spaced featured image -->
-        <Section id="main" class="!p-0 content-section">
+        <Section id="main" class="p-0! content-section">
           <div class="mx-auto lg:px-8">
             <!-- Featured image (if exists) - with optimized loading -->
             <div v-if="doc.socialImage?.src" class="featured-image-container">

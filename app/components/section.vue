@@ -36,11 +36,11 @@ const props = defineProps({
 
 <style scoped>
 .full-height.full-height--forced {
-    height: calc(100vh - theme('spacing.nav'));
+    height: calc(100vh - 4rem);
 }
 @media (min-width: 768px) {
     .full-height:not(.full-height--forced) {
-        height: calc(100vh - theme('spacing.nav'));
+        height: calc(100vh - 4rem);
     }
 }
 </style>

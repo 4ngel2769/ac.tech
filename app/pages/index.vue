@@ -135,7 +135,7 @@ const latestBlogs = computed(() =>
           </UTooltip>
         </div> -->
       </div>
-      <UDivider label="Socials" class="socialdivider" />
+      <USeparator label="Socials" class="socialdivider" />
       <div class="linkscontainer">
         <p class="linkstitle">My socials:</p>
         <UTooltip text="GitHub | angeldev0/4ngel2769">
@@ -198,10 +198,10 @@ const latestBlogs = computed(() =>
           </NuxtLink>
         </UTooltip>
       </div>
-      <UDivider label="About Me" class="descriptiondivider" />
+      <USeparator label="About Me" class="descriptiondivider" />
       <div class="descriptiondiv">
         <div class="Description">
-          <h2 class="DescriptionText leading-h4 font-semibold">
+          <h2 class="DescriptionText font-semibold leading-h4">
             I am an Embedded Systems Developer and Cybersecurity Researcher<br/>
             I write secure firmware for IoT and other embedded devices.
           </h2>
@@ -249,7 +249,7 @@ const latestBlogs = computed(() =>
         </p>
         <NuxtLink to="/projects" class="explore-projects-btn projects-hero-btn">
           <p>PROJECTS</p>
-          <font-awesome-icon :icon="['fas','rocket']" class="h-5" />
+          <!-- <font-awesome-icon :icon="['fas','rocket']" class="h-5" /> -->
         </NuxtLink>
       </div>
     </div>
@@ -480,6 +480,7 @@ p {
   /* font-family: var(--font22); */
   font-size: 18px;
   font-family: var(--font3);
+  line-height: 2em;
 }
 .descriptiondiv {
   display: flex;

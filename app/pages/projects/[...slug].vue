@@ -57,7 +57,7 @@
             <!-- Hero Section with Image and Title -->
             <div class="project-hero-container mb-12">
               <!-- Mobile & Tablet: Title and Meta First -->
-              <div class="project-hero-content lg:hidden">
+              <div class="project-hero-content project-hero-mobile">
                 <!-- Title -->
                 <h1
                   class="project-hero-title text-2xl md:text-3xl font-bold mb-4 leading-tight"
@@ -136,9 +136,9 @@
               </div>
 
               <!-- Desktop: Side by side layout -->
-              <div class="hidden lg:flex lg:gap-8 lg:items-start">
+              <div class="project-hero-desktop">
                 <!-- Featured Image - Left Half -->
-                <div class="lg:w-1/2 lg:flex-shrink-0">
+                <div class="project-hero-desktop-media">
                   <div class="project-hero-image desktop-image">
                     <NuxtImg
                       v-if="doc.socialImage?.src"
@@ -162,7 +162,7 @@
 
                 <!-- Title and Meta - Right Half -->
                 <div
-                  class="lg:w-1/2 lg:pl-6 project-hero-content flex flex-col justify-center"
+                  class="project-hero-desktop-meta project-hero-content flex flex-col justify-center"
                 >
                   <!-- Title -->
                   <h1
@@ -574,6 +574,8 @@ useHead({
 </script>
 
 <style scoped>
+@reference "../../assets/css/main.css";
+
 .copy-link-btn {
   display: flex;
   align-items: center;
@@ -670,6 +672,36 @@ h1 {
 .project-hero-content {
   @apply w-full;
   margin: 0 0 20px 0;
+}
+
+.project-hero-mobile {
+  display: block;
+}
+
+.project-hero-desktop {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .project-hero-mobile {
+    display: none;
+  }
+
+  .project-hero-desktop {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+  }
+
+  .project-hero-desktop-media,
+  .project-hero-desktop-meta {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
+  .project-hero-desktop-meta {
+    padding-left: 1.5rem;
+  }
 }
 
 /* Meta Information Styling */

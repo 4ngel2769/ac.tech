@@ -61,6 +61,8 @@ const prevLink = computed(() => {
 </script>
 
 <style scoped>
+@reference "../../assets/css/main.css";
+
 .pagination-list {
     @apply flex flex-row w-full items-center justify-center;
 }

@@ -22,7 +22,7 @@
               v-model="searchQuery"
               type="text"
               placeholder="Search projects..."
-              class="px-4 py-2 border rounded-lg flex-grow backdrop-blur-sm bg-black/10"
+              class="px-4 py-2 border rounded-lg grow backdrop-blur-sm bg-black/10"
               style="font-family: var(--font3); color: var(--text-color);"
             />
             <CustomSelect
@@ -53,7 +53,7 @@
       </div>
 
       <!-- Projects Grid -->
-      <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div v-else class="panel-grid">
         <div
           v-for="project in visibleProjects"
           :key="project._path"
@@ -432,6 +432,8 @@ const formatDate = (date) => {
   overflow: hidden;
   transition: border-color 0.2s ease;
   height: 100%;
+  width: 100%;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   max-height: 420px;
@@ -627,6 +629,33 @@ const formatDate = (date) => {
   color: #888;
 }
 
+.panel-grid {
+  --panel-card-width: 23rem;
+  display: grid;
+  gap: 2rem;
+  justify-content: center;
+  grid-template-columns: repeat(3, minmax(var(--panel-card-width), var(--panel-card-width)));
+  align-items: stretch;
+}
+
+@media (max-width: 70rem) {
+  .panel-grid {
+    grid-template-columns: repeat(2, minmax(var(--panel-card-width), var(--panel-card-width)));
+  }
+}
+
+@media (max-width: 46rem) {
+  .panel-grid {
+    grid-template-columns: minmax(var(--panel-card-width), var(--panel-card-width));
+  }
+}
+
+@media (max-width: 24rem) {
+  .panel-grid {
+    --panel-card-width: calc(100vw - 2rem);
+  }
+}
+
 /* Mobile responsive */
 @media (min-width: 640px) {
   .projects-hero-content-header {
@@ -644,7 +673,6 @@ const formatDate = (date) => {
 
 @media (max-width: 768px) {
   .project-card {
-    margin: 0 0.5rem;
     max-height: 380px;
   }
 

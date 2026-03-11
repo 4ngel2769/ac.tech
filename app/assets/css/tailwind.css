@@ -6,9 +6,8 @@ Sen
 Nunito
 */
 
-/* @tailwind base; */
-@tailwind components;
-@tailwind utilities;
+/* @tailwind utilities; */
+/* Tailwind layers are imported in app/assets/css/main.css */
 
 /* font-family: 'Lexend Deca', sans-serif; */
 /* font-family: 'Montserrat', sans-serif; */
@@ -27,7 +26,7 @@ Nunito
 } */
 @font-face {
   font-family: 'Progress';
-  src: url('/assets/fonts/progress_personal.ttf');
+  src: url('../fonts/progress_personal.ttf');
   font-display: swap;
 }
 /* @font-face {
