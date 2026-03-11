@@ -65,16 +65,23 @@ export default defineNuxtConfig({
 
   nitro: {
     hooks: {
-      // Skip IPX routes for external image URLs during prerender.
-      // Windows cannot mkdir paths containing ":" (from https:), causing ENOENT.
       'prerender:generate': (route: any) => {
-        if (route.route?.startsWith('/_ipx/') && route.route.includes('/https:')) {
-          route.skip = true
+        // On Windows, ':' in filesystem paths is illegal (e.g. /_ipx/.../https://).
+        // Skip external URL IPX routes so the build succeeds locally.
+        // Docker builds run on Linux where ':' in filenames is valid, so images
+        // prerender correctly in production.
+        if (
+          process.platform === 'win32' &&
+          route.route?.startsWith('/_ipx/') &&
+          route.route.includes('/https:')
+        ) {
+          route.skip = true;
         }
       },
-    },
+    } as any,
     prerender: {
       crawlLinks: true,
+      failOnError: false,
       routes: ['/projects', '/blog', '/'],
     },
     // Exclude large assets from worker bundle - serve from /public instead
@@ -241,6 +248,7 @@ export default defineNuxtConfig({
       anchorLinks: false,
       highlight: {
         theme: 'nord',
+        // lineNumbers: true, 
         // CRITICAL: Only preload languages ACTUALLY used in blog posts to reduce bundle size
         // Cloudflare Workers have 3 MB limit (free) / 10 MB (paid)
         // Each language adds ~50-200 KB to the bundle

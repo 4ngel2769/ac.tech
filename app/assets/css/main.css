@@ -344,6 +344,34 @@ p {
   line-height: 1.35rem;
 }
 
+/* Shared panel grid layout used on blog and projects pages */
+.panel-grid {
+  --panel-card-width: 23rem;
+  display: grid;
+  gap: 2rem;
+  justify-content: center;
+  grid-template-columns: repeat(3, minmax(var(--panel-card-width), var(--panel-card-width)));
+  align-items: stretch;
+}
+
+@media (max-width: 70rem) {
+  .panel-grid {
+    grid-template-columns: repeat(2, minmax(var(--panel-card-width), var(--panel-card-width)));
+  }
+}
+
+@media (max-width: 46rem) {
+  .panel-grid {
+    grid-template-columns: minmax(var(--panel-card-width), var(--panel-card-width));
+  }
+}
+
+@media (max-width: 24rem) {
+  .panel-grid {
+    --panel-card-width: calc(100vw - 2rem);
+  }
+}
+
 /* Blog Headings */
 
 .blog-content h1 {
