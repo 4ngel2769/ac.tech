@@ -2,7 +2,7 @@
   <main>
     <div class="py-12">
       <BlogHero />
-      <Section id="main" class="!pt-0">
+      <Section id="main" class="pt-0!">
         <div class="max-w-7xl mx-auto">
           <div v-if="pending" class="text-center py-8">
             <p class="no-results">Loading posts...</p>
@@ -18,7 +18,7 @@
 
           <div v-else class="flex gap-8">
             <!-- Filter Sidebar -->
-            <div class="w-1/4 flex-shrink-0">
+            <div class="w-1/4 shrink-0">
               <div class="filter-sidebar">
                 <h3 class="filter-title">Filter</h3>
                 <div class="space-y-4">
@@ -346,7 +346,7 @@ definePageMeta({
 }
 
 .search-input:focus {
-  ring: 2px solid var(--htb-green);
+  outline: 2px solid var(--htb-green);
   border-color: var(--htb-green);
 }
 
@@ -367,7 +367,7 @@ definePageMeta({
 
 .blog-card:hover {
   background-color: var(--dark-alt1);
-  border-opacity: 0.8;
+  border-color: rgba(32, 230, 147, 0.8); /* --kde with 80% opacity */
 }
 
 .blog-image {

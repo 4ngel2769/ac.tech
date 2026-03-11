@@ -26,7 +26,7 @@ Nunito
 } */
 @font-face {
   font-family: 'Progress';
-  src: url('/assets/fonts/progress_personal.ttf');
+  src: url('../fonts/progress_personal.ttf');
   font-display: swap;
 }
 /* @font-face {

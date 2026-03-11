@@ -1,7 +1,7 @@
 <template>
     <main>
         <BlogHero />
-        <Section id="main" class="!pt-0">
+        <Section id="main" class="pt-0!">
             <div v-if="pending" class="text-center py-8">
                 <p class="no-results">Loading projects...</p>
             </div>

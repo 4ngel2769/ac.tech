@@ -139,7 +139,10 @@ const languageText = computed(() => (props.language ? languageMap[props.language
 }
 
 .container {
-    @apply w-full rounded-md relative overflow-hidden;/*
+    width: 100%;
+    border-radius: 0.375rem;
+    position: relative;
+    overflow: hidden;/*
     background-color: var(--htb-bg2);*/
     display: flex;
     flex-direction: column;
@@ -163,39 +166,58 @@ const languageText = computed(() => (props.language ? languageMap[props.language
     word-break: break-word;
 }
 .bottom-container {
-    @apply absolute right-0 bottom-4 pr-2 pb-2;
+    position: absolute;
+    right: 0;
+    bottom: 1rem;
+    padding-right: 0.5rem;
+    padding-bottom: 0.5rem;
 }
 @media (min-width: 768px) {
     .bottom-container {
-        @apply top-10;
+        top: 2.5rem;
     }
 }
 .copy-container {
-    @apply flex;
+    display: flex;
 }
 .filename-text {
-    @apply absolute top-0 left-4 py-1 text-xs text-background/75;
+    position: absolute;
+    top: 0;
+    left: 1rem;
+    padding: 0.25rem 0;
+    font-size: 0.75rem;
+    color: color-mix(in oklab, var(--background) 75%, transparent);
 }
 @media (min-width: 768px) {
     .filename-text {
-        @apply text-sm;
+        font-size: 0.875rem;
     }
 }
 .language-text {
-    @apply absolute right-0 top-0 text-background/75 px-2 py-1 rounded-bl-md;
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: color-mix(in oklab, var(--background) 75%, transparent);
+    padding: 0.25rem 0.5rem;
+    border-bottom-left-radius: 0.375rem;
     font-family: 'Sen', sans-serif;
     font-weight: 300;/*
     background-color: var(--htb-bg2);*/
 }
 :slotted(pre code) {
-    @apply w-full flex flex-col;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
 }
 :slotted(pre code .line) {
-    @apply inline-table;
+    display: inline-table;
     min-height: 1rem;
 }
 :slotted(pre code .line::before) {
-    @apply w-4 mr-6 inline-block text-left;
+    width: 1rem;
+    margin-right: 1.5rem;
+    display: inline-block;
+    text-align: left;
     counter-increment: lines;
     content: counter(lines);
     color: rgba(115, 138, 148, 0.4);

@@ -6,13 +6,14 @@
     "node": ">=22.16.0"
   },
   "scripts": {
-    "build": "nuxt build",
+    "build": "cross-env NODE_NO_WARNINGS=1 nuxt build",
     "dev": "nuxt dev --host 0.0.0.0",
-    "generate": "nuxt generate",
+    "generate": "cross-env NODE_NO_WARNINGS=1 nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "@formkit/auto-animate": "^0.9.0",
     "@iconify-json/mdi": "^1.2.3",
     "@iconify-json/lucide": "^1.2.60",

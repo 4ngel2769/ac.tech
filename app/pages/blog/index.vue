@@ -21,7 +21,7 @@
               v-model="searchQuery"
               type="text"
               placeholder="Search articles..."
-              class="px-4 py-2 border rounded-lg flex-grow backdrop-blur-sm bg-black/10"
+              class="px-4 py-2 border rounded-lg grow backdrop-blur-sm bg-black/10"
               style="font-family: var(--font3); color: var(--text-color);"
             />
             <CustomSelect
@@ -36,7 +36,7 @@
     </div>
 
     <!-- Main Content -->
-    <Section id="main" class="!pt-0">
+    <Section id="main" class="pt-0!">
       <div class="space-y-8">
         <div v-if="pending" class="text-center py-16">
           <p class="no-results">Loading articles...</p>

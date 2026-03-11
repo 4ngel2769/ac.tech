@@ -33,6 +33,11 @@ export default defineNuxtConfig({
     // timeline: {enabled: false}
   },
   ssr: true,
+  // Disable sourcemaps for production builds.
+  sourcemap: {
+    server: false,
+    client: false,
+  },
   experimental: {
     payloadExtraction: true,
     renderJsonPayloads: true,
@@ -59,14 +64,18 @@ export default defineNuxtConfig({
   },
 
   nitro: {
+    hooks: {
+      // Skip IPX routes for external image URLs during prerender.
+      // Windows cannot mkdir paths containing ":" (from https:), causing ENOENT.
+      'prerender:generate': (route: any) => {
+        if (route.route?.startsWith('/_ipx/') && route.route.includes('/https:')) {
+          route.skip = true
+        }
+      },
+    },
     prerender: {
-      crawlLinks: true,
+      crawlLinks: false,
       routes: ['/projects', '/blog', '/'],
-      // Ignore IPX routes for external images — they contain ":" in URLs
-      // which is illegal in Windows directory names and can't be written to disk
-      ignore: [
-        '/_ipx/**',
-      ],
     },
     // Exclude large assets from worker bundle - serve from /public instead
     publicAssets: [

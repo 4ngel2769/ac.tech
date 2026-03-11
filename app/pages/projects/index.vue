@@ -22,7 +22,7 @@
               v-model="searchQuery"
               type="text"
               placeholder="Search projects..."
-              class="px-4 py-2 border rounded-lg flex-grow backdrop-blur-sm bg-black/10"
+              class="px-4 py-2 border rounded-lg grow backdrop-blur-sm bg-black/10"
               style="font-family: var(--font3); color: var(--text-color);"
             />
             <CustomSelect
