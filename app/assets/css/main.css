@@ -1,7 +1,7 @@
-@tailwind base;
-@tailwind components;
+@config "../../../tailwind.config.js";
+@import "tailwindcss";
+@import "@nuxt/ui";
 @tailwind utilities;
-/* @import "tailwindcss"; */
 /* @plugin "daisyui"; */
 
 :root {
@@ -281,73 +281,89 @@ html {
 }
 
 h1 {
-  @apply text-h1_sm leading-h1_sm mb-6;
+  font-size: 3rem;
+  line-height: 3.25rem;
+  margin-bottom: 1.5rem;
 }
 
 h2 {
-  @apply text-h2_sm leading-h2_sm mb-4;
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  margin-bottom: 1rem;
 }
 
 h3 {
-  @apply text-h3_sm leading-h3_sm mb-4;
+  font-size: 1.75rem;
+  line-height: 2rem;
+  margin-bottom: 1rem;
 }
 
 h4 {
-  @apply text-h4_sm leading-h4_sm mb-2;
+  font-size: 1.5rem;
+  line-height: 1.75rem;
+  margin-bottom: 0.5rem;
 }
 
 h5 {
-  @apply text-h5_sm leading-h5_sm mb-1;
+  font-size: 1.25rem;
+  line-height: 1.5rem;
+  margin-bottom: 0.25rem;
 }
 
-@screen md {
+@media (min-width: 768px) {
   h1 {
-    @apply text-h1 leading-h1;
+    font-size: 4rem;
+    line-height: 4.25rem;
   }
 
   h2 {
-    @apply text-h2 leading-h2;
+    font-size: 3rem;
+    line-height: 3.25rem;
   }
 
   h3 {
-    @apply text-h3 leading-h3;
+    font-size: 2rem;
+    line-height: 2.25rem;
   }
 
   h4 {
-    @apply text-h4 leading-h4;
+    font-size: 1.5rem;
+    line-height: 1.75rem;
   }
 
   h5 {
-    @apply text-h5 leading-h5;
+    font-size: 1.25rem;
+    line-height: 1.5rem;
   }
 }
 
 /* Body Text */
 
 p {
-  @apply text-base leading-base;
+  font-size: 1rem;
+  line-height: 1.35rem;
 }
 
 /* Blog Headings */
 
 .blog-content h1 {
-  @apply mt-16;
+  margin-top: 4rem;
 }
 
 .blog-content h2 {
-  @apply mt-8;
+  margin-top: 2rem;
 }
 
 .blog-content h3 {
-  @apply mt-6;
+  margin-top: 1.5rem;
 }
 
 .blog-content h4 {
-  @apply mt-4;
+  margin-top: 1rem;
 }
 
 .blog-content h5 {
-  @apply mt-4;
+  margin-top: 1rem;
 }
 
 /* Blog Content */
@@ -357,7 +373,7 @@ p {
 .blog-content > ol + p,
 .blog-content > p + ul,
 .blog-content > p + ol {
-  @apply mt-4;
+  margin-top: 1rem;
 }
 
 /* Blog Body */
@@ -365,13 +381,16 @@ p {
 .blog-content p,
 .blog-content ol,
 .blog-content ul {
-  @apply text-lg leading-h5;
+  font-size: 1.125rem;
+  line-height: 1.5rem;
 }
 
 /* Blog Breadcrumbs */
 
 .blog-breadcrumb {
-  @apply inline-block text-center font-light;
+  display: inline-block;
+  text-align: center;
+  font-weight: 300;
   font-family: 'Montserrat', sans-serif;
   font-optical-sizing: none;
   /* font-weight: 200; */
@@ -380,11 +399,13 @@ p {
 }
 
 .blog-breadcrumb > span {
-  @apply mx-1 inline;
+  margin-left: 0.25rem;
+  margin-right: 0.25rem;
+  display: inline;
 }
 
 .blog-breadcrumb > li {
-  @apply inline;
+  display: inline;
 }
 
 .blog-breadcrumb > li a {
@@ -393,7 +414,7 @@ p {
 }
 
 .blog-breadcrumb > li a:hover {
-  @apply underline;
+  text-decoration: underline;
 }
 
 .blog-breadcrumb li:last-child span[itemprop="name"] {
@@ -404,7 +425,10 @@ p {
 /* Blog Aside */
 
 .blog-aside-title {
-  @apply uppercase font-extrabold text-xs leading-xs;
+  text-transform: uppercase;
+  font-weight: 800;
+  font-size: 0.75rem;
+  line-height: 1rem;
 }
 
 /* Blog Links */

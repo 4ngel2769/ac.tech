@@ -86,7 +86,7 @@
             <p class="no-results">No articles found matching your criteria.</p>
           </div>
 
-          <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div v-else class="panel-grid">
             <article
               v-for="blog in filteredAndSortedBlogs(allBlogs)"
               :key="blog._path"
@@ -433,6 +433,8 @@ useSeoMeta({
   overflow: hidden;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   height: 100%;
+  width: 100%;
+  min-width: 0;
   position: relative;
   box-shadow: 
     0 4px 6px -1px rgba(0, 0, 0, 0.1),
@@ -651,6 +653,33 @@ useSeoMeta({
   font-size: 1rem;
 }
 
+.panel-grid {
+  --panel-card-width: 23rem;
+  display: grid;
+  gap: 1.5rem;
+  justify-content: center;
+  grid-template-columns: repeat(3, minmax(var(--panel-card-width), var(--panel-card-width)));
+  align-items: stretch;
+}
+
+@media (max-width: 69rem) {
+  .panel-grid {
+    grid-template-columns: repeat(2, minmax(var(--panel-card-width), var(--panel-card-width)));
+  }
+}
+
+@media (max-width: 45.5rem) {
+  .panel-grid {
+    grid-template-columns: minmax(var(--panel-card-width), var(--panel-card-width));
+  }
+}
+
+@media (max-width: 24rem) {
+  .panel-grid {
+    --panel-card-width: calc(100vw - 2rem);
+  }
+}
+
 /* --- Responsive --- */
 @media (min-width: 640px) {
   .blog-hero-content-header {
@@ -672,9 +701,6 @@ useSeoMeta({
   .tag-show-more {
     font-size: 0.75rem;
     padding: 0.25rem 0.5rem;
-  }
-  .blog-card {
-    margin: 0 0.5rem;
   }
   .blog-card:hover {
     transform: translateY(-4px) scale(1.01);

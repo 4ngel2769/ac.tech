@@ -6,9 +6,8 @@ Sen
 Nunito
 */
 
-/* @tailwind base; */
-@tailwind components;
 @tailwind utilities;
+/* Tailwind layers are imported in app/assets/css/main.css */
 
 /* font-family: 'Lexend Deca', sans-serif; */
 /* font-family: 'Montserrat', sans-serif; */

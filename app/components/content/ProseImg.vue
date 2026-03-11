@@ -14,9 +14,7 @@
     </figure>
 </template>
 
-<script setup lang="ts">
-import { withBase } from 'ufo';
-import { useRuntimeConfig, computed } from '#imports';
+<script setup>
 
 const props = defineProps({
     src: {
@@ -37,10 +35,27 @@ const props = defineProps({
     }
 });
 
-const refinedSrc = computed(() => {
-    if (props.src?.startsWith('/') && !props.src.startsWith('//')) {
-        return withBase(props.src, useRuntimeConfig().app.baseURL);
+const appBaseURL = useRuntimeConfig().app?.baseURL || '/';
+
+const withBase = (path, baseURL) => {
+    if (!path) return path;
+    if (/^(https?:)?\/\//.test(path) || path.startsWith('data:') || path.startsWith('blob:')) {
+        return path;
     }
-    return props.src;
+
+    const normalizedBase = baseURL && baseURL !== '/'
+        ? (baseURL.endsWith('/') ? baseURL.slice(0, -1) : baseURL)
+        : '';
+
+    if (normalizedBase && (path === normalizedBase || path.startsWith(`${normalizedBase}/`))) {
+        return path;
+    }
+
+    const normalizedPath = path.startsWith('/') ? path : `/${path}`;
+    return normalizedBase ? `${normalizedBase}${normalizedPath}` : normalizedPath;
+};
+
+const refinedSrc = computed(() => {
+    return withBase(props.src, appBaseURL);
 });
 </script>

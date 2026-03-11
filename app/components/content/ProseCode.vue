@@ -1,5 +1,9 @@
 <template>
-    <div class="container group">
+    <code v-if="isInline" class="inline-code">
+        <slot />
+    </code>
+
+    <div v-else class="container group">
         <span v-if="filename" class="filename-text">
             {{ filename }}
         </span>
@@ -21,23 +25,56 @@
     </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 // https://mokkapps.de/blog/how-to-create-a-custom-code-block-with-nuxt-content-v2/
-import { useClipboard } from '@vueuse/core';
+const props = defineProps({
+    code: {
+        type: String,
+        default: ''
+    },
+    language: {
+        type: String,
+        default: null
+    },
+    filename: {
+        type: String,
+        default: null
+    },
+    highlights: {
+        type: Array,
+        default: () => []
+    }
+});
 
-const { copy, copied, text } = useClipboard();
+const copied = ref(false);
+const copy = async (value) => {
+    const textToCopy = value ?? '';
 
-const props = withDefaults(
-    defineProps<{
-        code?: string;
-        language?: string | null;
-        filename?: string | null;
-        highlights?: Array<number>;
-    }>(),
-    { code: '', language: null, filename: null, highlights: () => [] }
-);
+    try {
+        if (typeof navigator !== 'undefined' && navigator.clipboard?.writeText) {
+            await navigator.clipboard.writeText(textToCopy);
+        } else if (typeof document !== 'undefined') {
+            const textArea = document.createElement('textarea');
+            textArea.value = textToCopy;
+            textArea.style.position = 'fixed';
+            textArea.style.opacity = '0';
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+        }
 
-const languageMap: Record<string, { text: string }> = {
+        copied.value = true;
+        setTimeout(() => {
+            copied.value = false;
+        }, 1200);
+    } catch {
+        copied.value = false;
+    }
+};
+
+const languageMap = {
     java: {
         text: 'Java'
     },
@@ -82,10 +119,25 @@ const languageMap: Record<string, { text: string }> = {
     },
 };
 
+const isInline = computed(
+    () => !props.language && !props.filename && (!props.code || !props.code.includes('\n'))
+);
+
 const languageText = computed(() => (props.language ? languageMap[props.language]?.text : null));
 </script>
 
 <style scoped lang="postcss">
+@reference "../../assets/css/main.css";
+
+.inline-code {
+    font-family: 'Fira Mono', 'Consolas', 'Menlo', 'Monaco', monospace;
+    font-size: 0.9em;
+    padding: 0.1rem 0.35rem;
+    border-radius: 0.35rem;
+    background-color: rgba(148, 163, 184, 0.18);
+    color: #d1e7ff;
+}
+
 .container {
     @apply w-full rounded-md relative overflow-hidden;/*
     background-color: var(--htb-bg2);*/
@@ -97,22 +149,23 @@ const languageText = computed(() => (props.language ? languageMap[props.language
     display: flex;
     overflow-x: auto;
     padding: 1rem 1rem 1rem 1rem;
-    font-size: 8rem;
+    font-size: 0.9rem;
     line-height: 1.625;
     counter-reset: lines;
 }
-@screen md {
+@media (min-width: 768px) {
     :slotted(pre) {
-        @apply text-base;
+        font-size: 1rem;
     }
 }
 .container pre > code .line {
-    @apply break-words;
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
 .bottom-container {
     @apply absolute right-0 bottom-4 pr-2 pb-2;
 }
-@screen md {
+@media (min-width: 768px) {
     .bottom-container {
         @apply top-10;
     }
@@ -123,7 +176,7 @@ const languageText = computed(() => (props.language ? languageMap[props.language
 .filename-text {
     @apply absolute top-0 left-4 py-1 text-xs text-background/75;
 }
-@screen md {
+@media (min-width: 768px) {
     .filename-text {
         @apply text-sm;
     }

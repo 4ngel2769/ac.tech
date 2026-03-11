@@ -298,7 +298,7 @@ export default defineNuxtConfig({
   },
 
   ui: {
-    global: true
+    // global: true
   },
 
   // Color mode configuration
