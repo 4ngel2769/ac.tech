@@ -1,7 +1,7 @@
 @config "../../../tailwind.config.js";
 @import "tailwindcss";
 @import "@nuxt/ui";
-@tailwind utilities;
+/* @tailwind utilities; */
 /* @plugin "daisyui"; */
 
 :root {

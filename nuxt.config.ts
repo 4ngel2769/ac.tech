@@ -74,7 +74,7 @@ export default defineNuxtConfig({
       },
     },
     prerender: {
-      crawlLinks: false,
+      crawlLinks: true,
       routes: ['/projects', '/blog', '/'],
     },
     // Exclude large assets from worker bundle - serve from /public instead

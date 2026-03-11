@@ -201,7 +201,7 @@ const latestBlogs = computed(() =>
       <USeparator label="About Me" class="descriptiondivider" />
       <div class="descriptiondiv">
         <div class="Description">
-          <h2 class="DescriptionText font-semibold leading-2">
+          <h2 class="DescriptionText font-semibold leading-h4">
             I am an Embedded Systems Developer and Cybersecurity Researcher<br/>
             I write secure firmware for IoT and other embedded devices.
           </h2>
