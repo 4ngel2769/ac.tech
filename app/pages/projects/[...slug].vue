@@ -2,7 +2,7 @@
   <main class="blog-post-text">
     <template v-if="doc">
         <!-- Header Section with Image and Meta -->
-        <Section id="blog-header" type="header" class="blog-header-bg !pb-8">
+        <Section id="blog-header" type="header" class="blog-header-bg pb-8!">
           <div class="mx-auto px-4 lg:px-8">
             <!-- Added responsive padding -->
             <!-- Breadcrumbs -->
@@ -72,7 +72,7 @@
                 <div class="project-meta-container mb-6 space-y-4">
                   <!-- Published -->
                   <div class="meta-item flex flex-row items-start gap-4">
-                    <span class="meta-label flex-shrink-0 w-1/2"
+                    <span class="meta-label shrink-0 w-1/2"
                       >Published</span
                     >
                     <div class="meta-content w-1/2">
@@ -85,7 +85,7 @@
                     v-if="doc.dateUpdated"
                     class="meta-item flex flex-row items-start gap-4"
                   >
-                    <span class="meta-label flex-shrink-0 w-1/2">Updated</span>
+                    <span class="meta-label shrink-0 w-1/2">Updated</span>
                     <div class="meta-content w-1/2">
                       <span class="meta-value">{{ formatDate(doc.dateUpdated) }}</span>
                     </div>
@@ -96,7 +96,7 @@
                     v-if="doc.tags && doc.tags.length > 0"
                     class="meta-item flex flex-row items-start gap-4"
                   >
-                    <span class="meta-label flex-shrink-0 w-1/3">
+                    <span class="meta-label shrink-0 w-1/3">
                       {{ doc.tags.length === 1 ? "Category" : "Categories" }}
                     </span>
                     <div class="meta-content w-2/3">
@@ -140,8 +140,16 @@
                 <!-- Featured Image - Left Half -->
                 <div class="project-hero-desktop-media">
                   <div class="project-hero-image desktop-image">
+                    <!-- External URLs bypass IPX to avoid rate-limiting -->
+                    <img
+                      v-if="doc.socialImage?.src?.startsWith('http')"
+                      :src="doc.socialImage.src"
+                      :alt="doc.socialImage.alt || doc.headline"
+                      class="w-full h-full object-cover rounded-lg"
+                      loading="eager"
+                    />
                     <NuxtImg
-                      v-if="doc.socialImage?.src"
+                      v-else-if="doc.socialImage?.src"
                       :src="doc.socialImage.src"
                       :alt="doc.socialImage.alt || doc.headline"
                       class="w-full h-full object-cover rounded-lg"
@@ -178,7 +186,7 @@
                   <div class="project-meta-container flex flex-col space-y-4">
                     <!-- Published -->
                     <div class="meta-item flex flex-row items-start gap-4">
-                      <span class="meta-label flex-shrink-0 w-1/2"
+                      <span class="meta-label shrink-0 w-1/2"
                         >Published</span
                       >
                       <div class="meta-content w-1/2">
@@ -193,7 +201,7 @@
                       v-if="doc.dateUpdated"
                       class="meta-item flex flex-row items-start gap-4"
                     >
-                      <span class="meta-label flex-shrink-0 w-1/2"
+                      <span class="meta-label shrink-0 w-1/2"
                         >Updated</span
                       >
                       <div class="meta-content w-1/2">
@@ -208,7 +216,7 @@
                       v-if="doc.tags && doc.tags.length > 0"
                       class="meta-item flex flex-row items-start gap-4"
                     >
-                      <span class="meta-label flex-shrink-0 w-1/3">
+                      <span class="meta-label shrink-0 w-1/3">
                         {{ doc.tags.length === 1 ? "Category" : "Categories" }}
                       </span>
                       <div class="meta-content w-2/3">
@@ -254,8 +262,16 @@
               <!-- Mobile & Tablet: Image Below Content -->
               <div class="lg:hidden">
                 <div class="project-hero-image mobile-tablet-image">
+                  <!-- External URLs bypass IPX to avoid rate-limiting -->
+                  <img
+                    v-if="doc.socialImage?.src?.startsWith('http')"
+                    :src="doc.socialImage.src"
+                    :alt="doc.socialImage.alt || doc.headline"
+                    class="w-full h-full object-cover rounded-lg"
+                    loading="eager"
+                  />
                   <NuxtImg
-                    v-if="doc.socialImage?.src"
+                    v-else-if="doc.socialImage?.src"
                     :src="doc.socialImage.src"
                     :alt="doc.socialImage.alt || doc.headline"
                     class="w-full h-full object-cover rounded-lg"
@@ -283,7 +299,7 @@
         </Section>
 
         <!-- Content Section -->
-        <Section id="main" class="!p-0">
+        <Section id="main" class="p-0!">
           <div class="max-w-6xl mx-auto px-4 sm:px-0 lg:px-8">
             <!-- Added responsive padding -->
             <article class="prose prose-lg max-w-none">

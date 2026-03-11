@@ -268,8 +268,16 @@ const latestBlogs = computed(() =>
             <div v-for="project in latestProjects" :key="project._path" class="blog-card">
               <NuxtLink :to="project._path" class="blog-card-link">
                 <div class="blog-card-image">
+                  <!-- External URLs bypass IPX to avoid rate-limiting -->
+                  <img
+                    v-if="project.socialImage?.src?.startsWith('http')"
+                    :src="project.socialImage.src"
+                    :alt="project.socialImage.alt || project.headline"
+                    class="blog-image"
+                    loading="lazy"
+                  />
                   <NuxtImg
-                    v-if="project.socialImage?.src"
+                    v-else-if="project.socialImage?.src"
                     :src="project.socialImage.src"
                     :alt="project.socialImage.alt || project.headline"
                     class="blog-image"
@@ -321,8 +329,16 @@ const latestBlogs = computed(() =>
             <div v-for="post in latestBlogs" :key="post._path" class="post-card">
               <NuxtLink :to="post._path" class="post-card-link">
                 <div class="post-card-image">
+                  <!-- External URLs bypass IPX to avoid rate-limiting -->
+                  <img
+                    v-if="post.socialImage?.src?.startsWith('http')"
+                    :src="post.socialImage.src"
+                    :alt="post.socialImage.alt || post.displayTitle"
+                    class="post-image"
+                    loading="lazy"
+                  />
                   <NuxtImg
-                    v-if="post.socialImage?.src"
+                    v-else-if="post.socialImage?.src"
                     :src="post.socialImage.src"
                     :alt="post.socialImage.alt || post.displayTitle"
                     class="post-image"

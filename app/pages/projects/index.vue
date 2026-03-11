@@ -62,8 +62,16 @@
           <NuxtLink :to="project._path" class="project-content-wrapper">
             <!-- Image Container with optimized loading -->
             <div class="project-image-container">
+              <!-- External URLs bypass IPX to avoid rate-limiting; local paths use NuxtImg -->
+              <img
+                v-if="project.socialImage?.src?.startsWith('http')"
+                :src="project.socialImage.src"
+                :alt="project.socialImage.alt || project.headline"
+                class="project-image"
+                loading="lazy"
+              />
               <NuxtImg
-                v-if="project.socialImage?.src"
+                v-else-if="project.socialImage?.src"
                 :src="project.socialImage.src"
                 :alt="project.socialImage.alt || project.headline"
                 class="project-image"
@@ -72,7 +80,6 @@
                 quality="75"
                 format="webp"
                 loading="lazy"
-                placeholder
                 sizes="sm:400px md:350px lg:300px"
               />
               <div v-else class="project-image-placeholder">
@@ -628,33 +635,8 @@ const formatDate = (date) => {
   font-family: var(--font3);
   color: #888;
 }
-
-.panel-grid {
-  --panel-card-width: 23rem;
-  display: grid;
-  gap: 2rem;
-  justify-content: center;
-  grid-template-columns: repeat(3, minmax(var(--panel-card-width), var(--panel-card-width)));
-  align-items: stretch;
-}
-
-@media (max-width: 70rem) {
-  .panel-grid {
-    grid-template-columns: repeat(2, minmax(var(--panel-card-width), var(--panel-card-width)));
-  }
-}
-
-@media (max-width: 46rem) {
-  .panel-grid {
-    grid-template-columns: minmax(var(--panel-card-width), var(--panel-card-width));
-  }
-}
-
-@media (max-width: 24rem) {
-  .panel-grid {
-    --panel-card-width: calc(100vw - 2rem);
-  }
-}
+/* layout for panels (shared by blog and projects pages)
+   moved to app/assets/css/main.css to avoid duplication */
 
 /* Mobile responsive */
 @media (min-width: 640px) {

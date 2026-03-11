@@ -186,7 +186,8 @@ const languageText = computed(() => (props.language ? languageMap[props.language
     left: 1rem;
     padding: 0.25rem 0;
     font-size: 0.75rem;
-    color: color-mix(in oklab, var(--background) 75%, transparent);
+    /* --background not defined; use semi-transparent white instead */
+    color: rgba(255,255,255,0.75);
 }
 @media (min-width: 768px) {
     .filename-text {
@@ -197,7 +198,8 @@ const languageText = computed(() => (props.language ? languageMap[props.language
     position: absolute;
     right: 0;
     top: 0;
-    color: color-mix(in oklab, var(--background) 75%, transparent);
+    /* match filename-text color: semi-transparent white */
+    color: rgba(255,255,255,0.75);
     padding: 0.25rem 0.5rem;
     border-bottom-left-radius: 0.375rem;
     font-family: 'Sen', sans-serif;

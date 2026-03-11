@@ -95,8 +95,16 @@
             <!-- Featured image (if exists) - with optimized loading -->
             <div v-if="doc.socialImage?.src" class="featured-image-container">
               <div class="featured-image">
-                <!-- Updated with progressive loading -->
+                <!-- External URLs bypass IPX to avoid rate-limiting -->
+                <img
+                  v-if="doc.socialImage.src.startsWith('http')"
+                  :src="doc.socialImage.src"
+                  :alt="doc.socialImage.alt || doc.title"
+                  class="featured-image-img"
+                  loading="eager"
+                />
                 <NuxtImg
+                  v-else
                   :src="doc.socialImage.src"
                   :alt="doc.socialImage.alt || doc.title"
                   class="featured-image-img"
@@ -105,7 +113,6 @@
                   quality="85"
                   format="webp"
                   loading="eager"
-                  placeholder
                   sizes="sm:100vw md:1200px lg:1200px"
                   :modifiers="{ 
                     fit: 'cover',

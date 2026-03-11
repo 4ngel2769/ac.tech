@@ -94,8 +94,16 @@
             >
               <NuxtLink :to="blog._path" class="blog-card-link">
                 <div class="blog-card-image">
+                  <!-- External URLs bypass IPX to avoid rate-limiting; local paths use NuxtImg -->
+                  <img
+                    v-if="blog.socialImage?.src?.startsWith('http')"
+                    :src="blog.socialImage.src"
+                    :alt="blog.socialImage.alt || blog.title"
+                    class="blog-image"
+                    loading="lazy"
+                  />
                   <NuxtImg
-                    v-if="blog.socialImage?.src"
+                    v-else-if="blog.socialImage?.src"
                     :src="blog.socialImage.src"
                     :alt="blog.socialImage.alt || blog.title"
                     class="blog-image"
@@ -104,7 +112,6 @@
                     quality="75"
                     format="webp"
                     loading="lazy"
-                    placeholder
                     sizes="sm:400px md:350px lg:300px"
                   />
                   <div v-else class="blog-image-placeholder">
@@ -652,33 +659,7 @@ useSeoMeta({
   color: var(--main-details, #808080);
   font-size: 1rem;
 }
-
-.panel-grid {
-  --panel-card-width: 23rem;
-  display: grid;
-  gap: 1.5rem;
-  justify-content: center;
-  grid-template-columns: repeat(3, minmax(var(--panel-card-width), var(--panel-card-width)));
-  align-items: stretch;
-}
-
-@media (max-width: 69rem) {
-  .panel-grid {
-    grid-template-columns: repeat(2, minmax(var(--panel-card-width), var(--panel-card-width)));
-  }
-}
-
-@media (max-width: 45.5rem) {
-  .panel-grid {
-    grid-template-columns: minmax(var(--panel-card-width), var(--panel-card-width));
-  }
-}
-
-@media (max-width: 24rem) {
-  .panel-grid {
-    --panel-card-width: calc(100vw - 2rem);
-  }
-}
+/* See global panel-grid rules in app/assets/css/main.css */
 
 /* --- Responsive --- */
 @media (min-width: 640px) {
