@@ -27,7 +27,7 @@ Here is a look at the tiny ESP32-S3 running the entire server, plugged into my P
 
 And here is what it looks like in-game!
 
-![Gameplay screenshot of Macerun](https://ipp.angellabs.xyz/s/macerun-gameplay-1.jpg)
+![Gameplay screenshot of Macerun](https://ipp.angellabs.xyz/s/macerun-gameplay-1)
 
 ### Video Demonstration
 
