@@ -1,6 +1,3 @@
-Here is a complete, formatted blog post ready for your website. It uses the structure and frontmatter you provided, incorporates the Nuxt Content UI alerts (`::alert{...}`), includes technical snippets from your actual C codebase, and sets up placeholders for your images and video.
-
-```markdown
 ---
 title: 'Macerun - Building a Minecraft Server on an ESP32 Microcontroller'
 description: "A deep dive into writing a bare-metal Minecraft 1.16.5 server in C for the ESP32-S3. Learn how to handle custom procedural generation, raw TCP sockets, and extreme memory constraints."
