@@ -202,7 +202,7 @@ const latestBlogs = computed(() =>
       <div class="descriptiondiv">
         <div class="Description">
           <h2 class="DescriptionText font-semibold leading-h4">
-            I am an Embedded Systems Developer and Cybersecurity Researcher<br/>
+            I am an Embedded Systems Developer and Cybersecurity Student<br/>
             I write secure firmware for IoT and other embedded devices.
           </h2>
         </div>
