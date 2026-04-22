@@ -1235,19 +1235,6 @@ body {
   }
 }
 
-/* Light mode support */
-.light .blog-card-title {
-  color: #111827;
-}
-
-.light .blog-card-date {
-  color: #6b7280;
-}
-
-.light .latest-blogs-label {
-  color: #111827;
-}
-
 /* Latest Posts Section (Blog Posts) */
 .latest-posts-section {
   margin: 3rem 0;
@@ -1546,27 +1533,6 @@ body {
 }
 
 /* Light mode support for Latest Posts */
-.light .post-card-title {
-  color: #111827;
-}
-
-.light .post-card-date {
-  color: #6b7280;
-}
-
-.light .latest-posts-label {
-  color: #111827;
-}
-
-.light .description-text {
-  color: #374151;
-}
-
-.light .posts-description-panel {
-  background: rgba(255, 255, 255, 0.5);
-  border-color: rgba(0, 0, 0, 0.1);
-}
-
 /* Simple first-line indent and paragraph spacing utility for hero intro */
 .first-line-indent {
   text-indent: 1.5rem; /* indent first line */

@@ -80,55 +80,11 @@
   --scroll-thumb-h: #0d1012;
 }
 
-/* Light mode overrides */
-.light {
-  --blog-bg: #ffffff;
-  --blog-text: #374151;
-  --blog-text-bold: #111827;
-  --blog-text-light: #6b7280;
-  --blog-text-secondary: #9ca3af;
-  --blog-link: #2563eb;
-  --blog-link-hover: #1d4ed8;
-  --blog-heading: #111827;
-  --blog-heading-secondary: #1f2937;
-
-  --blog-code-bg: #f3f4f6;
-  --blog-code-text: #059669;
-  --code-border: 1px solid #d1d5db;
-  --code-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-
-  --blog-tag-bg: #f3f4f6;
-  --blog-tag-bg-hover: #e5e7eb;
-  --blog-tag-text: #6b7280;
-  --blog-tag-text-hover: #374151;
-
-  --breadcrumbs: #6b7280;
-  --breadcrumbs-main: #2563eb;
-
-  --dark-bg: #ffffff;
-  --dark-alt1: #f8fafc;
-  --dark-alt2: #f1f5f9;
-  --dark-alt3: #e2e8f0;
-  --dark-alt4: #cbd5e1;
-
-  --main-dark: #111827;
-  --main-dsc: #374151;
-  --main-details: #6b7280;
-
-  --scroll-track: #f1f5f9;
-  --scroll-thumb: #cbd5e1;
-  --scroll-thumb-h: #94a3b8;
-}
-
 /* Base body styles */
 body {
   background-color: var(--dark-bg);
   color: var(--main-dark);
   transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.light body {
-  color: var(--main-dark);
 }
 
 .router-link-exact-active {

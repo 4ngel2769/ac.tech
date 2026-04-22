@@ -22,30 +22,10 @@
                         <p>ANGELLABS</p><p class="colored-tech">.XYZ</p>
                     </a>
                 </div>
-                
-                <!-- Theme Toggle Button -->
-                <!-- <div class="theme-toggle-container">
-                    <button 
-                        @click="toggleTheme" 
-                        class="theme-toggle-btn"
-                        :title="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
-                        aria-label="Toggle theme"
-                    >
-                        <font-awesome-icon 
-                            :icon="['fas', isDark ? 'sun' : 'moon']" 
-                            class="theme-icon"
-                        />
-                    </button>
-                </div> -->
-                <!-- Works but not fully | have to set colors properly -->
             </nav>
         </div>
     </header>
 </template>
-
-<script setup>
-const { isDark, toggleTheme } = useTheme()
-</script>
 
 <style scoped>
 .navbar {
@@ -140,64 +120,8 @@ const { isDark, toggleTheme } = useTheme()
     color: hotpink;
 }
 
-/* Theme Toggle Styles */
-.theme-toggle-container {
-    position: absolute;
-    right: 2rem;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 52;
-    pointer-events: auto;
-}
-
-.theme-toggle-btn {
-    background: rgba(30, 30, 30, 0.35);
-    box-shadow: 0 4px 32px 0 rgba(0,0,0,0.12);
-    backdrop-filter: blur(12px) saturate(160%);
-    -webkit-backdrop-filter: blur(12px) saturate(160%);
-    border-radius: 50%;
-    border: 1px solid rgba(255,255,255,0.18);
-    width: 2.5rem;
-    height: 2.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    pointer-events: auto;
-}
-
-.theme-toggle-btn:hover {
-    background: rgba(50, 50, 50, 0.45);
-    border-color: rgba(255,255,255,0.25);
-    transform: scale(1.05);
-}
-
-.theme-icon {
-    color: #fbbf24;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-}
-
-.theme-toggle-btn:hover .theme-icon {
-    color: #f59e0b;
-    transform: rotate(15deg);
-}
-
 /* Mobile responsive */
 @media (max-width: 768px) {
-    .theme-toggle-container {
-        right: 1rem;
-    }
-    
-    .theme-toggle-btn {
-        width: 2rem;
-        height: 2rem;
-    }
-    
-    .theme-icon {
-        font-size: 0.875rem;
-    }
 }
 </style>
 

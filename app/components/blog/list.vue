@@ -13,7 +13,7 @@
                         >
                             {{ article.headline }}
                         </h2>
-                        <p class="text-sm leading-sm mb-4 text-typography_primary/75 dark:text-typography_primary_dark/75">
+                        <p class="text-sm leading-sm mb-4 text-typography_primary/75">
                             {{ $formatDate(article.date) }}
                         </p>
                         <p>{{ article.excerpt }}</p>
@@ -22,7 +22,7 @@
             </NuxtLink>
         </li>
     </ul>
-    <p v-if="data.length == 0" class="w-full md:w-7/12 text-h3 leading-h3 font-bold dark:text-white">{{message}}</p>
+    <p v-if="data.length == 0" class="w-full md:w-7/12 text-h3 leading-h3 font-bold text-typography_primary/75">{{message}}</p>
 </template>
 
 <script setup>

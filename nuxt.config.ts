@@ -238,7 +238,6 @@ export default defineNuxtConfig({
     "nuxt-gtag",
     // '@nuxtjs/google-analytics',
     "@nuxtjs/sitemap", 
-    "@nuxtjs/color-mode", 
     '@nuxt/content',
     // 'nuxt-og-image'
   ],
@@ -317,18 +316,6 @@ export default defineNuxtConfig({
   ui: {
     // global: true
   },
-
-  // Color mode configuration
-  colorMode: {
-    preference: 'dark', // default value of $colorMode.preference
-    fallback: 'dark', // fallback value if not system preference found
-    hid: 'nuxt-color-mode-script',
-    globalName: '__NUXT_COLOR_MODE__',
-    componentName: 'ColorScheme',
-    classPrefix: '',
-    classSuffix: '',
-    storageKey: 'nuxt-color-mode'
-  },
   
   runtimeConfig: {
     public: {
@@ -344,9 +331,6 @@ export default defineNuxtConfig({
     }
   },
 
-  // colorMode: {
-  //   preference: 'dark'
-  // },
   // ogImage: {
   //   enabled: true
   // },
