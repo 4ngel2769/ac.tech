@@ -306,7 +306,7 @@
               <!-- Update date -->
               <span
                 v-show="doc.dateUpdated"
-                class="italic block text-sm leading-sm font-light text-typography_primary/75 dark:text-typography_primary_dark/75 mb-8"
+                class="italic block text-sm leading-sm font-light text-typography_primary/75 mb-8"
                 >(Updated: {{ formatDate(doc.dateUpdated) }})</span
               >
               <!-- Blog content -->

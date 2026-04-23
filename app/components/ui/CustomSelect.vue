@@ -252,48 +252,4 @@ onUnmounted(() => {
     min-width: 120px;
   }
 }
-
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-  .select-dropdown {
-    background: rgba(20, 20, 20, 0.95);
-    border-color: rgba(255, 255, 255, 0.15);
-  }
-}
-
-/* Light mode support */
-.light .select-button {
-  background: rgba(255, 255, 255, 0.9);
-  border-color: rgba(0, 0, 0, 0.15);
-  color: #374151;
-}
-
-.light .select-button:hover {
-  background: rgba(255, 255, 255, 1);
-  border-color: rgba(0, 0, 0, 0.2);
-}
-
-.light .select-dropdown {
-  background: rgba(255, 255, 255, 0.95);
-  border-color: rgba(0, 0, 0, 0.15);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-}
-
-.light .select-option {
-  color: #374151;
-}
-
-.light .select-option:hover {
-  background: rgba(59, 130, 246, 0.1);
-  color: #2563eb;
-}
-
-.light .select-option.selected {
-  background: rgba(59, 130, 246, 0.15);
-  color: #2563eb;
-}
-
-.light .check-icon {
-  color: #2563eb;
-}
 </style>
