@@ -212,7 +212,7 @@ const latestBlogs = computed(() =>
             <span class="font-bold decoration-solid text-slate-200 decoration-1">security operations</span>, and
             <span class="font-bold decoration-solid text-slate-200 decoration-1">backend software development</span>, with
             experience in Linux, Docker, virtualization, networking,
-            and server managementa.</p>
+            and server management.</p>
           <p class="tracking-normal leading-6 text-gray-300 first-line-indent mb-4 mt-1">
             My work involves creating secure hardware and firmware, uncovering and mitigating vulnerabilities, and creating occasional scripts for convenience.<br/>
             I write most of my code in C/C++ for embedded projects, and Python, Node.js, or Go for scripts and backend services. For the occasional website I like to use Nuxt or Svelte.
