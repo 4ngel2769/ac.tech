@@ -1,13 +1,17 @@
-const navHeight = 64;   //px
+const navHeight = 64; //px
 
 export default defineNuxtPlugin((nuxtApp) => {
   // Only run on client side
   if (process.client) {
-    nuxtApp.$router.options.scrollBehavior = async (to, from, savedPosition) => {
+    nuxtApp.$router.options.scrollBehavior = async (
+      to,
+      from,
+      savedPosition,
+    ) => {
       if (savedPosition && !to.hash) {
         return savedPosition;
       }
-  
+
       const findEl = async (hash, x = 0) => {
         return (
           document.querySelector(hash) ||
@@ -22,16 +26,17 @@ export default defineNuxtPlugin((nuxtApp) => {
           })
         );
       };
-  
-      if (to.hash && to.hash !== '#') {
+
+      if (to.hash && to.hash !== "#") {
         const el = await findEl(to.hash);
         if (el) {
-            const offset = el.getBoundingClientRect().top + window.scrollY - navHeight;
-            if ("scrollBehavior" in document.documentElement.style) {
-              return window.scrollTo({ top: offset, behavior: "smooth" });
-            } else {
-              return window.scrollTo(0, offset);
-            }
+          const offset =
+            el.getBoundingClientRect().top + window.scrollY - navHeight;
+          if ("scrollBehavior" in document.documentElement.style) {
+            return window.scrollTo({ top: offset, behavior: "smooth" });
+          } else {
+            return window.scrollTo(0, offset);
+          }
         }
       }
       return { left: 0, top: 0, behaviour: "smooth" };

@@ -1,3 +1,7 @@
+> [!WARNING]
+> This repository is deprecated.
+> The website has been rebuilt with Svelte and is live at [angellabs.xyz](https://angellabs.xyz).
+
 <div align="center">
     <!-- <h1>my </h1> -->
     <!-- <br/> -->
